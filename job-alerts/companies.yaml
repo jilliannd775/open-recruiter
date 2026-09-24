@@ -1,0 +1,33 @@
+# The companies to check every morning.
+#
+# To add a company, copy one block below and change the three lines:
+#   name:     how the company appears in your email (anything you like)
+#   platform: greenhouse, lever, ashby, workable or smartrecruiters
+#             (see the README for how to tell)
+#   slug:     the company's short name in its job-board web address, e.g.
+#               job-boards.greenhouse.io/andurilindustries  ->  andurilindustries
+#               jobs.lever.co/palantir                      ->  palantir
+#               jobs.ashbyhq.com/sandboxaq                  ->  sandboxaq
+#               apply.workable.com/huggingface              ->  huggingface
+#               jobs.smartrecruiters.com/ServiceNow/...     ->  ServiceNow
+#
+# Keep the two spaces of indentation and the dash. Lines starting with # are notes.
+# After you save, the "Check company boards" action tests every entry for you.
+
+companies:
+  - name: SandboxAQ
+    platform: ashby
+    slug: sandboxaq
+
+  - name: Anduril
+    platform: greenhouse
+    slug: andurilindustries
+
+  - name: Palantir
+    platform: lever
+    slug: palantir
+
+  # Google is not listed: it runs its own careers site (google.com/about/careers),
+  # not any of the supported job-board systems (checked every common spelling),
+  # so there is no free public feed to read.
+

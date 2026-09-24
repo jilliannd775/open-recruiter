@@ -1,0 +1,167 @@
+# Knobs you can change. Save the file and the next run uses the new values.
+# Lines starting with # are notes. Keep the indentation (spaces) as it is.
+
+# ---------------------------------------------------------------------------
+# DAILY JOB ALERTS
+# ---------------------------------------------------------------------------
+
+# Minimum AI score (0-100) for a job to be emailed to you.
+score_threshold: 65
+
+# Where jobs come from. Change true to false to turn a source off.
+sources:
+  company_boards: true   # the companies in companies.yaml
+  hacker_news: true      # Hacker News monthly "Ask HN: Who is hiring?" thread
+  remotive: true         # remotive.com
+  remoteok: true         # remoteok.com
+  himalayas: true        # himalayas.app
+  weworkremotely: true   # weworkremotely.com
+
+# Job boards (Remotive, Remote OK, Himalayas, Hacker News) list thousands of
+# jobs. So nothing is wasted on the AI, a job from those sources is only
+# scored if its TITLE contains one of these words. (Jobs from your own
+# companies.yaml list are not limited this way.) Add or remove words freely.
+job_board_title_keywords:
+  - program
+  - project
+  - operations
+  - ops
+  - strategy
+  - analyst
+  - product owner
+  - chief of staff
+  - special projects
+  - implementation
+  - process
+  - delivery
+  - tpm
+  - r&d
+  - portfolio
+  - transformation
+
+# The We Work Remotely feeds read each day. Other categories are listed at
+# weworkremotely.com (look for the RSS link on a category page).
+weworkremotely_feeds:
+  - https://weworkremotely.com/categories/remote-management-and-finance-jobs.rss
+  - https://weworkremotely.com/categories/remote-product-jobs.rss
+  - https://weworkremotely.com/categories/all-other-remote-jobs.rss
+
+# The searches run on Himalayas each day (US-eligible remote jobs, newest
+# first, 20 results each).
+himalayas_searches:
+  - technical program manager
+  - program manager
+  - product operations
+  - strategy and operations
+  - business analyst
+  - product owner
+  - chief of staff
+  - special projects
+  - implementation lead
+
+# Which Gemini model does the AI work. "gemini-flash-latest" always points at
+# Google's newest Flash model. If the free daily limit on it runs out, the
+# fallback (the lighter "Flash-Lite", which has a much bigger free allowance)
+# takes over for the rest of the run.
+gemini_model: gemini-flash-latest
+fallback_model: gemini-flash-lite-latest
+
+# AI budget per daily run. Each "AI call" scores up to jobs_per_ai_call jobs.
+# 20 x 15 = up to 300 new jobs per day; anything beyond waits until tomorrow
+# (nothing is lost). Reading the Hacker News thread uses up to
+# hacker_news_max_ai_calls of the same budget.
+jobs_per_ai_call: 20
+max_ai_calls_per_run: 15
+hacker_news_max_ai_calls: 3
+hacker_news_posts_per_ai_call: 12
+seconds_between_ai_calls: 7
+
+# How much of each job description the AI reads (characters).
+max_description_chars: 1500
+
+# true = skip company-board jobs that never mention "remote" anywhere (most
+# onsite jobs just list a city). Set to false if you think good jobs are missed.
+require_remote_mention: true
+
+# Jobs you've already been scored on are remembered this many days.
+forget_seen_jobs_after_days: 365
+
+# ---------------------------------------------------------------------------
+# WEEKLY COMPANY DISCOVERY (runs Monday mornings)
+# ---------------------------------------------------------------------------
+discovery:
+  enabled: true                   # false = stop the weekly discovery
+  max_new_companies_per_week: 25
+  min_fit_score: 60               # 0-100: how well a company must fit your sectors
+  lookback_days: 8                # how far back to read the news
+  max_ai_calls: 4                 # AI budget for reading the news (+1 for the YC directory)
+  articles_per_ai_call: 25
+  max_companies_to_check: 60      # most companies to look up job boards for
+
+  # Y Combinator's company directory (a free, community-kept copy of
+  # ycombinator.com/companies). Each week it looks at YC companies that say
+  # they're hiring, are in the US, have at least yc_min_team_size people, and
+  # mention one of yc_sector_keywords; the AI then scores them against your
+  # profile like the news-based ones.
+  yc_directory: true
+  yc_min_team_size: 15
+  yc_max_companies_per_week: 40
+  yc_sector_keywords:
+    - quantum
+    - physics
+    - space
+    - satellite
+    - aerospace
+    - earth observation
+    - geospatial
+    - fusion
+    - nuclear
+    - energy
+    - climate
+    - battery
+    - grid
+    - carbon
+    - defense
+    - national security
+    - hard tech
+    - deep tech
+    - robotics
+    - drones
+    - semiconductor
+    - photonics
+    - sensors
+
+  # Funding-news feeds (all free). Set enabled: false to turn one off, or add
+  # your own with a name and url. every_item: true reads every story in the
+  # feed (for newsletters whose headlines don't say "raises"); otherwise only
+  # stories that look like funding news are read.
+  feeds:
+    - name: TechCrunch Venture
+      url: https://techcrunch.com/category/venture/feed/
+      enabled: true
+    - name: TechCrunch Funding
+      url: https://techcrunch.com/tag/funding/feed/
+      enabled: true
+    - name: Crunchbase News
+      url: https://news.crunchbase.com/feed/
+      enabled: true
+    - name: The Quantum Insider
+      url: https://thequantuminsider.com/feed/
+      enabled: true
+    - name: Payload (space)
+      url: https://payloadspace.com/feed/
+      enabled: true
+    - name: SpaceNews
+      url: https://spacenews.com/feed/
+      enabled: true
+    - name: CTVC (climate tech deals newsletter)
+      url: https://www.ctvc.co/rss/
+      enabled: true
+      every_item: true
+      max_chars: 6000
+    - name: GeekWire
+      url: https://www.geekwire.com/feed/
+      enabled: true
+    - name: SiliconANGLE
+      url: https://siliconangle.com/feed/
+      enabled: false

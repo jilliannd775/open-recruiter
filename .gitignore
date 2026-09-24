@@ -10,3 +10,6 @@ workspace/
 # Your keys. `.env.example` is the template and IS tracked; `.env` never is.
 .env
 !.env.example
+
+# Job alerts dry-run previews
+job-alerts/preview_*.html

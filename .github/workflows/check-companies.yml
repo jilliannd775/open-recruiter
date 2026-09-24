@@ -1,0 +1,50 @@
+name: Check companies and sources
+
+# Runs by itself whenever companies.yaml or settings.yaml changes, and from the
+# "Run workflow" button. It tests every company's job board, every job source
+# and every funding-news feed (no AI, no email, no secrets needed) and, for any
+# company that fails, searches for the right platform/slug.
+
+on:
+  push:
+    paths:
+      - "job-alerts/companies.yaml"
+      - "job-alerts/settings.yaml"
+      - "job-alerts/*.py"
+  workflow_dispatch:
+    inputs:
+      search_for:
+        description: "Optional: company names to look up (e.g. Rocket Lab, Planet). Separate with commas."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: job-alerts
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Test every company, source and feed
+        env:
+          SEARCH_FOR: ${{ inputs.search_for }}
+        run: |
+          names=()
+          IFS=',' read -ra parts <<< "${SEARCH_FOR:-}"
+          for n in "${parts[@]}"; do
+            n="$(echo "$n" | xargs)"; [ -n "$n" ] && names+=("$n")
+          done
+          if [ ${#names[@]} -gt 0 ]; then
+            python job_alerts.py --check --probe "${names[@]}"
+          else
+            python job_alerts.py --check
+          fi

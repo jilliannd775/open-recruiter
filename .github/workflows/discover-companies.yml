@@ -1,0 +1,58 @@
+name: Weekly company discovery
+
+on:
+  schedule:
+    # Mondays 13:00 UTC = 6am Pacific in summer, 5am in winter,
+    # so new companies are included in that morning's job alert.
+    - cron: "0 13 * * 1"
+  workflow_dispatch:  # adds the "Run workflow" button for test runs
+
+permissions:
+  contents: write  # lets the run save companies.yaml and discovery_state.json
+
+concurrency:
+  group: job-alerts-repo-writes
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: job-alerts
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: job-alerts/requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Find funded companies and add their job boards
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python discover.py
+
+      - name: Save the updated company list
+        if: always()
+        run: |
+          if git diff --quiet -- companies.yaml discovery_state.json; then
+            echo "Nothing new to save."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add companies.yaml discovery_state.json
+          git commit -m "Weekly discovery: update company list ($(TZ=America/Los_Angeles date +%F))"
+          for i in 1 2 3; do
+            git pull --rebase --quiet && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

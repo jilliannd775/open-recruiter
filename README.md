@@ -1,5 +1,9 @@
 # OpenRecruiter
 
+> **Daily AI job alerts:** the cloud-only job alert system (GitHub Actions +
+> Gemini + Gmail) lives in [`job-alerts/`](job-alerts/README.md). Setup steps are
+> in that folder's README.
+
 **A recruiter that lives on your laptop and texts your phone.**
 
 I hate filling in job applications, so I automated the whole thing and made an
