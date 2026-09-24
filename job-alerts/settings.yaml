@@ -1,0 +1,29 @@
+# Knobs you can change. Save the file and the next run uses the new values.
+
+# Minimum AI score (0-100) for a job to be emailed to you.
+score_threshold: 65
+
+# Which Gemini model scores jobs. "gemini-flash-latest" always points at
+# Google's newest Flash model. If the free daily limit on it runs out, the
+# fallback (the lighter "Flash-Lite", which has a much bigger free allowance)
+# takes over for the rest of the run.
+gemini_model: gemini-flash-latest
+fallback_model: gemini-flash-lite-latest
+
+# How many jobs go into one AI request, and the most requests per day.
+# 20 x 15 = up to 300 new jobs scored per day. Anything beyond that waits
+# until tomorrow (nothing is lost). Keep max_ai_calls_per_run under your
+# free-tier "requests per day" limit shown in Google AI Studio.
+jobs_per_ai_call: 20
+max_ai_calls_per_run: 15
+seconds_between_ai_calls: 7
+
+# How much of each job description the AI reads (characters).
+max_description_chars: 1500
+
+# true = skip jobs that never mention "remote" anywhere (saves AI calls; most
+# onsite jobs just list a city). Set to false if you think good jobs are missed.
+require_remote_mention: true
+
+# Jobs you've already been scored on are remembered this many days.
+forget_seen_jobs_after_days: 365

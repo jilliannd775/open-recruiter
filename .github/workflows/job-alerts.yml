@@ -1,0 +1,60 @@
+name: Daily job alerts
+
+on:
+  schedule:
+    # GitHub schedules run in UTC, which doesn't follow daylight saving.
+    # We start at both 14:00 and 15:00 UTC; the script only does its work on
+    # the one that lands at 7am Pacific (and never twice in one day).
+    - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
+  workflow_dispatch:  # adds the "Run workflow" button for test runs
+
+permissions:
+  contents: write  # lets the run save seen_jobs.json back to the repo
+
+concurrency:
+  group: job-alerts
+  cancel-in-progress: false
+
+jobs:
+  alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: job-alerts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: job-alerts/requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Find, score and email new jobs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }}
+
+      - name: Save the list of jobs already seen
+        if: always()
+        run: |
+          if git diff --quiet -- seen_jobs.json; then
+            echo "Nothing new to save."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add seen_jobs.json
+          git commit -m "Update seen jobs ($(TZ=America/Los_Angeles date +%F))"
+          for i in 1 2 3; do
+            git pull --rebase --quiet && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
