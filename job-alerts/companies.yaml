@@ -25,9 +25,6 @@ companies:
     slug: palantir
 
   # Google is not listed: it runs its own careers site (google.com/about/careers),
-  # not Greenhouse, Lever or Ashby, so there is no free public feed to read.
+  # not Greenhouse, Lever or Ashby (checked every common spelling on all three),
+  # so there is no free public feed to read.
 
-  # TEMPORARY: checking whether Google has a public board anywhere.
-  - name: Google
-    platform: greenhouse
-    slug: google
