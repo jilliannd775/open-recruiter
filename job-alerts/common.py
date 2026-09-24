@@ -570,7 +570,7 @@ class Gemini:
         self.settings = settings
         self.models = [m for m in (settings["gemini_model"], settings.get("fallback_model")) if m]
         self.model_idx = 0
-        self.calls_made = 0        # successful + failed requests actually sent
+        self.calls_made = 0        # requests Google counted (answers and 4xx), not 5xx/network failures
         self.max_calls = max_calls if max_calls is not None else int(settings["max_ai_calls_per_run"])
         self._last_call = 0.0
 
@@ -603,12 +603,14 @@ class Gemini:
         while True:
             attempts += 1
             self._last_call = time.time()
-            self.calls_made += 1
             try:
                 resp = http_json(GEMINI_URL.format(model=self.model), method="POST", body=body,
                                  headers={"x-goog-api-key": self.api_key}, timeout=180)
+                self.calls_made += 1
             except urllib.error.HTTPError as e:
                 detail = e.read().decode("utf-8", "replace")
+                if e.code < 500:
+                    self.calls_made += 1  # Google counts these; overload errors (5xx) don't use quota
                 if e.code == 429:
                     if "PerDay" in detail or "per day" in detail.lower():
                         if self._next_model(f"daily free quota used up on {self.model}"):
@@ -622,9 +624,20 @@ class Gemini:
                     raise QuotaExhausted("Gemini kept rate-limiting (429)") from None
                 if e.code == 404 and self._next_model(f"model {self.model} not found"):
                     continue
-                if e.code >= 500 and attempts <= 3:
-                    time.sleep(10 * attempts)
-                    continue
+                if e.code >= 500:
+                    # "Model is overloaded": retry once, then move to the lighter backup model,
+                    # which is usually less busy, and stay on it for the rest of the run.
+                    if attempts == 1:
+                        log(f"    Gemini ({self.model}) is busy (HTTP {e.code}); retrying in 15s...")
+                        time.sleep(15)
+                        continue
+                    if self._next_model(f"{self.model} is overloaded (HTTP {e.code})"):
+                        attempts = 0
+                        continue
+                    if attempts <= 3:
+                        time.sleep(30)
+                        continue
+                    raise RuntimeError(f"Gemini is overloaded right now (HTTP {e.code}); will retry next run") from None
                 raise RuntimeError(f"Gemini HTTP {e.code}: {detail[:300]}") from None
             except (urllib.error.URLError, TimeoutError) as e:
                 if attempts <= 3:

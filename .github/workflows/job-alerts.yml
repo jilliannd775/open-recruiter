@@ -8,6 +8,11 @@ on:
     - cron: "0 14 * * *"
     - cron: "0 15 * * *"
   workflow_dispatch:  # adds the "Run workflow" button for test runs
+    inputs:
+      test_email_only:
+        description: "Only send a test email (checks the Gmail secrets; no job search)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write  # lets the run save seen_jobs.json back to the repo
@@ -40,7 +45,7 @@ jobs:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }}
+        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }} ${{ inputs.test_email_only && '--test-email' || '' }}
 
       - name: Save the list of jobs already seen
         if: always()
