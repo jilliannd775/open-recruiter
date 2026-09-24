@@ -15,6 +15,7 @@ sources:
   remotive: true         # remotive.com
   remoteok: true         # remoteok.com
   himalayas: true        # himalayas.app
+  weworkremotely: true   # weworkremotely.com
 
 # Job boards (Remotive, Remote OK, Himalayas, Hacker News) list thousands of
 # jobs. So nothing is wasted on the AI, a job from those sources is only
@@ -37,6 +38,13 @@ job_board_title_keywords:
   - r&d
   - portfolio
   - transformation
+
+# The We Work Remotely feeds read each day. Other categories are listed at
+# weworkremotely.com (look for the RSS link on a category page).
+weworkremotely_feeds:
+  - https://weworkremotely.com/categories/remote-management-and-finance-jobs.rss
+  - https://weworkremotely.com/categories/remote-product-jobs.rss
+  - https://weworkremotely.com/categories/all-other-remote-jobs.rss
 
 # The searches run on Himalayas each day (US-eligible remote jobs, newest
 # first, 20 results each).
@@ -86,9 +94,42 @@ discovery:
   max_new_companies_per_week: 25
   min_fit_score: 60               # 0-100: how well a company must fit your sectors
   lookback_days: 8                # how far back to read the news
-  max_ai_calls: 4                 # AI budget for the weekly run
+  max_ai_calls: 4                 # AI budget for reading the news (+1 for the YC directory)
   articles_per_ai_call: 25
   max_companies_to_check: 60      # most companies to look up job boards for
+
+  # Y Combinator's company directory (a free, community-kept copy of
+  # ycombinator.com/companies). Each week it looks at YC companies that say
+  # they're hiring, are in the US, have at least yc_min_team_size people, and
+  # mention one of yc_sector_keywords; the AI then scores them against your
+  # profile like the news-based ones.
+  yc_directory: true
+  yc_min_team_size: 15
+  yc_max_companies_per_week: 40
+  yc_sector_keywords:
+    - quantum
+    - physics
+    - space
+    - satellite
+    - aerospace
+    - earth observation
+    - geospatial
+    - fusion
+    - nuclear
+    - energy
+    - climate
+    - battery
+    - grid
+    - carbon
+    - defense
+    - national security
+    - hard tech
+    - deep tech
+    - robotics
+    - drones
+    - semiconductor
+    - photonics
+    - sensors
 
   # Funding-news feeds (all free). Set enabled: false to turn one off, or add
   # your own with a name and url. every_item: true reads every story in the

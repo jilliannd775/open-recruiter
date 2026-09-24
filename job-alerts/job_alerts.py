@@ -2,8 +2,9 @@
 
 What one run does, in order:
   1. Collects open jobs from every source switched on in settings.yaml:
-     your companies' Greenhouse / Lever / Ashby boards (companies.yaml),
-     Remotive, Remote OK, Himalayas, and the monthly Hacker News
+     your companies' Greenhouse / Lever / Ashby / Workable / SmartRecruiters
+     boards (companies.yaml), Remotive, Remote OK, Himalayas, We Work
+     Remotely, and the monthly Hacker News
      "Who is hiring?" thread (Gemini pulls the roles out of each post).
      A source that fails is skipped and noted at the bottom of the email.
   2. Drops jobs already seen (seen_jobs.json), duplicates across sources, and
@@ -32,7 +33,7 @@ from datetime import datetime
 
 import sources
 from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, fetch_board,
-                    find_board, load_companies, load_json_state, load_profile, load_settings, log,
+                    fill_details, find_board, load_companies, load_json_state, load_profile, load_settings, log,
                     missing_secrets, prefilter, priority, prune_dated, save_json_state, send_email,
                     source_on, email_shell, today_pacific)
 
@@ -161,6 +162,8 @@ def collect_fixed_sources(settings: dict, notes: list[str]) -> tuple[list[Job], 
         ("remotive", "Remotive", sources.fetch_remotive),
         ("remoteok", "Remote OK", sources.fetch_remoteok),
         ("himalayas", "Himalayas", lambda: sources.fetch_himalayas(settings.get("himalayas_searches") or [])),
+        ("weworkremotely", "We Work Remotely",
+         lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
     ]
     for key, label, fetch in aggregators:
         if not source_on(settings, key):
@@ -304,6 +307,7 @@ def run(dry_run: bool, scheduled: bool) -> int:
         notes.append(f"{len(candidates) - budget} jobs were left for tomorrow to stay inside "
                      f"the free AI limit ({settings['max_ai_calls_per_run']} AI calls per day).")
     to_score = candidates[:budget]
+    fill_details(to_score)  # SmartRecruiters lists titles only; fetch descriptions for these few
     scored: dict[str, dict] = {}
     ai_errors = 0
     for start in range(0, len(to_score), batch_size):
@@ -401,25 +405,27 @@ def check_all(probe_names: list[str]) -> int:
         ("remotive", "Remotive", sources.fetch_remotive),
         ("remoteok", "Remote OK", sources.fetch_remoteok),
         ("himalayas", "Himalayas", lambda: sources.fetch_himalayas((settings.get("himalayas_searches") or [])[:2])),
+        ("weworkremotely", "We Work Remotely",
+         lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
     ]
     for key, label, fetch in checks:
         state = "on " if source_on(settings, key) else "off"
         try:
             jobs = fetch()
             passing = [j for j in jobs if not prefilter(j, settings)]
-            log(f"  OK    {label:<12} ({state}) {len(jobs)} jobs, {len(passing)} pass the keyword filter")
+            log(f"  OK    {label:<16} ({state}) {len(jobs)} jobs, {len(passing)} pass the keyword filter")
         except Exception as e:  # noqa: BLE001
             failed += 1
-            log(f"  FAIL  {label:<12} ({state}) {e}")
+            log(f"  FAIL  {label:<16} ({state}) {e}")
     state = "on " if source_on(settings, "hacker_news") else "off"
     try:
         t = sources.latest_hn_thread()
         worth = sum(1 for c in t["comments"] if sources.hn_worth_extracting(c["text"]))
-        log(f"  OK    {'Hacker News':<12} ({state}) {t['title']}: {len(t['comments'])} posts, "
+        log(f"  OK    {'Hacker News':<16} ({state}) {t['title']}: {len(t['comments'])} posts, "
             f"{worth} mention remote + a relevant role")
     except Exception as e:  # noqa: BLE001
         failed += 1
-        log(f"  FAIL  {'Hacker News':<12} ({state}) {e}")
+        log(f"  FAIL  {'Hacker News':<16} ({state}) {e}")
 
     try:
         import discover
@@ -429,14 +435,15 @@ def check_all(probe_names: list[str]) -> int:
         pass
 
     if probe_names:
-        log("\nSearching for boards by name (tries common slug spellings on all 3 platforms):")
+        log("\nSearching for boards by name (tries common slug spellings on every platform):")
         for name in dict.fromkeys(probe_names):
             found = find_board(name, verify=False, pause=0.1)
             if found:
                 platform, slug, jobs = found
                 log(f"  FOUND {name:<28} platform: {platform:<10} slug: {slug:<24} {len(jobs)} open jobs")
             else:
-                log(f"  NONE  {name:<28} not on Greenhouse, Lever or Ashby under any common slug")
+                log(f"  NONE  {name:<28} not on Greenhouse, Lever, Ashby, Workable or SmartRecruiters "
+                    "under any common slug")
     return 1 if failed else 0
 
 

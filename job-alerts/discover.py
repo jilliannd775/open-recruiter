@@ -1,10 +1,12 @@
 """Weekly company discovery, built to run on GitHub Actions every Monday.
 
   1. Reads the last week of startup-funding news from the RSS feeds listed in
-     settings.yaml (discovery -> feeds).
-  2. Asks Gemini which companies in those stories raised money, fit the sectors
-     in profile.md, and are likely to hire program/operations/strategy people.
-  3. For each good fit, tries likely board names on Greenhouse, Lever and Ashby.
+     settings.yaml (discovery -> feeds), and the Y Combinator company directory
+     (companies marked as hiring, filtered to your sectors).
+  2. Asks Gemini which of those companies fit the sectors in profile.md and are
+     likely to hire program/operations/strategy people.
+  3. For each good fit, tries likely board names on Greenhouse, Lever, Ashby,
+     Workable and SmartRecruiters.
      If one exists and has open jobs, the company is added to companies.yaml
      (tagged "discovered", with the date and a one-line reason).
   4. Emails a short summary: who was added and why, plus strong fits with no
@@ -27,22 +29,26 @@ import re
 import sys
 import time
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 
 import yaml
 
-from common import (COMPANIES_FILE, DISCOVERY_STATE_FILE, Gemini, QuotaExhausted, _request, as_list,
-                    email_shell, find_board, load_json_state, load_profile,
+from common import (CAREERS_URLS, COMPANIES_FILE, DISCOVERY_STATE_FILE, Gemini, QuotaExhausted,
+                    _request, as_list, email_shell, find_board, get_with_retries, http_json, load_json_state, load_profile,
                     load_settings, log, missing_secrets, norm_name, prune_dated, save_json_state,
                     send_email, strip_html, today_pacific)
 
-EMPTY_STATE = {"companies": {}, "articles": {}, "last_run": None}
-CAREERS_URLS = {
-    "greenhouse": "https://job-boards.greenhouse.io/{slug}",
-    "lever": "https://jobs.lever.co/{slug}",
-    "ashby": "https://jobs.ashbyhq.com/{slug}",
-}
+EMPTY_STATE = {"companies": {}, "articles": {}, "yc_seen": {}, "last_run": None}
+YC_HIRING_URL = "https://yc-oss.github.io/api/companies/hiring.json"
+YC_US_REGIONS = {"United States of America", "America / Canada"}
+DEFAULT_YC_KEYWORDS = [
+    "quantum", "physics", "space", "satellite", "aerospace", "earth observation", "geospatial",
+    "fusion", "nuclear", "energy", "climate", "battery", "grid", "carbon", "defense",
+    "national security", "hard tech", "deep tech", "robotics", "drones", "semiconductor",
+    "photonics", "sensors",
+]
 FUNDING_WORDS = re.compile(
     r"\brais(e|es|ed|ing)\b|\bfunding\b|\bseries [a-f]\b|\bseed\b|\bround\b|\bbacked\b|"
     r"\bsecures?\b|\blands?\b|\bcloses?\b|\bvaluation\b|\$\s?\d|€\s?\d|£\s?\d|\bmillion\b", re.I)
@@ -134,6 +140,15 @@ def recent_funding_items(settings: dict, notes: list[str], state: dict | None = 
 def check_feeds(settings: dict) -> int:
     """Used by `job_alerts.py --check`. Returns how many enabled feeds failed."""
     failed = 0
+    cfg = settings["discovery"]
+    state = "on " if cfg.get("yc_directory", True) else "off"
+    try:
+        n = len(yc_candidates(cfg, load_json_state(DISCOVERY_STATE_FILE, EMPTY_STATE), set(), today_pacific()))
+        log(f"  OK    {'Y Combinator directory':<28} ({state}) {n} hiring US companies match your sectors "
+            f"(max {cfg['yc_max_companies_per_week']} a week)")
+    except Exception as e:  # noqa: BLE001
+        failed += 1 if cfg.get("yc_directory", True) else 0
+        log(f"  FAIL  {'Y Combinator directory':<28} ({state}) {e}")
     for feed in settings["discovery"].get("feeds") or []:
         if not isinstance(feed, dict) or not feed.get("url"):
             continue
@@ -228,9 +243,87 @@ def pick_companies(gemini: Gemini, profile: str, articles: list[dict], per_call:
             except (TypeError, ValueError):
                 c["fit_score"] = 0
             c["company"] = str(c["company"]).strip()
+            c["found_via"] = "funding news"
             found.append(c)
         log(f"  read {len(batch)} articles -> {len(found)} funded companies so far")
     return found, read
+
+
+# --------------------------------------------------------------------------- #
+# Y Combinator directory
+# --------------------------------------------------------------------------- #
+
+YC_SYSTEM = """You help a job seeker decide which startups to watch. Below are \
+Y Combinator companies that say they are hiring, and the job seeker's profile.
+
+For EACH company return:
+{"id": "<id>", "fit_score": <0-100>, "hires_non_engineering": <true/false>, \
+"sector": "<2-5 words>", "reason": "<one sentence on why it fits the profile or not>"}
+
+fit_score: how well the company matches the candidate's favorite sectors AND could \
+plausibly hire them (fully remote, US-based). hires_non_engineering: true if a \
+company of this size and stage is likely to hire program/project management, \
+operations, strategy or business-analyst roles (under ~15 people mostly hire \
+engineers, except a Chief of Staff).
+
+Reply with JSON only: a list with one object per company.
+
+CANDIDATE PROFILE:
+"""
+
+
+def yc_candidates(cfg: dict, state: dict, taken: set[str], today: str) -> list[dict]:
+    """Hiring YC companies in the US, in your sectors, not looked at recently."""
+    data = get_with_retries(lambda: http_json(YC_HIRING_URL, timeout=90), "Y Combinator directory")
+    if not isinstance(data, list):
+        raise ValueError("unexpected Y Combinator directory shape")
+    words = [w.lower() for w in (cfg.get("yc_sector_keywords") or DEFAULT_YC_KEYWORDS)]
+    pattern = re.compile(r"\b(" + "|".join(re.escape(w) for w in words) + r")", re.I) if words else None
+    cutoff = (datetime.fromisoformat(today) - timedelta(days=180)).date().isoformat()
+    out = []
+    for c in data:
+        if c.get("status") != "Active" or not c.get("isHiring"):
+            continue
+        if not YC_US_REGIONS & set(c.get("regions") or []):
+            continue
+        if int(c.get("team_size") or 0) < int(cfg["yc_min_team_size"]):
+            continue
+        key = norm_name(c.get("name") or "")
+        if not key or key in taken or recently_considered(state, key, today):
+            continue
+        if (state["yc_seen"].get(c.get("slug") or key) or "") >= cutoff:
+            continue
+        text = " ".join([c.get("one_liner") or "", c.get("long_description") or "",
+                         " ".join(c.get("tags") or []), " ".join(c.get("industries") or [])])
+        hits = len(set(m.lower() for m in pattern.findall(text))) if pattern else 1
+        if hits:
+            c["_hits"] = hits
+            out.append(c)
+    out.sort(key=lambda c: (-c["_hits"], -int(c.get("team_size") or 0)))
+    return out[: int(cfg["yc_max_companies_per_week"])]
+
+
+def score_yc(gemini: Gemini, profile: str, companies: list[dict]) -> list[dict]:
+    blocks = [f"### Company id: {i}\nName: {c.get('name')}\nOne-liner: {c.get('one_liner')}\n"
+              f"Industries: {', '.join(c.get('industries') or [])}; tags: {', '.join(c.get('tags') or [])}\n"
+              f"Team size: {c.get('team_size')}; stage: {c.get('stage')}; batch: {c.get('batch')}\n"
+              f"Locations: {c.get('all_locations') or ', '.join(c.get('regions') or [])}\n"
+              f"About: {(c.get('long_description') or '')[:500]}\n"
+              for i, c in enumerate(companies, 1)]
+    data = gemini.ask_json(YC_SYSTEM + profile.strip(), "Score these companies.\n\n" + "\n".join(blocks))
+    out = []
+    for r in as_list(data, "companies"):
+        try:
+            c = companies[int(str(r.get("id")).strip().lstrip("#")) - 1]
+            fit = int(float(r.get("fit_score") or 0))
+        except (TypeError, ValueError, IndexError, AttributeError):
+            continue
+        out.append({"company": c["name"], "website": c.get("website") or "", "sector": r.get("sector") or "",
+                    "round": f"YC {c.get('batch')}" if c.get("batch") else "", "amount": "",
+                    "fit_score": fit, "hires_non_engineering": r.get("hires_non_engineering", True),
+                    "reason": r.get("reason") or "", "found_via": "Y Combinator directory",
+                    "yc_slug": c.get("slug") or ""})
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -287,10 +380,14 @@ def build_summary(added: list[dict], no_board: list[dict], notes: list[str], sta
                 f"<div style='padding:8px 0;border-bottom:1px solid #eee;'>"
                 f"<b><a href='{esc(a['careers'])}' style='color:#0b57d0;text-decoration:none;'>{esc(a['name'])}</a></b>"
                 f" <span style='color:#666;'>&middot; {esc(a['sector'])}{' &middot; ' + esc(a['round']) if a['round'] else ''}"
-                f"{' ' + esc(a['amount']) if a['amount'] else ''} &middot; {a['jobs']} open jobs</span>"
+                f"{' ' + esc(a['amount']) if a['amount'] else ''} &middot; {a['jobs']} open jobs"
+                f"{' &middot; via ' + esc(a['found_via']) if a.get('found_via') else ''}</span>"
                 f"<div>{esc(a['reason'])}</div></div>")
     else:
         parts.append("<p>No new companies were added this week.</p>")
+    no_board = sorted(no_board, key=lambda c: -c.get("fit_score", 0))
+    extra_count = max(0, len(no_board) - 15)
+    no_board = no_board[:15]
     if no_board:
         parts.append("<h3 style='font-size:16px;margin:20px 0 6px;'>Strong fits with no job board I could find</h3>"
                      "<div style='color:#666;font-size:13px;'>They may use a different careers system. Worth a look.</div>")
@@ -303,12 +400,15 @@ def build_summary(added: list[dict], no_board: list[dict], notes: list[str], sta
                 f"<div style='padding:8px 0;border-bottom:1px solid #eee;'><b>{esc(c['company'])}</b>"
                 f" <span style='color:#666;'>&middot; {esc(c.get('sector') or '')} &middot; fit {c['fit_score']}</span>"
                 f" &middot; {link}<div>{esc(c.get('reason') or '')}</div></div>")
+    if extra_count:
+        parts.append(f"<div style='color:#666;font-size:13px;margin-top:6px;'>...and {extra_count} more lower-scoring ones.</div>")
     if notes:
         parts.append("<p style='margin-top:24px;color:#8a1c1c;font-size:13px;'><b>Problems this run</b></p><ul style='color:#8a1c1c;font-size:13px;'>"
                      + "".join(f"<li>{esc(n)}</li>" for n in notes) + "</ul>")
     return email_shell(
         "Weekly company discovery",
-        f"{stats['articles']} funding stories read &middot; {stats['candidates']} good fits &middot; "
+        f"{stats['articles']} funding stories and {stats.get('yc', 0)} Y Combinator companies read "
+        f"&middot; {stats['candidates']} good fits &middot; "
         f"{len(added)} added",
         "".join(parts),
         "Added companies are checked in your daily job alerts from now on. "
@@ -339,11 +439,29 @@ def run(dry_run: bool) -> int:
     articles = recent_funding_items(settings, notes, state)
     log(f"{len(articles)} new funding stories to read.\n")
 
-    gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings, max_calls=int(cfg["max_ai_calls"]))
-    found, read_links = pick_companies(gemini, load_profile(), articles, int(cfg["articles_per_ai_call"]), notes)
+    use_yc = bool(cfg.get("yc_directory", True))
+    gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings,
+                    max_calls=int(cfg["max_ai_calls"]) + (1 if use_yc else 0))
+    profile = load_profile()
+    found, read_links = pick_companies(gemini, profile, articles, int(cfg["articles_per_ai_call"]), notes)
+    taken = existing_keys()
+
+    yc_scored: list[dict] = []
+    if use_yc:
+        log("\nReading the Y Combinator directory...")
+        try:
+            yc = yc_candidates(cfg, state, taken, today)
+            log(f"  {len(yc)} hiring US companies in your sectors not looked at recently")
+            if yc:
+                yc_scored = score_yc(gemini, profile, yc)
+                found.extend(yc_scored)
+        except QuotaExhausted as e:
+            notes.append(f"Y Combinator directory: {e}; it's tried again next week.")
+        except Exception as e:  # noqa: BLE001
+            log(f"  FAILED - {e}")
+            notes.append(f"Couldn't read the Y Combinator directory: {e}")
 
     # Best fit per company, minus anything already known.
-    taken = existing_keys()
     best: dict[str, dict] = {}
     for c in found:
         key = norm_name(c["company"])
@@ -356,21 +474,25 @@ def run(dry_run: bool) -> int:
     candidates = sorted(best.values(), key=lambda c: -c["fit_score"])[: int(cfg["max_companies_to_check"])]
     log(f"\n{len(candidates)} good-fit companies not already on your list. Looking for their job boards...")
 
+    # Look up boards 6 companies at a time (each lookup is ~40 quick requests).
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        boards = list(pool.map(lambda c: find_board(c["company"], c.get("website") or ""), candidates))
+
     cap = int(cfg["max_new_companies_per_week"])
     added: list[dict] = []
     no_board: list[dict] = []
-    for c in candidates:
+    for c, found_board in zip(candidates, boards):
         key = norm_name(c["company"])
-        if len(added) >= cap:
-            log(f"  reached this week's limit of {cap} new companies; the rest can come up again later")
-            break
-        found_board = find_board(c["company"], c.get("website") or "")
+        if found_board and len(added) >= cap:
+            log(f"  over this week's limit of {cap}: {c['company']} can be added another week")
+            continue
         if found_board:
             platform, slug, jobs = found_board
             if norm_name(slug) in taken:
                 continue
             entry = {"name": c["company"], "platform": platform, "slug": slug, "date": today,
                      "reason": c.get("reason") or "", "sector": c.get("sector") or "",
+                     "found_via": c.get("found_via") or "",
                      "round": c.get("round") or "", "amount": c.get("amount") or "",
                      "jobs": len(jobs), "careers": CAREERS_URLS[platform].format(slug=slug)}
             added.append(entry)
@@ -382,9 +504,9 @@ def run(dry_run: bool) -> int:
             no_board.append(c)
             state["companies"][key] = {"name": c["company"], "status": "no_board", "date": today,
                                        "website": c.get("website") or ""}
-            log(f"  none   {c['company']:<30} (fit {c['fit_score']}) no Greenhouse/Lever/Ashby board found")
+            log(f"  none   {c['company']:<30} (fit {c['fit_score']}) no job board found")
 
-    stats = {"articles": len(read_links), "candidates": len(candidates)}
+    stats = {"articles": len(read_links), "candidates": len(candidates), "yc": len(yc_scored)}
     if dry_run:
         log(f"\nDry run: would add {len(added)} companies; nothing saved or emailed.")
         (DISCOVERY_STATE_FILE.parent / "preview_discovery.html").write_text(
@@ -395,6 +517,9 @@ def run(dry_run: bool) -> int:
         append_companies(added)
     for link in read_links:
         state["articles"][link] = today
+    for c in yc_scored:
+        state["yc_seen"][c["yc_slug"] or norm_name(c["company"])] = today
+    state["yc_seen"] = prune_dated(state["yc_seen"], 200)
     state["articles"] = prune_dated(state["articles"], 60)
     state["last_run"] = today
     save_json_state(DISCOVERY_STATE_FILE, state)
@@ -405,7 +530,7 @@ def run(dry_run: bool) -> int:
     log(f"\nEmail sent: {subject}")
     if notes:
         log("\nProblems this run:\n  - " + "\n  - ".join(notes))
-    if articles and not read_links:
+    if articles and not read_links and not yc_scored:
         log("ERROR: the AI couldn't read any articles. Check GEMINI_API_KEY.")
         return 1
     return 0

@@ -12,16 +12,19 @@ jobs are only emailed to you, never republished.
     We use 1 request a day and link straight to their page.
   * Himalayas: rate limited, refreshed daily. We send one search per line
     of `himalayas_searches` in settings.yaml, 2 seconds apart.
+  * We Work Remotely: public RSS feeds, one request per feed a day. Every
+    job links to its We Work Remotely page and is credited to them.
 """
 from __future__ import annotations
 
 import re
 import time
 import urllib.parse
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
-from common import (REMOTE_WORD, Gemini, Job, as_list, get_with_retries, http_json, log,
-                    strip_html)
+from common import (REMOTE_WORD, Gemini, Job, as_list, get_with_retries, http_json, http_text,
+                    log, strip_html)
 
 UA_NOTE = "personal job alert emailed to one person"
 
@@ -30,6 +33,7 @@ SOURCE_HOMES = {
     "Remotive": "https://remotive.com",
     "Remote OK": "https://remoteok.com",
     "Himalayas": "https://himalayas.app",
+    "We Work Remotely": "https://weworkremotely.com",
 }
 
 
@@ -116,6 +120,47 @@ def fetch_himalayas(searches: list[str]) -> list[Job]:
                 workplace="remote",
                 description=strip_html(j.get("description") or j.get("excerpt") or ""),
                 source="Himalayas", source_url=SOURCE_HOMES["Himalayas"], kind="aggregator",
+            )
+    if errors and not jobs:
+        raise RuntimeError("; ".join(errors[:3]))
+    return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# We Work Remotely
+# --------------------------------------------------------------------------- #
+
+def fetch_weworkremotely(feeds: list[str]) -> list[Job]:
+    jobs: dict[str, Job] = {}
+    errors = []
+    for url in feeds:
+        try:
+            xml = get_with_retries(lambda: http_text(url, timeout=60), "We Work Remotely feed")
+            root = ET.fromstring(xml.encode("utf-8"))
+        except Exception as e:  # noqa: BLE001
+            errors.append(f"{url.rsplit('/', 1)[-1]}: {e}")
+            continue
+        finally:
+            time.sleep(1)
+        for it in root.iter("item"):
+            link = (it.findtext("link") or it.findtext("guid") or "").strip()
+            raw_title = (it.findtext("title") or "").strip()
+            company, _, title = raw_title.partition(": ")
+            if not title:
+                company, title = "", raw_title
+            region = (it.findtext("region") or "").strip()
+            country = re.sub(r"[^\w\s,().-]", "", it.findtext("country") or "").strip()
+            location = ", ".join(x for x in (region, country) if x)
+            uid = f"weworkremotely:{link.rstrip('/').rsplit('/', 1)[-1] or _slug(raw_title)}"
+            jobs[uid] = Job(
+                uid=uid,
+                company=company.strip(),
+                title=title.strip(),
+                url=link,                                  # their page, credited in the email
+                location=location,
+                workplace="remote",
+                description=strip_html(it.findtext("description") or ""),
+                source="We Work Remotely", source_url=SOURCE_HOMES["We Work Remotely"], kind="aggregator",
             )
     if errors and not jobs:
         raise RuntimeError("; ".join(errors[:3]))

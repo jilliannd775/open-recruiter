@@ -38,8 +38,19 @@ BOARD_URLS = {
     "greenhouse": "https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true",
     "lever": "https://api.lever.co/v0/postings/{slug}?mode=json",
     "ashby": "https://api.ashbyhq.com/posting-api/job-board/{slug}",
+    "workable": "https://apply.workable.com/api/v1/widget/accounts/{slug}?details=true",
+    "smartrecruiters": "https://api.smartrecruiters.com/v1/companies/{slug}/postings?limit=100&offset={offset}",
 }
-PLATFORM_LABELS = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby"}
+PLATFORM_LABELS = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby",
+                   "workable": "Workable", "smartrecruiters": "SmartRecruiters"}
+CAREERS_URLS = {
+    "greenhouse": "https://job-boards.greenhouse.io/{slug}",
+    "lever": "https://jobs.lever.co/{slug}",
+    "ashby": "https://jobs.ashbyhq.com/{slug}",
+    "workable": "https://apply.workable.com/{slug}/",
+    "smartrecruiters": "https://careers.smartrecruiters.com/{slug}",
+}
+SMARTRECRUITERS_MAX_PAGES = 10  # 1,000 jobs; enough for any company we'd watch
 
 # Everything here can be overridden in settings.yaml.
 DEFAULT_SETTINGS = {
@@ -58,9 +69,15 @@ DEFAULT_SETTINGS = {
         "remotive": True,
         "remoteok": True,
         "himalayas": True,
+        "weworkremotely": True,
     },
     "hacker_news_max_ai_calls": 3,
     "hacker_news_posts_per_ai_call": 12,
+    "weworkremotely_feeds": [
+        "https://weworkremotely.com/categories/remote-management-and-finance-jobs.rss",
+        "https://weworkremotely.com/categories/remote-product-jobs.rss",
+        "https://weworkremotely.com/categories/all-other-remote-jobs.rss",
+    ],
     "himalayas_searches": [
         "technical program manager", "program manager", "product operations",
         "strategy and operations", "business analyst", "product owner",
@@ -80,6 +97,10 @@ DEFAULT_SETTINGS = {
         "articles_per_ai_call": 25,
         "max_companies_to_check": 60,
         "feeds": [],
+        "yc_directory": True,
+        "yc_min_team_size": 15,
+        "yc_max_companies_per_week": 40,
+        "yc_sector_keywords": [],
     },
 }
 
@@ -239,11 +260,16 @@ class Job:
 def fetch_board(company: dict) -> list[Job]:
     platform, slug, name = company["platform"], company["slug"], company["name"]
     if platform not in BOARD_URLS:
-        raise ValueError(f"unknown platform '{platform}' (use greenhouse, lever or ashby)")
-    url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
-    data = get_with_retries(lambda: http_json(url, timeout=90), f"{platform} board '{slug}'")
-    parse = {"greenhouse": _parse_greenhouse, "lever": _parse_lever, "ashby": _parse_ashby}[platform]
-    jobs = parse(data, name, slug)
+        raise ValueError(f"unknown platform '{platform}' (use one of: {', '.join(BOARD_URLS)})")
+    what = f"{platform} board '{slug}'"
+    if platform == "smartrecruiters":
+        jobs = _fetch_smartrecruiters(name, slug, what)
+    else:
+        url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
+        data = get_with_retries(lambda: http_json(url, timeout=90), what)
+        parse = {"greenhouse": _parse_greenhouse, "lever": _parse_lever, "ashby": _parse_ashby,
+                 "workable": _parse_workable}[platform]
+        jobs = parse(data, name, slug)
     label = f"{name} careers ({PLATFORM_LABELS[platform]})"
     for j in jobs:
         j.source, j.kind = label, "board"
@@ -321,6 +347,73 @@ def _parse_ashby(data, name, slug) -> list[Job]:
     return jobs
 
 
+def _parse_workable(data, name, slug) -> list[Job]:
+    if not isinstance(data, dict) or not isinstance(data.get("jobs"), list):
+        raise ValueError("unexpected Workable response shape")
+    jobs = []
+    for j in data["jobs"]:
+        locs = []
+        for l in j.get("locations") or [{"city": j.get("city"), "region": j.get("state"), "country": j.get("country")}]:
+            locs.append(", ".join(x for x in (l.get("city"), l.get("region"), l.get("country")) if x))
+        codes = {(l.get("countryCode") or "").upper() for l in j.get("locations") or []} - {""}
+        jobs.append(Job(
+            uid=f"workable:{slug}:{j.get('shortcode')}",
+            company=name,
+            title=(j.get("title") or "").strip(),
+            url=j.get("url") or j.get("shortlink") or "",
+            location="; ".join(l for l in locs if l),
+            workplace="remote" if j.get("telecommuting") else "",
+            description=strip_html(j.get("description") or ""),
+            extra={"country": "US" if "US" in codes else (sorted(codes)[0] if len(codes) == 1 else ""),
+                   "board_name": data.get("name") or ""},
+        ))
+    return jobs
+
+
+def _fetch_smartrecruiters(name, slug, what) -> list[Job]:
+    """The list API has no descriptions; fill_details() fetches them later, only
+    for the few jobs that survive the keyword filter."""
+    jobs = []
+    for page in range(SMARTRECRUITERS_MAX_PAGES):
+        url = BOARD_URLS["smartrecruiters"].format(slug=urllib.parse.quote(slug), offset=page * 100)
+        data = get_with_retries(lambda: http_json(url, timeout=60), what)
+        if not isinstance(data, dict) or not isinstance(data.get("content"), list):
+            raise ValueError("unexpected SmartRecruiters response shape")
+        for j in data["content"]:
+            loc = j.get("location") or {}
+            workplace = "remote" if loc.get("remote") else "hybrid" if loc.get("hybrid") else "onsite"
+            jobs.append(Job(
+                uid=f"smartrecruiters:{slug}:{j.get('id')}",
+                company=name,
+                title=(j.get("name") or "").strip(),
+                url=f"https://jobs.smartrecruiters.com/{slug}/{j.get('id')}",
+                location=loc.get("fullLocation") or "",
+                workplace=workplace,
+                description="",
+                extra={"country": (loc.get("country") or "").upper(),
+                       "board_name": (j.get("company") or {}).get("name") or "",
+                       "detail_url": f"https://api.smartrecruiters.com/v1/companies/{urllib.parse.quote(slug)}/postings/{j.get('id')}"},
+            ))
+        if len(data["content"]) < 100 or len(jobs) >= int(data.get("totalFound") or 0):
+            break
+    return jobs
+
+
+def fill_details(jobs: list[Job], limit: int = 80) -> None:
+    """Fetch full descriptions for jobs whose board only lists titles (SmartRecruiters)."""
+    for j in [j for j in jobs if j.extra.get("detail_url") and not j.description][:limit]:
+        try:
+            d = get_with_retries(lambda: http_json(j.extra["detail_url"], timeout=60), "job details", attempts=2)
+            sections = ((d.get("jobAd") or {}).get("sections") or {})
+            j.description = "\n".join(strip_html((sections.get(k) or {}).get("text") or "")
+                                      for k in ("jobDescription", "qualifications", "additionalInformation",
+                                                "companyDescription")).strip()
+            j.url = d.get("postingUrl") or j.url
+        except Exception:  # noqa: BLE001
+            pass
+        time.sleep(0.3)
+
+
 SLUG_SUFFIXES = ("inc", "hq", "ai", "labs", "technologies", "tech", "industries")
 
 
@@ -339,6 +432,10 @@ def slug_candidates(name: str, website: str = "") -> list[str]:
         if len(parts) > 2 or parts[-1] not in ("com", "org", "net", "co", "us"):
             out.append(re.sub(r"[^a-z0-9]", "", "".join(parts[:-1])) + parts[-1])  # hubble.network -> hubblenetwork
     out += [core + s for s in SLUG_SUFFIXES]
+    # SmartRecruiters ids are often CamelCase, e.g. "BoschGroup".
+    words = re.findall(r"[A-Za-z0-9]+", name or "")
+    if len(words) > 1:
+        out.append("".join(w[:1].upper() + w[1:] for w in words))
     return [s for s in dict.fromkeys(out) if len(s) >= 2]
 
 
@@ -347,6 +444,9 @@ def board_matches_company(platform: str, slug: str, jobs: list[Job], name: str) 
     target = norm_name(name)
     if not target:
         return False
+    board = norm_name(next((j.extra.get("board_name") for j in jobs if j.extra.get("board_name")), ""))
+    if board:
+        return board in target or target in board
     if platform == "greenhouse":
         try:
             info = http_json(f"https://boards-api.greenhouse.io/v1/boards/{urllib.parse.quote(slug)}", timeout=30)
@@ -362,7 +462,7 @@ def board_matches_company(platform: str, slug: str, jobs: list[Job], name: str) 
 
 
 def find_board(name: str, website: str = "", verify: bool = True, pause: float = 0.3):
-    """Try likely slugs on all three platforms. Returns (platform, slug, jobs) or None."""
+    """Try likely slugs on every platform. Returns (platform, slug, jobs) or None."""
     for slug in slug_candidates(name, website):
         for platform in BOARD_URLS:
             try:
