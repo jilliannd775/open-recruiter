@@ -173,7 +173,7 @@ Every Monday morning, before the daily alert, it:
 
    ```yaml
      - name: "Hubble Network"
-       platform: ashby
+       platform: greenhouse
        slug: "hubblenetwork"
        tag: discovered
        added: "2026-09-28"
