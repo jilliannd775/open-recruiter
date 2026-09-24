@@ -23,13 +23,14 @@ so you can check those yourself.
 
 | Source | What it is | How often |
 |---|---|---|
-| **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever and Ashby feeds | Daily |
+| **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable and SmartRecruiters feeds | Daily |
 | **Hacker News "Who is hiring?"** | The monthly thread where companies post openings. The AI reads each new post and pulls out the roles | Daily (new posts only) |
 | **Remotive** | Remote job board (remotive.com). Its free feed is small, about 20 jobs, shown 24 hours after posting | Daily |
 | **Remote OK** | Remote job board (remoteok.com). The 100 newest jobs | Daily |
 | **Himalayas** | Remote job board (himalayas.app). Searches for your target titles, US-eligible, newest first | Daily |
+| **We Work Remotely** | One of the biggest remote job boards (weworkremotely.com). Its management & finance, product, and "all other" categories | Daily |
 
-All five are free and need no sign-up. Each one's terms ask that you credit it
+All six are free and need no sign-up. Each one's terms ask that you credit it
 and link back to its listing. The email does that for every job ("via
 Remotive", and so on), and the jobs are only emailed to you. Nothing is
 scraped from LinkedIn or Indeed.
@@ -165,8 +166,14 @@ Every Monday morning, before the daily alert, it:
 2. **Has the AI pick out funded companies** that fit the sectors in your
    `profile.md` and are big enough to hire program, operations or strategy
    people.
-3. **Looks for each company's job board** on Greenhouse, Lever and Ashby by
-   trying likely names. It double-checks that the board really belongs to that
+
+   It also looks through the **Y Combinator company directory**: YC companies
+   that say they're hiring, are in the US, have at least 15 people, and
+   mention one of your sectors (quantum, space, fusion, climate, defense, and
+   so on). The AI scores those against your profile too. It looks at up to 40
+   a week and doesn't look at the same one again for 6 months.
+3. **Looks for each company's job board** on Greenhouse, Lever, Ashby,
+   Workable and SmartRecruiters by trying likely names. It double-checks that the board really belongs to that
    company before using it.
 4. **Adds the ones it finds** (with open jobs) to the bottom of
    `companies.yaml`, up to **25 a week**. Each one is marked like this:
@@ -190,6 +197,10 @@ no job board are tried again after 90 days, in case they've set one up.
 - `min_fit_score: 60`: raise it for fewer, better-fitting companies.
 - `max_new_companies_per_week: 25`: the weekly cap.
 
+**Changing the YC sectors:** under `discovery:`, edit the `yc_sector_keywords`
+list. Change `yc_min_team_size` to allow smaller or only bigger companies, or
+set `yc_directory: false` to stop using YC.
+
 **Adding a news feed:** under `feeds:` in `settings.yaml`, copy one of the
 entries and change the `name` and `url`. Any free RSS feed works. After you
 save, the **Check companies and sources** action tests it for you.
@@ -206,20 +217,22 @@ All of these are in `settings.yaml`. Change the word, then **Commit changes**.
 
 | To turn off... | Change this |
 |---|---|
-| One job source (e.g. Remote OK) | Under `sources:`, set `remoteok: false`. The others are `company_boards`, `hacker_news`, `remotive` and `himalayas` |
+| One job source (e.g. Remote OK) | Under `sources:`, set `remoteok: false`. The others are `company_boards`, `hacker_news`, `remotive`, `himalayas` and `weworkremotely` |
+| The Y Combinator directory | Under `discovery:`, set `yc_directory: false` |
 | One news feed | Under `discovery:` then `feeds:`, set that feed's `enabled: false` |
 | Weekly discovery entirely | Under `discovery:`, set `enabled: false` |
 | Everything | Actions tab, then click the workflow, then the **...** menu (top right), then **Disable workflow**. Do it for each workflow you want stopped. Turn it back on the same way |
 
 **Job-board sources only score titles you're targeting.** Remotive, Remote OK,
-Himalayas and Hacker News list thousands of jobs. So the AI budget isn't
+Himalayas, We Work Remotely and Hacker News list thousands of jobs. So the AI budget isn't
 wasted, a job from those sources is only scored if its title contains a word
 from `job_board_title_keywords` in `settings.yaml`, such as program, project,
 operations, strategy, analyst or chief of staff. Add words there if you see
 good jobs being missed. Jobs from your own companies aren't limited this way.
 
 To change what Himalayas searches for each day, edit the `himalayas_searches`
-list.
+list. To read other We Work Remotely categories, add their RSS links to
+`weworkremotely_feeds`.
 
 ---
 
@@ -233,6 +246,8 @@ list.
    | `job-boards.greenhouse.io/`**`acme`**`/jobs/123` or `boards.greenhouse.io/`**`acme`** | `greenhouse` | `acme` |
    | `jobs.lever.co/`**`acme`**`/abc-123` | `lever` | `acme` |
    | `jobs.ashbyhq.com/`**`acme`**`/abc-123` | `ashby` | `acme` |
+   | `apply.workable.com/`**`acme`**`/j/ABC123` | `workable` | `acme` |
+   | `jobs.smartrecruiters.com/`**`Acme`**`/123-job-title` | `smartrecruiters` | `Acme` (capital letters matter) |
 
    Some companies wrap the board in their own site. If you can't see any of
    those addresses, try the **search** trick below.
@@ -251,8 +266,8 @@ list.
 
 **Search trick:** Actions tab, then **Check companies and sources**, then
 **Run workflow**. Type company names in the box, separated by commas (e.g.
-`Planet, Rocket Lab`), and run it. The log lists any Greenhouse/Lever/Ashby
-boards it finds under common spellings.
+`Planet, Rocket Lab`), and run it. The log lists any Greenhouse, Lever, Ashby,
+Workable or SmartRecruiters boards it finds under common spellings.
 
 Companies that run their own in-house careers site, such as Google, Apple,
 Amazon and Microsoft, can't be added. They don't publish a free feed.
@@ -303,7 +318,8 @@ companies in the weekly discovery. Changes apply from the next run.
   2. Jobs go to the AI **20 at a time** in one request, with at most **15
      requests a day** in total. Reading Hacker News uses up to 3 of those.
      Anything left over waits until tomorrow; nothing is lost.
-  3. Weekly discovery uses at most **4 requests**, on Mondays.
+  3. Weekly discovery uses at most **5 requests**, on Mondays: 4 for the news
+     and 1 for the Y Combinator directory.
   4. If the free daily limit on the main model runs out, it switches to
      Flash-Lite, which has a bigger free allowance.
 
