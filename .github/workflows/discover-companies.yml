@@ -1,23 +1,21 @@
-name: Daily job alerts
+name: Weekly company discovery
 
 on:
   schedule:
-    # GitHub schedules run in UTC, which doesn't follow daylight saving.
-    # We start at both 14:00 and 15:00 UTC; the script only does its work on
-    # the one that lands at 7am Pacific (and never twice in one day).
-    - cron: "0 14 * * *"
-    - cron: "0 15 * * *"
+    # Mondays 13:00 UTC = 6am Pacific in summer, 5am in winter,
+    # so new companies are included in that morning's job alert.
+    - cron: "0 13 * * 1"
   workflow_dispatch:  # adds the "Run workflow" button for test runs
 
 permissions:
-  contents: write  # lets the run save seen_jobs.json back to the repo
+  contents: write  # lets the run save companies.yaml and discovery_state.json
 
 concurrency:
   group: job-alerts-repo-writes
   cancel-in-progress: false
 
 jobs:
-  alerts:
+  discover:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     defaults:
@@ -34,25 +32,25 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Find, score and email new jobs
+      - name: Find funded companies and add their job boards
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }}
+        run: python discover.py
 
-      - name: Save the list of jobs already seen
+      - name: Save the updated company list
         if: always()
         run: |
-          if git diff --quiet -- seen_jobs.json; then
+          if git diff --quiet -- companies.yaml discovery_state.json; then
             echo "Nothing new to save."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add seen_jobs.json
-          git commit -m "Update seen jobs ($(TZ=America/Los_Angeles date +%F))"
+          git add companies.yaml discovery_state.json
+          git commit -m "Weekly discovery: update company list ($(TZ=America/Los_Angeles date +%F))"
           for i in 1 2 3; do
             git pull --rebase --quiet && git push && exit 0
             sleep $((i * 5))

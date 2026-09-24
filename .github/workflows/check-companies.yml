@@ -1,14 +1,16 @@
-name: Check company boards
+name: Check companies and sources
 
-# Runs by itself whenever companies.yaml changes, and from the "Run workflow"
-# button. It tests every company's job board (no AI, no email, no secrets) and,
-# for any that fail, searches for the right platform/slug.
+# Runs by itself whenever companies.yaml or settings.yaml changes, and from the
+# "Run workflow" button. It tests every company's job board, every job source
+# and every funding-news feed (no AI, no email, no secrets needed) and, for any
+# company that fails, searches for the right platform/slug.
 
 on:
   push:
     paths:
       - "job-alerts/companies.yaml"
-      - "job-alerts/job_alerts.py"
+      - "job-alerts/settings.yaml"
+      - "job-alerts/*.py"
   workflow_dispatch:
     inputs:
       search_for:
@@ -32,7 +34,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - name: Test every board in companies.yaml
+      - name: Test every company, source and feed
         env:
           SEARCH_FOR: ${{ inputs.search_for }}
         run: |
