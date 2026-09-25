@@ -130,11 +130,16 @@ When you're done you should see all four names listed under **Repository secrets
      the red X to read what went wrong. The most common causes are a secret
      name with a typo, or a Gmail app password that was pasted wrong.
 
+**To check only the email setup:** in the **Run workflow** dropdown, tick
+**Only send a test email** before clicking the green button. It skips the job
+search and just sends you a test message in under a minute.
+
 **To see what it did**, click the run, then **alerts**, then the step **Find,
 score and email new jobs**. The log shows:
 - how many jobs each source had
 - how many the keyword filter dropped, and why
 - every score at or above your threshold, with where each job came from
+- the 10 best jobs that scored below it, with the AI's reason
 
 **About test runs:** a manual run always runs, even if the 7am run already
 happened. Jobs it has already scored are never emailed again, so a second

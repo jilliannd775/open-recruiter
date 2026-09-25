@@ -347,6 +347,12 @@ def run(dry_run: bool, scheduled: bool) -> int:
     log(f"\nScored {len(scored)} jobs with {gemini.calls_made} AI calls; {len(matches)} scored {threshold}+.")
     for job, r in matches:
         log(f"  {r['score']:>3}  {job.company} - {job.title}  [{r['remote']}]  via {job.source}")
+    near = sorted(((unique[u], r) for u, r in scored.items() if r["score"] < threshold),
+                  key=lambda x: -x[1]["score"])[:10]
+    if near:
+        log(f"Best of the rest (below {threshold}, not emailed):")
+        for job, r in near:
+            log(f"  {r['score']:>3}  {job.company} - {job.title}  [{r['remote']}]  {r['reason']}")
 
     # 4. Email
     stats = {"scored": len(scored), "sources_ok": sources_ok}
@@ -447,6 +453,26 @@ def check_all(probe_names: list[str]) -> int:
     return 1 if failed else 0
 
 
+def test_email() -> int:
+    missing = missing_secrets(("GMAIL_ADDRESS", "GMAIL_APP_PASSWORD"))
+    if missing:
+        log(f"ERROR: these GitHub secrets are missing or empty: {', '.join(missing)}.")
+        return 2
+    to = os.environ.get("TO_EMAIL") or os.environ["GMAIL_ADDRESS"]
+    try:
+        send_email("Job alerts: test email", email_shell(
+            "Your job alerts can send email", "This is a test from your GitHub Action.",
+            "<p>If you're reading this, the Gmail secrets are set up correctly. "
+            "Real alerts arrive around 7am Pacific on days with new matches.</p>"))
+    except Exception as e:  # noqa: BLE001
+        log(f"ERROR: sending failed: {e}")
+        log("Check GMAIL_ADDRESS is the full Gmail address and GMAIL_APP_PASSWORD is the 16-letter "
+            "app password (not your normal password).")
+        return 1
+    log(f"Test email sent to {to}. Check your inbox (and spam).")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--check", action="store_true", help="only test companies.yaml and every source")
@@ -454,9 +480,12 @@ def main() -> int:
                    help="with --check: also search for these company names on all platforms")
     p.add_argument("--dry-run", action="store_true", help="don't send email or save seen jobs")
     p.add_argument("--scheduled", action="store_true", help="skip unless it's 7am+ Pacific and not yet run today")
+    p.add_argument("--test-email", action="store_true", help="only send a test email, to check the Gmail secrets")
     args = p.parse_args()
     if args.check:
         return check_all(list(args.probe))
+    if args.test_email:
+        return test_email()
     return run(dry_run=args.dry_run, scheduled=args.scheduled)
 
 
