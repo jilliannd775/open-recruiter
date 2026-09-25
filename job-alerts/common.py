@@ -83,6 +83,12 @@ DEFAULT_SETTINGS = {
         "strategy and operations", "business analyst", "product owner",
         "chief of staff", "special projects", "implementation lead",
     ],
+    "my_target_titles": [],
+    "too_senior_title_words": [
+        "director", "vp", "svp", "evp", "vice president", "head of", "chief", "principal",
+        "staff", "executive", "president", "partner", "general manager",
+    ],
+    "drop_if_ai_says_not_remote_us": True,
     "job_board_title_keywords": [
         "program", "project", "operations", "ops", "strategy", "analyst",
         "product owner", "chief of staff", "special projects", "implementation",
@@ -513,9 +519,18 @@ def prefilter(job: Job, settings: dict) -> str | None:
     if ENGINEERING_TITLE.search(title) and not PROGRAM_OR_PROJECT.search(title):
         return "engineering/science title"
 
-    if job.kind == "aggregator":
+    # Your own target titles always count, even if a word in them looks senior
+    # ("chief" in "Chief of Staff"). Anything else must be mid-level.
+    low = title.lower()
+    target = next((t for t in (x.lower().strip() for x in settings.get("my_target_titles") or [])
+                   if t and re.search(r"\b" + re.escape(t) + r"\b", low)), None)
+    rest = low.replace(target, " ") if target else low
+    for w in (x.lower().strip() for x in settings.get("too_senior_title_words") or []):
+        if w and re.search(r"\b" + re.escape(w) + r"\b", rest):
+            return "too senior"
+
+    if job.kind == "aggregator" and not target:
         words = [w.lower() for w in settings.get("job_board_title_keywords") or []]
-        low = title.lower()
         if words and not any(re.search(r"\b" + re.escape(w) + r"\b", low) for w in words):
             return "job-board title not in your target list"
 

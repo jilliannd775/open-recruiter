@@ -17,6 +17,52 @@ sources:
   himalayas: true        # himalayas.app
   weworkremotely: true   # weworkremotely.com
 
+# YOUR SPECIFIC TITLES. A job whose title contains one of these is always
+# considered, from any source, even if it has a word from the "too senior"
+# list below (so "Chief of Staff" isn't blocked by "chief"). Add or remove
+# titles freely, one per line.
+my_target_titles:
+  - technical program manager
+  - r&d program manager
+  - program manager
+  - project manager
+  - product operations manager
+  - strategy & operations manager
+  - strategy and operations manager
+  - business operations manager
+  - business analyst
+  - technical business analyst
+  - product owner
+  - special projects lead
+  - special projects manager
+  - ai implementation lead
+  - implementation lead
+  - process lead
+  - chief of staff
+
+# EVERYTHING ELSE MUST BE MID-LEVEL. A job title containing any of these
+# words is skipped as too senior (unless it's one of your titles above,
+# e.g. "Program Manager" is kept but "Principal Program Manager" is not).
+# Add "senior" or "sr" here if you also want to skip Senior-level roles.
+too_senior_title_words:
+  - director
+  - vp
+  - svp
+  - evp
+  - vice president
+  - head of
+  - chief
+  - principal
+  - staff
+  - executive
+  - president
+  - partner
+  - general manager
+
+# true = never email a job the AI itself labels Remote (non-US), Hybrid or
+# Onsite, whatever score it gave.
+drop_if_ai_says_not_remote_us: true
+
 # Job boards (Remotive, Remote OK, Himalayas, Hacker News) list thousands of
 # jobs. So nothing is wasted on the AI, a job from those sources is only
 # scored if its TITLE contains one of these words. (Jobs from your own

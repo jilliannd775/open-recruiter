@@ -290,6 +290,24 @@ discovery added. A company discovery added and you deleted will not come back.
 
 ---
 
+## Choosing which job titles you see
+
+Two lists in `settings.yaml` control this:
+
+- **`my_target_titles`**: your specific titles, such as Technical Program
+  Manager, Chief of Staff or Product Owner. A job whose title contains one of
+  these is always considered, from any source.
+- **`too_senior_title_words`**: director, VP, head of, principal, staff,
+  chief, and so on. Any other job with one of these words in its title is
+  skipped as too senior. Your own titles are exempt, so "Chief of Staff" is
+  kept even though it contains "chief". "Principal Program Manager" is still
+  skipped, because "principal" isn't part of your title.
+
+Everything else that is mid-level still gets considered. To also skip
+Senior-level roles, add `senior` and `sr` to `too_senior_title_words`. Your
+target level is also written in `profile.md`, and the AI scores roles above it
+lower.
+
 ## Changing the score threshold
 
 1. Open `settings.yaml` and click the pencil.

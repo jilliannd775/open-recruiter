@@ -14,6 +14,12 @@ English. Be specific about what you want and what you don't.
 - **Not** engineering or coding roles (software engineer, developer, data
   scientist, research scientist, etc.).
 
+## Target level
+- **Mid-level** roles: individual contributor through manager (e.g. Program
+  Manager, Senior Program Manager, Business Analyst, Operations Manager).
+- **Not** Director, VP, Head of, Principal, Staff or other executive roles
+  (except Chief of Staff, below).
+
 ## Target titles
 - Technical Program Manager
 - R&D Program Manager

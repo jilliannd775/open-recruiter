@@ -49,6 +49,9 @@ Scoring guide:
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
 - 0-39: wrong kind of role (engineering/coding, sales, etc.), onsite/hybrid only, \
 or outside the US.
+Seniority matters: match the candidate's target level in the profile. Roles \
+clearly above it (Director, VP, Head of, Principal, Staff, C-level other than \
+Chief of Staff) score below 50 even if the function fits.
 A job that is not fully remote or not open to US-based candidates must score below 40.
 
 Reply with JSON only: a list with one object per job, in the same order, shaped:
@@ -341,8 +344,11 @@ def run(dry_run: bool, scheduled: bool) -> int:
                              if j.uid in unique and j.uid not in scored and j.uid not in dropped
                              and j.uid not in seen["jobs"] and j.dedupe_key() not in seen["jobs"]]
 
+    not_remote_us = {"remote (non-us)", "hybrid", "onsite"}
+    strict = bool(settings.get("drop_if_ai_says_not_remote_us", True))
     matches = sorted(
-        ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold),
+        ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold
+         and not (strict and r["remote"].strip().lower() in not_remote_us)),
         key=lambda x: (-x[1]["score"], x[0].company, x[0].title))
     log(f"\nScored {len(scored)} jobs with {gemini.calls_made} AI calls; {len(matches)} scored {threshold}+.")
     for job, r in matches:
