@@ -24,7 +24,7 @@ so you can check those yourself.
 | Source | What it is | How often |
 |---|---|---|
 | **Startup board list** | Built for you automatically: the job boards of about 1,500 hiring US startups from the Y Combinator directory. See "The startup board list" below | Daily |
-| **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable and SmartRecruiters feeds | Daily |
+| **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Gem feeds | Daily |
 | **Hacker News "Who is hiring?"** | The monthly thread where companies post openings. The AI reads each new post and pulls out the roles | Daily (new posts only) |
 | **Remotive** | Remote job board (remotive.com). Its free feed is small, about 20 jobs, shown 24 hours after posting | Daily |
 | **Remote OK** | Remote job board (remoteok.com). The 100 newest jobs | Daily |
@@ -208,7 +208,7 @@ Every Monday morning, before the daily alert, it:
    so on). The AI scores those against your profile too. It looks at up to 40
    a week and doesn't look at the same one again for 6 months.
 3. **Looks for each company's job board** on Greenhouse, Lever, Ashby,
-   Workable and SmartRecruiters by trying likely names. It double-checks that the board really belongs to that
+   Workable, SmartRecruiters and Gem by trying likely names. It double-checks that the board really belongs to that
    company before using it.
 4. **Adds the ones it finds** (with open jobs) to the bottom of
    `companies.yaml`, up to **25 a week**. Each one is marked like this:
@@ -283,6 +283,7 @@ list. To read other We Work Remotely categories, add their RSS links to
    | `jobs.ashbyhq.com/`**`acme`**`/abc-123` | `ashby` | `acme` |
    | `apply.workable.com/`**`acme`**`/j/ABC123` | `workable` | `acme` |
    | `jobs.smartrecruiters.com/`**`Acme`**`/123-job-title` | `smartrecruiters` | `Acme` (capital letters matter) |
+   | `jobs.gem.com/`**`acme`**`/...` | `gem` | `acme` |
 
    Some companies wrap the board in their own site. If you can't see any of
    those addresses, try the **search** trick below.

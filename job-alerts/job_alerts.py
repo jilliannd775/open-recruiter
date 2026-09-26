@@ -479,7 +479,7 @@ def check_all(probe_names: list[str]) -> int:
                 platform, slug, jobs = found
                 log(f"  FOUND {name:<28} platform: {platform:<10} slug: {slug:<24} {len(jobs)} open jobs")
             else:
-                log(f"  NONE  {name:<28} not on Greenhouse, Lever, Ashby, Workable or SmartRecruiters "
+                log(f"  NONE  {name:<28} not on Greenhouse, Lever, Ashby, Workable, SmartRecruiters or Gem "
                     "under any common slug")
     return 1 if failed else 0
 

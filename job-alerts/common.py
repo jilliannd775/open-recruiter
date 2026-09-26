@@ -40,15 +40,17 @@ BOARD_URLS = {
     "ashby": "https://api.ashbyhq.com/posting-api/job-board/{slug}",
     "workable": "https://apply.workable.com/api/v1/widget/accounts/{slug}?details=true",
     "smartrecruiters": "https://api.smartrecruiters.com/v1/companies/{slug}/postings?limit=100&offset={offset}",
+    "gem": "https://api.gem.com/job_board/v0/{slug}/job_posts/",
 }
 PLATFORM_LABELS = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby",
-                   "workable": "Workable", "smartrecruiters": "SmartRecruiters"}
+                   "workable": "Workable", "smartrecruiters": "SmartRecruiters", "gem": "Gem"}
 CAREERS_URLS = {
     "greenhouse": "https://job-boards.greenhouse.io/{slug}",
     "lever": "https://jobs.lever.co/{slug}",
     "ashby": "https://jobs.ashbyhq.com/{slug}",
     "workable": "https://apply.workable.com/{slug}/",
     "smartrecruiters": "https://careers.smartrecruiters.com/{slug}",
+    "gem": "https://jobs.gem.com/{slug}",
 }
 SMARTRECRUITERS_MAX_PAGES = 10  # 1,000 jobs; enough for any company we'd watch
 
@@ -291,7 +293,7 @@ def fetch_board(company: dict) -> list[Job]:
         url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
         data = get_with_retries(lambda: http_json(url, timeout=90), what)
         parse = {"greenhouse": _parse_greenhouse, "lever": _parse_lever, "ashby": _parse_ashby,
-                 "workable": _parse_workable}[platform]
+                 "workable": _parse_workable, "gem": _parse_gem}[platform]
         jobs = parse(data, name, slug)
     label = f"{name} careers ({PLATFORM_LABELS[platform]})"
     for j in jobs:
@@ -389,6 +391,33 @@ def _parse_workable(data, name, slug) -> list[Job]:
             description=strip_html(j.get("description") or ""),
             extra={"country": "US" if "US" in codes else (sorted(codes)[0] if len(codes) == 1 else ""),
                    "board_name": data.get("name") or ""},
+        ))
+    return jobs
+
+
+def _parse_gem(data, name, slug) -> list[Job]:
+    """Gem's public job board feed (Greenhouse-like fields)."""
+    if isinstance(data, dict):
+        data = data.get("job_posts") or data.get("jobs") or data.get("results")
+    if not isinstance(data, list):
+        raise ValueError("unexpected Gem response shape")
+    jobs = []
+    for j in data:
+        if not isinstance(j, dict):
+            continue
+        loc = j.get("location")
+        loc_names = [loc.get("name", "")] if isinstance(loc, dict) else [loc] if isinstance(loc, str) else []
+        loc_names += [l.get("name", "") for l in j.get("locations") or j.get("offices") or [] if isinstance(l, dict)]
+        wt = str(j.get("location_type") or j.get("workplace_type") or "").lower().replace("-", "").replace("_", "")
+        wt = {"inoffice": "onsite", "office": "onsite"}.get(wt, wt)
+        jobs.append(Job(
+            uid=f"gem:{slug}:{j.get('id') or j.get('absolute_url')}",
+            company=name,
+            title=(j.get("title") or j.get("name") or "").strip(),
+            url=j.get("absolute_url") or j.get("url") or "",
+            location="; ".join(dict.fromkeys(n for n in loc_names if n)),
+            workplace=wt if wt in ("remote", "hybrid", "onsite") else "",
+            description=strip_html(j.get("content") or j.get("description") or ""),
         ))
     return jobs
 
