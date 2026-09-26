@@ -31,6 +31,7 @@ COMPANIES_FILE = HERE / "companies.yaml"
 PROFILE_FILE = HERE / "profile.md"
 SETTINGS_FILE = HERE / "settings.yaml"
 SEEN_FILE = HERE / "seen_jobs.json"
+MATCHES_LOG_FILE = HERE / "matches_log.json"  # emailed matches, read by the tracker's daily sync
 DISCOVERY_STATE_FILE = HERE / "discovery_state.json"
 
 PACIFIC = ZoneInfo("America/Los_Angeles")
@@ -42,6 +43,9 @@ BOARD_URLS = {
     "workable": "https://apply.workable.com/api/v1/widget/accounts/{slug}?details=true",
     "smartrecruiters": "https://api.smartrecruiters.com/v1/companies/{slug}/postings?limit=100&offset={offset}",
     "gem": "https://api.gem.com/job_board/v0/{slug}/job_posts/",
+    "recruitee": "https://{slug}.recruitee.com/api/offers/",
+    "breezy": "https://{slug}.breezy.hr/json?verbose=true",
+    "jazzhr": "https://app.jazz.co/feeds/export/jobs/{slug}",
     # slug = "<tenant>.wd<N>.myworkdayjobs.com/<site>", e.g. nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite
     "workday": "https://{host}/wday/cxs/{tenant}/{site}/jobs",
     "amazon": "https://www.amazon.jobs/en/search.json",
@@ -54,6 +58,7 @@ BIG_COMPANY_SEARCHES_DEFAULT = ["program manager", "product operations", "busine
 WORKDAY_MAX_JOBS = 1000
 PLATFORM_LABELS = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby",
                    "workable": "Workable", "smartrecruiters": "SmartRecruiters", "gem": "Gem",
+                   "recruitee": "Recruitee", "breezy": "Breezy HR", "jazzhr": "JazzHR",
                    "workday": "Workday", "page": "careers page", "amazon": "amazon.jobs",
                    "microsoft": "Microsoft Careers"}
 CAREERS_URLS = {
@@ -63,6 +68,9 @@ CAREERS_URLS = {
     "workable": "https://apply.workable.com/{slug}/",
     "smartrecruiters": "https://careers.smartrecruiters.com/{slug}",
     "gem": "https://jobs.gem.com/{slug}",
+    "recruitee": "https://{slug}.recruitee.com",
+    "breezy": "https://{slug}.breezy.hr",
+    "jazzhr": "https://{slug}.applytojob.com/apply",
     "workday": "https://{slug}",
     "page": "{slug}",
     "amazon": "https://www.amazon.jobs",
@@ -323,11 +331,15 @@ def fetch_board(company: dict) -> list[Job]:
         jobs = _fetch_amazon(name, what)
     elif platform == "microsoft":
         jobs = _fetch_microsoft(name, what)
+    elif platform == "jazzhr":
+        url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
+        jobs = _parse_jazzhr(get_with_retries(lambda: http_text(url, timeout=90), what), name, slug)
     else:
         url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
         data = get_with_retries(lambda: http_json(url, timeout=90), what)
         parse = {"greenhouse": _parse_greenhouse, "lever": _parse_lever, "ashby": _parse_ashby,
-                 "workable": _parse_workable, "gem": _parse_gem}[platform]
+                 "workable": _parse_workable, "gem": _parse_gem,
+                 "recruitee": _parse_recruitee, "breezy": _parse_breezy}[platform]
         jobs = parse(data, name, slug)
     label = f"{name} careers ({PLATFORM_LABELS[platform]})"
     for j in jobs:
@@ -452,6 +464,105 @@ def _parse_gem(data, name, slug) -> list[Job]:
             location="; ".join(dict.fromkeys(n for n in loc_names if n)),
             workplace=wt if wt in ("remote", "hybrid", "onsite") else "",
             description=(j.get("content_plain") or strip_html(j.get("content") or j.get("description") or "")).strip(),
+        ))
+    return jobs
+
+
+def _parse_recruitee(data, name, slug) -> list[Job]:
+    if not isinstance(data, dict) or not isinstance(data.get("offers"), list):
+        raise ValueError("unexpected Recruitee response shape")
+    jobs = []
+    for j in data["offers"]:
+        if j.get("status") not in (None, "published"):
+            continue
+        locs = [", ".join(x for x in (l.get("city"), l.get("state_name") or l.get("state"), l.get("country"))
+                          if x) for l in j.get("locations") or [] if isinstance(l, dict)]
+        locs = [l for l in locs if l] or [", ".join(x for x in (j.get("city"), j.get("state_name"), j.get("country")) if x)
+                                          or j.get("location") or ""]
+        wt = "remote" if j.get("remote") else "hybrid" if j.get("hybrid") else "onsite" if j.get("on_site") else ""
+        extra = {"country": (j.get("country_code") or "").upper(), "board_name": j.get("company_name") or ""}
+        sal = j.get("salary") or {}
+        if (isinstance(sal, dict) and sal.get("min") and sal.get("max") and (sal.get("currency") or "USD") == "USD"
+                and (sal.get("period") or "year") == "year"):
+            try:
+                extra["salary"] = (int(float(sal["min"])), int(float(sal["max"])))
+            except (TypeError, ValueError):
+                pass
+        jobs.append(Job(
+            uid=f"recruitee:{slug}:{j.get('id')}",
+            company=name,
+            title=(j.get("title") or "").strip(),
+            url=j.get("careers_url") or j.get("careers_apply_url") or "",
+            location="; ".join(dict.fromkeys(locs)),
+            workplace=wt,
+            description=strip_html(f"{j.get('description') or ''} {j.get('requirements') or ''}"),
+            extra=extra,
+        ))
+    return jobs
+
+
+def _parse_breezy(data, name, slug) -> list[Job]:
+    if not isinstance(data, list):
+        raise ValueError("unexpected Breezy HR response shape")
+    jobs = []
+    for j in data:
+        if not isinstance(j, dict):
+            continue
+        locs, remote, country = [], False, ""
+        for l in j.get("locations") or ([j["location"]] if isinstance(j.get("location"), dict) else []):
+            if not isinstance(l, dict):
+                continue
+            remote = remote or bool(l.get("is_remote"))
+            c = l.get("country") or {}
+            country = country or (c.get("id") if isinstance(c, dict) else "") or ""
+            locs.append(l.get("name") or ", ".join(
+                x.get("name", "") if isinstance(x, dict) else str(x)
+                for x in (l.get("city"), l.get("state"), l.get("country")) if x))
+        company = j.get("company") or {}
+        salary = j.get("salary") or ""
+        jobs.append(Job(
+            uid=f"breezy:{slug}:{j.get('id')}",
+            company=name,
+            title=(j.get("name") or "").strip(),
+            url=j.get("url") or "",
+            location="; ".join(dict.fromkeys(l for l in locs if l)),
+            workplace="remote" if remote else "",
+            description=(f"Pay: {salary}. " if isinstance(salary, str) and salary else "")
+                        + strip_html(j.get("description") or ""),
+            extra={"country": str(country).upper(),
+                   "board_name": company.get("name", "") if isinstance(company, dict) else ""},
+        ))
+    return jobs
+
+
+def _parse_jazzhr(xml_text, name, slug) -> list[Job]:
+    """JazzHR's public XML job feed."""
+    import xml.etree.ElementTree as ET
+    try:
+        root = ET.fromstring(xml_text.strip().encode("utf-8"))
+    except ET.ParseError as e:
+        raise ValueError(f"JazzHR feed isn't readable XML ({e})") from None
+    if root.tag.lower() != "jobs":
+        raise ValueError("unexpected JazzHR response shape")
+    board_name = (root.findtext("company") or "").strip()
+    jobs = []
+    for el in root.iter("job"):
+        d = {c.tag.lower(): (c.text or "").strip() for c in el}
+        if d.get("status") and d["status"].lower() not in ("open", "active", "published"):
+            continue
+        loc = ", ".join(x for x in (d.get("city"), d.get("state"), d.get("country")) if x)
+        text = f"{d.get('title', '')} {loc}"
+        country = d.get("country", "")
+        jobs.append(Job(
+            uid=f"jazzhr:{slug}:{d.get('id') or d.get('url') or d.get('title')}",
+            company=name,
+            title=d.get("title", ""),
+            url=d.get("url") or d.get("apply_url") or d.get("applyurl") or CAREERS_URLS["jazzhr"].format(slug=slug),
+            location=loc,
+            workplace="remote" if re.search(r"\bremote\b", text, re.I) else "",
+            description=strip_html(d.get("description") or ""),
+            extra={"country": "US" if country.lower() in ("us", "usa", "united states") else "",
+                   "board_name": board_name},
         ))
     return jobs
 
@@ -679,6 +790,9 @@ ATS_PATTERNS = [
     ("ashby", re.compile(r"jobs\.ashbyhq\.com/([\w.%-]+)")),
     ("workable", re.compile(r"apply\.workable\.com/(?!j/|api/)([\w-]+)")),
     ("gem", re.compile(r"jobs\.gem\.com/([\w-]+)")),
+    ("recruitee", re.compile(r"(?<![\w.-])([\w-]+)\.recruitee\.com")),
+    ("breezy", re.compile(r"(?<![\w.-])([\w-]+)\.breezy\.hr")),
+    ("jazzhr", re.compile(r"(?<![\w.-])([\w-]+)\.applytojob\.com")),
     ("smartrecruiters", re.compile(r"(?:jobs|careers)\.smartrecruiters\.com/([\w-]+)")),
     ("workday", re.compile(r"([\w-]+\.wd\d+\.myworkdayjobs\.com/(?:[a-z]{2}-[A-Z]{2}/)?[\w-]+)")),
 ]
@@ -687,13 +801,16 @@ JOB_WORDS = re.compile(r"\b(manager|analyst|lead|coordinator|specialist|consulta
                        r"representative|executive|administrator|architect|head of|chief)\b", re.I)
 
 
+NOT_SLUGS = {"embed", "j", "jobs", "api", "v1", "www", "app", "cdn", "static", "assets", "help", "support"}
+
+
 def detect_ats(html_text: str, final_url: str = "") -> tuple[str, str] | None:
     """If a careers page is really a Greenhouse/Lever/... board, return (platform, slug)."""
     for text in (final_url, html_text):
         for platform, pat in ATS_PATTERNS:
-            m = pat.search(text or "")
-            if m and m.group(1).lower() not in ("embed", "j", "jobs", "api", "v1"):
-                return platform, urllib.parse.unquote(m.group(1))
+            for m in pat.finditer(text or ""):
+                if m.group(1).lower() not in NOT_SLUGS:
+                    return platform, urllib.parse.unquote(m.group(1))
     return None
 
 

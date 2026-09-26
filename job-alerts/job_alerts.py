@@ -27,13 +27,14 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import sources
 import startups
-from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
+from common import (HERE, MATCHES_LOG_FILE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
                     fetch_board, fill_details, fill_page_details, find_board, format_salary, load_companies,
                     load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
                     prefilter, priority, prune_dated, save_json_state, send_email, source_on,
@@ -280,6 +281,25 @@ def collect_hacker_news(settings: dict, seen: dict, gemini: Gemini, notes: list[
 # Main flows
 # --------------------------------------------------------------------------- #
 
+def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
+    """Append emailed matches to matches_log.json (last 60 days), which the
+    daily tracker sync copies into the job tracker as 'New match'."""
+    try:
+        data = json.loads(MATCHES_LOG_FILE.read_text(encoding="utf-8")) if MATCHES_LOG_FILE.exists() else {}
+    except json.JSONDecodeError:
+        data = {}
+    entries = {e["id"]: e for e in data.get("matches", []) if isinstance(e, dict) and e.get("id")}
+    for job, r in matches:
+        entries.setdefault(job.uid, {
+            "id": job.uid, "date": today, "t": job.title, "c": job.company, "u": job.url,
+            "l": r.get("remote") or job.location, "p": format_salary(parse_salary(job)), "s": r.get("score"),
+            "src": job.source, "why": (r.get("reason") or "")[:240],
+        })
+    cutoff = (datetime.now(PACIFIC) - timedelta(days=60)).date().isoformat()
+    kept = sorted((e for e in entries.values() if (e.get("date") or "") >= cutoff), key=lambda e: (e["date"], e["id"]))
+    MATCHES_LOG_FILE.write_text(json.dumps({"matches": kept}, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def should_skip_scheduled(seen: dict) -> str | None:
     now = datetime.now(PACIFIC)
     if now.hour < SEND_HOUR_PACIFIC:
@@ -424,6 +444,8 @@ def run(dry_run: bool, scheduled: bool) -> int:
         log("\nProblems this run:\n  - " + "\n  - ".join(notes))
 
     # 5. Remember
+    if not dry_run and matches:
+        log_matches(matches, today)
     if not dry_run:
         seen["last_run_date"] = today
         days = int(settings["forget_seen_jobs_after_days"])
