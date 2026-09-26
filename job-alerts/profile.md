@@ -27,7 +27,9 @@ English. Be specific about what you want and what you don't.
 - Product Operations Manager
 - Strategy & Operations Manager
 - Business Analyst / Technical Business Analyst
-- Product Owner
+- Product Owner / Technical Product Owner / Product Owner II
+- Senior Analyst, Technology (or Technical) Product Management
+- Product Operations Associate / Product Operations Analyst / Product Operator
 - Special Projects Lead
 - Chief of Staff — **only** at a seed or Series A deep tech company
 
