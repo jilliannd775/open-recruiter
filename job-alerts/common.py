@@ -7,6 +7,7 @@ Only dependency outside the standard library: PyYAML.
 from __future__ import annotations
 
 import copy
+import hashlib
 import html
 import json
 import os
@@ -41,9 +42,15 @@ BOARD_URLS = {
     "workable": "https://apply.workable.com/api/v1/widget/accounts/{slug}?details=true",
     "smartrecruiters": "https://api.smartrecruiters.com/v1/companies/{slug}/postings?limit=100&offset={offset}",
     "gem": "https://api.gem.com/job_board/v0/{slug}/job_posts/",
+    # slug = "<tenant>.wd<N>.myworkdayjobs.com/<site>", e.g. nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite
+    "workday": "https://{host}/wday/cxs/{tenant}/{site}/jobs",
 }
+# Platforms whose company ids can't be guessed from a name (skipped by find_board).
+UNGUESSABLE = {"workday"}
+WORKDAY_MAX_JOBS = 1000
 PLATFORM_LABELS = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby",
-                   "workable": "Workable", "smartrecruiters": "SmartRecruiters", "gem": "Gem"}
+                   "workable": "Workable", "smartrecruiters": "SmartRecruiters", "gem": "Gem",
+                   "workday": "Workday", "page": "careers page"}
 CAREERS_URLS = {
     "greenhouse": "https://job-boards.greenhouse.io/{slug}",
     "lever": "https://jobs.lever.co/{slug}",
@@ -51,6 +58,8 @@ CAREERS_URLS = {
     "workable": "https://apply.workable.com/{slug}/",
     "smartrecruiters": "https://careers.smartrecruiters.com/{slug}",
     "gem": "https://jobs.gem.com/{slug}",
+    "workday": "https://{slug}",
+    "page": "{slug}",
 }
 SMARTRECRUITERS_MAX_PAGES = 10  # 1,000 jobs; enough for any company we'd watch
 
@@ -118,6 +127,9 @@ DEFAULT_SETTINGS = {
         "yc_min_team_size": 15,
         "yc_max_companies_per_week": 40,
         "yc_sector_keywords": [],
+        "outreach_notes": True,
+        "outreach_max": 12,
+        "watch_for_funding": [],
     },
 }
 
@@ -163,6 +175,10 @@ def load_companies() -> list[dict]:
     companies = data.get("companies", []) if isinstance(data, dict) else data
     cleaned = []
     for c in companies or []:
+        if isinstance(c, dict) and not c.get("platform") and c.get("url"):
+            c = {**c, "platform": "page"}
+        if isinstance(c, dict) and c.get("platform") == "page" and c.get("url") and not c.get("slug"):
+            c = {**c, "slug": c["url"]}
         if not isinstance(c, dict) or not c.get("platform") or not c.get("slug"):
             log(f"  ! Skipping a malformed entry in companies.yaml: {c!r}")
             continue
@@ -285,10 +301,15 @@ class Job:
 def fetch_board(company: dict) -> list[Job]:
     platform, slug, name = company["platform"], company["slug"], company["name"]
     if platform not in BOARD_URLS:
-        raise ValueError(f"unknown platform '{platform}' (use one of: {', '.join(BOARD_URLS)})")
+        if platform != "page":
+            raise ValueError(f"unknown platform '{platform}' (use one of: {', '.join(BOARD_URLS)}, or a careers page url)")
+    if platform == "page":
+        return fetch_careers_page(name, slug)
     what = f"{platform} board '{slug}'"
     if platform == "smartrecruiters":
         jobs = _fetch_smartrecruiters(name, slug, what)
+    elif platform == "workday":
+        jobs = _fetch_workday(name, slug, what)
     else:
         url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
         data = get_with_retries(lambda: http_json(url, timeout=90), what)
@@ -417,8 +438,49 @@ def _parse_gem(data, name, slug) -> list[Job]:
             url=j.get("absolute_url") or j.get("url") or "",
             location="; ".join(dict.fromkeys(n for n in loc_names if n)),
             workplace=wt if wt in ("remote", "hybrid", "onsite") else "",
-            description=strip_html(j.get("content") or j.get("description") or ""),
+            description=(j.get("content_plain") or strip_html(j.get("content") or j.get("description") or "")).strip(),
         ))
+    return jobs
+
+
+def _workday_parts(slug: str) -> tuple[str, str, str]:
+    """'nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite' -> (host, tenant, site)."""
+    slug = re.sub(r"^https?://", "", slug.strip()).strip("/")
+    host, _, rest = slug.partition("/")
+    parts = [p for p in rest.split("/") if p and not re.fullmatch(r"[a-z]{2}-[A-Z]{2}", p)]
+    if not host.endswith("myworkdayjobs.com") or not parts:
+        raise ValueError("Workday slug should look like tenant.wd5.myworkdayjobs.com/SiteName")
+    return host, host.split(".")[0], parts[0]
+
+
+def _fetch_workday(name, slug, what) -> list[Job]:
+    """Workday career sites: list jobs page by page; descriptions come later from fill_details()."""
+    host, tenant, site = _workday_parts(slug)
+    url = BOARD_URLS["workday"].format(host=host, tenant=tenant, site=site)
+    jobs, offset, total = [], 0, None
+    while offset < WORKDAY_MAX_JOBS and (total is None or offset < total):
+        body = {"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": ""}
+        data = get_with_retries(lambda: http_json(url, method="POST", body=body, timeout=60), what)
+        if not isinstance(data, dict) or not isinstance(data.get("jobPostings"), list):
+            raise ValueError("unexpected Workday response shape")
+        total = int(data.get("total") or 0) if total is None else total
+        for p in data["jobPostings"]:
+            path = p.get("externalPath") or ""
+            loc = p.get("locationsText") or ""
+            jobs.append(Job(
+                uid=f"workday:{host}:{path.rsplit('_', 1)[-1] or path}",
+                company=name,
+                title=(p.get("title") or "").strip(),
+                url=f"https://{host}/{site}{path}",
+                location=loc,
+                workplace="remote" if REMOTE_WORD.search(loc) else "",
+                description="",
+                extra={"detail_url": f"https://{host}/wday/cxs/{tenant}/{site}{path}", "detail_kind": "workday"},
+            ))
+        if not data["jobPostings"]:
+            break
+        offset += 20
+        time.sleep(0.2)
     return jobs
 
 
@@ -452,15 +514,111 @@ def _fetch_smartrecruiters(name, slug, what) -> list[Job]:
 
 
 def fill_details(jobs: list[Job], limit: int = 80) -> None:
-    """Fetch full descriptions for jobs whose board only lists titles (SmartRecruiters)."""
+    """Fetch full descriptions for jobs whose board only lists titles (SmartRecruiters, Workday)."""
     for j in [j for j in jobs if j.extra.get("detail_url") and not j.description][:limit]:
         try:
             d = get_with_retries(lambda: http_json(j.extra["detail_url"], timeout=60), "job details", attempts=2)
+            if j.extra.get("detail_kind") == "workday":
+                info = d.get("jobPostingInfo") or {}
+                remote = info.get("remoteType") or ""
+                j.description = (f"Work arrangement: {remote}. " if remote else "") + strip_html(info.get("jobDescription") or "")
+                j.url = info.get("externalUrl") or j.url
+                if re.search(r"office|on-?site|hybrid", remote, re.I) and not re.search(r"remote", remote, re.I):
+                    j.workplace = "hybrid" if re.search(r"hybrid|flexible", remote, re.I) else "onsite"
+                continue
             sections = ((d.get("jobAd") or {}).get("sections") or {})
             j.description = "\n".join(strip_html((sections.get(k) or {}).get("text") or "")
                                       for k in ("jobDescription", "qualifications", "additionalInformation",
                                                 "companyDescription")).strip()
             j.url = d.get("postingUrl") or j.url
+        except Exception:  # noqa: BLE001
+            pass
+        time.sleep(0.3)
+
+
+# --------------------------------------------------------------------------- #
+# Careers-page watcher: any company's own careers page
+# --------------------------------------------------------------------------- #
+
+ATS_PATTERNS = [
+    ("greenhouse", re.compile(r"greenhouse\.io/embed/job_board(?:/js)?\?for=([\w-]+)")),
+    ("greenhouse", re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?!embed)([\w-]+)")),
+    ("lever", re.compile(r"jobs\.lever\.co/([\w-]+)")),
+    ("ashby", re.compile(r"jobs\.ashbyhq\.com/([\w.%-]+)")),
+    ("workable", re.compile(r"apply\.workable\.com/(?!j/|api/)([\w-]+)")),
+    ("gem", re.compile(r"jobs\.gem\.com/([\w-]+)")),
+    ("smartrecruiters", re.compile(r"(?:jobs|careers)\.smartrecruiters\.com/([\w-]+)")),
+    ("workday", re.compile(r"([\w-]+\.wd\d+\.myworkdayjobs\.com/(?:[a-z]{2}-[A-Z]{2}/)?[\w-]+)")),
+]
+JOB_WORDS = re.compile(r"\b(manager|analyst|lead|coordinator|specialist|consultant|associate|director|"
+                       r"owner|operations|program|project|strategy|engineer|designer|scientist|officer|"
+                       r"representative|executive|administrator|architect|head of|chief)\b", re.I)
+
+
+def detect_ats(html_text: str, final_url: str = "") -> tuple[str, str] | None:
+    """If a careers page is really a Greenhouse/Lever/... board, return (platform, slug)."""
+    for text in (final_url, html_text):
+        for platform, pat in ATS_PATTERNS:
+            m = pat.search(text or "")
+            if m and m.group(1).lower() not in ("embed", "j", "jobs", "api", "v1"):
+                return platform, urllib.parse.unquote(m.group(1))
+    return None
+
+
+def fetch_careers_page(name: str, url: str, detail_limit: int = 15) -> list[Job]:
+    """Read a company's own careers page. Uses its hiring system's feed when one is
+    linked; otherwise picks job-looking links off the page and reads each one."""
+    what = f"{name}'s careers page"
+
+    def get_page(u):
+        req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (compatible; " + USER_AGENT + ")",
+                                                 "Accept": "text/html,application/xhtml+xml"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.read().decode("utf-8", "replace"), resp.geturl()
+
+    page, final = get_with_retries(lambda: get_page(url), what)
+    ats = detect_ats(page, final)
+    if ats:
+        platform, slug = ats
+        jobs = fetch_board({"name": name, "platform": platform, "slug": slug})
+        for j in jobs:
+            j.source = f"{name} careers page ({PLATFORM_LABELS[platform]})"
+        return jobs
+
+    links = []
+    for href, text in re.findall(r"<a\b[^>]*href=[\"']([^\"'#]+)[\"'][^>]*>(.*?)</a>", page, re.S | re.I):
+        title = re.sub(r"\s+", " ", strip_html(text)).strip()
+        if not (4 <= len(title) <= 120) or not JOB_WORDS.search(title) or href.startswith(("mailto:", "tel:", "javascript:")):
+            continue
+        links.append((title, urllib.parse.urljoin(final, href)))
+    links = list(dict.fromkeys(links))
+    if not links:
+        if len(strip_html(page)) < 2000:
+            raise ValueError("this page loads its jobs with JavaScript, so there's nothing to read "
+                             "(try the link its 'Apply' buttons go to instead)")
+        return []
+    host = urllib.parse.urlparse(final).hostname or ""
+    jobs = []
+    for title, link in links:
+        jobs.append(Job(uid=f"page:{host}:{hashlib.sha1(link.encode()).hexdigest()[:12]}", company=name,
+                        title=title, url=link, location="", workplace="", description="",
+                        source=f"{name} careers page", source_url=url, kind="board",
+                        extra={"page_detail": link}))
+    return jobs
+
+
+def fill_page_details(jobs: list[Job], settings: dict, limit: int = 40) -> None:
+    """For careers-page jobs whose title looks relevant, read the job's own page."""
+    todo = [j for j in jobs if j.extra.get("page_detail") and not j.description]
+    todo = [j for j in todo if prefilter(Job(**{**j.to_dict(), "description": "remote", "workplace": "remote"}), settings) is None]
+    for j in todo[:limit]:
+        try:
+            req = urllib.request.Request(j.extra["page_detail"], headers={"User-Agent": "Mozilla/5.0 (compatible; " + USER_AGENT + ")"})
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                text = strip_html(resp.read().decode("utf-8", "replace"))
+            j.description = text[:8000]
+            m = re.search(r"(remote[^\n.]{0,60}|hybrid[^\n.]{0,60}|on-?site[^\n.]{0,60})", text, re.I)
+            j.location = m.group(1).strip() if m else ""
         except Exception:  # noqa: BLE001
             pass
         time.sleep(0.3)
@@ -521,6 +679,8 @@ def find_board(name: str, website: str = "", verify: bool = True, pause: float =
     slugs = list(dict.fromkeys([s for s in extra_slugs if s] + slug_candidates(name, website, quick)))
     for slug in slugs:
         for platform in BOARD_URLS:
+            if platform in UNGUESSABLE:
+                continue
             try:
                 jobs = fetch_board({"name": name, "platform": platform, "slug": slug})
             except Exception:  # noqa: BLE001

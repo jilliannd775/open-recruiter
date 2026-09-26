@@ -34,7 +34,7 @@ from datetime import datetime
 import sources
 import startups
 from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
-                    fetch_board, fill_details, find_board, format_salary, load_companies,
+                    fetch_board, fill_details, fill_page_details, find_board, format_salary, load_companies,
                     load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
                     prefilter, priority, prune_dated, save_json_state, send_email, source_on,
                     today_pacific, years_required)
@@ -311,6 +311,7 @@ def run(dry_run: bool, scheduled: bool) -> int:
         keys_taken.add(key)
     new_jobs = [j for j in unique.values()
                 if j.uid not in seen["jobs"] and j.dedupe_key() not in seen["jobs"]]
+    fill_page_details(new_jobs, settings)  # careers-page jobs: read each relevant job's own page
     drop_counts: dict[str, int] = {}
     dropped: set[str] = set()
     candidates = []

@@ -24,7 +24,7 @@ so you can check those yourself.
 | Source | What it is | How often |
 |---|---|---|
 | **Startup board list** | Built for you automatically: the job boards of about 1,500 hiring US startups from the Y Combinator directory. See "The startup board list" below | Daily |
-| **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable, SmartRecruiters and Gem feeds | Daily |
+| **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable, SmartRecruiters, Gem and Workday feeds | Daily |
 | **Hacker News "Who is hiring?"** | The monthly thread where companies post openings. The AI reads each new post and pulls out the roles | Daily (new posts only) |
 | **Remotive** | Remote job board (remotive.com). Its free feed is small, about 20 jobs, shown 24 hours after posting | Daily |
 | **Remote OK** | Remote job board (remoteok.com). The 100 newest jobs | Daily |
@@ -223,6 +223,15 @@ Every Monday morning, before the daily alert, it:
    ```
 5. **Emails you a summary** of what it added and why. It also lists strong fits
    it couldn't find a board for, with their website.
+6. **Helps you reach out before a job is posted.** For the best-fitting
+   companies (up to 12), the email suggests who to contact (a person named in
+   the news when there is one, otherwise the right role, like the founder or
+   head of operations), a tip for finding them, and a short note from you that
+   the AI drafts from your profile and resume. Edit it and send it yourself.
+7. **Funding alerts.** If the week's news mentions a company you're watching,
+   it's listed at the top of the email: new funding usually means hiring soon.
+   You're watching every company in `companies.yaml` plus any names you add
+   under `watch_for_funding:` in `settings.yaml`.
 
 It never adds the same company twice. It also never re-adds a company you
 deleted, because it remembers every company it has ever added. Companies with
@@ -231,6 +240,9 @@ no job board are tried again after 90 days, in case they've set one up.
 **Changing how picky it is**, in `settings.yaml` under `discovery:`:
 - `min_fit_score: 60`: raise it for fewer, better-fitting companies.
 - `max_new_companies_per_week: 25`: the weekly cap.
+
+**Turning off the outreach notes:** under `discovery:`, set
+`outreach_notes: false`. Change `outreach_max` for more or fewer.
 
 **Changing the YC sectors:** under `discovery:`, edit the `yc_sector_keywords`
 list. Change `yc_min_team_size` to allow smaller or only bigger companies, or
@@ -284,6 +296,7 @@ list. To read other We Work Remotely categories, add their RSS links to
    | `apply.workable.com/`**`acme`**`/j/ABC123` | `workable` | `acme` |
    | `jobs.smartrecruiters.com/`**`Acme`**`/123-job-title` | `smartrecruiters` | `Acme` (capital letters matter) |
    | `jobs.gem.com/`**`acme`**`/...` | `gem` | `acme` |
+   | `acme.wd5.myworkdayjobs.com/`**`AcmeCareers`**`/...` | `workday` | `acme.wd5.myworkdayjobs.com/AcmeCareers` (the whole address up to the site name) |
 
    Some companies wrap the board in their own site. If you can't see any of
    those addresses, try the **search** trick below.
@@ -305,8 +318,25 @@ list. To read other We Work Remotely categories, add their RSS links to
 `Planet, Rocket Lab`), and run it. The log lists any Greenhouse, Lever, Ashby,
 Workable or SmartRecruiters boards it finds under common spellings.
 
-Companies that run their own in-house careers site, such as Google, Apple,
-Amazon and Microsoft, can't be added. They don't publish a free feed.
+**Companies with their own careers website** (no Greenhouse, Lever, etc. in
+the address): add the careers page itself, and it's checked every day:
+
+```yaml
+  - name: Acme Space
+    url: https://acmespace.com/careers
+```
+
+- If the page is really powered by one of the hiring systems above (very
+  common, even when it doesn't look like it), the watcher notices and reads
+  that system's full feed.
+- Otherwise it picks the job links off the page, reads each relevant one,
+  and runs them through the same filters and AI scoring.
+- Some sites (SpaceX, for example) load their jobs with browser scripts, so
+  there's nothing on the page to read. **Check companies and sources** will
+  say so. For those, open a job and use the address its **Apply** button goes
+  to instead; that's usually a Workday or Greenhouse link you can add.
+
+BambooHR-hosted career pages can't be read (they have no public feed).
 
 ## Removing a company
 
