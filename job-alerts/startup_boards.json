@@ -1,1 +1,7883 @@
-{"companies": {}, "last_build": null}
+{
+ "companies": {
+  "10x-science": {
+   "checked": "2026-09-25",
+   "name": "10x Science",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://10xscience.com"
+  },
+  "1stcollab": {
+   "checked": "2026-09-25",
+   "name": "1stCollab",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://1stcollab.com/"
+  },
+  "222": {
+   "checked": "2026-09-25",
+   "name": "222",
+   "source": "yc",
+   "status": "none",
+   "team_size": 23,
+   "website": "https://222.place"
+  },
+  "9-mothers-corporation": {
+   "checked": "2026-09-25",
+   "name": "9 Mothers",
+   "platform": "ashby",
+   "slug": "9-mothers",
+   "source": "yc",
+   "status": "found",
+   "team_size": 19,
+   "website": "https://9mothers.com"
+  },
+  "abacum": {
+   "checked": "2026-09-25",
+   "name": "Abacum",
+   "platform": "ashby",
+   "slug": "abacum",
+   "source": "yc",
+   "status": "found",
+   "team_size": 125,
+   "website": "https://www.abacum.ai/"
+  },
+  "abundant": {
+   "checked": "2026-09-25",
+   "name": "Abundant",
+   "platform": "ashby",
+   "slug": "abundant",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://www.abundant.ai/"
+  },
+  "accord": {
+   "checked": "2026-09-25",
+   "name": "Accord",
+   "platform": "ashby",
+   "slug": "accord",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://inaccord.com"
+  },
+  "acely": {
+   "checked": "2026-09-25",
+   "name": "Acely",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://acely.com"
+  },
+  "activeloop": {
+   "checked": "2026-09-25",
+   "name": "Activeloop",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://activeloop.ai/"
+  },
+  "adentris": {
+   "checked": "2026-09-25",
+   "name": "Adentris",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.adentris.com"
+  },
+  "adyn": {
+   "checked": "2026-09-25",
+   "name": "adyn",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://adyn.com"
+  },
+  "afriex": {
+   "checked": "2026-09-25",
+   "name": "Afriex",
+   "source": "yc",
+   "status": "none",
+   "team_size": 55,
+   "website": "https://www.afriexapp.com"
+  },
+  "afterquery": {
+   "checked": "2026-09-25",
+   "name": "AfterQuery",
+   "platform": "ashby",
+   "slug": "afterquery",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://afterquery.com"
+  },
+  "agape": {
+   "checked": "2026-09-25",
+   "name": "Agapé",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.getdailyagape.com"
+  },
+  "agave": {
+   "checked": "2026-09-25",
+   "name": "Agave",
+   "platform": "ashby",
+   "slug": "agave",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://www.useagave.com"
+  },
+  "agency": {
+   "checked": "2026-09-25",
+   "name": "Agency",
+   "platform": "smartrecruiters",
+   "slug": "agency",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://GetAgency.com"
+  },
+  "agentmail": {
+   "checked": "2026-09-25",
+   "name": "AgentMail",
+   "platform": "ashby",
+   "slug": "agentmail",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://agentmail.to"
+  },
+  "agilemd": {
+   "checked": "2026-09-25",
+   "name": "AgileMD",
+   "source": "yc",
+   "status": "none",
+   "team_size": 19,
+   "website": "https://agilemd.com"
+  },
+  "aios": {
+   "checked": "2026-09-25",
+   "name": "AIOS",
+   "platform": "ashby",
+   "slug": "aios",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "https://www.aiosmedical.com/"
+  },
+  "aiprise": {
+   "checked": "2026-09-25",
+   "name": "AiPrise",
+   "platform": "ashby",
+   "slug": "aiprise",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "https://aiprise.com/"
+  },
+  "aircaps": {
+   "checked": "2026-09-25",
+   "name": "AirCaps",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://aircaps.com"
+  },
+  "airgoods": {
+   "checked": "2026-09-25",
+   "name": "Airgoods",
+   "platform": "ashby",
+   "slug": "airgoods",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://airgoods.com/"
+  },
+  "airhart-aeronautics": {
+   "checked": "2026-09-25",
+   "name": "Airhart Aeronautics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://www.airhartaero.com/"
+  },
+  "airmyne": {
+   "checked": "2026-09-25",
+   "name": "AirMyne",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "http://www.airmyne.com"
+  },
+  "airweave": {
+   "checked": "2026-09-25",
+   "name": "Airweave",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://airweave.ai"
+  },
+  "aivideo-com": {
+   "checked": "2026-09-25",
+   "name": "AIVideo.com",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://aivideo.com"
+  },
+  "aktoria-robotics": {
+   "checked": "2026-09-25",
+   "name": "Aktoria Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://aktoria.com/"
+  },
+  "albedo": {
+   "checked": "2026-09-25",
+   "name": "Albedo",
+   "platform": "greenhouse",
+   "slug": "albedo",
+   "source": "yc",
+   "status": "found",
+   "team_size": 55,
+   "website": "https://albedo.com"
+  },
+  "aleph": {
+   "checked": "2026-09-25",
+   "name": "Aleph",
+   "platform": "lever",
+   "slug": "aleph",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://getaleph.com/"
+  },
+  "alex-com": {
+   "checked": "2026-09-25",
+   "name": "Alex",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://alex.com"
+  },
+  "algolia": {
+   "checked": "2026-09-25",
+   "name": "Algolia",
+   "platform": "greenhouse",
+   "slug": "algolia",
+   "source": "yc",
+   "status": "found",
+   "team_size": 810,
+   "website": "http://www.algolia.com"
+  },
+  "alinea": {
+   "checked": "2026-09-25",
+   "name": "Alinea",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://alinea-invest.com/"
+  },
+  "allus-ai": {
+   "checked": "2026-09-25",
+   "name": "Allus AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://allus.ai"
+  },
+  "almond-2": {
+   "checked": "2026-09-25",
+   "name": "Almond",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://almond.bot/"
+  },
+  "alpaca": {
+   "checked": "2026-09-25",
+   "name": "Alpaca",
+   "platform": "greenhouse",
+   "slug": "alpaca",
+   "source": "yc",
+   "status": "found",
+   "team_size": 150,
+   "website": "https://alpaca.markets/"
+  },
+  "alpha-vantage": {
+   "checked": "2026-09-25",
+   "name": "Alpha Vantage",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.alphavantage.co/"
+  },
+  "ambient-ai": {
+   "checked": "2026-09-25",
+   "name": "Ambient.ai",
+   "source": "yc",
+   "status": "none",
+   "team_size": 150,
+   "website": "https://ambient.ai"
+  },
+  "anara": {
+   "checked": "2026-09-25",
+   "name": "Anara",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://anara.com"
+  },
+  "andromeda-surgical": {
+   "checked": "2026-09-25",
+   "name": "Andromeda Surgical",
+   "platform": "ashby",
+   "slug": "andromedasurgical",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "http://www.andromedasurgical.com"
+  },
+  "andson-biotech": {
+   "checked": "2026-09-25",
+   "name": "Andson Biotech",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "http://www.andsonbiotech.com"
+  },
+  "andy-ai": {
+   "checked": "2026-09-25",
+   "name": "Andy AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://with-andy.com"
+  },
+  "anglera": {
+   "checked": "2026-09-25",
+   "name": "Anglera",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.anglera.com/"
+  },
+  "ankr-health": {
+   "checked": "2026-09-25",
+   "name": "Ankr Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://ankr.us"
+  },
+  "answerthis": {
+   "checked": "2026-09-25",
+   "name": "AnswerThis",
+   "platform": "ashby",
+   "slug": "answerthis",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://answerthis.io/"
+  },
+  "anthrogen": {
+   "checked": "2026-09-25",
+   "name": "Anthrogen",
+   "platform": "ashby",
+   "slug": "anthrogen",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://anthrogen.com"
+  },
+  "antigen": {
+   "checked": "2026-09-25",
+   "name": "Antigen",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://antigen.sh/"
+  },
+  "aon3d": {
+   "checked": "2026-09-25",
+   "name": "AON3D",
+   "platform": "greenhouse",
+   "slug": "aon3d",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.aon3d.com"
+  },
+  "apero-health": {
+   "checked": "2026-09-25",
+   "name": "Apero Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 24,
+   "website": "https://www.aperohealth.com"
+  },
+  "apolink": {
+   "checked": "2026-09-25",
+   "name": "Apolink",
+   "platform": "ashby",
+   "slug": "apolink",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://apolink.space"
+  },
+  "apollo": {
+   "checked": "2026-09-25",
+   "name": "Apollo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 200,
+   "website": "http://apollographql.com/"
+  },
+  "apollo-io": {
+   "checked": "2026-09-25",
+   "name": "Apollo.io",
+   "platform": "greenhouse",
+   "slug": "apolloio",
+   "source": "yc",
+   "status": "found",
+   "team_size": 800,
+   "website": "https://www.apollo.io/"
+  },
+  "apprentice-health": {
+   "checked": "2026-09-25",
+   "name": "Apprentice Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.apprenticehealth.com"
+  },
+  "apten": {
+   "checked": "2026-09-25",
+   "name": "Apten",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.apten.ai/"
+  },
+  "aqua": {
+   "checked": "2026-09-25",
+   "name": "Aqua",
+   "source": "yc",
+   "status": "none",
+   "team_size": 23,
+   "website": "https://www.investwithaqua.com"
+  },
+  "archform": {
+   "checked": "2026-09-25",
+   "name": "ArchForm",
+   "source": "yc",
+   "status": "none",
+   "team_size": 23,
+   "website": "http://archform.com"
+  },
+  "arini": {
+   "checked": "2026-09-25",
+   "name": "Arini",
+   "platform": "ashby",
+   "slug": "arini",
+   "source": "yc",
+   "status": "found",
+   "team_size": 17,
+   "website": "https://www.arini.ai"
+  },
+  "arketa": {
+   "checked": "2026-09-25",
+   "name": "Arketa",
+   "platform": "ashby",
+   "slug": "arketa",
+   "source": "yc",
+   "status": "found",
+   "team_size": 55,
+   "website": "https://arketa.com"
+  },
+  "arnata": {
+   "checked": "2026-09-25",
+   "name": "arnata",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://arnata.com"
+  },
+  "arpari": {
+   "checked": "2026-09-25",
+   "name": "Arpari",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.arpari.com"
+  },
+  "artie": {
+   "checked": "2026-09-25",
+   "name": "Artie",
+   "platform": "ashby",
+   "slug": "artie",
+   "source": "yc",
+   "status": "found",
+   "team_size": 16,
+   "website": "https://www.artie.com/"
+  },
+  "artisan": {
+   "checked": "2026-09-25",
+   "name": "Artisan",
+   "platform": "ashby",
+   "slug": "artisan",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://artisan.co/?utm_source=ycombinator"
+  },
+  "artos": {
+   "checked": "2026-09-25",
+   "name": "Artos",
+   "platform": "ashby",
+   "slug": "artosai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://www.artosai.com/"
+  },
+  "arva-ai": {
+   "checked": "2026-09-25",
+   "name": "Arva AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://www.arva.ai"
+  },
+  "arzana": {
+   "checked": "2026-09-25",
+   "name": "Arzana",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://www.arzana.com/"
+  },
+  "aseon-labs": {
+   "checked": "2026-09-25",
+   "name": "Aseon Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.aseonlabs.com/"
+  },
+  "asha-health": {
+   "checked": "2026-09-25",
+   "name": "Asha Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://asha.health"
+  },
+  "ashby": {
+   "checked": "2026-09-25",
+   "name": "Ashby",
+   "platform": "ashby",
+   "slug": "ashby",
+   "source": "yc",
+   "status": "found",
+   "team_size": 110,
+   "website": "https://www.ashbyhq.com"
+  },
+  "aside": {
+   "checked": "2026-09-25",
+   "name": "Aside",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://aside.com"
+  },
+  "asim": {
+   "checked": "2026-09-25",
+   "name": "aSim",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://asim.sh/"
+  },
+  "assembly-com": {
+   "checked": "2026-09-25",
+   "name": "Assembly",
+   "platform": "ashby",
+   "slug": "assembly",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://www.assembly.com"
+  },
+  "assembly-hoa": {
+   "checked": "2026-09-25",
+   "name": "Assembly HOA",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://assemblyhoa.com"
+  },
+  "assemblyai": {
+   "checked": "2026-09-25",
+   "name": "AssemblyAI",
+   "platform": "greenhouse",
+   "slug": "assemblyai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "https://www.assemblyai.com"
+  },
+  "astraea": {
+   "checked": "2026-09-25",
+   "name": "Astraea",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://tryastraea.com"
+  },
+  "astranis": {
+   "checked": "2026-09-25",
+   "name": "Astranis",
+   "platform": "greenhouse",
+   "slug": "astranis",
+   "source": "yc",
+   "status": "found",
+   "team_size": 500,
+   "website": "http://www.astranis.com"
+  },
+  "astro-mechanica": {
+   "checked": "2026-09-25",
+   "name": "Astro Mechanica",
+   "platform": "ashby",
+   "slug": "astro-mechanica",
+   "source": "yc",
+   "status": "found",
+   "team_size": 52,
+   "website": "https://astromecha.co/"
+  },
+  "astroforge": {
+   "checked": "2026-09-25",
+   "name": "AstroForge",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.astroforge.io/"
+  },
+  "athelas": {
+   "checked": "2026-09-25",
+   "name": "Athelas",
+   "source": "yc",
+   "status": "none",
+   "team_size": 1000,
+   "website": "http://athelas.com"
+  },
+  "athenahq": {
+   "checked": "2026-09-25",
+   "name": "AthenaHQ",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.athenahq.ai"
+  },
+  "atlas-3": {
+   "checked": "2026-09-25",
+   "name": "Atlas",
+   "platform": "ashby",
+   "slug": "atlas",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://atlascard.com"
+  },
+  "atob": {
+   "checked": "2026-09-25",
+   "name": "AtoB",
+   "platform": "ashby",
+   "slug": "atob",
+   "source": "yc",
+   "status": "found",
+   "team_size": 75,
+   "website": "https://atob.com/"
+  },
+  "atomic": {
+   "checked": "2026-09-25",
+   "name": "Atomic",
+   "platform": "ashby",
+   "slug": "atomic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://www.atomicvest.com/"
+  },
+  "atomic-industries": {
+   "checked": "2026-09-25",
+   "name": "Atomic Industries",
+   "source": "yc",
+   "status": "none",
+   "team_size": 60,
+   "website": "http://atomic.industries"
+  },
+  "atopile": {
+   "checked": "2026-09-25",
+   "name": "atopile",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "http://atopile.io"
+  },
+  "attack-capital": {
+   "checked": "2026-09-25",
+   "name": "Attack Capital",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://attack.capital/"
+  },
+  "attain": {
+   "checked": "2026-09-25",
+   "name": "Attain",
+   "platform": "greenhouse",
+   "slug": "attain",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://joinattain.com/"
+  },
+  "auctor": {
+   "checked": "2026-09-25",
+   "name": "Auctor",
+   "platform": "ashby",
+   "slug": "auctor",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://getauctor.com"
+  },
+  "aurelian": {
+   "checked": "2026-09-25",
+   "name": "Aurelian",
+   "platform": "ashby",
+   "slug": "aurelian",
+   "source": "yc",
+   "status": "found",
+   "team_size": 45,
+   "website": "https://www.aurelian.com/"
+  },
+  "authzed": {
+   "checked": "2026-09-25",
+   "name": "authzed",
+   "platform": "ashby",
+   "slug": "authzed",
+   "source": "yc",
+   "status": "found",
+   "team_size": 31,
+   "website": "https://authzed.com"
+  },
+  "autonomous-technologies-group": {
+   "checked": "2026-09-25",
+   "name": "Autonomous Technologies Group",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://becomeautonomous.com/"
+  },
+  "avallon-ai": {
+   "checked": "2026-09-25",
+   "name": "Avallon AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.avallon.ai/"
+  },
+  "avent": {
+   "checked": "2026-09-25",
+   "name": "Avent",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.aventindustrial.com"
+  },
+  "aviaryai": {
+   "checked": "2026-09-25",
+   "name": "AviaryAI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "http://www.helloaviary.ai"
+  },
+  "aviator": {
+   "checked": "2026-09-25",
+   "name": "Aviator",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://aviator.co"
+  },
+  "avoca": {
+   "checked": "2026-09-25",
+   "name": "Avoca",
+   "platform": "ashby",
+   "slug": "avoca",
+   "source": "yc",
+   "status": "found",
+   "team_size": 85,
+   "website": "https://www.avoca.ai/"
+  },
+  "axel-travel": {
+   "checked": "2026-09-25",
+   "name": "Axel Travel",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://helloaxel.com/"
+  },
+  "axle": {
+   "checked": "2026-09-25",
+   "name": "Axle",
+   "platform": "greenhouse",
+   "slug": "axle",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://axle.insure"
+  },
+  "axle-health": {
+   "checked": "2026-09-25",
+   "name": "Axle Health",
+   "platform": "ashby",
+   "slug": "axle-health",
+   "source": "yc",
+   "status": "found",
+   "team_size": 28,
+   "website": "https://www.axlehealth.com"
+  },
+  "banner": {
+   "checked": "2026-09-25",
+   "name": "Banner",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "https://withbanner.com"
+  },
+  "be-go": {
+   "checked": "2026-09-25",
+   "name": "BeGo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 65,
+   "website": "http://www.bego.ai"
+  },
+  "beacons": {
+   "checked": "2026-09-25",
+   "name": "Beacons",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://beacons.ai/"
+  },
+  "beam": {
+   "checked": "2026-09-25",
+   "name": "Beam",
+   "platform": "greenhouse",
+   "slug": "beam",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://beam.cloud"
+  },
+  "benepass": {
+   "checked": "2026-09-25",
+   "name": "Benepass",
+   "platform": "ashby",
+   "slug": "benepass",
+   "source": "yc",
+   "status": "found",
+   "team_size": 45,
+   "website": "http://www.getbenepass.com"
+  },
+  "berry": {
+   "checked": "2026-09-25",
+   "name": "Berry",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://berryai.com/"
+  },
+  "besimple-ai": {
+   "checked": "2026-09-25",
+   "name": "Besimple AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://besimple.ai"
+  },
+  "betterbasket": {
+   "checked": "2026-09-25",
+   "name": "BetterBasket",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "http://www.betterbasket.com"
+  },
+  "beyond-reach-labs": {
+   "checked": "2026-09-25",
+   "name": "Beyond Reach Labs",
+   "platform": "ashby",
+   "slug": "beyondreachlabs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://www.beyondreachlabs.com"
+  },
+  "bik": {
+   "checked": "2026-09-25",
+   "name": "BIK",
+   "source": "yc",
+   "status": "none",
+   "team_size": 55,
+   "website": "https://bik.ai/"
+  },
+  "bild-ai": {
+   "checked": "2026-09-25",
+   "name": "Bild AI",
+   "platform": "ashby",
+   "slug": "bild-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 9,
+   "website": "https://www.bild.ai"
+  },
+  "biodock": {
+   "checked": "2026-09-25",
+   "name": "Biodock",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.biodock.ai"
+  },
+  "biorender": {
+   "checked": "2026-09-25",
+   "name": "BioRender",
+   "platform": "lever",
+   "slug": "biorender",
+   "source": "yc",
+   "status": "found",
+   "team_size": 205,
+   "website": "https://www.biorender.com"
+  },
+  "biostack-platforms": {
+   "checked": "2026-09-25",
+   "name": "BioStack Platforms",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.getbiostack.com/"
+  },
+  "bitmovin": {
+   "checked": "2026-09-25",
+   "name": "Bitmovin",
+   "platform": "greenhouse",
+   "slug": "bitmovin",
+   "source": "yc",
+   "status": "found",
+   "team_size": 145,
+   "website": "http://bitmovin.com"
+  },
+  "bland-ai": {
+   "checked": "2026-09-25",
+   "name": "Bland AI",
+   "platform": "ashby",
+   "slug": "bland",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "https://bland.com"
+  },
+  "blee": {
+   "checked": "2026-09-25",
+   "name": "Blee",
+   "platform": "ashby",
+   "slug": "blee",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://www.blee.com"
+  },
+  "blissway": {
+   "checked": "2026-09-25",
+   "name": "Blissway",
+   "platform": "ashby",
+   "slug": "blissway",
+   "source": "yc",
+   "status": "found",
+   "team_size": 22,
+   "website": "https://www.blissway.com/"
+  },
+  "bloom-institute-of-technology": {
+   "checked": "2026-09-25",
+   "name": "Bloom Institute of Technology",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.bloomtech.com"
+  },
+  "blue-onion": {
+   "checked": "2026-09-25",
+   "name": "Blue Onion",
+   "source": "yc",
+   "status": "none",
+   "team_size": 27,
+   "website": "https://www.blueonion.ai/"
+  },
+  "bluecargo": {
+   "checked": "2026-09-25",
+   "name": "BlueCargo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "http://www.bluecargo.io/"
+  },
+  "bluejay": {
+   "checked": "2026-09-25",
+   "name": "Bluejay",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://getbluejay.ai/"
+  },
+  "boldvoice": {
+   "checked": "2026-09-25",
+   "name": "BoldVoice",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://boldvoice.com"
+  },
+  "bolster": {
+   "checked": "2026-09-25",
+   "name": "Bolster",
+   "platform": "lever",
+   "slug": "bolster",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://bolsterbuilt.com"
+  },
+  "botbuilt": {
+   "checked": "2026-09-25",
+   "name": "BotBuilt",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.botbuilt.com"
+  },
+  "boundary": {
+   "checked": "2026-09-25",
+   "name": "Boundary",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.boundaryml.com"
+  },
+  "bretton-ai": {
+   "checked": "2026-09-25",
+   "name": "Bretton AI",
+   "platform": "ashby",
+   "slug": "brettonai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 34,
+   "website": "https://www.bretton.com/"
+  },
+  "brighterway": {
+   "checked": "2026-09-25",
+   "name": "Brighterway",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://www.brighterway.ai/"
+  },
+  "broccoli-ai": {
+   "checked": "2026-09-25",
+   "name": "Broccoli AI",
+   "platform": "ashby",
+   "slug": "broccoli",
+   "source": "yc",
+   "status": "found",
+   "team_size": 85,
+   "website": "https://www.broccoli.com/"
+  },
+  "browser-use": {
+   "checked": "2026-09-25",
+   "name": "Browser Use",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://browser-use.com"
+  },
+  "bucket-robotics": {
+   "checked": "2026-09-25",
+   "name": "Bucket Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://bucket.bot"
+  },
+  "buildbuddy": {
+   "checked": "2026-09-25",
+   "name": "BuildBuddy",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://buildbuddy.io"
+  },
+  "bunkerhill-health": {
+   "checked": "2026-09-25",
+   "name": "Bunkerhill Health",
+   "platform": "ashby",
+   "slug": "bunkerhillhealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "http://bunkerhillhealth.com"
+  },
+  "cair-health": {
+   "checked": "2026-09-25",
+   "name": "Cair Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.cairhealth.com/"
+  },
+  "callab-ai": {
+   "checked": "2026-09-25",
+   "name": "Callab AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://callab.ai"
+  },
+  "calltree": {
+   "checked": "2026-09-25",
+   "name": "Calltree",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://calltree.ai"
+  },
+  "camber-2": {
+   "checked": "2026-09-25",
+   "name": "Camber",
+   "platform": "ashby",
+   "slug": "camber",
+   "source": "yc",
+   "status": "found",
+   "team_size": 101,
+   "website": "https://www.camber.health/"
+  },
+  "cambio-2": {
+   "checked": "2026-09-25",
+   "name": "Cambio",
+   "platform": "ashby",
+   "slug": "cambio",
+   "source": "yc",
+   "status": "found",
+   "team_size": 60,
+   "website": "https://www.cambio.ai/"
+  },
+  "cambly": {
+   "checked": "2026-09-25",
+   "name": "Cambly",
+   "platform": "ashby",
+   "slug": "cambly",
+   "source": "yc",
+   "status": "found",
+   "team_size": 200,
+   "website": "http://www.cambly.com"
+  },
+  "campfire-2": {
+   "checked": "2026-09-25",
+   "name": "Campfire",
+   "platform": "ashby",
+   "slug": "campfire",
+   "source": "yc",
+   "status": "found",
+   "team_size": 105,
+   "website": "https://campfire.ai"
+  },
+  "canary-technologies": {
+   "checked": "2026-09-25",
+   "name": "Canary Technologies",
+   "platform": "lever",
+   "slug": "canarytechnologies",
+   "source": "yc",
+   "status": "found",
+   "team_size": 150,
+   "website": "https://www.canarytechnologies.com"
+  },
+  "candid-health": {
+   "checked": "2026-09-25",
+   "name": "Candid Health",
+   "platform": "ashby",
+   "slug": "candidhealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 200,
+   "website": "https://www.joincandidhealth.com"
+  },
+  "canix": {
+   "checked": "2026-09-25",
+   "name": "Canix",
+   "source": "yc",
+   "status": "none",
+   "team_size": 22,
+   "website": "https://www.canix.com/"
+  },
+  "capitol-ai": {
+   "checked": "2026-09-25",
+   "name": "Capitol AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://www.capitol.ai/"
+  },
+  "capix": {
+   "checked": "2026-09-25",
+   "name": "Capix",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "http://capix.ai/"
+  },
+  "captivateiq": {
+   "checked": "2026-09-25",
+   "name": "CaptivateIQ",
+   "platform": "lever",
+   "slug": "captivateiq",
+   "source": "yc",
+   "status": "found",
+   "team_size": 280,
+   "website": "https://www.captivateiq.com"
+  },
+  "capy": {
+   "checked": "2026-09-25",
+   "name": "Capy",
+   "platform": "ashby",
+   "slug": "capy",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://capy.ai"
+  },
+  "cardinal-gray": {
+   "checked": "2026-09-25",
+   "name": "Cardinal Gray",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.cardinalgray.com/"
+  },
+  "careforce": {
+   "checked": "2026-09-25",
+   "name": "Careforce",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://careforce.ai/"
+  },
+  "cargo": {
+   "checked": "2026-09-25",
+   "name": "Cargo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://getcargo.io"
+  },
+  "carma": {
+   "checked": "2026-09-25",
+   "name": "Carma",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.joincarma.com/"
+  },
+  "cartage": {
+   "checked": "2026-09-25",
+   "name": "Cartage",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://cartage.ai"
+  },
+  "casca": {
+   "checked": "2026-09-25",
+   "name": "Casca",
+   "platform": "ashby",
+   "slug": "casca",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.cascading.ai/"
+  },
+  "cascade-space": {
+   "checked": "2026-09-25",
+   "name": "Cascade Space",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://cascadespace.com"
+  },
+  "castle-2": {
+   "checked": "2026-09-25",
+   "name": "Castle",
+   "platform": "ashby",
+   "slug": "castle",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://castle.io"
+  },
+  "catchback-cards": {
+   "checked": "2026-09-25",
+   "name": "CatchBack Cards",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://catchbackcards.com"
+  },
+  "cedana": {
+   "checked": "2026-09-25",
+   "name": "Cedana",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://cedana.ai"
+  },
+  "cekura-ai": {
+   "checked": "2026-09-25",
+   "name": "Cekura",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.cekura.ai/"
+  },
+  "celltype": {
+   "checked": "2026-09-25",
+   "name": "CellType",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.celltype.com"
+  },
+  "centralize": {
+   "checked": "2026-09-25",
+   "name": "Centralize",
+   "platform": "ashby",
+   "slug": "centralize",
+   "source": "yc",
+   "status": "found",
+   "team_size": 9,
+   "website": "https://www.usecentralize.com/"
+  },
+  "channel3": {
+   "checked": "2026-09-25",
+   "name": "Channel3",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://trychannel3.com"
+  },
+  "charge-robotics": {
+   "checked": "2026-09-25",
+   "name": "Charge Robotics",
+   "platform": "ashby",
+   "slug": "charge-robotics",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://chargerobotics.com/"
+  },
+  "chariot-2": {
+   "checked": "2026-09-25",
+   "name": "Chariot",
+   "platform": "ashby",
+   "slug": "chariot",
+   "source": "yc",
+   "status": "found",
+   "team_size": 24,
+   "website": "https://givechariot.com/"
+  },
+  "checkr": {
+   "checked": "2026-09-25",
+   "name": "Checkr",
+   "platform": "greenhouse",
+   "slug": "checkr",
+   "source": "yc",
+   "status": "found",
+   "team_size": 800,
+   "website": "http://www.checkr.com"
+  },
+  "chima": {
+   "checked": "2026-09-25",
+   "name": "Chima",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.withchima.com/"
+  },
+  "cinder-2": {
+   "checked": "2026-09-25",
+   "name": "Cinder",
+   "platform": "ashby",
+   "slug": "cinder",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://cinder.ai"
+  },
+  "circleback": {
+   "checked": "2026-09-25",
+   "name": "Circleback",
+   "platform": "ashby",
+   "slug": "circleback",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://circleback.ai"
+  },
+  "ciro": {
+   "checked": "2026-09-25",
+   "name": "Ciro",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.ciro.io/"
+  },
+  "clad": {
+   "checked": "2026-09-25",
+   "name": "Clad",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://withclad.com/"
+  },
+  "claim-health": {
+   "checked": "2026-09-25",
+   "name": "Claim Health",
+   "platform": "ashby",
+   "slug": "claim-health",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://www.claimhealth.com"
+  },
+  "clara-2": {
+   "checked": "2026-09-25",
+   "name": "Clara",
+   "platform": "greenhouse",
+   "slug": "clara",
+   "source": "yc",
+   "status": "found",
+   "team_size": 9,
+   "website": "http://askclara.com"
+  },
+  "clarion": {
+   "checked": "2026-09-25",
+   "name": "Clarion",
+   "platform": "ashby",
+   "slug": "clarion",
+   "source": "yc",
+   "status": "found",
+   "team_size": 16,
+   "website": "https://clarionhealth.com"
+  },
+  "classdojo": {
+   "checked": "2026-09-25",
+   "name": "ClassDojo",
+   "platform": "ashby",
+   "slug": "classdojo",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "http://www.classdojo.com"
+  },
+  "clearest-health": {
+   "checked": "2026-09-25",
+   "name": "Clearest Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://clearesthealth.com/"
+  },
+  "clearly-ai": {
+   "checked": "2026-09-25",
+   "name": "Clearly AI",
+   "platform": "ashby",
+   "slug": "clearly-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 17,
+   "website": "https://clearly-ai.com"
+  },
+  "clicks-health": {
+   "checked": "2026-09-25",
+   "name": "Clicks Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.goclicks.ai/"
+  },
+  "clipboard": {
+   "checked": "2026-09-25",
+   "name": "Clipboard",
+   "platform": "ashby",
+   "slug": "clipboard",
+   "source": "yc",
+   "status": "found",
+   "team_size": 1000,
+   "website": "https://www.clipboardworks.com/careers"
+  },
+  "closure": {
+   "checked": "2026-09-25",
+   "name": "Closure",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://closure-intel.com/"
+  },
+  "cloudcruise": {
+   "checked": "2026-09-25",
+   "name": "CloudCruise",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://cloudcruise.com"
+  },
+  "coast": {
+   "checked": "2026-09-25",
+   "name": "Coast",
+   "platform": "greenhouse",
+   "slug": "coast",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://trycoast.com"
+  },
+  "coba": {
+   "checked": "2026-09-25",
+   "name": "Coba",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://www.coba.ai"
+  },
+  "codeant-ai": {
+   "checked": "2026-09-25",
+   "name": "CodeAnt AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://codeant.ai/"
+  },
+  "codes-health": {
+   "checked": "2026-09-25",
+   "name": "Codes Health",
+   "platform": "ashby",
+   "slug": "codes-health",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.codeshealth.com/"
+  },
+  "cofactr": {
+   "checked": "2026-09-25",
+   "name": "Cofactr",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.cofactr.com/"
+  },
+  "cogram": {
+   "checked": "2026-09-25",
+   "name": "Cogram",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://cogram.com"
+  },
+  "cointracker": {
+   "checked": "2026-09-25",
+   "name": "CoinTracker",
+   "source": "yc",
+   "status": "none",
+   "team_size": 70,
+   "website": "https://cointracker.com"
+  },
+  "collectly": {
+   "checked": "2026-09-25",
+   "name": "Collectly",
+   "source": "yc",
+   "status": "none",
+   "team_size": 106,
+   "website": "http://collectly.co/"
+  },
+  "collectwise": {
+   "checked": "2026-09-25",
+   "name": "CollectWise",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://collectwise.com/"
+  },
+  "community-phone-company": {
+   "checked": "2026-09-25",
+   "name": "Community Phone Company",
+   "source": "yc",
+   "status": "none",
+   "team_size": 101,
+   "website": "https://www.communityphone.org/"
+  },
+  "complete": {
+   "checked": "2026-09-25",
+   "name": "Complete",
+   "platform": "ashby",
+   "slug": "complete",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://complete.so"
+  },
+  "compose-ai": {
+   "checked": "2026-09-25",
+   "name": "Compose.ai",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://compose.ai"
+  },
+  "concourse": {
+   "checked": "2026-09-25",
+   "name": "Concourse",
+   "platform": "ashby",
+   "slug": "concourse",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://concourse.ai/"
+  },
+  "conductor": {
+   "checked": "2026-09-25",
+   "name": "Conductor",
+   "platform": "ashby",
+   "slug": "conductor",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://conductor.build"
+  },
+  "conduit": {
+   "checked": "2026-09-25",
+   "name": "Conduit",
+   "platform": "ashby",
+   "slug": "conduit",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "http://helloconduit.com"
+  },
+  "conduit-ai": {
+   "checked": "2026-09-25",
+   "name": "Conduit",
+   "platform": "ashby",
+   "slug": "conduit",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://conduit.ai/"
+  },
+  "confident-ai": {
+   "checked": "2026-09-25",
+   "name": "Confident AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://confident-ai.com"
+  },
+  "confido": {
+   "checked": "2026-09-25",
+   "name": "Confido",
+   "platform": "ashby",
+   "slug": "confido",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "https://www.confidotech.com"
+  },
+  "contrario": {
+   "checked": "2026-09-25",
+   "name": "Contrario",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://contrario.ai"
+  },
+  "converge": {
+   "checked": "2026-09-25",
+   "name": "Converge",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "http://www.runconverge.com"
+  },
+  "coperniq": {
+   "checked": "2026-09-25",
+   "name": "Coperniq",
+   "platform": "ashby",
+   "slug": "coperniq",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://coperniq.io"
+  },
+  "corgea": {
+   "checked": "2026-09-25",
+   "name": "Corgea",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.corgea.com/"
+  },
+  "corgi-insurance": {
+   "checked": "2026-09-25",
+   "name": "Corgi Insurance",
+   "source": "yc",
+   "status": "none",
+   "team_size": 250,
+   "website": "https://corgi.com"
+  },
+  "coris": {
+   "checked": "2026-09-25",
+   "name": "Coris",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://coris.ai/"
+  },
+  "cotera": {
+   "checked": "2026-09-25",
+   "name": "Cotera",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://cotera.co"
+  },
+  "coval": {
+   "checked": "2026-09-25",
+   "name": "Coval",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://coval.dev"
+  },
+  "cozmo-ai": {
+   "checked": "2026-09-25",
+   "name": "Cozmo AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.hellocozmo.ai/"
+  },
+  "craniometrix": {
+   "checked": "2026-09-25",
+   "name": "Craniometrix",
+   "source": "yc",
+   "status": "none",
+   "team_size": 64,
+   "website": "https://craniometrix.com"
+  },
+  "credal-ai": {
+   "checked": "2026-09-25",
+   "name": "Credal.ai",
+   "platform": "ashby",
+   "slug": "credal",
+   "source": "yc",
+   "status": "found",
+   "team_size": 14,
+   "website": "https://credal.ai"
+  },
+  "ctgt": {
+   "checked": "2026-09-25",
+   "name": "CTGT",
+   "platform": "ashby",
+   "slug": "ctgt",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.ctgt.ai/"
+  },
+  "culdesac": {
+   "checked": "2026-09-25",
+   "name": "Culdesac",
+   "platform": "lever",
+   "slug": "culdesac",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "http://culdesac.com"
+  },
+  "curri": {
+   "checked": "2026-09-25",
+   "name": "Curri",
+   "platform": "ashby",
+   "slug": "curri",
+   "source": "yc",
+   "status": "found",
+   "team_size": 104,
+   "website": "http://www.curri.com"
+  },
+  "cyble": {
+   "checked": "2026-09-25",
+   "name": "Cyble",
+   "source": "yc",
+   "status": "none",
+   "team_size": 197,
+   "website": "https://cyble.com/"
+  },
+  "dart": {
+   "checked": "2026-09-25",
+   "name": "Dart",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.dartai.com"
+  },
+  "data-driven-bioscience": {
+   "checked": "2026-09-25",
+   "name": "Data Driven Bioscience",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "http://datadrivenbioscience.com"
+  },
+  "datafold": {
+   "checked": "2026-09-25",
+   "name": "Datafold",
+   "platform": "ashby",
+   "slug": "datafold",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://datafold.com"
+  },
+  "dataleap": {
+   "checked": "2026-09-25",
+   "name": "Dataleap",
+   "platform": "ashby",
+   "slug": "dataleap",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://dataleap.ai/"
+  },
+  "datrics": {
+   "checked": "2026-09-25",
+   "name": "Datrics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 22,
+   "website": "https://datrics.ai"
+  },
+  "david-ai": {
+   "checked": "2026-09-25",
+   "name": "David AI",
+   "platform": "ashby",
+   "slug": "david-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.withdavid.ai/"
+  },
+  "decoda-health": {
+   "checked": "2026-09-25",
+   "name": "Decoda Health",
+   "platform": "ashby",
+   "slug": "decodahealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 19,
+   "website": "https://decodahealth.com/"
+  },
+  "dedalus-labs": {
+   "checked": "2026-09-25",
+   "name": "Dedalus Labs",
+   "platform": "ashby",
+   "slug": "dedalus-labs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.dedaluslabs.ai/"
+  },
+  "deel": {
+   "checked": "2026-09-25",
+   "name": "Deel",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5000,
+   "website": "https://www.deel.com/"
+  },
+  "deepgram": {
+   "checked": "2026-09-25",
+   "name": "Deepgram",
+   "platform": "ashby",
+   "slug": "deepgram",
+   "source": "yc",
+   "status": "found",
+   "team_size": 115,
+   "website": "https://www.deepgram.com"
+  },
+  "deepnight": {
+   "checked": "2026-09-25",
+   "name": "Deepnight",
+   "source": "yc",
+   "status": "none",
+   "team_size": 16,
+   "website": "https://www.deepnight.com"
+  },
+  "dench-com": {
+   "checked": "2026-09-25",
+   "name": "Dench.com",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://dench.com"
+  },
+  "diffuse-bio": {
+   "checked": "2026-09-25",
+   "name": "Diffuse Bio",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "http://diffuse.bio"
+  },
+  "digibuild": {
+   "checked": "2026-09-25",
+   "name": "DigiBuild",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://digibuild.com"
+  },
+  "dili": {
+   "checked": "2026-09-25",
+   "name": "dili",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.dili.com"
+  },
+  "diode-computers-inc": {
+   "checked": "2026-09-25",
+   "name": "Diode Computers, Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://diode.computer"
+  },
+  "directshifts": {
+   "checked": "2026-09-25",
+   "name": "DirectShifts",
+   "source": "yc",
+   "status": "none",
+   "team_size": 72,
+   "website": "https://directshifts.com"
+  },
+  "ditto": {
+   "checked": "2026-09-25",
+   "name": "Ditto",
+   "platform": "ashby",
+   "slug": "ditto",
+   "source": "yc",
+   "status": "found",
+   "team_size": 14,
+   "website": "http://dittowords.com"
+  },
+  "dodo": {
+   "checked": "2026-09-25",
+   "name": "Dodo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.dodo.ai/"
+  },
+  "domu-technology-inc": {
+   "checked": "2026-09-25",
+   "name": "Domu Technology Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.domu.ai/"
+  },
+  "doola": {
+   "checked": "2026-09-25",
+   "name": "doola",
+   "platform": "lever",
+   "slug": "doola",
+   "source": "yc",
+   "status": "found",
+   "team_size": 43,
+   "website": "https://www.doola.com/"
+  },
+  "doppler": {
+   "checked": "2026-09-25",
+   "name": "Doppler",
+   "platform": "ashby",
+   "slug": "doppler",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://doppler.com"
+  },
+  "dots-2": {
+   "checked": "2026-09-25",
+   "name": "Dots 💸",
+   "platform": "greenhouse",
+   "slug": "dots",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://usedots.com"
+  },
+  "doublehq": {
+   "checked": "2026-09-25",
+   "name": "Double",
+   "platform": "ashby",
+   "slug": "double",
+   "source": "yc",
+   "status": "found",
+   "team_size": 80,
+   "website": "https://www.doublehq.com"
+  },
+  "dover": {
+   "checked": "2026-09-25",
+   "name": "Dover",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://dover.com"
+  },
+  "draft-the-record": {
+   "checked": "2026-09-25",
+   "name": "Draft The Record",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.drafttherecord.com/"
+  },
+  "draftwise": {
+   "checked": "2026-09-25",
+   "name": "Draftwise",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.draftwise.com/"
+  },
+  "dreamcraft-entertainment-inc": {
+   "checked": "2026-09-25",
+   "name": "DreamCraft Entertainment, Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 23,
+   "website": "https://www.dreamcraft.com/"
+  },
+  "drillbit": {
+   "checked": "2026-09-25",
+   "name": "Drillbit",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.drillbit.com"
+  },
+  "dynamo-ai": {
+   "checked": "2026-09-25",
+   "name": "Dynamo AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "https://dynamo.ai"
+  },
+  "eden-2": {
+   "checked": "2026-09-25",
+   "name": "Eden",
+   "source": "yc",
+   "status": "none",
+   "team_size": 100,
+   "website": "https://edenmed.com"
+  },
+  "edgerun": {
+   "checked": "2026-09-25",
+   "name": "Edgerun",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://edgerun.com"
+  },
+  "educato": {
+   "checked": "2026-09-25",
+   "name": "Educato",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.educato.com/"
+  },
+  "ego": {
+   "checked": "2026-09-25",
+   "name": "ego",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://egoai.com"
+  },
+  "eight-sleep": {
+   "checked": "2026-09-25",
+   "name": "Eight Sleep",
+   "platform": "ashby",
+   "slug": "eightsleep",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "http://eightsleep.com"
+  },
+  "ekho": {
+   "checked": "2026-09-25",
+   "name": "Ekho",
+   "platform": "ashby",
+   "slug": "ekho",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://www.ekho.com"
+  },
+  "elayne": {
+   "checked": "2026-09-25",
+   "name": "Elayne",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.elayne.com/"
+  },
+  "electric-air-2": {
+   "checked": "2026-09-25",
+   "name": "Electric Air",
+   "platform": "ashby",
+   "slug": "electricair",
+   "source": "yc",
+   "status": "found",
+   "team_size": 18,
+   "website": "https://www.electricair.io/"
+  },
+  "ello": {
+   "checked": "2026-09-25",
+   "name": "Ello",
+   "platform": "ashby",
+   "slug": "ello",
+   "source": "yc",
+   "status": "found",
+   "team_size": 45,
+   "website": "https://www.ello.com"
+  },
+  "eloquent-ai": {
+   "checked": "2026-09-25",
+   "name": "Eloquent AI",
+   "platform": "ashby",
+   "slug": "eloquentai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://www.eloquentai.co/"
+  },
+  "ember": {
+   "checked": "2026-09-25",
+   "name": "Ember",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://www.embercopilot.ai"
+  },
+  "emerge-career": {
+   "checked": "2026-09-25",
+   "name": "Emerge Career",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.emergecareer.com/"
+  },
+  "entangl": {
+   "checked": "2026-09-25",
+   "name": "Entangl",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.entangl.com/"
+  },
+  "epinoma": {
+   "checked": "2026-09-25",
+   "name": "Epinoma",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.epinoma.com/"
+  },
+  "epsilon3-inc": {
+   "checked": "2026-09-25",
+   "name": "Epsilon3",
+   "platform": "lever",
+   "slug": "epsilon3",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://www.epsilon3.io/"
+  },
+  "etleap": {
+   "checked": "2026-09-25",
+   "name": "Etleap",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://etleap.com"
+  },
+  "event-horizon-labs": {
+   "checked": "2026-09-25",
+   "name": "Event Horizon Labs",
+   "platform": "ashby",
+   "slug": "event-horizon-labs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.ehl.markets/"
+  },
+  "eventual": {
+   "checked": "2026-09-25",
+   "name": "Eventual",
+   "platform": "ashby",
+   "slug": "eventual",
+   "source": "yc",
+   "status": "found",
+   "team_size": 18,
+   "website": "https://www.daft.ai/"
+  },
+  "every": {
+   "checked": "2026-09-25",
+   "name": "Every",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://every.io/"
+  },
+  "eze": {
+   "checked": "2026-09-25",
+   "name": "Eze",
+   "source": "yc",
+   "status": "none",
+   "team_size": 32,
+   "website": "https://www.ezeit.ai/"
+  },
+  "f2": {
+   "checked": "2026-09-25",
+   "name": "F2",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "http://f2.ai"
+  },
+  "faire": {
+   "checked": "2026-09-25",
+   "name": "Faire",
+   "platform": "greenhouse",
+   "slug": "faire",
+   "source": "yc",
+   "status": "found",
+   "team_size": 900,
+   "website": "https://www.faire.com/"
+  },
+  "farcast": {
+   "checked": "2026-09-25",
+   "name": "Farcast",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.farcast.com/"
+  },
+  "fathom": {
+   "checked": "2026-09-25",
+   "name": "Fathom",
+   "source": "yc",
+   "status": "none",
+   "team_size": 95,
+   "website": "https://www.fathom.ai"
+  },
+  "feanix-biotechnologies": {
+   "checked": "2026-09-25",
+   "name": "Feanix Biotechnologies",
+   "platform": "greenhouse",
+   "slug": "feanixbiotechnologies",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://www.feanixbio.com/"
+  },
+  "feather-2": {
+   "checked": "2026-09-25",
+   "name": "Feather",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://featherhq.com"
+  },
+  "fernstone": {
+   "checked": "2026-09-25",
+   "name": "Fernstone",
+   "platform": "ashby",
+   "slug": "fernstone",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://www.fernstone.com"
+  },
+  "fieldguide": {
+   "checked": "2026-09-25",
+   "name": "Fieldguide",
+   "platform": "ashby",
+   "slug": "fieldguide",
+   "source": "yc",
+   "status": "found",
+   "team_size": 200,
+   "website": "http://fieldguide.com"
+  },
+  "finch": {
+   "checked": "2026-09-25",
+   "name": "Finch",
+   "platform": "lever",
+   "slug": "finch",
+   "source": "yc",
+   "status": "found",
+   "team_size": 73,
+   "website": "https://tryfinch.com"
+  },
+  "finn": {
+   "checked": "2026-09-25",
+   "name": "Finn",
+   "platform": "lever",
+   "slug": "finn",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://getfinn.us/"
+  },
+  "finny-ai": {
+   "checked": "2026-09-25",
+   "name": "FINNY AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "https://www.finny.com/"
+  },
+  "finosu": {
+   "checked": "2026-09-25",
+   "name": "Finosu",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.finosu.com"
+  },
+  "first": {
+   "checked": "2026-09-25",
+   "name": "FIRST",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://firstdelivery.com/"
+  },
+  "firstbase-io": {
+   "checked": "2026-09-25",
+   "name": "Firstbase.io",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://firstbase.io/"
+  },
+  "firstwork": {
+   "checked": "2026-09-25",
+   "name": "FirstWork",
+   "platform": "ashby",
+   "slug": "firstwork",
+   "source": "yc",
+   "status": "found",
+   "team_size": 9,
+   "website": "https://firstwork.com"
+  },
+  "flagright": {
+   "checked": "2026-09-25",
+   "name": "Flagright",
+   "source": "yc",
+   "status": "none",
+   "team_size": 31,
+   "website": "https://flagright.com"
+  },
+  "flai": {
+   "checked": "2026-09-25",
+   "name": "Flai",
+   "platform": "ashby",
+   "slug": "flai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.useflai.com/"
+  },
+  "flair-labs": {
+   "checked": "2026-09-25",
+   "name": "Flair Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.flairlabs.ai/"
+  },
+  "fleetline": {
+   "checked": "2026-09-25",
+   "name": "Fleetline",
+   "platform": "ashby",
+   "slug": "fleetline",
+   "source": "yc",
+   "status": "found",
+   "team_size": 11,
+   "website": "https://fleetline.ai"
+  },
+  "fleetworks": {
+   "checked": "2026-09-25",
+   "name": "FleetWorks",
+   "platform": "ashby",
+   "slug": "fleetworks",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://fleetworks.ai"
+  },
+  "flexdesk": {
+   "checked": "2026-09-25",
+   "name": "FlexDesk",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.flexdesk.com/"
+  },
+  "flexport": {
+   "checked": "2026-09-25",
+   "name": "Flexport",
+   "platform": "greenhouse",
+   "slug": "flexport",
+   "source": "yc",
+   "status": "found",
+   "team_size": 3000,
+   "website": "https://www.flexport.com/careers/jobs/"
+  },
+  "flint": {
+   "checked": "2026-09-25",
+   "name": "Flint",
+   "platform": "ashby",
+   "slug": "flint",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://withflint.com"
+  },
+  "flint-2": {
+   "checked": "2026-09-25",
+   "name": "Flint",
+   "platform": "ashby",
+   "slug": "flint",
+   "source": "yc",
+   "status": "found",
+   "team_size": 18,
+   "website": "http://flintk12.com/"
+  },
+  "flock-safety": {
+   "checked": "2026-09-25",
+   "name": "Flock Safety",
+   "source": "yc",
+   "status": "none",
+   "team_size": 1000,
+   "website": "http://www.flocksafety.com"
+  },
+  "flockjay": {
+   "checked": "2026-09-25",
+   "name": "Flockjay",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://flockjay.com"
+  },
+  "flowtel": {
+   "checked": "2026-09-25",
+   "name": "Flowtel",
+   "platform": "ashby",
+   "slug": "flowtel",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://flowtel.ai"
+  },
+  "flutterflow": {
+   "checked": "2026-09-25",
+   "name": "FlutterFlow",
+   "platform": "ashby",
+   "slug": "flutterflow",
+   "source": "yc",
+   "status": "found",
+   "team_size": 55,
+   "website": "https://flutterflow.io"
+  },
+  "fondo": {
+   "checked": "2026-09-25",
+   "name": "Fondo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 80,
+   "website": "https://fondo.com"
+  },
+  "forage-2": {
+   "checked": "2026-09-25",
+   "name": "Forage",
+   "source": "yc",
+   "status": "none",
+   "team_size": 66,
+   "website": "http://www.joinforage.com"
+  },
+  "forge": {
+   "checked": "2026-09-25",
+   "name": "Forge",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.forgehq.com/"
+  },
+  "forge-automation": {
+   "checked": "2026-09-25",
+   "name": "Forge Automation",
+   "source": "yc",
+   "status": "none",
+   "team_size": 21,
+   "website": "https://www.forgeautomation.ca"
+  },
+  "fortuna-health": {
+   "checked": "2026-09-25",
+   "name": "Fortuna Health",
+   "platform": "ashby",
+   "slug": "fortuna-health",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://fortunahealth.com/"
+  },
+  "foundation-industries": {
+   "checked": "2026-09-25",
+   "name": "Foundation Industries",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.foundation-industries.com/"
+  },
+  "fractional": {
+   "checked": "2026-09-25",
+   "name": "Fractional",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://fractional.app"
+  },
+  "freshpaint": {
+   "checked": "2026-09-25",
+   "name": "Freshpaint",
+   "platform": "ashby",
+   "slug": "freshpaint",
+   "source": "yc",
+   "status": "found",
+   "team_size": 120,
+   "website": "https://freshpaint.io"
+  },
+  "function-of-beauty": {
+   "checked": "2026-09-25",
+   "name": "Function of Beauty",
+   "source": "yc",
+   "status": "none",
+   "team_size": 300,
+   "website": "http://www.functionofbeauty.com"
+  },
+  "furtherai": {
+   "checked": "2026-09-25",
+   "name": "FurtherAI",
+   "platform": "ashby",
+   "slug": "furtherai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 36,
+   "website": "https://www.furtherai.com/"
+  },
+  "fuse-ai": {
+   "checked": "2026-09-25",
+   "name": "Fuse AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://fuseai.com/"
+  },
+  "galactic-resource-utilization-space-inc-gru-space": {
+   "checked": "2026-09-25",
+   "name": "Galactic Resource Utilization Space, Inc. (GRU Space)",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://gru.space"
+  },
+  "garage-2": {
+   "checked": "2026-09-25",
+   "name": "Garage",
+   "platform": "ashby",
+   "slug": "garage",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.shopgarage.com/"
+  },
+  "gather-2": {
+   "checked": "2026-09-25",
+   "name": "Gather",
+   "source": "yc",
+   "status": "none",
+   "team_size": 60,
+   "website": "https://www.gather.town/"
+  },
+  "gauge": {
+   "checked": "2026-09-25",
+   "name": "Gauge",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://withgauge.com"
+  },
+  "gecko-robotics": {
+   "checked": "2026-09-25",
+   "name": "Gecko Robotics",
+   "platform": "ashby",
+   "slug": "gecko-robotics",
+   "source": "yc",
+   "status": "found",
+   "team_size": 230,
+   "website": "https://www.geckorobotics.com"
+  },
+  "gem": {
+   "checked": "2026-09-25",
+   "name": "Gem",
+   "source": "yc",
+   "status": "none",
+   "team_size": 200,
+   "website": "https://www.gem.com/"
+  },
+  "gemnote": {
+   "checked": "2026-09-25",
+   "name": "Gemnote",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "http://gemnote.com"
+  },
+  "general-proximity": {
+   "checked": "2026-09-25",
+   "name": "General Proximity",
+   "platform": "greenhouse",
+   "slug": "generalproximity",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://www.generalproximity.bio/"
+  },
+  "getasap": {
+   "checked": "2026-09-25",
+   "name": "GETASAP",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://www.getasap.us"
+  },
+  "getcrux": {
+   "checked": "2026-09-25",
+   "name": "GetCrux",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "http://getcrux.ai/"
+  },
+  "ghosteye": {
+   "checked": "2026-09-25",
+   "name": "GhostEye",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://ghosteye.ai"
+  },
+  "giga": {
+   "checked": "2026-09-25",
+   "name": "Giga",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://giga.ai/"
+  },
+  "gigs": {
+   "checked": "2026-09-25",
+   "name": "Gigs",
+   "platform": "greenhouse",
+   "slug": "gigs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 150,
+   "website": "https://gigs.com"
+  },
+  "givecampus": {
+   "checked": "2026-09-25",
+   "name": "GiveCampus",
+   "platform": "greenhouse",
+   "slug": "givecampus",
+   "source": "yc",
+   "status": "found",
+   "team_size": 130,
+   "website": "http://go.givecampus.com"
+  },
+  "glimpse-2": {
+   "checked": "2026-09-25",
+   "name": "Glimpse",
+   "platform": "ashby",
+   "slug": "glimpse",
+   "source": "yc",
+   "status": "found",
+   "team_size": 52,
+   "website": "https://tryglimpse.com/"
+  },
+  "go1": {
+   "checked": "2026-09-25",
+   "name": "Go1",
+   "source": "yc",
+   "status": "none",
+   "team_size": 650,
+   "website": "https://go1.com"
+  },
+  "goat-group": {
+   "checked": "2026-09-25",
+   "name": "GOAT Group",
+   "platform": "greenhouse",
+   "slug": "goatgroup",
+   "source": "yc",
+   "status": "found",
+   "team_size": 1600,
+   "website": "https://www.goatgroup.com/"
+  },
+  "godela": {
+   "checked": "2026-09-25",
+   "name": "Godela",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "http://godela.ai"
+  },
+  "gogograndparent": {
+   "checked": "2026-09-25",
+   "name": "GoGoGrandparent",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://gogograndparent.com"
+  },
+  "goldbelly": {
+   "checked": "2026-09-25",
+   "name": "Goldbelly",
+   "source": "yc",
+   "status": "none",
+   "team_size": 125,
+   "website": "https://www.goldbelly.com/"
+  },
+  "golinks": {
+   "checked": "2026-09-25",
+   "name": "GoLinks",
+   "platform": "ashby",
+   "slug": "golinks",
+   "source": "yc",
+   "status": "found",
+   "team_size": 70,
+   "website": "https://www.golinks.io"
+  },
+  "goodfin": {
+   "checked": "2026-09-25",
+   "name": "goodfin",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "http://www.goodfin.com"
+  },
+  "gooseworks": {
+   "checked": "2026-09-25",
+   "name": "Gooseworks",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://gooseworks.ai/"
+  },
+  "govdash": {
+   "checked": "2026-09-25",
+   "name": "GovDash",
+   "platform": "ashby",
+   "slug": "govdash",
+   "source": "yc",
+   "status": "found",
+   "team_size": 56,
+   "website": "https://govdash.com/"
+  },
+  "goveagle": {
+   "checked": "2026-09-25",
+   "name": "GovEagle",
+   "platform": "ashby",
+   "slug": "goveagle",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://www.goveagle.com/"
+  },
+  "governgpt": {
+   "checked": "2026-09-25",
+   "name": "GovernGPT",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.governgpt.com/"
+  },
+  "great-question": {
+   "checked": "2026-09-25",
+   "name": "Great Question",
+   "platform": "ashby",
+   "slug": "greatquestion",
+   "source": "yc",
+   "status": "found",
+   "team_size": 41,
+   "website": "https://greatquestion.co"
+  },
+  "greenboard": {
+   "checked": "2026-09-25",
+   "name": "Greenboard",
+   "platform": "ashby",
+   "slug": "greenboard",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.greenboard.com"
+  },
+  "gridware": {
+   "checked": "2026-09-25",
+   "name": "Gridware",
+   "platform": "lever",
+   "slug": "gridware",
+   "source": "yc",
+   "status": "found",
+   "team_size": 125,
+   "website": "https://www.gridware.io"
+  },
+  "groundcontrol": {
+   "checked": "2026-09-25",
+   "name": "GroundControl",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://rungroundcontrol.com/"
+  },
+  "growthbook": {
+   "checked": "2026-09-25",
+   "name": "GrowthBook",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "https://www.growthbook.io"
+  },
+  "guac": {
+   "checked": "2026-09-25",
+   "name": "Guac",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.guac.com/"
+  },
+  "guardian-rf": {
+   "checked": "2026-09-25",
+   "name": "Guardian RF",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://guardianrf.com/"
+  },
+  "gusto": {
+   "checked": "2026-09-25",
+   "name": "Gusto",
+   "platform": "greenhouse",
+   "slug": "gusto",
+   "source": "yc",
+   "status": "found",
+   "team_size": 2400,
+   "website": "https://gusto.com"
+  },
+  "gym-class": {
+   "checked": "2026-09-25",
+   "name": "Gym Class",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://gymclass.com"
+  },
+  "hackerrank": {
+   "checked": "2026-09-25",
+   "name": "HackerRank",
+   "platform": "greenhouse",
+   "slug": "hackerrank",
+   "source": "yc",
+   "status": "found",
+   "team_size": 300,
+   "website": "http://hackerrank.com"
+  },
+  "hadrius": {
+   "checked": "2026-09-25",
+   "name": "Hadrius",
+   "source": "yc",
+   "status": "none",
+   "team_size": 80,
+   "website": "https://www.hadrius.com"
+  },
+  "halluminate": {
+   "checked": "2026-09-25",
+   "name": "Halluminate",
+   "platform": "ashby",
+   "slug": "halluminate",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://halluminate.ai/"
+  },
+  "hamming-ai": {
+   "checked": "2026-09-25",
+   "name": "Hamming AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://hamming.ai/"
+  },
+  "hammr": {
+   "checked": "2026-09-25",
+   "name": "Hammr",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.hammr.com"
+  },
+  "handle": {
+   "checked": "2026-09-25",
+   "name": "Handle",
+   "source": "yc",
+   "status": "none",
+   "team_size": 203,
+   "website": "https://www.handle.com"
+  },
+  "handoff": {
+   "checked": "2026-09-25",
+   "name": "Handoff",
+   "platform": "lever",
+   "slug": "handoff",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://www.handoff.ai/"
+  },
+  "hapi": {
+   "checked": "2026-09-25",
+   "name": "Hapi",
+   "source": "yc",
+   "status": "none",
+   "team_size": 45,
+   "website": "https://hapi.trade/"
+  },
+  "happyrobot": {
+   "checked": "2026-09-25",
+   "name": "HappyRobot",
+   "source": "yc",
+   "status": "none",
+   "team_size": 80,
+   "website": "https://happyrobot.ai"
+  },
+  "harper": {
+   "checked": "2026-09-25",
+   "name": "Harper",
+   "platform": "ashby",
+   "slug": "harperinsure",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://www.harperinsure.com/"
+  },
+  "haven": {
+   "checked": "2026-09-25",
+   "name": "Haven",
+   "platform": "greenhouse",
+   "slug": "haven",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "http://www.havenservicing.com"
+  },
+  "haystack": {
+   "checked": "2026-09-25",
+   "name": "Haystack",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://usehaystack.io/"
+  },
+  "healia": {
+   "checked": "2026-09-25",
+   "name": "Healia",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.healiahealth.com/"
+  },
+  "helium": {
+   "checked": "2026-09-25",
+   "name": "Helium",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://tryhelium.com"
+  },
+  "heron": {
+   "checked": "2026-09-25",
+   "name": "Heron",
+   "platform": "ashby",
+   "slug": "herondata",
+   "source": "yc",
+   "status": "found",
+   "team_size": 60,
+   "website": "https://www.herondata.io"
+  },
+  "hioperator": {
+   "checked": "2026-09-25",
+   "name": "HiOperator",
+   "source": "yc",
+   "status": "none",
+   "team_size": 200,
+   "website": "http://www.hioperator.com"
+  },
+  "hive": {
+   "checked": "2026-09-25",
+   "name": "Hive",
+   "platform": "greenhouse",
+   "slug": "hive",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "http://www.hive.co"
+  },
+  "hockeystack": {
+   "checked": "2026-09-25",
+   "name": "HockeyStack",
+   "platform": "ashby",
+   "slug": "hockeystack",
+   "source": "yc",
+   "status": "found",
+   "team_size": 32,
+   "website": "https://hockeystack.com"
+  },
+  "hokali": {
+   "checked": "2026-09-25",
+   "name": "HOKALI",
+   "platform": "workable",
+   "slug": "hokali",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://www.hokali.com/"
+  },
+  "homli": {
+   "checked": "2026-09-25",
+   "name": "HOMLI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://thehomli.com"
+  },
+  "hotglue": {
+   "checked": "2026-09-25",
+   "name": "hotglue",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://hotglue.com"
+  },
+  "hotplate": {
+   "checked": "2026-09-25",
+   "name": "Hotplate",
+   "platform": "ashby",
+   "slug": "hotplate",
+   "source": "yc",
+   "status": "found",
+   "team_size": 9,
+   "website": "http://www.hotplate.com/"
+  },
+  "hub": {
+   "checked": "2026-09-25",
+   "name": "Hub",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://hub.xyz"
+  },
+  "hud": {
+   "checked": "2026-09-25",
+   "name": "HUD",
+   "platform": "ashby",
+   "slug": "hud",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://www.hud.ai"
+  },
+  "human-archive": {
+   "checked": "2026-09-25",
+   "name": "Human Archive",
+   "platform": "ashby",
+   "slug": "humanarchive",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "https://www.humanarchive.ai/"
+  },
+  "human-interest": {
+   "checked": "2026-09-25",
+   "name": "Human Interest",
+   "platform": "greenhouse",
+   "slug": "humaninterest",
+   "source": "yc",
+   "status": "found",
+   "team_size": 765,
+   "website": "http://humaninterest.com"
+  },
+  "hyperbound": {
+   "checked": "2026-09-25",
+   "name": "Hyperbound",
+   "platform": "ashby",
+   "slug": "hyperbound",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://hyperbound.ai"
+  },
+  "hyperspell": {
+   "checked": "2026-09-25",
+   "name": "Hyperspell",
+   "platform": "ashby",
+   "slug": "hyperspell",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://hyperspell.com"
+  },
+  "hypotenuse-ai": {
+   "checked": "2026-09-25",
+   "name": "Hypotenuse AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://hypotenuse.ai/"
+  },
+  "icarus": {
+   "checked": "2026-09-25",
+   "name": "Icarus",
+   "platform": "greenhouse",
+   "slug": "icarus",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://www.icarus.one/"
+  },
+  "icepanel": {
+   "checked": "2026-09-25",
+   "name": "IcePanel",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://icepanel.io"
+  },
+  "idler": {
+   "checked": "2026-09-25",
+   "name": "idler",
+   "platform": "ashby",
+   "slug": "idler",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://idler.ai/"
+  },
+  "ignition-benefits": {
+   "checked": "2026-09-25",
+   "name": "Ignition Benefits",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.ignitionbenefits.com/"
+  },
+  "imagine-ai": {
+   "checked": "2026-09-25",
+   "name": "Imagine AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://imagineai.me"
+  },
+  "imperfect": {
+   "checked": "2026-09-25",
+   "name": "Imperfect",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://imperfect.co"
+  },
+  "inbuild": {
+   "checked": "2026-09-25",
+   "name": "inBuild",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.inbuild.ai/"
+  },
+  "inevent": {
+   "checked": "2026-09-25",
+   "name": "InEvent",
+   "source": "yc",
+   "status": "none",
+   "team_size": 150,
+   "website": "https://inevent.com"
+  },
+  "infisical": {
+   "checked": "2026-09-25",
+   "name": "Infisical",
+   "platform": "ashby",
+   "slug": "infisical",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://infisical.com"
+  },
+  "influxdata": {
+   "checked": "2026-09-25",
+   "name": "InfluxData",
+   "platform": "ashby",
+   "slug": "influxdata",
+   "source": "yc",
+   "status": "found",
+   "team_size": 210,
+   "website": "https://influxdata.com"
+  },
+  "inkeep": {
+   "checked": "2026-09-25",
+   "name": "Inkeep",
+   "platform": "ashby",
+   "slug": "inkeep",
+   "source": "yc",
+   "status": "found",
+   "team_size": 18,
+   "website": "https://inkeep.com"
+  },
+  "innate": {
+   "checked": "2026-09-25",
+   "name": "Innate",
+   "platform": "ashby",
+   "slug": "innate",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://innate.bot"
+  },
+  "inscribe": {
+   "checked": "2026-09-25",
+   "name": "Inscribe",
+   "platform": "ashby",
+   "slug": "inscribeai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.inscribe.ai/"
+  },
+  "inspectify": {
+   "checked": "2026-09-25",
+   "name": "Inspectify",
+   "source": "yc",
+   "status": "none",
+   "team_size": 75,
+   "website": "http://www.inspectify.com"
+  },
+  "instawork": {
+   "checked": "2026-09-25",
+   "name": "Instawork",
+   "platform": "greenhouse",
+   "slug": "instawork",
+   "source": "yc",
+   "status": "found",
+   "team_size": 500,
+   "website": "http://instawork.com"
+  },
+  "instrumentl": {
+   "checked": "2026-09-25",
+   "name": "Instrumentl",
+   "source": "yc",
+   "status": "none",
+   "team_size": 60,
+   "website": "https://www.instrumentl.com"
+  },
+  "intelligence-factory": {
+   "checked": "2026-09-25",
+   "name": "Intelligence Factory",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://intelligence-factory.com"
+  },
+  "interfaze": {
+   "checked": "2026-09-25",
+   "name": "Interfaze",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://interfaze.ai"
+  },
+  "interfere": {
+   "checked": "2026-09-25",
+   "name": "Interfere",
+   "platform": "ashby",
+   "slug": "interfere",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://interfere.com"
+  },
+  "intryc": {
+   "checked": "2026-09-25",
+   "name": "Intryc",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://intryc.com"
+  },
+  "invert": {
+   "checked": "2026-09-25",
+   "name": "Invert",
+   "platform": "ashby",
+   "slug": "invert",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "http://www.invertbio.com/"
+  },
+  "iomete": {
+   "checked": "2026-09-25",
+   "name": "IOMETE",
+   "source": "yc",
+   "status": "none",
+   "team_size": 21,
+   "website": "https://www.iomete.com/"
+  },
+  "ironclad": {
+   "checked": "2026-09-25",
+   "name": "Ironclad",
+   "source": "yc",
+   "status": "none",
+   "team_size": 700,
+   "website": "http://ironcladapp.com"
+  },
+  "isono-health": {
+   "checked": "2026-09-25",
+   "name": "iSono Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "http://www.isonohealth.com"
+  },
+  "item": {
+   "checked": "2026-09-25",
+   "name": "item",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://item.app"
+  },
+  "jarmin": {
+   "checked": "2026-09-25",
+   "name": "Jarmin",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://jarmin.ai/"
+  },
+  "jetlenses": {
+   "checked": "2026-09-25",
+   "name": "Verse Medical",
+   "platform": "ashby",
+   "slug": "versemedical",
+   "source": "yc",
+   "status": "found",
+   "team_size": 200,
+   "website": "http://versemedical.com/"
+  },
+  "jitx": {
+   "checked": "2026-09-25",
+   "name": "JITX",
+   "source": "yc",
+   "status": "none",
+   "team_size": 18,
+   "website": "http://www.jitx.com"
+  },
+  "joy": {
+   "checked": "2026-09-25",
+   "name": "Joy",
+   "source": "yc",
+   "status": "none",
+   "team_size": 100,
+   "website": "http://withjoy.com"
+  },
+  "juicebox": {
+   "checked": "2026-09-25",
+   "name": "Juicebox",
+   "platform": "ashby",
+   "slug": "juicebox",
+   "source": "yc",
+   "status": "found",
+   "team_size": 80,
+   "website": "https://juicebox.ai/"
+  },
+  "julius": {
+   "checked": "2026-09-25",
+   "name": "Julius",
+   "platform": "ashby",
+   "slug": "julius",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://julius.ai"
+  },
+  "just-appraised": {
+   "checked": "2026-09-25",
+   "name": "Just Appraised",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "https://www.justappraised.com"
+  },
+  "kaipod-learning": {
+   "checked": "2026-09-25",
+   "name": "KaiPod Learning",
+   "source": "yc",
+   "status": "none",
+   "team_size": 27,
+   "website": "http://www.kaipodlearning.com"
+  },
+  "kaizen": {
+   "checked": "2026-09-25",
+   "name": "Kaizen",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://kaizenautomation.com"
+  },
+  "kalshi": {
+   "checked": "2026-09-25",
+   "name": "Kalshi",
+   "platform": "greenhouse",
+   "slug": "kalshi",
+   "source": "yc",
+   "status": "found",
+   "team_size": 125,
+   "website": "https://www.kalshi.com"
+  },
+  "karat-financial": {
+   "checked": "2026-09-25",
+   "name": "Karat Financial",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "http://trykarat.com"
+  },
+  "kastle": {
+   "checked": "2026-09-25",
+   "name": "Kastle",
+   "platform": "ashby",
+   "slug": "kastle",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://kastle.ai/"
+  },
+  "kingdom": {
+   "checked": "2026-09-25",
+   "name": "Kingdom",
+   "platform": "ashby",
+   "slug": "kingdom",
+   "source": "yc",
+   "status": "found",
+   "team_size": 21,
+   "website": "https://kingdomsuperculture.com"
+  },
+  "kinro": {
+   "checked": "2026-09-25",
+   "name": "Kinro",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.kinro.com/"
+  },
+  "kinter": {
+   "checked": "2026-09-25",
+   "name": "Kinter",
+   "platform": "lever",
+   "slug": "kinter",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://kinter.ai"
+  },
+  "kivo-health": {
+   "checked": "2026-09-25",
+   "name": "Kivo Health",
+   "platform": "ashby",
+   "slug": "kivo-health",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://kivohealth.com"
+  },
+  "kobalt-labs": {
+   "checked": "2026-09-25",
+   "name": "Kobalt Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.kobaltlabs.com/"
+  },
+  "kodex": {
+   "checked": "2026-09-25",
+   "name": "Kodex",
+   "platform": "ashby",
+   "slug": "kodex",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://www.kodexglobal.com"
+  },
+  "kontigo": {
+   "checked": "2026-09-25",
+   "name": "Kontigo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://kontigo.lat/"
+  },
+  "korrai": {
+   "checked": "2026-09-25",
+   "name": "KorrAI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 24,
+   "website": "https://www.korrai.com"
+  },
+  "koyal": {
+   "checked": "2026-09-25",
+   "name": "Koyal",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://koyal.ai"
+  },
+  "kyber": {
+   "checked": "2026-09-25",
+   "name": "Kyber",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://askkyber.com"
+  },
+  "lab0": {
+   "checked": "2026-09-25",
+   "name": "Lab0",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://lab0.ai"
+  },
+  "lago": {
+   "checked": "2026-09-25",
+   "name": "Lago",
+   "platform": "ashby",
+   "slug": "lago",
+   "source": "yc",
+   "status": "found",
+   "team_size": 27,
+   "website": "https://www.getlago.com/"
+  },
+  "lamar-health": {
+   "checked": "2026-09-25",
+   "name": "Lamar Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "http://www.lamarhealth.com"
+  },
+  "lambda-robotics": {
+   "checked": "2026-09-25",
+   "name": "Lambda Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://lambdarobotics.ai"
+  },
+  "laminar-com": {
+   "checked": "2026-09-25",
+   "name": "Laminar",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://laminar.com"
+  },
+  "lance": {
+   "checked": "2026-09-25",
+   "name": "Lance",
+   "platform": "ashby",
+   "slug": "lance",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.lance.live"
+  },
+  "landed-2": {
+   "checked": "2026-09-25",
+   "name": "Landed",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.gotlanded.com"
+  },
+  "lanesurf": {
+   "checked": "2026-09-25",
+   "name": "Lanesurf",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://www.lanesurf.com/"
+  },
+  "latent": {
+   "checked": "2026-09-25",
+   "name": "Latent",
+   "platform": "ashby",
+   "slug": "latent",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://latenthealth.com"
+  },
+  "lattice": {
+   "checked": "2026-09-25",
+   "name": "Lattice",
+   "platform": "greenhouse",
+   "slug": "lattice",
+   "source": "yc",
+   "status": "found",
+   "team_size": 540,
+   "website": "https://lattice.com"
+  },
+  "layerup": {
+   "checked": "2026-09-25",
+   "name": "Layerup",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://www.uselayerup.com/"
+  },
+  "laylo": {
+   "checked": "2026-09-25",
+   "name": "Laylo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 24,
+   "website": "https://laylo.com"
+  },
+  "leadbay": {
+   "checked": "2026-09-25",
+   "name": "Leadbay",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://leadbay.ai/"
+  },
+  "leaping-ai": {
+   "checked": "2026-09-25",
+   "name": "Leaping AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://www.leapingai.com"
+  },
+  "ledger-investing": {
+   "checked": "2026-09-25",
+   "name": "Ledger Investing",
+   "source": "yc",
+   "status": "none",
+   "team_size": 85,
+   "website": "https://ledgerinvesting.com/"
+  },
+  "leena-ai": {
+   "checked": "2026-09-25",
+   "name": "Leena AI",
+   "platform": "workable",
+   "slug": "leena-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 500,
+   "website": "https://www.leena.ai"
+  },
+  "legalist": {
+   "checked": "2026-09-25",
+   "name": "Legalist",
+   "platform": "greenhouse",
+   "slug": "legalist",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.legalist.com"
+  },
+  "legion-health": {
+   "checked": "2026-09-25",
+   "name": "Legion Health",
+   "platform": "ashby",
+   "slug": "legionhealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 11,
+   "website": "https://legionhealth.com"
+  },
+  "lemonlime": {
+   "checked": "2026-09-25",
+   "name": "LemonLime",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.lemonlime.com/"
+  },
+  "letter-ai": {
+   "checked": "2026-09-25",
+   "name": "Letter AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 70,
+   "website": "https://www.letter.ai"
+  },
+  "letterdrop": {
+   "checked": "2026-09-25",
+   "name": "Letterdrop",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://letterdrop.com"
+  },
+  "lighthouz-ai": {
+   "checked": "2026-09-25",
+   "name": "Lighthouz AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://lighthouz.ai/"
+  },
+  "lineleap": {
+   "checked": "2026-09-25",
+   "name": "LineLeap",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.lineleap.com/"
+  },
+  "lingodotdev": {
+   "checked": "2026-09-25",
+   "name": "Lingo.dev",
+   "platform": "ashby",
+   "slug": "lingodotdev",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://lingo.dev"
+  },
+  "liquid-compute": {
+   "checked": "2026-09-25",
+   "name": "Liquid Compute",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.liquidcompute.com"
+  },
+  "litellm": {
+   "checked": "2026-09-25",
+   "name": "LiteLLM",
+   "platform": "ashby",
+   "slug": "litellm",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://www.litellm.ai/"
+  },
+  "liveflow": {
+   "checked": "2026-09-25",
+   "name": "LiveFlow",
+   "platform": "ashby",
+   "slug": "liveflow",
+   "source": "yc",
+   "status": "found",
+   "team_size": 51,
+   "website": "https://www.liveflow.com"
+  },
+  "living-carbon": {
+   "checked": "2026-09-25",
+   "name": "Living Carbon",
+   "platform": "lever",
+   "slug": "livingcarbon",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.livingcarbon.com"
+  },
+  "lob": {
+   "checked": "2026-09-25",
+   "name": "Lob",
+   "platform": "greenhouse",
+   "slug": "lob",
+   "source": "yc",
+   "status": "found",
+   "team_size": 150,
+   "website": "http://lob.com"
+  },
+  "loombotic": {
+   "checked": "2026-09-25",
+   "name": "Loombotic",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://www.loombotic.com"
+  },
+  "loopfour": {
+   "checked": "2026-09-25",
+   "name": "loopfour",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://www.loopfour.com"
+  },
+  "luca-iq": {
+   "checked": "2026-09-25",
+   "name": "Luca IQ",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://lucaiq.com/"
+  },
+  "lugg": {
+   "checked": "2026-09-25",
+   "name": "Lugg",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "http://lugg.com"
+  },
+  "lumari": {
+   "checked": "2026-09-25",
+   "name": "Lumari",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.lumari.ai/"
+  },
+  "luminai": {
+   "checked": "2026-09-25",
+   "name": "Luminai",
+   "platform": "ashby",
+   "slug": "luminai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://www.luminai.com"
+  },
+  "luminal": {
+   "checked": "2026-09-25",
+   "name": "Luminal",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://luminal.com"
+  },
+  "lunajoy-health": {
+   "checked": "2026-09-25",
+   "name": "LunaJoy Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "http://HelloLunaJoy.com"
+  },
+  "mach9": {
+   "checked": "2026-09-25",
+   "name": "Mach9",
+   "platform": "ashby",
+   "slug": "mach9",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://www.mach9.ai/"
+  },
+  "magic": {
+   "checked": "2026-09-25",
+   "name": "Magic",
+   "source": "yc",
+   "status": "none",
+   "team_size": 350,
+   "website": "https://getmagic.com/"
+  },
+  "magic-patterns": {
+   "checked": "2026-09-25",
+   "name": "Magic Patterns",
+   "platform": "ashby",
+   "slug": "magicpatterns",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.magicpatterns.com/"
+  },
+  "magnetic": {
+   "checked": "2026-09-25",
+   "name": "Magnetic",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.magnetictax.com"
+  },
+  "maintouch": {
+   "checked": "2026-09-25",
+   "name": "Maintouch",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://maintouch.com/?utm_source=bookface&utm_medium=social&utm_campaign=profile"
+  },
+  "manicule": {
+   "checked": "2026-09-25",
+   "name": "Manicule",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://manicule.com"
+  },
+  "margin": {
+   "checked": "2026-09-25",
+   "name": "Margin",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://usemargin.com/"
+  },
+  "maritime-fusion": {
+   "checked": "2026-09-25",
+   "name": "Maritime Fusion",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://maritimefusion.com"
+  },
+  "mashgin": {
+   "checked": "2026-09-25",
+   "name": "Mashgin",
+   "platform": "lever",
+   "slug": "mashgin",
+   "source": "yc",
+   "status": "found",
+   "team_size": 150,
+   "website": "http://mashgin.com"
+  },
+  "mason": {
+   "checked": "2026-09-25",
+   "name": "Mason",
+   "source": "yc",
+   "status": "none",
+   "team_size": 65,
+   "website": "http://www.bymason.com"
+  },
+  "matter": {
+   "checked": "2026-09-25",
+   "name": "Matter",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://getmatter.app"
+  },
+  "maven-bio": {
+   "checked": "2026-09-25",
+   "name": "Maven Bio",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://mavenbio.com"
+  },
+  "may-mobility": {
+   "checked": "2026-09-25",
+   "name": "May Mobility",
+   "platform": "greenhouse",
+   "slug": "maymobility",
+   "source": "yc",
+   "status": "found",
+   "team_size": 260,
+   "website": "http://maymobility.com"
+  },
+  "maywood": {
+   "checked": "2026-09-25",
+   "name": "Maywood",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://maywoodai.com/"
+  },
+  "mbodi-ai": {
+   "checked": "2026-09-25",
+   "name": "Mbodi AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.mbodi.ai/"
+  },
+  "mdhub": {
+   "checked": "2026-09-25",
+   "name": "mdhub",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://www.mdhub.ai/"
+  },
+  "measured": {
+   "checked": "2026-09-25",
+   "name": "Measured",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://trymeasured.com/"
+  },
+  "medme-health": {
+   "checked": "2026-09-25",
+   "name": "MedMe Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 60,
+   "website": "https://www.medmehealth.com"
+  },
+  "mednet": {
+   "checked": "2026-09-25",
+   "name": "Mednet",
+   "platform": "ashby",
+   "slug": "mednet",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.themednet.org"
+  },
+  "medplum": {
+   "checked": "2026-09-25",
+   "name": "Medplum",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://www.medplum.com"
+  },
+  "mem0": {
+   "checked": "2026-09-25",
+   "name": "Mem0",
+   "platform": "ashby",
+   "slug": "mem0",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://mem0.ai"
+  },
+  "mentra": {
+   "checked": "2026-09-25",
+   "name": "Mentra",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://mentra.glass"
+  },
+  "merlin-ai": {
+   "checked": "2026-09-25",
+   "name": "Merlin AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 19,
+   "website": "https://www.merlinai.co"
+  },
+  "meru-health": {
+   "checked": "2026-09-25",
+   "name": "Meru Health",
+   "platform": "greenhouse",
+   "slug": "meruhealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 55,
+   "website": "http://www.meruhealth.com"
+  },
+  "metal": {
+   "checked": "2026-09-25",
+   "name": "Metal",
+   "platform": "ashby",
+   "slug": "metal",
+   "source": "yc",
+   "status": "found",
+   "team_size": 17,
+   "website": "https://metal.ai/"
+  },
+  "method-financial": {
+   "checked": "2026-09-25",
+   "name": "Method Financial",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://methodfi.com"
+  },
+  "meticulate": {
+   "checked": "2026-09-25",
+   "name": "Meticulate",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://meticulate.ai/"
+  },
+  "metriport": {
+   "checked": "2026-09-25",
+   "name": "Metriport",
+   "platform": "ashby",
+   "slug": "metriport",
+   "source": "yc",
+   "status": "found",
+   "team_size": 29,
+   "website": "https://metriport.com/"
+  },
+  "middesk": {
+   "checked": "2026-09-25",
+   "name": "Middesk",
+   "platform": "ashby",
+   "slug": "middesk",
+   "source": "yc",
+   "status": "found",
+   "team_size": 130,
+   "website": "http://www.middesk.com"
+  },
+  "middleware": {
+   "checked": "2026-09-25",
+   "name": "Middleware",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "https://www.middleware.io"
+  },
+  "mindfort": {
+   "checked": "2026-09-25",
+   "name": "MindFort",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://mindfort.ai/?utm_source=ycombinator&utm_medium=referral&utm_campaign=yc"
+  },
+  "minicor": {
+   "checked": "2026-09-25",
+   "name": "Minicor",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://minicor.com"
+  },
+  "mino-games": {
+   "checked": "2026-09-25",
+   "name": "Mino Games",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "http://minomonsters.com"
+  },
+  "mintlify": {
+   "checked": "2026-09-25",
+   "name": "Mintlify",
+   "platform": "ashby",
+   "slug": "mintlify",
+   "source": "yc",
+   "status": "found",
+   "team_size": 75,
+   "website": "https://mintlify.com"
+  },
+  "mixrank": {
+   "checked": "2026-09-25",
+   "name": "MixRank",
+   "source": "yc",
+   "status": "none",
+   "team_size": 31,
+   "website": "https://mixrank.com"
+  },
+  "modern-health": {
+   "checked": "2026-09-25",
+   "name": "Modern Health",
+   "platform": "greenhouse",
+   "slug": "modernhealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 375,
+   "website": "https://www.modernhealth.com/"
+  },
+  "modern-treasury": {
+   "checked": "2026-09-25",
+   "name": "Modern Treasury",
+   "platform": "ashby",
+   "slug": "moderntreasury",
+   "source": "yc",
+   "status": "found",
+   "team_size": 160,
+   "website": "http://www.moderntreasury.com/"
+  },
+  "modernloop": {
+   "checked": "2026-09-25",
+   "name": "ModernLoop",
+   "platform": "smartrecruiters",
+   "slug": "modernloop",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "http://modernloop.io"
+  },
+  "momentic": {
+   "checked": "2026-09-25",
+   "name": "Momentic",
+   "platform": "greenhouse",
+   "slug": "momentic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://momentic.ai"
+  },
+  "monumint": {
+   "checked": "2026-09-25",
+   "name": "Monumint",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://monumint.com"
+  },
+  "moonset-health": {
+   "checked": "2026-09-25",
+   "name": "Moonset Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.moonsethealth.com/"
+  },
+  "moonvalley": {
+   "checked": "2026-09-25",
+   "name": "Moonvalley",
+   "source": "yc",
+   "status": "none",
+   "team_size": 95,
+   "website": "https://www.moonvalley.com"
+  },
+  "morphoai": {
+   "checked": "2026-09-25",
+   "name": "MorphoAI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://morpho.ai/"
+  },
+  "mosaic-2": {
+   "checked": "2026-09-25",
+   "name": "Mosaic",
+   "platform": "ashby",
+   "slug": "mosaic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://mosaic.so"
+  },
+  "moss": {
+   "checked": "2026-09-25",
+   "name": "Moss",
+   "platform": "ashby",
+   "slug": "moss",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://moss.dev"
+  },
+  "motion": {
+   "checked": "2026-09-25",
+   "name": "Motion",
+   "source": "yc",
+   "status": "none",
+   "team_size": 65,
+   "website": "https://www.usemotion.com/"
+  },
+  "multiply-labs": {
+   "checked": "2026-09-25",
+   "name": "Multiply Labs",
+   "platform": "lever",
+   "slug": "multiplylabs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 36,
+   "website": "http://multiplylabs.com/"
+  },
+  "mutiny": {
+   "checked": "2026-09-25",
+   "name": "Mutiny",
+   "platform": "ashby",
+   "slug": "mutiny",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://www.mutinyhq.com"
+  },
+  "nabis": {
+   "checked": "2026-09-25",
+   "name": "Nabis",
+   "platform": "greenhouse",
+   "slug": "nabis",
+   "source": "yc",
+   "status": "found",
+   "team_size": 700,
+   "website": "https://www.nabis.com/"
+  },
+  "naive": {
+   "checked": "2026-09-25",
+   "name": "Naïve",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://usenaive.ai"
+  },
+  "nango": {
+   "checked": "2026-09-25",
+   "name": "Nango",
+   "platform": "ashby",
+   "slug": "nango",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://nango.dev"
+  },
+  "nanonets": {
+   "checked": "2026-09-25",
+   "name": "NanoNets",
+   "platform": "ashby",
+   "slug": "nanonets",
+   "source": "yc",
+   "status": "found",
+   "team_size": 102,
+   "website": "https://nanonets.com"
+  },
+  "narrative": {
+   "checked": "2026-09-25",
+   "name": "Narrative",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.trynarrative.com/"
+  },
+  "nash": {
+   "checked": "2026-09-25",
+   "name": "Nash",
+   "platform": "ashby",
+   "slug": "nash",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.usenash.com/"
+  },
+  "navier-ai": {
+   "checked": "2026-09-25",
+   "name": "Navier AI",
+   "platform": "greenhouse",
+   "slug": "navierai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "http://navier.ai"
+  },
+  "nectar": {
+   "checked": "2026-09-25",
+   "name": "Nectar",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://nectarclimate.com"
+  },
+  "nest-genomics": {
+   "checked": "2026-09-25",
+   "name": "Nest Genomics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://nestgenomics.com"
+  },
+  "nestor": {
+   "checked": "2026-09-25",
+   "name": "Nestor",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://nestorup.com"
+  },
+  "new-story": {
+   "checked": "2026-09-25",
+   "name": "New Story",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "http://newstoryhomes.org"
+  },
+  "nextera-robotics-didgeai": {
+   "checked": "2026-09-25",
+   "name": "Nextera Robotics | DIDGE.ai",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://nexterarobotics.com"
+  },
+  "nimble": {
+   "checked": "2026-09-25",
+   "name": "Nimble",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "http://www.hirenimble.com"
+  },
+  "nitrode": {
+   "checked": "2026-09-25",
+   "name": "Nitrode",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.nitrode.com"
+  },
+  "nixo": {
+   "checked": "2026-09-25",
+   "name": "Nixo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://withnixo.com/"
+  },
+  "no-logo": {
+   "checked": "2026-09-25",
+   "name": "No Logo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://nologo.com/"
+  },
+  "nomic-bio": {
+   "checked": "2026-09-25",
+   "name": "Nomic Bio",
+   "source": "yc",
+   "status": "none",
+   "team_size": 100,
+   "website": "http://www.nomic.bio"
+  },
+  "noora-health": {
+   "checked": "2026-09-25",
+   "name": "Noora Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 500,
+   "website": "http://noorahealth.org"
+  },
+  "noso-labs": {
+   "checked": "2026-09-25",
+   "name": "NOSO LABS",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://noso.so"
+  },
+  "notabene": {
+   "checked": "2026-09-25",
+   "name": "Notabene",
+   "platform": "ashby",
+   "slug": "notabene",
+   "source": "yc",
+   "status": "found",
+   "team_size": 47,
+   "website": "https://notabene.id"
+  },
+  "nourish": {
+   "checked": "2026-09-25",
+   "name": "Nourish",
+   "source": "yc",
+   "status": "none",
+   "team_size": 250,
+   "website": "https://nourish.com"
+  },
+  "nova-credit": {
+   "checked": "2026-09-25",
+   "name": "Nova Credit",
+   "platform": "greenhouse",
+   "slug": "novacredit",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "http://www.novacredit.com/"
+  },
+  "novig": {
+   "checked": "2026-09-25",
+   "name": "Novig",
+   "platform": "ashby",
+   "slug": "novig",
+   "source": "yc",
+   "status": "found",
+   "team_size": 55,
+   "website": "https://www.novig.com"
+  },
+  "novoflow": {
+   "checked": "2026-09-25",
+   "name": "Novoflow",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.novoflow.io/"
+  },
+  "nowadays": {
+   "checked": "2026-09-25",
+   "name": "Nowadays",
+   "platform": "ashby",
+   "slug": "nowadays",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "http://nowadays.ai/"
+  },
+  "nox-metals": {
+   "checked": "2026-09-25",
+   "name": "Nox Metals",
+   "platform": "ashby",
+   "slug": "nox-metals",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://noxmetals.co/"
+  },
+  "numen": {
+   "checked": "2026-09-25",
+   "name": "Numen",
+   "source": "yc",
+   "status": "none",
+   "team_size": 18,
+   "website": "https://www.numen.com"
+  },
+  "numeral": {
+   "checked": "2026-09-25",
+   "name": "Numeral",
+   "platform": "ashby",
+   "slug": "numeral",
+   "source": "yc",
+   "status": "found",
+   "team_size": 110,
+   "website": "https://www.numeral.com/"
+  },
+  "numero": {
+   "checked": "2026-09-25",
+   "name": "Numero",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.numero.ai"
+  },
+  "ocular-ai": {
+   "checked": "2026-09-25",
+   "name": "Ocular AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://useocular.com"
+  },
+  "odeko": {
+   "checked": "2026-09-25",
+   "name": "Odeko",
+   "platform": "greenhouse",
+   "slug": "odeko",
+   "source": "yc",
+   "status": "found",
+   "team_size": 371,
+   "website": "http://www.odeko.com"
+  },
+  "odys-aviation": {
+   "checked": "2026-09-25",
+   "name": "Odys Aviation",
+   "platform": "ashby",
+   "slug": "odys-aviation",
+   "source": "yc",
+   "status": "found",
+   "team_size": 11,
+   "website": "https://www.odysaviation.com/"
+  },
+  "offdeal": {
+   "checked": "2026-09-25",
+   "name": "OffDeal",
+   "platform": "ashby",
+   "slug": "offdeal",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://offdeal.io"
+  },
+  "offstream": {
+   "checked": "2026-09-25",
+   "name": "Offstream",
+   "platform": "ashby",
+   "slug": "offstream",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.useoffstream.com/"
+  },
+  "ohm-2": {
+   "checked": "2026-09-25",
+   "name": "Ohm",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.ohm.ai"
+  },
+  "okteto": {
+   "checked": "2026-09-25",
+   "name": "Okteto",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://okteto.com"
+  },
+  "olympian-motors": {
+   "checked": "2026-09-25",
+   "name": "Olympian Motors",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://olympianmotors.com/"
+  },
+  "omnistrate": {
+   "checked": "2026-09-25",
+   "name": "Omnistrate",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "http://www.omnistrate.com"
+  },
+  "ondeck-ai": {
+   "checked": "2026-09-25",
+   "name": "OnDeck AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.ondeckai.com"
+  },
+  "onechronos": {
+   "checked": "2026-09-25",
+   "name": "OneChronos",
+   "platform": "ashby",
+   "slug": "onechronos",
+   "source": "yc",
+   "status": "found",
+   "team_size": 75,
+   "website": "https://www.onechronos.com/"
+  },
+  "onelocal": {
+   "checked": "2026-09-25",
+   "name": "OneLocal",
+   "source": "yc",
+   "status": "none",
+   "team_size": 90,
+   "website": "https://onelocal.com/"
+  },
+  "oneschema": {
+   "checked": "2026-09-25",
+   "name": "OneSchema",
+   "platform": "ashby",
+   "slug": "oneschema",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://www.oneschema.co"
+  },
+  "onesignal": {
+   "checked": "2026-09-25",
+   "name": "OneSignal",
+   "source": "yc",
+   "status": "none",
+   "team_size": 150,
+   "website": "https://onesignal.com"
+  },
+  "ooak-data": {
+   "checked": "2026-09-25",
+   "name": "Ooak Data",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://ooakdata.com/"
+  },
+  "openmart": {
+   "checked": "2026-09-25",
+   "name": "Openmart",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.openmart.com"
+  },
+  "openunit": {
+   "checked": "2026-09-25",
+   "name": "OpenUnit",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.openunit.com/"
+  },
+  "ophelia": {
+   "checked": "2026-09-25",
+   "name": "Ophelia",
+   "platform": "greenhouse",
+   "slug": "ophelia",
+   "source": "yc",
+   "status": "found",
+   "team_size": 250,
+   "website": "https://ophelia.com"
+  },
+  "orangewood-labs": {
+   "checked": "2026-09-25",
+   "name": "Orangewood Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "http://www.orangewood.co"
+  },
+  "orbital-operations": {
+   "checked": "2026-09-25",
+   "name": "Orbital Operations",
+   "platform": "greenhouse",
+   "slug": "orbitaloperations",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.orbitalops.tech/"
+  },
+  "osmosis": {
+   "checked": "2026-09-25",
+   "name": "Osmosis",
+   "platform": "greenhouse",
+   "slug": "osmosis",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://osmosis.ai/"
+  },
+  "output": {
+   "checked": "2026-09-25",
+   "name": "Output Biosciences",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.outputbio.com/"
+  },
+  "outset": {
+   "checked": "2026-09-25",
+   "name": "Outset",
+   "platform": "ashby",
+   "slug": "outset",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://outset.ai/"
+  },
+  "overlap": {
+   "checked": "2026-09-25",
+   "name": "Overlap",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.overlap.ai"
+  },
+  "overview": {
+   "checked": "2026-09-25",
+   "name": "Overview",
+   "platform": "ashby",
+   "slug": "overview",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://overview.ai"
+  },
+  "oxygen": {
+   "checked": "2026-09-25",
+   "name": "Oxygen",
+   "source": "yc",
+   "status": "none",
+   "team_size": 68,
+   "website": "http://getoxygen.com"
+  },
+  "paces": {
+   "checked": "2026-09-25",
+   "name": "Paces",
+   "source": "yc",
+   "status": "none",
+   "team_size": 48,
+   "website": "https://paces.com"
+  },
+  "padlet": {
+   "checked": "2026-09-25",
+   "name": "Padlet",
+   "platform": "ashby",
+   "slug": "padlet",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "https://padlet.com"
+  },
+  "pair-team": {
+   "checked": "2026-09-25",
+   "name": "Pair Team",
+   "platform": "greenhouse",
+   "slug": "pairteam",
+   "source": "yc",
+   "status": "found",
+   "team_size": 500,
+   "website": "https://pairteam.com/"
+  },
+  "paradedb": {
+   "checked": "2026-09-25",
+   "name": "ParadeDB",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://paradedb.com"
+  },
+  "paradigm": {
+   "checked": "2026-09-25",
+   "name": "Paradigm",
+   "platform": "greenhouse",
+   "slug": "paradigm",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://www.paradigmai.com/"
+  },
+  "paragon": {
+   "checked": "2026-09-25",
+   "name": "Paragon",
+   "platform": "ashby",
+   "slug": "paragon",
+   "source": "yc",
+   "status": "found",
+   "team_size": 48,
+   "website": "http://useparagon.com"
+  },
+  "parallel-bio": {
+   "checked": "2026-09-25",
+   "name": "Parallel Bio",
+   "platform": "ashby",
+   "slug": "parallel-bio",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "http://parallel.bio"
+  },
+  "parameter": {
+   "checked": "2026-09-25",
+   "name": "Parameter",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://parameter.ai?utm_source=ycombinator&utm_medium=referral&utm_campaign=parameter-profile"
+  },
+  "parametric": {
+   "checked": "2026-09-25",
+   "name": "Parametric",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://parametric.company/"
+  },
+  "pasito": {
+   "checked": "2026-09-25",
+   "name": "Pasito",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://pasito.ai"
+  },
+  "pave-2": {
+   "checked": "2026-09-25",
+   "name": "Pave",
+   "source": "yc",
+   "status": "none",
+   "team_size": 170,
+   "website": "https://pave.com"
+  },
+  "pax": {
+   "checked": "2026-09-25",
+   "name": "Pax",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://paxai.com/"
+  },
+  "pax-historia": {
+   "checked": "2026-09-25",
+   "name": "Pax Historia",
+   "platform": "ashby",
+   "slug": "pax-historia",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://www.paxhistoria.co"
+  },
+  "pax-markets": {
+   "checked": "2026-09-25",
+   "name": "PAX Markets",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://pax.markets/"
+  },
+  "pelago": {
+   "checked": "2026-09-25",
+   "name": "Pelago",
+   "platform": "greenhouse",
+   "slug": "pelago",
+   "source": "yc",
+   "status": "found",
+   "team_size": 180,
+   "website": "https://www.pelagohealth.com"
+  },
+  "people-ai": {
+   "checked": "2026-09-25",
+   "name": "People.ai",
+   "platform": "lever",
+   "slug": "people-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 300,
+   "website": "https://people.ai"
+  },
+  "per-diem": {
+   "checked": "2026-09-25",
+   "name": "Per Diem",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://tryperdiem.com"
+  },
+  "permitflow": {
+   "checked": "2026-09-25",
+   "name": "PermitFlow",
+   "platform": "ashby",
+   "slug": "permitflow",
+   "source": "yc",
+   "status": "found",
+   "team_size": 80,
+   "website": "http://www.permitflow.com"
+  },
+  "pesto": {
+   "checked": "2026-09-25",
+   "name": "Pesto",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.getpesto.com/"
+  },
+  "phoenix": {
+   "checked": "2026-09-25",
+   "name": "Phoenix",
+   "platform": "ashby",
+   "slug": "phoenix",
+   "source": "yc",
+   "status": "found",
+   "team_size": 70,
+   "website": "https://phoenix.ca"
+  },
+  "photonium": {
+   "checked": "2026-09-25",
+   "name": "Photonium",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.photoniumoptics.com/"
+  },
+  "picnicai": {
+   "checked": "2026-09-25",
+   "name": "PicnicAI",
+   "platform": "smartrecruiters",
+   "slug": "picnic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "https://picnic.ai"
+  },
+  "piinpoint": {
+   "checked": "2026-09-25",
+   "name": "PiinPoint",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://piinpoint.com"
+  },
+  "pillar-2": {
+   "checked": "2026-09-25",
+   "name": "Pillar",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.pillar.io"
+  },
+  "pine-park-health": {
+   "checked": "2026-09-25",
+   "name": "Pine Park Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 75,
+   "website": "http://pineparkhealth.com"
+  },
+  "piramidal": {
+   "checked": "2026-09-25",
+   "name": "Piramidal",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://piramidal.ai"
+  },
+  "pirislabs": {
+   "checked": "2026-09-25",
+   "name": "Piris Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://pirislabs.io/"
+  },
+  "pirouette-pharma": {
+   "checked": "2026-09-25",
+   "name": "Pirouette Pharma",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://www.pirouettepharma.com/"
+  },
+  "pirros": {
+   "checked": "2026-09-25",
+   "name": "Pirros",
+   "platform": "ashby",
+   "slug": "pirros",
+   "source": "yc",
+   "status": "found",
+   "team_size": 44,
+   "website": "http://pirros.com"
+  },
+  "pivot-robotics": {
+   "checked": "2026-09-25",
+   "name": "Pivot Robotics",
+   "platform": "ashby",
+   "slug": "pivotrobotics",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://pivotrobotics.com"
+  },
+  "players-lounge": {
+   "checked": "2026-09-25",
+   "name": "Players' Lounge",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://playerslounge.co/"
+  },
+  "ploy": {
+   "checked": "2026-09-25",
+   "name": "Ploy",
+   "platform": "ashby",
+   "slug": "ployai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 14,
+   "website": "https://ploy.ai"
+  },
+  "pnoe": {
+   "checked": "2026-09-25",
+   "name": "PNOĒ",
+   "source": "yc",
+   "status": "none",
+   "team_size": 70,
+   "website": ""
+  },
+  "pocket": {
+   "checked": "2026-09-25",
+   "name": "Pocket",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://heypocket.com/now"
+  },
+  "pocketsuite": {
+   "checked": "2026-09-25",
+   "name": "PocketSuite",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://pocketsuite.io"
+  },
+  "podium": {
+   "checked": "2026-09-25",
+   "name": "Podium",
+   "source": "yc",
+   "status": "none",
+   "team_size": 1000,
+   "website": "https://podium.com"
+  },
+  "pointone": {
+   "checked": "2026-09-25",
+   "name": "PointOne",
+   "platform": "ashby",
+   "slug": "pointone",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://pointone.com/"
+  },
+  "poka-labs": {
+   "checked": "2026-09-25",
+   "name": "Poka Labs",
+   "platform": "greenhouse",
+   "slug": "poka",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://www.pokalabs.com/"
+  },
+  "polymath": {
+   "checked": "2026-09-25",
+   "name": "Polymath",
+   "platform": "ashby",
+   "slug": "polymath",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://polymathlabs.ai/"
+  },
+  "polymath-robotics": {
+   "checked": "2026-09-25",
+   "name": "Polymath Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "http://www.polymathrobotics.com"
+  },
+  "popl": {
+   "checked": "2026-09-25",
+   "name": "Popl",
+   "platform": "ashby",
+   "slug": "popl",
+   "source": "yc",
+   "status": "found",
+   "team_size": 60,
+   "website": "https://popl.co/"
+  },
+  "porter": {
+   "checked": "2026-09-25",
+   "name": "Porter",
+   "platform": "greenhouse",
+   "slug": "porter",
+   "source": "yc",
+   "status": "found",
+   "team_size": 18,
+   "website": "https://porter.run"
+  },
+  "posh": {
+   "checked": "2026-09-25",
+   "name": "Posh",
+   "platform": "ashby",
+   "slug": "posh",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.poshenergy.com"
+  },
+  "posthog": {
+   "checked": "2026-09-25",
+   "name": "PostHog",
+   "platform": "ashby",
+   "slug": "posthog",
+   "source": "yc",
+   "status": "found",
+   "team_size": 150,
+   "website": "https://www.posthog.com"
+  },
+  "powder": {
+   "checked": "2026-09-25",
+   "name": "Powder",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.powderfi.com/"
+  },
+  "prelim": {
+   "checked": "2026-09-25",
+   "name": "Prelim",
+   "platform": "ashby",
+   "slug": "prelim",
+   "source": "yc",
+   "status": "found",
+   "team_size": 49,
+   "website": "https://prelim.com/"
+  },
+  "prequel": {
+   "checked": "2026-09-25",
+   "name": "Prequel",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://prequel.co"
+  },
+  "prescience-inc": {
+   "checked": "2026-09-25",
+   "name": "Prescience, Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.getprescience.com/"
+  },
+  "probably-genetic": {
+   "checked": "2026-09-25",
+   "name": "Probably Genetic",
+   "platform": "ashby",
+   "slug": "probablygenetic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 17,
+   "website": "https://www.probablygenetic.com/"
+  },
+  "proception-inc": {
+   "checked": "2026-09-25",
+   "name": "Proception Inc",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://proception.ai/"
+  },
+  "prodigal": {
+   "checked": "2026-09-25",
+   "name": "Prodigal",
+   "platform": "greenhouse",
+   "slug": "prodigal",
+   "source": "yc",
+   "status": "found",
+   "team_size": 99,
+   "website": "https://prodigaltech.com/"
+  },
+  "prohostai": {
+   "checked": "2026-09-25",
+   "name": "ProhostAI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.prohost.ai/"
+  },
+  "promise": {
+   "checked": "2026-09-25",
+   "name": "Promise",
+   "platform": "ashby",
+   "slug": "promise",
+   "source": "yc",
+   "status": "found",
+   "team_size": 80,
+   "website": "http://promise-pay.com"
+  },
+  "promptless": {
+   "checked": "2026-09-25",
+   "name": "Promptless",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://promptless.ai/"
+  },
+  "proof-of-human": {
+   "checked": "2026-09-25",
+   "name": "Proof of Human",
+   "platform": "ashby",
+   "slug": "proofofhuman",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://poh.org"
+  },
+  "propelauth": {
+   "checked": "2026-09-25",
+   "name": "PropelAuth",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.propelauth.com"
+  },
+  "prosights": {
+   "checked": "2026-09-25",
+   "name": "ProSights",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://prosights.co/"
+  },
+  "prosper": {
+   "checked": "2026-09-25",
+   "name": "Prosper",
+   "platform": "lever",
+   "slug": "prosper",
+   "source": "yc",
+   "status": "found",
+   "team_size": 60,
+   "website": "https://www.getprosper.ai?utm_source=yc&utm_medium=directory&utm_campaign=yc_directory"
+  },
+  "proven-group": {
+   "checked": "2026-09-25",
+   "name": "Proven Group",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "https://www.provenskincare.com"
+  },
+  "provision": {
+   "checked": "2026-09-25",
+   "name": "Provision",
+   "platform": "ashby",
+   "slug": "provision",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://provision.com"
+  },
+  "prox": {
+   "checked": "2026-09-25",
+   "name": "Prox",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://useprox.com"
+  },
+  "pulley": {
+   "checked": "2026-09-25",
+   "name": "Pulley",
+   "source": "yc",
+   "status": "none",
+   "team_size": 68,
+   "website": "https://pulley.com"
+  },
+  "pulse-3": {
+   "checked": "2026-09-25",
+   "name": "Pulse",
+   "platform": "greenhouse",
+   "slug": "pulse",
+   "source": "yc",
+   "status": "found",
+   "team_size": 22,
+   "website": "https://www.runpulse.com/"
+  },
+  "pump-co": {
+   "checked": "2026-09-25",
+   "name": "Pump.co",
+   "source": "yc",
+   "status": "none",
+   "team_size": 75,
+   "website": "https://www.pump.co/"
+  },
+  "pure": {
+   "checked": "2026-09-25",
+   "name": "Pure",
+   "platform": "ashby",
+   "slug": "pure",
+   "source": "yc",
+   "status": "found",
+   "team_size": 13,
+   "website": "https://www.collectpure.com/"
+  },
+  "pylon-2": {
+   "checked": "2026-09-25",
+   "name": "Pylon",
+   "platform": "ashby",
+   "slug": "pylon",
+   "source": "yc",
+   "status": "found",
+   "team_size": 120,
+   "website": "https://usepylon.com/?utm_source=bookface&utm_medium=referral&utm_campaign=pylon-profile"
+  },
+  "quadrant-health": {
+   "checked": "2026-09-25",
+   "name": "Quadrant Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://quadrant.health"
+  },
+  "qualgent": {
+   "checked": "2026-09-25",
+   "name": "QualGent",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.qualgent.ai"
+  },
+  "quartzy": {
+   "checked": "2026-09-25",
+   "name": "Quartzy",
+   "source": "yc",
+   "status": "none",
+   "team_size": 100,
+   "website": "https://www.quartzy.com"
+  },
+  "quicknode": {
+   "checked": "2026-09-25",
+   "name": "Quicknode",
+   "platform": "ashby",
+   "slug": "quicknode",
+   "source": "yc",
+   "status": "found",
+   "team_size": 115,
+   "website": "https://www.quicknode.com"
+  },
+  "quill": {
+   "checked": "2026-09-25",
+   "name": "Quill",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://quill.co"
+  },
+  "quindar": {
+   "checked": "2026-09-25",
+   "name": "Quindar",
+   "platform": "ashby",
+   "slug": "quindar",
+   "source": "yc",
+   "status": "found",
+   "team_size": 57,
+   "website": "https://www.quindar.space"
+  },
+  "qventus": {
+   "checked": "2026-09-25",
+   "name": "Qventus",
+   "platform": "greenhouse",
+   "slug": "qventus",
+   "source": "yc",
+   "status": "found",
+   "team_size": 230,
+   "website": "http://qventus.com"
+  },
+  "radar": {
+   "checked": "2026-09-25",
+   "name": "RADAR",
+   "platform": "greenhouse",
+   "slug": "radar",
+   "source": "yc",
+   "status": "found",
+   "team_size": 120,
+   "website": "https://goradar.com"
+  },
+  "raindrop": {
+   "checked": "2026-09-25",
+   "name": "Raindrop",
+   "platform": "ashby",
+   "slug": "raindrop",
+   "source": "yc",
+   "status": "found",
+   "team_size": 9,
+   "website": "https://www.raindrop.ai"
+  },
+  "rallyuxr": {
+   "checked": "2026-09-25",
+   "name": "Rally",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "https://www.rallyuxr.com/"
+  },
+  "raycaster": {
+   "checked": "2026-09-25",
+   "name": "Raycaster",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://eval.raycaster.ai"
+  },
+  "reach": {
+   "checked": "2026-09-25",
+   "name": "Reach",
+   "platform": "ashby",
+   "slug": "reach",
+   "source": "yc",
+   "status": "found",
+   "team_size": 45,
+   "website": "https://reachpower.com"
+  },
+  "reacher": {
+   "checked": "2026-09-25",
+   "name": "Reacher",
+   "platform": "ashby",
+   "slug": "reacher",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://reacherapp.com/"
+  },
+  "readily": {
+   "checked": "2026-09-25",
+   "name": "Readily",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://readily.ai"
+  },
+  "ready": {
+   "checked": "2026-09-25",
+   "name": "Ready",
+   "platform": "ashby",
+   "slug": "ready",
+   "source": "yc",
+   "status": "found",
+   "team_size": 60,
+   "website": "https://ready.net"
+  },
+  "reality-defender": {
+   "checked": "2026-09-25",
+   "name": "Reality Defender",
+   "platform": "ashby",
+   "slug": "realitydefender",
+   "source": "yc",
+   "status": "found",
+   "team_size": 54,
+   "website": "http://www.realitydefender.com"
+  },
+  "recall-ai": {
+   "checked": "2026-09-25",
+   "name": "Recall.ai",
+   "platform": "greenhouse",
+   "slug": "recall",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://www.recall.ai"
+  },
+  "recidiviz": {
+   "checked": "2026-09-25",
+   "name": "Recidiviz",
+   "platform": "greenhouse",
+   "slug": "recidiviz",
+   "source": "yc",
+   "status": "found",
+   "team_size": 120,
+   "website": "https://www.recidiviz.org/"
+  },
+  "recurrency": {
+   "checked": "2026-09-25",
+   "name": "Recurrency",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "http://www.recurrency.com"
+  },
+  "reditus-space": {
+   "checked": "2026-09-25",
+   "name": "Reditus Space",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.reditus.space/"
+  },
+  "reducto": {
+   "checked": "2026-09-25",
+   "name": "Reducto",
+   "platform": "ashby",
+   "slug": "reducto",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://reducto.ai"
+  },
+  "reflex": {
+   "checked": "2026-09-25",
+   "name": "Reflex",
+   "platform": "greenhouse",
+   "slug": "reflex",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://reflex.dev"
+  },
+  "reform": {
+   "checked": "2026-09-25",
+   "name": "Reform",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://www.reformhq.com"
+  },
+  "reframe": {
+   "checked": "2026-09-25",
+   "name": "Reframe",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "https://www.joinreframeapp.com/"
+  },
+  "relace": {
+   "checked": "2026-09-25",
+   "name": "Relace",
+   "platform": "ashby",
+   "slug": "relace",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://relace.ai"
+  },
+  "relativity-space": {
+   "checked": "2026-09-25",
+   "name": "Relativity Space",
+   "source": "yc",
+   "status": "none",
+   "team_size": 2500,
+   "website": "http://relativityspace.com"
+  },
+  "remi": {
+   "checked": "2026-09-25",
+   "name": "Remi",
+   "platform": "greenhouse",
+   "slug": "remi",
+   "source": "yc",
+   "status": "found",
+   "team_size": 170,
+   "website": "https://www.remihq.com"
+  },
+  "renthop": {
+   "checked": "2026-09-25",
+   "name": "RentHop",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "http://renthop.com"
+  },
+  "replit": {
+   "checked": "2026-09-25",
+   "name": "Replit",
+   "platform": "ashby",
+   "slug": "replit",
+   "source": "yc",
+   "status": "found",
+   "team_size": 65,
+   "website": "https://replit.com"
+  },
+  "replo": {
+   "checked": "2026-09-25",
+   "name": "Replo",
+   "platform": "ashby",
+   "slug": "replo",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://replo.app/"
+  },
+  "rescale": {
+   "checked": "2026-09-25",
+   "name": "Rescale",
+   "platform": "ashby",
+   "slug": "rescale",
+   "source": "yc",
+   "status": "found",
+   "team_size": 250,
+   "website": "https://rescale.com"
+  },
+  "resident-boost": {
+   "checked": "2026-09-25",
+   "name": "Zuma",
+   "platform": "lever",
+   "slug": "getzuma",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://www.getzuma.com/"
+  },
+  "respan": {
+   "checked": "2026-09-25",
+   "name": "Respan",
+   "source": "yc",
+   "status": "none",
+   "team_size": 23,
+   "website": "https://respan.ai"
+  },
+  "resquared": {
+   "checked": "2026-09-25",
+   "name": "Resquared",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "http://re2.ai"
+  },
+  "retailready": {
+   "checked": "2026-09-25",
+   "name": "RetailReady",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.retailreadyai.com/"
+  },
+  "retell-ai": {
+   "checked": "2026-09-25",
+   "name": "Retell AI",
+   "platform": "ashby",
+   "slug": "retell-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://retellai.com"
+  },
+  "retool": {
+   "checked": "2026-09-25",
+   "name": "Retool",
+   "source": "yc",
+   "status": "none",
+   "team_size": 300,
+   "website": "https://retool.com"
+  },
+  "rev-genomics": {
+   "checked": "2026-09-25",
+   "name": "Rev Genomics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.revgenomics.com"
+  },
+  "revenuecat": {
+   "checked": "2026-09-25",
+   "name": "RevenueCat",
+   "platform": "ashby",
+   "slug": "revenuecat",
+   "source": "yc",
+   "status": "found",
+   "team_size": 160,
+   "website": "https://www.revenuecat.com/"
+  },
+  "revion": {
+   "checked": "2026-09-25",
+   "name": "Revion",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://revion.inc"
+  },
+  "revyl": {
+   "checked": "2026-09-25",
+   "name": "Revyl",
+   "source": "yc",
+   "status": "none",
+   "team_size": 16,
+   "website": "https://www.revyl.com"
+  },
+  "ridecell": {
+   "checked": "2026-09-25",
+   "name": "Ridecell",
+   "source": "yc",
+   "status": "none",
+   "team_size": 88,
+   "website": "https://www.ridecell.com"
+  },
+  "rinse": {
+   "checked": "2026-09-25",
+   "name": "Rinse",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "http://www.rinse.dental"
+  },
+  "rippling": {
+   "checked": "2026-09-25",
+   "name": "Rippling",
+   "source": "yc",
+   "status": "none",
+   "team_size": 2500,
+   "website": "http://rippling.com/"
+  },
+  "rivet": {
+   "checked": "2026-09-25",
+   "name": "Rivet",
+   "platform": "ashby",
+   "slug": "rivet",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://rivet.dev"
+  },
+  "roboflow": {
+   "checked": "2026-09-25",
+   "name": "Roboflow",
+   "platform": "ashby",
+   "slug": "roboflow",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "https://roboflow.com"
+  },
+  "roe": {
+   "checked": "2026-09-25",
+   "name": "ROE",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://getroe.ai"
+  },
+  "rollstack-2": {
+   "checked": "2026-09-25",
+   "name": "Rollstack",
+   "platform": "ashby",
+   "slug": "rollstack",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://www.rollstack.com"
+  },
+  "rootly": {
+   "checked": "2026-09-25",
+   "name": "Rootly",
+   "source": "yc",
+   "status": "none",
+   "team_size": 75,
+   "website": "https://rootly.com"
+  },
+  "rose-rocket": {
+   "checked": "2026-09-25",
+   "name": "Rose Rocket",
+   "source": "yc",
+   "status": "none",
+   "team_size": 165,
+   "website": "http://roserocket.com"
+  },
+  "routable": {
+   "checked": "2026-09-25",
+   "name": "Routable",
+   "source": "yc",
+   "status": "none",
+   "team_size": 160,
+   "website": "https://routable.com"
+  },
+  "rubbrband": {
+   "checked": "2026-09-25",
+   "name": "Rubbrband",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://rubbrband.com"
+  },
+  "ruma-care": {
+   "checked": "2026-09-25",
+   "name": "Ruma Care",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://rumacare.com"
+  },
+  "runanywhere": {
+   "checked": "2026-09-25",
+   "name": "RunAnywhere",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.runanywhere.ai/"
+  },
+  "runtime": {
+   "checked": "2026-09-25",
+   "name": "Runtime",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.runtm.com/"
+  },
+  "runway": {
+   "checked": "2026-09-25",
+   "name": "Runway",
+   "platform": "ashby",
+   "slug": "runway",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://runway.team"
+  },
+  "rutter": {
+   "checked": "2026-09-25",
+   "name": "Rutter",
+   "platform": "ashby",
+   "slug": "rutter",
+   "source": "yc",
+   "status": "found",
+   "team_size": 24,
+   "website": "https://rutter.com"
+  },
+  "ryvn": {
+   "checked": "2026-09-25",
+   "name": "Ryvn",
+   "platform": "ashby",
+   "slug": "ryvn",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://ryvn.ai"
+  },
+  "safebeat": {
+   "checked": "2026-09-25",
+   "name": "SafeBeat",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://safebeat.com"
+  },
+  "safetykit": {
+   "checked": "2026-09-25",
+   "name": "SafetyKit",
+   "platform": "ashby",
+   "slug": "safetykit",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.safetykit.com/"
+  },
+  "safetywing": {
+   "checked": "2026-09-25",
+   "name": "SafetyWing",
+   "source": "yc",
+   "status": "none",
+   "team_size": 130,
+   "website": "http://www.safetywing.com"
+  },
+  "salespatriot": {
+   "checked": "2026-09-25",
+   "name": "SalesPatriot",
+   "platform": "ashby",
+   "slug": "salespatriot",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://www.salespatriot.com/"
+  },
+  "salient": {
+   "checked": "2026-09-25",
+   "name": "Salient",
+   "platform": "ashby",
+   "slug": "salient",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.trysalient.com"
+  },
+  "sameday": {
+   "checked": "2026-09-25",
+   "name": "Sameday",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.gosameday.com/"
+  },
+  "sante": {
+   "checked": "2026-09-25",
+   "name": "Santé",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://santehq.com/"
+  },
+  "saphira-ai": {
+   "checked": "2026-09-25",
+   "name": "Saphira AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://saphira.ai"
+  },
+  "savahq": {
+   "checked": "2026-09-25",
+   "name": "Sava",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.savahq.com"
+  },
+  "scale-ai": {
+   "checked": "2026-09-25",
+   "name": "Scale AI",
+   "platform": "greenhouse",
+   "slug": "scaleai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 500,
+   "website": "http://scale.com"
+  },
+  "scispot-io": {
+   "checked": "2026-09-25",
+   "name": "Scispot",
+   "source": "yc",
+   "status": "none",
+   "team_size": 16,
+   "website": "https://scispot.io"
+  },
+  "scout-4": {
+   "checked": "2026-09-25",
+   "name": "Scout",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://scoutforschools.com/"
+  },
+  "seam": {
+   "checked": "2026-09-25",
+   "name": "Seam",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://seam.co"
+  },
+  "semble": {
+   "checked": "2026-09-25",
+   "name": "Semble",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://www.sembleai.com"
+  },
+  "sendbird": {
+   "checked": "2026-09-25",
+   "name": "Sendbird",
+   "platform": "greenhouse",
+   "slug": "sendbird",
+   "source": "yc",
+   "status": "found",
+   "team_size": 300,
+   "website": "https://sendbird.com"
+  },
+  "sendblue": {
+   "checked": "2026-09-25",
+   "name": "Sendblue",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.sendblue.com"
+  },
+  "senso": {
+   "checked": "2026-09-25",
+   "name": "Senso",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "http://www.senso.ai"
+  },
+  "serif-health": {
+   "checked": "2026-09-25",
+   "name": "Serif Health",
+   "platform": "ashby",
+   "slug": "serifhealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://www.serifhealth.com"
+  },
+  "shape-shapescale": {
+   "checked": "2026-09-25",
+   "name": "Shape (ShapeScale)",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://shapescale.com"
+  },
+  "shasta-health": {
+   "checked": "2026-09-25",
+   "name": "Shasta Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.shasta.health"
+  },
+  "shepherd": {
+   "checked": "2026-09-25",
+   "name": "Shepherd",
+   "platform": "ashby",
+   "slug": "shepherd",
+   "source": "yc",
+   "status": "found",
+   "team_size": 60,
+   "website": "https://shepherdinsurance.com"
+  },
+  "shiboleth": {
+   "checked": "2026-09-25",
+   "name": "Shiboleth",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.shiboleth.ai/"
+  },
+  "shimmer": {
+   "checked": "2026-09-25",
+   "name": "Shimmer",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://shimmer.care"
+  },
+  "short-story": {
+   "checked": "2026-09-25",
+   "name": "Short Story",
+   "platform": "ashby",
+   "slug": "shortstory",
+   "source": "yc",
+   "status": "found",
+   "team_size": 120,
+   "website": "https://shortstorybox.com"
+  },
+  "shortloop": {
+   "checked": "2026-09-25",
+   "name": "ShortLoop",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://shortloop.dev/"
+  },
+  "sid": {
+   "checked": "2026-09-25",
+   "name": "SID",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.sid.ai"
+  },
+  "sieve": {
+   "checked": "2026-09-25",
+   "name": "Sieve",
+   "platform": "ashby",
+   "slug": "sieve",
+   "source": "yc",
+   "status": "found",
+   "team_size": 34,
+   "website": "https://sievedata.com/"
+  },
+  "sigmaos": {
+   "checked": "2026-09-25",
+   "name": "SigmaOS",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.sigmaos.com"
+  },
+  "signadot": {
+   "checked": "2026-09-25",
+   "name": "Signadot",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.signadot.com/"
+  },
+  "signoz": {
+   "checked": "2026-09-25",
+   "name": "SigNoz",
+   "platform": "ashby",
+   "slug": "signoz",
+   "source": "yc",
+   "status": "found",
+   "team_size": 38,
+   "website": "https://signoz.io"
+  },
+  "silimate": {
+   "checked": "2026-09-25",
+   "name": "Silimate",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.silimate.com"
+  },
+  "silkchart": {
+   "checked": "2026-09-25",
+   "name": "SilkChart",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.silkchart.com"
+  },
+  "silurian": {
+   "checked": "2026-09-25",
+   "name": "Silurian",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://silurian.ai/"
+  },
+  "sim": {
+   "checked": "2026-09-25",
+   "name": "Sim",
+   "platform": "ashby",
+   "slug": "sim",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://sim.ai"
+  },
+  "simbie-ai": {
+   "checked": "2026-09-25",
+   "name": "Simbie AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "http://www.simbie.ai"
+  },
+  "simcare": {
+   "checked": "2026-09-25",
+   "name": "SimCare",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://simcare.ai"
+  },
+  "simple-ai": {
+   "checked": "2026-09-25",
+   "name": "Simple AI",
+   "platform": "ashby",
+   "slug": "simple-ai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 11,
+   "website": "https://www.usesimple.ai"
+  },
+  "simplyinsured": {
+   "checked": "2026-09-25",
+   "name": "SimplyInsured",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "http://simplyinsured.com"
+  },
+  "siphox-health": {
+   "checked": "2026-09-25",
+   "name": "SiPhox Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 63,
+   "website": "https://www.siphoxhealth.com"
+  },
+  "sixtyfour": {
+   "checked": "2026-09-25",
+   "name": "Sixtyfour",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.sixtyfour.ai/"
+  },
+  "skypher": {
+   "checked": "2026-09-25",
+   "name": "Skypher",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://skypher.co"
+  },
+  "skyvern": {
+   "checked": "2026-09-25",
+   "name": "Skyvern",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.skyvern.com/"
+  },
+  "skyways": {
+   "checked": "2026-09-25",
+   "name": "Skyways",
+   "platform": "lever",
+   "slug": "skyways",
+   "source": "yc",
+   "status": "found",
+   "team_size": 33,
+   "website": "http://skyways.com"
+  },
+  "slash": {
+   "checked": "2026-09-25",
+   "name": "Slash",
+   "source": "yc",
+   "status": "none",
+   "team_size": 70,
+   "website": "https://www.slash.com/"
+  },
+  "slope": {
+   "checked": "2026-09-25",
+   "name": "Slope",
+   "platform": "ashby",
+   "slug": "slope",
+   "source": "yc",
+   "status": "found",
+   "team_size": 16,
+   "website": "http://www.slopepay.com"
+  },
+  "snapmagic": {
+   "checked": "2026-09-25",
+   "name": "SnapMagic",
+   "platform": "ashby",
+   "slug": "snapmagic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 23,
+   "website": "https://www.snapmagic.com"
+  },
+  "snappr": {
+   "checked": "2026-09-25",
+   "name": "Snappr",
+   "platform": "lever",
+   "slug": "snappr",
+   "source": "yc",
+   "status": "found",
+   "team_size": 250,
+   "website": "https://www.snappr.com"
+  },
+  "socratix-ai": {
+   "checked": "2026-09-25",
+   "name": "Socratix AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://getsocratix.ai"
+  },
+  "soff": {
+   "checked": "2026-09-25",
+   "name": "Soff",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://soff.ai"
+  },
+  "sola": {
+   "checked": "2026-09-25",
+   "name": "Sola",
+   "platform": "ashby",
+   "slug": "sola",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://www.sola-solutions.com/"
+  },
+  "solidroad": {
+   "checked": "2026-09-25",
+   "name": "Solidroad",
+   "platform": "ashby",
+   "slug": "solidroad",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://solidroad.com"
+  },
+  "solo": {
+   "checked": "2026-09-25",
+   "name": "Solo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://www.solosuit.com/"
+  },
+  "solva": {
+   "checked": "2026-09-25",
+   "name": "Solva",
+   "platform": "ashby",
+   "slug": "solva",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://solvatechnology.com"
+  },
+  "sonia": {
+   "checked": "2026-09-25",
+   "name": "Sonia",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://soniahealth.com"
+  },
+  "soraban": {
+   "checked": "2026-09-25",
+   "name": "Soraban",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://www.soraban.com"
+  },
+  "sorce": {
+   "checked": "2026-09-25",
+   "name": "Sorce",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://sorce.jobs"
+  },
+  "sorting-robotics": {
+   "checked": "2026-09-25",
+   "name": "Sorting Robotics",
+   "platform": "workable",
+   "slug": "sorting-robotics",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://www.sortingrobotics.com/"
+  },
+  "sourcify": {
+   "checked": "2026-09-25",
+   "name": "Sourcify",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.sourcify.com/"
+  },
+  "spade": {
+   "checked": "2026-09-25",
+   "name": "Spade",
+   "platform": "ashby",
+   "slug": "spade",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://www.spade.com"
+  },
+  "speak": {
+   "checked": "2026-09-25",
+   "name": "Speak",
+   "platform": "ashby",
+   "slug": "speak",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "http://speak.com"
+  },
+  "speedy-labs": {
+   "checked": "2026-09-25",
+   "name": "Speedy Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://speedylabs.ai/"
+  },
+  "spellbrush": {
+   "checked": "2026-09-25",
+   "name": "Spellbrush",
+   "platform": "ashby",
+   "slug": "spellbrush",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://spellbrush.com"
+  },
+  "sphere": {
+   "checked": "2026-09-25",
+   "name": "Sphere",
+   "platform": "ashby",
+   "slug": "sphere",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://www.getsphere.com/"
+  },
+  "splash-inc": {
+   "checked": "2026-09-25",
+   "name": "Splash Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://splash9.com/"
+  },
+  "spot-health": {
+   "checked": "2026-09-25",
+   "name": "Spot Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://spotdx.com"
+  },
+  "spruceid": {
+   "checked": "2026-09-25",
+   "name": "SpruceID",
+   "platform": "ashby",
+   "slug": "spruceid",
+   "source": "yc",
+   "status": "found",
+   "team_size": 25,
+   "website": "https://www.spruceid.com"
+  },
+  "spur": {
+   "checked": "2026-09-25",
+   "name": "Spur",
+   "platform": "ashby",
+   "slug": "spur",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://www.spurtest.com/"
+  },
+  "stable": {
+   "checked": "2026-09-25",
+   "name": "Stable",
+   "platform": "ashby",
+   "slug": "stable",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://useStable.com"
+  },
+  "stacksync": {
+   "checked": "2026-09-25",
+   "name": "Stacksync",
+   "source": "yc",
+   "status": "none",
+   "team_size": 34,
+   "website": "https://www.stacksync.com/"
+  },
+  "standard-ai": {
+   "checked": "2026-09-25",
+   "name": "Standard AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 150,
+   "website": "https://standard.ai"
+  },
+  "standout": {
+   "checked": "2026-09-25",
+   "name": "Standout",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://standout.work"
+  },
+  "stardex": {
+   "checked": "2026-09-25",
+   "name": "Stardex",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.stardex.com"
+  },
+  "steinmetz": {
+   "checked": "2026-09-25",
+   "name": "Steinmetz",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://steinmetzmotors.com/"
+  },
+  "stepful": {
+   "checked": "2026-09-25",
+   "name": "Stepful",
+   "platform": "ashby",
+   "slug": "stepful",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "https://www.stepful.com"
+  },
+  "stoke-space": {
+   "checked": "2026-09-25",
+   "name": "Stoke Space",
+   "source": "yc",
+   "status": "none",
+   "team_size": 305,
+   "website": "https://www.stokespace.com/"
+  },
+  "storylane": {
+   "checked": "2026-09-25",
+   "name": "Storylane",
+   "source": "yc",
+   "status": "none",
+   "team_size": 55,
+   "website": "https://www.storylane.io/"
+  },
+  "strac": {
+   "checked": "2026-09-25",
+   "name": "Strac",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.strac.io/"
+  },
+  "strada": {
+   "checked": "2026-09-25",
+   "name": "Strada",
+   "source": "yc",
+   "status": "none",
+   "team_size": 21,
+   "website": "https://www.getstrada.com/"
+  },
+  "streak": {
+   "checked": "2026-09-25",
+   "name": "Streak",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "http://streak.com"
+  },
+  "stream": {
+   "checked": "2026-09-25",
+   "name": "Stream",
+   "platform": "ashby",
+   "slug": "stream",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "http://www.stream.claims"
+  },
+  "stripe": {
+   "checked": "2026-09-25",
+   "name": "Stripe",
+   "platform": "greenhouse",
+   "slug": "stripe",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7000,
+   "website": "http://stripe.com"
+  },
+  "structured-ai": {
+   "checked": "2026-09-25",
+   "name": "Structured AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://www.getstructured.ai/"
+  },
+  "suger": {
+   "checked": "2026-09-25",
+   "name": "Suger",
+   "platform": "lever",
+   "slug": "suger",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://www.suger.io/"
+  },
+  "sully": {
+   "checked": "2026-09-25",
+   "name": "Sully",
+   "source": "yc",
+   "status": "none",
+   "team_size": 44,
+   "website": "https://www.sully.ai"
+  },
+  "supertokens": {
+   "checked": "2026-09-25",
+   "name": "SuperTokens",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://supertokens.com"
+  },
+  "surface-labs": {
+   "checked": "2026-09-25",
+   "name": "Surface Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://withsurface.com"
+  },
+  "svix": {
+   "checked": "2026-09-25",
+   "name": "Svix",
+   "platform": "ashby",
+   "slug": "svix",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://www.svix.com"
+  },
+  "swadesh": {
+   "checked": "2026-09-25",
+   "name": "Swadesh",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "http://www.swadesh.co"
+  },
+  "swayable": {
+   "checked": "2026-09-25",
+   "name": "Swayable",
+   "platform": "greenhouse",
+   "slug": "swayable",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "http://swayable.com"
+  },
+  "sweetspot": {
+   "checked": "2026-09-25",
+   "name": "Sweetspot",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.sweetspot.so/"
+  },
+  "swif-ai": {
+   "checked": "2026-09-25",
+   "name": "Swif.ai",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://www.swif.ai"
+  },
+  "swiftsku": {
+   "checked": "2026-09-25",
+   "name": "SwiftSku",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "https://swiftsku.com"
+  },
+  "sync-2": {
+   "checked": "2026-09-25",
+   "name": "sync.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://sync.so/"
+  },
+  "syncly": {
+   "checked": "2026-09-25",
+   "name": "Syncly",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://syncly.app/"
+  },
+  "syntheticfi": {
+   "checked": "2026-09-25",
+   "name": "SyntheticFi",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://www.syntheticfi.com/"
+  },
+  "synthio-labs": {
+   "checked": "2026-09-25",
+   "name": "Synthio Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 29,
+   "website": "https://synthiolabs.com/"
+  },
+  "syntra": {
+   "checked": "2026-09-25",
+   "name": "Syntra",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.syntra.com"
+  },
+  "taiv": {
+   "checked": "2026-09-25",
+   "name": "Taiv",
+   "source": "yc",
+   "status": "none",
+   "team_size": 40,
+   "website": "https://taiv.tv"
+  },
+  "tamarind-bio": {
+   "checked": "2026-09-25",
+   "name": "Tamarind Bio",
+   "platform": "ashby",
+   "slug": "tamarindbio",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://www.tamarind.bio"
+  },
+  "tandem-2": {
+   "checked": "2026-09-25",
+   "name": "Tandem",
+   "source": "yc",
+   "status": "none",
+   "team_size": 22,
+   "website": "https://tandemspace.com/"
+  },
+  "tank-payments": {
+   "checked": "2026-09-25",
+   "name": "Tank Payments",
+   "platform": "ashby",
+   "slug": "tank-payments",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.tankpayments.com/"
+  },
+  "taskade": {
+   "checked": "2026-09-25",
+   "name": "Taskade",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.taskade.com"
+  },
+  "tasklet-2": {
+   "checked": "2026-09-25",
+   "name": "Tasklet",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://tasklet.ai"
+  },
+  "tavus": {
+   "checked": "2026-09-25",
+   "name": "Tavus",
+   "platform": "ashby",
+   "slug": "tavus",
+   "source": "yc",
+   "status": "found",
+   "team_size": 75,
+   "website": "https://www.tavus.io"
+  },
+  "taxgpt": {
+   "checked": "2026-09-25",
+   "name": "TaxGPT",
+   "source": "yc",
+   "status": "none",
+   "team_size": 45,
+   "website": "https://www.taxgpt.com"
+  },
+  "teamout": {
+   "checked": "2026-09-25",
+   "name": "TeamOut",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.teamout.com/"
+  },
+  "telmai": {
+   "checked": "2026-09-25",
+   "name": "Telmai",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.telm.ai/"
+  },
+  "tempo": {
+   "checked": "2026-09-25",
+   "name": "Tempo",
+   "platform": "greenhouse",
+   "slug": "tempo",
+   "source": "yc",
+   "status": "found",
+   "team_size": 158,
+   "website": "https://tempo.fit/"
+  },
+  "tempo-2": {
+   "checked": "2026-09-25",
+   "name": "Tempo",
+   "platform": "greenhouse",
+   "slug": "tempo",
+   "source": "yc",
+   "status": "found",
+   "team_size": 8,
+   "website": "https://www.tempo.new"
+  },
+  "tennr": {
+   "checked": "2026-09-25",
+   "name": "Tennr",
+   "platform": "ashby",
+   "slug": "tennr",
+   "source": "yc",
+   "status": "found",
+   "team_size": 205,
+   "website": "https://www.tennr.com"
+  },
+  "terminal": {
+   "checked": "2026-09-25",
+   "name": "Terminal",
+   "platform": "ashby",
+   "slug": "terminal",
+   "source": "yc",
+   "status": "found",
+   "team_size": 17,
+   "website": "https://www.withterminal.com/"
+  },
+  "terra-api": {
+   "checked": "2026-09-25",
+   "name": "Terra API",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "http://tryterra.co"
+  },
+  "terrakotta": {
+   "checked": "2026-09-25",
+   "name": "Terrakotta",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.terrakotta.ai/"
+  },
+  "tesora": {
+   "checked": "2026-09-25",
+   "name": "Tesora",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://tesora.ai"
+  },
+  "testrigor": {
+   "checked": "2026-09-25",
+   "name": "testRigor",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://testrigor.com"
+  },
+  "text-blaze": {
+   "checked": "2026-09-25",
+   "name": "Text Blaze",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://blaze.today"
+  },
+  "the-juggernaut": {
+   "checked": "2026-09-25",
+   "name": "The Juggernaut",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.thejuggernaut.com/"
+  },
+  "the-prompting-company": {
+   "checked": "2026-09-25",
+   "name": "The Prompting Company",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://www.promptingcompany.com"
+  },
+  "thera": {
+   "checked": "2026-09-25",
+   "name": "Thera",
+   "platform": "ashby",
+   "slug": "thera",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://www.getthera.com"
+  },
+  "theseus": {
+   "checked": "2026-09-25",
+   "name": "Theseus",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://theseus.us"
+  },
+  "third-chair": {
+   "checked": "2026-09-25",
+   "name": "Third Chair",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://usethirdchair.com"
+  },
+  "thunder-compute": {
+   "checked": "2026-09-25",
+   "name": "Thunder Compute",
+   "platform": "ashby",
+   "slug": "thundercompute",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.thundercompute.com"
+  },
+  "thunkable": {
+   "checked": "2026-09-25",
+   "name": "Thunkable",
+   "platform": "lever",
+   "slug": "thunkable",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "http://thunkable.com"
+  },
+  "tilt-fka-delphia": {
+   "checked": "2026-09-25",
+   "name": "Tilt (f.k.a. Delphia)",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "http://tilt.io"
+  },
+  "tint": {
+   "checked": "2026-09-25",
+   "name": "Tint",
+   "platform": "greenhouse",
+   "slug": "tintai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "http://www.tint.ai"
+  },
+  "titan": {
+   "checked": "2026-09-25",
+   "name": "Titan",
+   "platform": "ashby",
+   "slug": "titan",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "http://www.titan.com"
+  },
+  "toothy-ai": {
+   "checked": "2026-09-25",
+   "name": "Toothy AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.toothy.ai/"
+  },
+  "topkey": {
+   "checked": "2026-09-25",
+   "name": "Topkey",
+   "source": "yc",
+   "status": "none",
+   "team_size": 17,
+   "website": "https://www.topkey.io/"
+  },
+  "topline-pro": {
+   "checked": "2026-09-25",
+   "name": "Topline Pro",
+   "platform": "ashby",
+   "slug": "topline-pro",
+   "source": "yc",
+   "status": "found",
+   "team_size": 28,
+   "website": "https://www.toplinepro.com"
+  },
+  "torus": {
+   "checked": "2026-09-25",
+   "name": "Torus",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.usetorus.com"
+  },
+  "tovala": {
+   "checked": "2026-09-25",
+   "name": "Tovala",
+   "platform": "lever",
+   "slug": "tovala",
+   "source": "yc",
+   "status": "found",
+   "team_size": 375,
+   "website": "http://www.tovala.com"
+  },
+  "tractian": {
+   "checked": "2026-09-25",
+   "name": "Tractian",
+   "source": "yc",
+   "status": "none",
+   "team_size": 530,
+   "website": "https://tractian.com"
+  },
+  "tradex": {
+   "checked": "2026-09-25",
+   "name": "Mindbase",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://mymindbase.ai"
+  },
+  "transastra-corporation": {
+   "checked": "2026-09-25",
+   "name": "TransAstra Corporation",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.transastra.com"
+  },
+  "trata": {
+   "checked": "2026-09-25",
+   "name": "Trata",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.trytrata.com/"
+  },
+  "trayd": {
+   "checked": "2026-09-25",
+   "name": "Trayd",
+   "source": "yc",
+   "status": "none",
+   "team_size": 34,
+   "website": "https://www.buildtrayd.com/"
+  },
+  "trelium": {
+   "checked": "2026-09-25",
+   "name": "Trelium",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.trelium.com"
+  },
+  "trellis-ai": {
+   "checked": "2026-09-25",
+   "name": "Trellis AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 34,
+   "website": "https://runtrellis.com/"
+  },
+  "triomics": {
+   "checked": "2026-09-25",
+   "name": "Triomics",
+   "platform": "ashby",
+   "slug": "triomics",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://triomics.com/"
+  },
+  "trm-labs": {
+   "checked": "2026-09-25",
+   "name": "TRM Labs",
+   "platform": "ashby",
+   "slug": "trm-labs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 400,
+   "website": "https://trmlabs.com/"
+  },
+  "truebiz": {
+   "checked": "2026-09-25",
+   "name": "TrueBiz",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://truebiz.io/"
+  },
+  "trueclaim": {
+   "checked": "2026-09-25",
+   "name": "TrueClaim",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.trytrueclaim.com"
+  },
+  "truewind": {
+   "checked": "2026-09-25",
+   "name": "Truewind",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://www.trytruewind.com"
+  },
+  "truss": {
+   "checked": "2026-09-25",
+   "name": "Truss",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://trusspayments.com"
+  },
+  "truthsystems": {
+   "checked": "2026-09-25",
+   "name": "truthsystems",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.truthsystems.ai"
+  },
+  "trynearby": {
+   "checked": "2026-09-25",
+   "name": "TryNearby",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://trynearby.com"
+  },
+  "tuesday-labs": {
+   "checked": "2026-09-25",
+   "name": "Tuesday Labs",
+   "platform": "ashby",
+   "slug": "tuesday-labs",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://www.tuesdaylabs.com"
+  },
+  "turing-labs-inc": {
+   "checked": "2026-09-25",
+   "name": "Turing Labs Inc.",
+   "platform": "greenhouse",
+   "slug": "turing",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "http://www.turingsaas.com"
+  },
+  "turion-space": {
+   "checked": "2026-09-25",
+   "name": "Turion Space",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://turionspace.com/"
+  },
+  "two-dots": {
+   "checked": "2026-09-25",
+   "name": "Two Dots",
+   "platform": "lever",
+   "slug": "twodots",
+   "source": "yc",
+   "status": "found",
+   "team_size": 28,
+   "website": "https://www.twodots.com"
+  },
+  "type": {
+   "checked": "2026-09-25",
+   "name": "Type",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://type.ai"
+  },
+  "ubicloud": {
+   "checked": "2026-09-25",
+   "name": "Ubicloud",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.ubicloud.com"
+  },
+  "unbound": {
+   "checked": "2026-09-25",
+   "name": "Unbound",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://getunbound.ai/"
+  },
+  "unison": {
+   "checked": "2026-09-25",
+   "name": "UNISON",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.in-unison.com/"
+  },
+  "unsloth-ai": {
+   "checked": "2026-09-25",
+   "name": "Unsloth AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://unsloth.ai/"
+  },
+  "upcodes": {
+   "checked": "2026-09-25",
+   "name": "UpCodes",
+   "platform": "ashby",
+   "slug": "upcodes",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://up.codes/"
+  },
+  "upequity": {
+   "checked": "2026-09-25",
+   "name": "UpEquity",
+   "source": "yc",
+   "status": "none",
+   "team_size": 90,
+   "website": "http://www.upequity.com"
+  },
+  "uplane": {
+   "checked": "2026-09-25",
+   "name": "Uplane",
+   "platform": "ashby",
+   "slug": "uplane",
+   "source": "yc",
+   "status": "found",
+   "team_size": 26,
+   "website": "https://uplane.com"
+  },
+  "upsolve": {
+   "checked": "2026-09-25",
+   "name": "Upsolve",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://upsolve.org/learn/should-i-file-for-chapter-7-bankruptcy/"
+  },
+  "usul": {
+   "checked": "2026-09-25",
+   "name": "Usul",
+   "platform": "ashby",
+   "slug": "usul",
+   "source": "yc",
+   "status": "found",
+   "team_size": 15,
+   "website": "https://www.usul.com"
+  },
+  "vanta": {
+   "checked": "2026-09-25",
+   "name": "Vanta",
+   "platform": "ashby",
+   "slug": "vanta",
+   "source": "yc",
+   "status": "found",
+   "team_size": 700,
+   "website": "https://vanta.com"
+  },
+  "vapi": {
+   "checked": "2026-09-25",
+   "name": "Vapi",
+   "platform": "ashby",
+   "slug": "vapi",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://vapi.ai"
+  },
+  "variance": {
+   "checked": "2026-09-25",
+   "name": "Variance",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.variance.com/"
+  },
+  "variant": {
+   "checked": "2026-09-25",
+   "name": "Variant",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://variant.com"
+  },
+  "varos": {
+   "checked": "2026-09-25",
+   "name": "Varos",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "http://varos.com"
+  },
+  "vector": {
+   "checked": "2026-09-25",
+   "name": "Vector",
+   "platform": "ashby",
+   "slug": "vector",
+   "source": "yc",
+   "status": "found",
+   "team_size": 20,
+   "website": "https://vector.co"
+  },
+  "vector-legal": {
+   "checked": "2026-09-25",
+   "name": "Vector Legal",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://vectorlegal.com"
+  },
+  "vectorshift": {
+   "checked": "2026-09-25",
+   "name": "VectorShift",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://www.vectorshift.ai"
+  },
+  "velt": {
+   "checked": "2026-09-25",
+   "name": "Velt",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://velt.dev"
+  },
+  "vena-vitals": {
+   "checked": "2026-09-25",
+   "name": "Vena Vitals",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "http://venavitals.com"
+  },
+  "vendra": {
+   "checked": "2026-09-25",
+   "name": "Vendra",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://vendra.io/"
+  },
+  "venu-ai": {
+   "checked": "2026-09-25",
+   "name": "Venu AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.venu3d.com"
+  },
+  "verge-genomics": {
+   "checked": "2026-09-25",
+   "name": "Verge Genomics",
+   "platform": "ashby",
+   "slug": "verge-genomics",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "http://vergegenomics.com"
+  },
+  "vergesense": {
+   "checked": "2026-09-25",
+   "name": "VergeSense",
+   "source": "yc",
+   "status": "none",
+   "team_size": 70,
+   "website": "http://www.vergesense.com"
+  },
+  "veritus": {
+   "checked": "2026-09-25",
+   "name": "Veritus",
+   "platform": "ashby",
+   "slug": "veritus",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://www.veritus.com"
+  },
+  "verne-robotics": {
+   "checked": "2026-09-25",
+   "name": "Verne Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://vernerobotics.com/"
+  },
+  "veryfi-inc": {
+   "checked": "2026-09-25",
+   "name": "Veryfi, Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 70,
+   "website": "https://www.veryfi.com/"
+  },
+  "vesence": {
+   "checked": "2026-09-25",
+   "name": "Vesence",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://vesence.com"
+  },
+  "vetcove": {
+   "checked": "2026-09-25",
+   "name": "Vetcove",
+   "platform": "ashby",
+   "slug": "vetcove",
+   "source": "yc",
+   "status": "found",
+   "team_size": 170,
+   "website": "https://www.vetcove.com"
+  },
+  "videogen": {
+   "checked": "2026-09-25",
+   "name": "VideoGen",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://videogen.io"
+  },
+  "vinci-games": {
+   "checked": "2026-09-25",
+   "name": "Vinci Games",
+   "platform": "smartrecruiters",
+   "slug": "vincigames",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://ruffnauts.com/"
+  },
+  "vitable-health": {
+   "checked": "2026-09-25",
+   "name": "Vitable Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 60,
+   "website": "https://vitablehealth.com"
+  },
+  "vitalize": {
+   "checked": "2026-09-25",
+   "name": "Vitalize",
+   "platform": "ashby",
+   "slug": "vitalize",
+   "source": "yc",
+   "status": "found",
+   "team_size": 28,
+   "website": "https://vitalize.care"
+  },
+  "voiceops": {
+   "checked": "2026-09-25",
+   "name": "Voiceops",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://voiceops.com"
+  },
+  "volantio": {
+   "checked": "2026-09-25",
+   "name": "Volantio",
+   "source": "yc",
+   "status": "none",
+   "team_size": 19,
+   "website": "http://www.volantio.com"
+  },
+  "volta-labs-inc": {
+   "checked": "2026-09-25",
+   "name": "Volta Labs, Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "http://voltalabs.com"
+  },
+  "voltair": {
+   "checked": "2026-09-25",
+   "name": "Voltair",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://voltairlabs.com/"
+  },
+  "voltic": {
+   "checked": "2026-09-25",
+   "name": "Voltic",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://volticshipping.com/"
+  },
+  "vooma": {
+   "checked": "2026-09-25",
+   "name": "Vooma",
+   "platform": "ashby",
+   "slug": "vooma",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://www.vooma.ai"
+  },
+  "vori": {
+   "checked": "2026-09-25",
+   "name": "Vori",
+   "platform": "ashby",
+   "slug": "vori",
+   "source": "yc",
+   "status": "found",
+   "team_size": 29,
+   "website": "https://www.vori.com"
+  },
+  "vorticity": {
+   "checked": "2026-09-25",
+   "name": "Vorticity",
+   "platform": "ashby",
+   "slug": "vorticity",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "http://vorticity.xyz/"
+  },
+  "vouch": {
+   "checked": "2026-09-25",
+   "name": "Vouch",
+   "platform": "smartrecruiters",
+   "slug": "vouch",
+   "source": "yc",
+   "status": "found",
+   "team_size": 190,
+   "website": "http://vouch.us"
+  },
+  "vulcan-technologies": {
+   "checked": "2026-09-25",
+   "name": "Vulcan Technologies",
+   "source": "yc",
+   "status": "none",
+   "team_size": 17,
+   "website": "https://vulcan.ai/"
+  },
+  "wardstone": {
+   "checked": "2026-09-25",
+   "name": "Wardstone",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.wardstone.us"
+  },
+  "warpbuild": {
+   "checked": "2026-09-25",
+   "name": "WarpBuild",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.warpbuild.com"
+  },
+  "wasmer": {
+   "checked": "2026-09-25",
+   "name": "Wasmer",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://wasmer.io"
+  },
+  "wayco": {
+   "checked": "2026-09-25",
+   "name": "Wayco",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://wayco.ai"
+  },
+  "wayline": {
+   "checked": "2026-09-25",
+   "name": "Wayline",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://wayline.com"
+  },
+  "weave-3": {
+   "checked": "2026-09-25",
+   "name": "Weave",
+   "platform": "greenhouse",
+   "slug": "weave",
+   "source": "yc",
+   "status": "found",
+   "team_size": 14,
+   "website": "https://weaveos.com"
+  },
+  "weave-robotics": {
+   "checked": "2026-09-25",
+   "name": "Weave Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 26,
+   "website": "https://www.weaverobotics.com"
+  },
+  "webflow": {
+   "checked": "2026-09-25",
+   "name": "Webflow",
+   "platform": "greenhouse",
+   "slug": "webflow",
+   "source": "yc",
+   "status": "found",
+   "team_size": 600,
+   "website": "https://webflow.com"
+  },
+  "weekend-fmr-volley": {
+   "checked": "2026-09-25",
+   "name": "Weekend (fmr. Volley)",
+   "source": "yc",
+   "status": "none",
+   "team_size": 80,
+   "website": "https://weekend.com"
+  },
+  "wefunder": {
+   "checked": "2026-09-25",
+   "name": "Wefunder",
+   "source": "yc",
+   "status": "none",
+   "team_size": 35,
+   "website": "http://wefunder.com"
+  },
+  "whatnot": {
+   "checked": "2026-09-25",
+   "name": "Whatnot",
+   "source": "yc",
+   "status": "none",
+   "team_size": 1500,
+   "website": "https://www.whatnot.com/careers/discover"
+  },
+  "willow": {
+   "checked": "2026-09-25",
+   "name": "Willow",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://willowvoice.com/"
+  },
+  "within": {
+   "checked": "2026-09-25",
+   "name": "Within",
+   "platform": "ashby",
+   "slug": "within",
+   "source": "yc",
+   "status": "found",
+   "team_size": 128,
+   "website": "http://within.ai"
+  },
+  "women-who-code": {
+   "checked": "2026-09-25",
+   "name": "Women Who Code",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://www.womenwhocode.com/"
+  },
+  "wordware": {
+   "checked": "2026-09-25",
+   "name": "Wordware",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://wordware.ai/"
+  },
+  "woz": {
+   "checked": "2026-09-25",
+   "name": "Woz",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.wozcode.com/"
+  },
+  "yarn-2": {
+   "checked": "2026-09-25",
+   "name": "Yarn",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.yarn.so"
+  },
+  "yn": {
+   "checked": "2026-09-25",
+   "name": "Y/n",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://yn.app"
+  },
+  "yondu": {
+   "checked": "2026-09-25",
+   "name": "Yondu",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://yondu.ai/"
+  },
+  "youshift": {
+   "checked": "2026-09-25",
+   "name": "YouShift",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.you-shift.com/"
+  },
+  "yummy-future": {
+   "checked": "2026-09-25",
+   "name": "Yummy Future",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://yummy-future.com"
+  },
+  "zapier": {
+   "checked": "2026-09-25",
+   "name": "Zapier",
+   "platform": "ashby",
+   "slug": "zapier",
+   "source": "yc",
+   "status": "found",
+   "team_size": 700,
+   "website": "http://zapier.com"
+  },
+  "zaymo": {
+   "checked": "2026-09-25",
+   "name": "Zaymo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://zaymo.com"
+  },
+  "zensors-inc": {
+   "checked": "2026-09-25",
+   "name": "Zensors",
+   "platform": "ashby",
+   "slug": "zensors",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://www.zensors.com"
+  },
+  "zentail": {
+   "checked": "2026-09-25",
+   "name": "Zentail",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "https://zentail.com"
+  },
+  "zenysis": {
+   "checked": "2026-09-25",
+   "name": "Zenysis",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "http://www.zenysis.com"
+  },
+  "zep-ai": {
+   "checked": "2026-09-25",
+   "name": "Zep AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.getzep.com/"
+  },
+  "zip": {
+   "checked": "2026-09-25",
+   "name": "Zip",
+   "platform": "ashby",
+   "slug": "zip",
+   "source": "yc",
+   "status": "found",
+   "team_size": 500,
+   "website": "https://ziphq.com/"
+  },
+  "zuddl": {
+   "checked": "2026-09-25",
+   "name": "Zuddl",
+   "source": "yc",
+   "status": "none",
+   "team_size": 120,
+   "website": "http://www.zuddl.com"
+  }
+ },
+ "last_build": "2026-09-25"
+}
