@@ -1,0 +1,15 @@
+name: explore-tmp
+on:
+  push:
+    branches: [claude/practical-allen-rslbfn]
+    paths: [".github/scratch/**", ".github/workflows/explore-tmp.yml"]
+jobs:
+  explore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml playwright && which google-chrome && google-chrome --version
+      - run: python3 .github/scratch/explore.py
