@@ -331,10 +331,20 @@ the address): add the careers page itself, and it's checked every day:
   that system's full feed.
 - Otherwise it picks the job links off the page, reads each relevant one,
   and runs them through the same filters and AI scoring.
-- Some sites (SpaceX, for example) load their jobs with browser scripts, so
-  there's nothing on the page to read. **Check companies and sources** will
-  say so. For those, open a job and use the address its **Apply** button goes
-  to instead; that's usually a Workday or Greenhouse link you can add.
+- Pages that build their job list with browser scripts (SpaceX, for example)
+  are opened in a hidden Chrome browser on GitHub's servers, which loads the
+  page like you would. It often discovers that the page gets its jobs from
+  Greenhouse or Lever behind the scenes, and then reads that feed. You don't
+  need to do anything for this.
+- A few sites keep their jobs somewhere the page never shows (Rocket Lab and
+  Relativity Space, for example). **Check companies and sources** will say
+  so. For those, open one of their jobs and add the address its **Apply**
+  button goes to instead; that's usually a Workday or Greenhouse link.
+
+**Big companies with their own job sites:** Amazon and Microsoft are
+connected directly and already on your list. They're searched each day for
+the terms in `big_company_searches` in `settings.yaml`. Apple and Google have
+no feed that can be read, so they can't be added.
 
 BambooHR-hosted career pages can't be read (they have no public feed).
 
@@ -426,12 +436,16 @@ companies in the weekly discovery. Changes apply from the next run.
      scientist titles (unless the title also says "program" or "project").
      It also drops jobs listed as onsite, hybrid or outside the US, jobs that
      never mention remote, and job-board titles outside your target words.
-  2. Jobs go to the AI **25 at a time** in one request, with at most **40
+  2. For your own companies' boards, a job must be marked remote, or say
+     remote in its title or location, or say so clearly in the description
+     ("fully remote", "remote (US)"). A passing mention of "remote" in
+     company boilerplate doesn't count.
+  3. Jobs go to the AI **25 at a time** in one request, with at most **40
      requests a day** in total (up to 1,000 jobs). Reading Hacker News uses up
      to 3 of those. Anything left over waits until tomorrow; nothing is lost.
-  3. Weekly discovery uses at most **5 requests**, on Mondays: 4 for the news
+  4. Weekly discovery uses at most **5 requests**, on Mondays: 4 for the news
      and 1 for the Y Combinator directory.
-  4. If the free daily limit on the main model runs out, it switches to
+  5. If the free daily limit on the main model runs out, it switches to
      Flash-Lite, which has a bigger free allowance.
 
   Google changes free-tier limits from time to time. Your current limits are

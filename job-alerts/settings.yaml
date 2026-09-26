@@ -134,6 +134,17 @@ weworkremotely_feeds:
   - https://weworkremotely.com/categories/remote-product-jobs.rss
   - https://weworkremotely.com/categories/all-other-remote-jobs.rss
 
+# The searches run each day on big companies' own job sites (Amazon and
+# Microsoft entries in companies.yaml), up to 100-200 results each.
+big_company_searches:
+  - program manager
+  - product operations
+  - business analyst
+  - product owner
+  - implementation
+  - solutions consultant
+  - chief of staff
+
 # The searches run on Himalayas each day (US-eligible remote jobs, newest
 # first, 20 results each).
 himalayas_searches:
