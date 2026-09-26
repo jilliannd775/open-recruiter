@@ -57,8 +57,8 @@ DEFAULT_SETTINGS = {
     "score_threshold": 65,
     "gemini_model": "gemini-flash-latest",
     "fallback_model": "gemini-flash-lite-latest",
-    "jobs_per_ai_call": 20,
-    "max_ai_calls_per_run": 15,
+    "jobs_per_ai_call": 25,
+    "max_ai_calls_per_run": 40,
     "seconds_between_ai_calls": 7,
     "max_description_chars": 1500,
     "require_remote_mention": True,
@@ -70,6 +70,13 @@ DEFAULT_SETTINGS = {
         "remoteok": True,
         "himalayas": True,
         "weworkremotely": True,
+        "startup_boards": True,
+    },
+    "startup_boards": {
+        "min_team_size": 5,
+        "new_companies_per_run": 400,
+        "recheck_missing_after_days": 90,
+        "recheck_found_after_days": 60,
     },
     "hacker_news_max_ai_calls": 3,
     "hacker_news_posts_per_ai_call": 12,
@@ -83,6 +90,14 @@ DEFAULT_SETTINGS = {
         "strategy and operations", "business analyst", "product owner",
         "chief of staff", "special projects", "implementation lead",
     ],
+    "my_target_titles": [],
+    "too_senior_title_words": [
+        "director", "vp", "svp", "evp", "vice president", "head of", "chief", "principal",
+        "staff", "president", "partner", "general manager",
+    ],
+    "drop_if_ai_says_not_remote_us": True,
+    "min_salary": 130000,
+    "max_years_experience": 6,
     "job_board_title_keywords": [
         "program", "project", "operations", "ops", "strategy", "analyst",
         "product owner", "chief of staff", "special projects", "implementation",
@@ -160,7 +175,15 @@ def load_companies() -> list[dict]:
 
 
 def load_profile() -> str:
-    return PROFILE_FILE.read_text(encoding="utf-8")
+    """profile.md, plus the resume from the RESUME secret if one is set.
+
+    The resume lives in a GitHub secret, not a file, because this repository is
+    public. It is only ever sent to the AI, never saved or printed."""
+    profile = PROFILE_FILE.read_text(encoding="utf-8")
+    resume = os.environ.get("RESUME", "").strip()
+    if resume:
+        profile += "\n\n## Resume (from the RESUME secret)\n" + resume[:20000]
+    return profile
 
 
 def _request(url: str, *, method: str = "GET", body: dict | None = None,
@@ -417,8 +440,9 @@ def fill_details(jobs: list[Job], limit: int = 80) -> None:
 SLUG_SUFFIXES = ("inc", "hq", "ai", "labs", "technologies", "tech", "industries")
 
 
-def slug_candidates(name: str, website: str = "") -> list[str]:
-    """Likely board slugs for a company, most likely first."""
+def slug_candidates(name: str, website: str = "", quick: bool = False) -> list[str]:
+    """Likely board slugs for a company, most likely first. quick=True skips the
+    long tail of suffix guesses ("acmeinc", "acmelabs"...), for bulk lookups."""
     raw = (name or "").lower()
     base = re.sub(r"[^a-z0-9]", "", raw)
     hyph = re.sub(r"[^a-z0-9]+", "-", raw).strip("-")
@@ -431,7 +455,8 @@ def slug_candidates(name: str, website: str = "") -> list[str]:
         out.append(re.sub(r"[^a-z0-9]", "", parts[0]))
         if len(parts) > 2 or parts[-1] not in ("com", "org", "net", "co", "us"):
             out.append(re.sub(r"[^a-z0-9]", "", "".join(parts[:-1])) + parts[-1])  # hubble.network -> hubblenetwork
-    out += [core + s for s in SLUG_SUFFIXES]
+    if not quick:
+        out += [core + s for s in SLUG_SUFFIXES]
     # SmartRecruiters ids are often CamelCase, e.g. "BoschGroup".
     words = re.findall(r"[A-Za-z0-9]+", name or "")
     if len(words) > 1:
@@ -461,9 +486,11 @@ def board_matches_company(platform: str, slug: str, jobs: list[Job], name: str) 
     return any(needle.search(j.description[:5000]) or needle.search(j.title) for j in jobs[:25])
 
 
-def find_board(name: str, website: str = "", verify: bool = True, pause: float = 0.3):
+def find_board(name: str, website: str = "", verify: bool = True, pause: float = 0.3,
+               extra_slugs: tuple = (), quick: bool = False):
     """Try likely slugs on every platform. Returns (platform, slug, jobs) or None."""
-    for slug in slug_candidates(name, website):
+    slugs = list(dict.fromkeys([s for s in extra_slugs if s] + slug_candidates(name, website, quick)))
+    for slug in slugs:
         for platform in BOARD_URLS:
             try:
                 jobs = fetch_board({"name": name, "platform": platform, "slug": slug})
@@ -513,15 +540,28 @@ def prefilter(job: Job, settings: dict) -> str | None:
     if ENGINEERING_TITLE.search(title) and not PROGRAM_OR_PROJECT.search(title):
         return "engineering/science title"
 
-    if job.kind == "aggregator":
+    # Your own target titles always count, even if a word in them looks senior
+    # ("chief" in "Chief of Staff"). Anything else must be mid-level.
+    low = title.lower()
+    target = next((t for t in (x.lower().strip() for x in settings.get("my_target_titles") or [])
+                   if t and re.search(r"\b" + re.escape(t) + r"\b", low)), None)
+    rest = low.replace(target, " ") if target else low
+    for w in (x.lower().strip() for x in settings.get("too_senior_title_words") or []):
+        if w and re.search(r"\b" + re.escape(w) + r"\b", rest):
+            return "too senior"
+
+    if job.kind == "aggregator" and not target:
         words = [w.lower() for w in settings.get("job_board_title_keywords") or []]
-        low = title.lower()
         if words and not any(re.search(r"\b" + re.escape(w) + r"\b", low) for w in words):
             return "job-board title not in your target list"
 
     loc = job.location or ""
     if job.workplace in ("onsite", "hybrid"):
         return f"listed as {job.workplace}"
+    # Startup-list boards: "remote" buried in a description is usually boilerplate,
+    # so the job itself must be marked remote, or say so in its title/location.
+    if job.extra.get("sweep") and job.workplace != "remote" and not REMOTE_WORD.search(f"{title} {loc}"):
+        return "startup job not listed as remote"
     if job.workplace != "remote":
         if HYBRID_OR_ONSITE.search(loc) and not REMOTE_WORD.search(loc):
             return "location says onsite/hybrid"
@@ -532,6 +572,15 @@ def prefilter(job: Job, settings: dict) -> str | None:
 
     if job.extra.get("non_us"):
         return "remote, but not open to the US"
+
+    min_pay = int(settings.get("min_salary") or 0)
+    pay = parse_salary(job)
+    if min_pay and pay and pay[1] < min_pay:
+        return f"pay tops out below ${min_pay // 1000}k"
+    max_years = int(settings.get("max_years_experience") or 0)
+    years = years_required(job)
+    if max_years and years and years > max_years:
+        return f"asks for more than {max_years} years' experience"
     country = (job.extra.get("country") or "").upper()
     if country and country not in ("US", "USA", "UNITED STATES"):
         if not US_HINT.search(loc):
@@ -539,6 +588,52 @@ def prefilter(job: Job, settings: dict) -> str | None:
     if NON_US.search(loc) and not US_HINT.search(loc):
         return "location outside the US"
     return None
+
+
+_MONEY = r"\$\s?(\d{2,3}(?:,\d{3})+(?:\.\d+)?|\d{2,3}(?:\.\d+)?\s?[kK])"
+SALARY_RANGE = re.compile(_MONEY + r"\s*(?:USD)?\s*(?:-|–|—|to)\s*" + _MONEY)
+HOURLY_RANGE = re.compile(r"\$\s?(\d{2,3}(?:\.\d{1,2})?)\s*(?:-|–|—|to)\s*\$?\s?(\d{2,3}(?:\.\d{1,2})?)\s*"
+                          r"(?:/|per|an)\s*(?:hr|hour)", re.I)
+YEARS_REQUIRED = re.compile(
+    r"(?:at least|minimum of|min\.?)?\s*(\d{1,2})\s*(?:\+|or more)?\s*(?:-|–|to)?\s*(?:\d{1,2})?\s*\+?\s*"
+    r"(?:years|yrs)\b[^.\n]{0,60}?\bexperience", re.I)
+
+
+def _money(v: str) -> float:
+    v = v.replace(",", "").replace(" ", "")
+    return float(v[:-1]) * 1000 if v[-1:] in "kK" else float(v)
+
+
+def parse_salary(job: "Job") -> tuple[int, int] | None:
+    """Yearly USD pay range from the board's own fields or the description, or None."""
+    if job.extra.get("salary"):
+        lo, hi = job.extra["salary"]
+        return int(lo), int(hi)
+    text = job.description or ""
+    for m in SALARY_RANGE.finditer(text):
+        lo, hi = _money(m.group(1)), _money(m.group(2))
+        if 20000 <= lo <= hi <= 1_000_000:
+            return int(lo), int(hi)
+    m = HOURLY_RANGE.search(text)
+    if m:
+        lo, hi = float(m.group(1)) * 2080, float(m.group(2)) * 2080
+        if 20000 <= lo <= hi <= 1_000_000:
+            return int(lo), int(hi)
+    return None
+
+
+def years_required(job: "Job") -> int | None:
+    """The smallest 'N+ years of experience' the posting asks for, or None."""
+    found = [int(m.group(1)) for m in YEARS_REQUIRED.finditer(job.description or "")]
+    found = [n for n in found if 0 < n <= 30]
+    return min(found) if found else None
+
+
+def format_salary(rng: tuple[int, int] | None) -> str:
+    if not rng:
+        return ""
+    lo, hi = rng
+    return f"${lo // 1000}k" if lo == hi else f"${lo // 1000}k–${hi // 1000}k"
 
 
 TARGET_WORDS = re.compile(

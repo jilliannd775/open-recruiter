@@ -32,10 +32,12 @@ import sys
 from datetime import datetime
 
 import sources
-from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, fetch_board,
-                    fill_details, find_board, load_companies, load_json_state, load_profile, load_settings, log,
-                    missing_secrets, prefilter, priority, prune_dated, save_json_state, send_email,
-                    source_on, email_shell, today_pacific)
+import startups
+from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
+                    fetch_board, fill_details, find_board, format_salary, load_companies,
+                    load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
+                    prefilter, priority, prune_dated, save_json_state, send_email, source_on,
+                    today_pacific, years_required)
 
 SEND_HOUR_PACIFIC = 7
 
@@ -49,6 +51,12 @@ Scoring guide:
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
 - 0-39: wrong kind of role (engineering/coding, sales, etc.), onsite/hybrid only, \
 or outside the US.
+Seniority matters: match the candidate's target level in the profile. Roles \
+clearly above it (Director, VP, Head of, Principal, Staff, C-level other than \
+Chief of Staff) score below 50 even if the function fits.
+Experience and pay: follow the profile's experience range and salary target. \
+A role that clearly asks for far more experience, or pays clearly below the \
+target, scores lower; if pay or years aren't listed, don't penalize.
 A job that is not fully remote or not open to US-based candidates must score below 40.
 
 Reply with JSON only: a list with one object per job, in the same order, shaped:
@@ -70,9 +78,11 @@ def score_batch(gemini: Gemini, profile: str, jobs: list[Job], max_chars: int) -
     """Returns {job.uid: {"score", "reason", "remote"}} for one batch."""
     blocks = []
     for i, j in enumerate(jobs, 1):
+        pay, yrs = format_salary(parse_salary(j)), years_required(j)
         blocks.append(f"### Job id: {i}\nTitle: {j.title}\nCompany: {j.company}\n"
                       f"Location: {j.location or 'not listed'}\n"
                       f"Workplace type: {j.workplace or 'not listed'}\n"
+                      f"Pay: {pay or 'not listed'}; experience asked: {f'{yrs}+ years' if yrs else 'not stated'}\n"
                       f"Description (truncated): {j.description[:max_chars]}\n")
     data = gemini.ask_json(SCORE_SYSTEM + profile.strip(),
                            "Score each of these jobs for the candidate.\n\n" + "\n".join(blocks))
@@ -111,7 +121,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
         rows.append(f"""
 <tr><td style="padding:14px 0;border-bottom:1px solid #e5e5e5;">
   <div style="font-size:16px;font-weight:600;"><a href="{esc(job.url)}" style="color:#0b57d0;text-decoration:none;">{esc(job.title)}</a></div>
-  <div style="color:#444;margin-top:2px;">{esc(job.company)} &middot; {esc(r['remote'])}{' &middot; ' + esc(job.location) if job.location else ''}</div>
+  <div style="color:#444;margin-top:2px;">{esc(job.company)} &middot; {esc(r['remote'])}{' &middot; ' + esc(job.location) if job.location else ''}{' &middot; ' + esc(format_salary(parse_salary(job))) if parse_salary(job) else ''}</div>
   <div style="margin-top:6px;"><span style="display:inline-block;background:{score_color(r['score'])};color:#fff;border-radius:10px;padding:1px 8px;font-size:13px;font-weight:600;">{r['score']}</span>
   <span style="color:#222;">{esc(r['reason'])}</span></div>
   <div style="margin-top:6px;font-size:13px;"><a href="{esc(job.url)}" style="color:#0b57d0;">Apply &rarr;</a>
@@ -158,6 +168,23 @@ def collect_fixed_sources(settings: dict, notes: list[str]) -> tuple[list[Job], 
             except Exception as e:  # noqa: BLE001
                 log(f"  {c['name']}: FAILED - {e}")
                 notes.append(f"Couldn't read {c['name']}'s job board ({c['platform']}/{c['slug']}): {e}")
+    if source_on(settings, "startup_boards"):
+        tried += 1
+        try:
+            skip = {(c["platform"], c["slug"].lower()) for c in load_companies()}
+            got, n, failed = startups.sweep(skip)
+            if n == 0:
+                log("Startup boards: the list is still empty (the 'Build startup board list' action fills it)")
+            else:
+                ok += 1
+                log(f"Startup boards: {len(got)} jobs from {n} startups' boards"
+                    + (f" ({failed} boards didn't answer)" if failed else ""))
+                if failed > max(10, n // 5):
+                    notes.append(f"{failed} of {n} startup job boards didn't answer today.")
+            jobs.extend(got)
+        except Exception as e:  # noqa: BLE001
+            log(f"Startup boards: FAILED - {e}")
+            notes.append(f"Couldn't read the startup board list: {e}")
     aggregators = [
         ("remotive", "Remotive", sources.fetch_remotive),
         ("remoteok", "Remote OK", sources.fetch_remoteok),
@@ -341,8 +368,11 @@ def run(dry_run: bool, scheduled: bool) -> int:
                              if j.uid in unique and j.uid not in scored and j.uid not in dropped
                              and j.uid not in seen["jobs"] and j.dedupe_key() not in seen["jobs"]]
 
+    not_remote_us = {"remote (non-us)", "hybrid", "onsite"}
+    strict = bool(settings.get("drop_if_ai_says_not_remote_us", True))
     matches = sorted(
-        ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold),
+        ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold
+         and not (strict and r["remote"].strip().lower() in not_remote_us)),
         key=lambda x: (-x[1]["score"], x[0].company, x[0].title))
     log(f"\nScored {len(scored)} jobs with {gemini.calls_made} AI calls; {len(matches)} scored {threshold}+.")
     for job, r in matches:
@@ -407,6 +437,7 @@ def check_all(probe_names: list[str]) -> int:
             probe_names.append(c["name"])
 
     log("\nChecking the job-board sources (on/off is in settings.yaml -> sources)\n")
+    startups.stats()
     checks = [
         ("remotive", "Remotive", sources.fetch_remotive),
         ("remoteok", "Remote OK", sources.fetch_remoteok),

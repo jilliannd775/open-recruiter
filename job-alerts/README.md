@@ -23,6 +23,7 @@ so you can check those yourself.
 
 | Source | What it is | How often |
 |---|---|---|
+| **Startup board list** | Built for you automatically: the job boards of about 1,500 hiring US startups from the Y Combinator directory. See "The startup board list" below | Daily |
 | **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable and SmartRecruiters feeds | Daily |
 | **Hacker News "Who is hiring?"** | The monthly thread where companies post openings. The AI reads each new post and pulls out the roles | Daily (new posts only) |
 | **Remotive** | Remote job board (remotive.com). Its free feed is small, about 20 jobs, shown 24 hours after posting | Daily |
@@ -105,8 +106,9 @@ When you're done you should see all four names listed under **Repository secrets
 1. Click the **Actions** tab at the top of the repository.
 2. If you see a button like **I understand my workflows, go ahead and enable
    them**, click it.
-3. You should see three workflows in the left sidebar: **Daily job alerts**,
-   **Weekly company discovery** and **Check companies and sources**.
+3. You should see four workflows in the left sidebar: **Daily job alerts**,
+   **Build startup board list**, **Weekly company discovery** and **Check
+   companies and sources**.
 
 > Scheduled runs only happen from the repository's main (default) branch. If
 > these files are on a different branch, merge them into main first.
@@ -153,6 +155,34 @@ finds. You'll get the summary email whether or not it added anything. Any
 companies it adds show up at the bottom of `companies.yaml`.
 
 ---
+
+## The startup board list (no company list needed)
+
+You don't need to know your target companies. A separate action, **Build
+startup board list**, runs early every morning:
+
+1. It takes every company in the Y Combinator directory that's hiring in the
+   US and has at least 5 people.
+2. It finds each one's job board on Greenhouse, Lever, Ashby, Workable or
+   SmartRecruiters, and saves the list in `startup_boards.json`.
+
+It looks up 400 companies a run, so the list fills in over the first few
+days. To fill it faster, run **Build startup board list** by hand a few times
+from the Actions tab. After that it mostly re-checks: found boards every 2
+months, and companies with no board every 3 months.
+
+The daily alert then reads every board on the list. Because there are
+thousands of jobs, they go through the same strict filters as the big job
+boards before any AI:
+- your target titles or keywords
+- not too senior
+- remote, and open to the US
+
+Big companies are still covered by Himalayas, We Work Remotely and the other
+job boards, which search by title across all companies.
+
+To turn it off, set `startup_boards: false` under `sources:` in
+`settings.yaml`.
 
 ## Weekly company discovery
 
@@ -290,6 +320,35 @@ discovery added. A company discovery added and you deleted will not come back.
 
 ---
 
+## Pay and experience
+
+In `settings.yaml`:
+- **`min_salary: 130000`**: a job is skipped only when its posted pay range
+  tops out below this. Jobs that don't list pay are kept, since many don't.
+- **`max_years_experience: 6`**: a job is skipped only when it clearly asks
+  for more (e.g. "8+ years of experience"). Jobs that don't say are kept.
+
+Your target (2-5 years, $130k+) is also in `profile.md`, so the AI scores
+jobs that fit it higher. When a job lists pay, the email shows it.
+
+## Choosing which job titles you see
+
+Two lists in `settings.yaml` control this:
+
+- **`my_target_titles`**: your specific titles, such as Technical Program
+  Manager, Chief of Staff or Product Owner. A job whose title contains one of
+  these is always considered, from any source.
+- **`too_senior_title_words`**: director, VP, head of, principal, staff,
+  chief, and so on. Any other job with one of these words in its title is
+  skipped as too senior. Your own titles are exempt, so "Chief of Staff" is
+  kept even though it contains "chief". "Principal Program Manager" is still
+  skipped, because "principal" isn't part of your title.
+
+Everything else that is mid-level still gets considered. To also skip
+Senior-level roles, add `senior` and `sr` to `too_senior_title_words`. Your
+target level is also written in `profile.md`, and the AI scores roles above it
+lower.
+
 ## Changing the score threshold
 
 1. Open `settings.yaml` and click the pencil.
@@ -299,6 +358,22 @@ discovery added. A company discovery added and you deleted will not come back.
 
 A new threshold only applies to jobs that haven't been scored yet. Jobs that
 were already scored are not re-scored.
+
+## Giving the AI your resume (optional, recommended)
+
+The AI scores jobs much better when it can see your actual experience. This
+repository is **public**, so don't put your resume in a file here. Add it as a
+secret instead; secrets are encrypted and never shown to anyone:
+
+1. Open your resume, select all the text, and copy it. Plain text is fine;
+   formatting doesn't matter.
+2. Go to **Settings**, then **Secrets and variables**, then **Actions**, then
+   **New repository secret**.
+3. Name: `RESUME`. Secret: paste the text. Click **Add secret**.
+
+From the next run on, the AI reads it along with `profile.md` when scoring
+jobs and picking companies. To update it later, click the pencil next to
+`RESUME` and paste the new version.
 
 ## Changing what the AI looks for
 
@@ -320,9 +395,9 @@ companies in the weekly discovery. Changes apply from the next run.
      scientist titles (unless the title also says "program" or "project").
      It also drops jobs listed as onsite, hybrid or outside the US, jobs that
      never mention remote, and job-board titles outside your target words.
-  2. Jobs go to the AI **20 at a time** in one request, with at most **15
-     requests a day** in total. Reading Hacker News uses up to 3 of those.
-     Anything left over waits until tomorrow; nothing is lost.
+  2. Jobs go to the AI **25 at a time** in one request, with at most **40
+     requests a day** in total (up to 1,000 jobs). Reading Hacker News uses up
+     to 3 of those. Anything left over waits until tomorrow; nothing is lost.
   3. Weekly discovery uses at most **5 requests**, on Mondays: 4 for the news
      and 1 for the Y Combinator directory.
   4. If the free daily limit on the main model runs out, it switches to

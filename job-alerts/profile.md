@@ -14,6 +14,16 @@ English. Be specific about what you want and what you don't.
 - **Not** engineering or coding roles (software engineer, developer, data
   scientist, research scientist, etc.).
 
+## Target level
+- **Mid-level** roles: individual contributor through manager (e.g. Program
+  Manager, Senior Program Manager, Business Analyst, Operations Manager).
+- **Not** Director, VP, Head of, Principal, Staff or other executive roles
+  (except Chief of Staff, below).
+
+## Experience and pay
+- Looking for roles asking **about 2-5 years** of experience.
+- Target base salary **$130k+ a year**, if possible.
+
 ## Target titles
 - Technical Program Manager
 - R&D Program Manager
@@ -21,9 +31,24 @@ English. Be specific about what you want and what you don't.
 - Product Operations Manager
 - Strategy & Operations Manager
 - Business Analyst / Technical Business Analyst
-- Product Owner
+- Product Owner / Technical Product Owner / Product Owner II
+- Senior Analyst, Technology (or Technical) Product Management
+- Product Operations Associate / Product Operations Analyst / Product Operator
+- Product Analyst
+- Business Systems Analyst / Senior Business Systems Analyst
+- Technical Business Analyst / Senior Technical Business Analyst
+- AI Program Manager / AI Transformation Program Manager
+- Implementation Manager / Implementation Consultant
+- Solutions Consultant / Professional Services Consultant
+- Technical Account Manager
+- Consultant / Senior Consultant
 - Special Projects Lead
 - Chief of Staff — **only** at a seed or Series A deep tech company
+
+## Company size
+- **Prefer small startups and mid-size companies.**
+- Big companies are fine too, as long as the role itself is fully remote.
+- I don't have a fixed list of target companies. Judge each job on fit.
 
 ## Favorite sectors (score higher)
 - Deep tech: quantum, physics, space, fusion

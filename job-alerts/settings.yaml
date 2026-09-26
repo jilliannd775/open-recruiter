@@ -16,6 +16,83 @@ sources:
   remoteok: true         # remoteok.com
   himalayas: true        # himalayas.app
   weworkremotely: true   # weworkremotely.com
+  startup_boards: true   # every hiring US startup on the startup board list (see below)
+
+# YOUR SPECIFIC TITLES. A job whose title contains one of these is always
+# considered, from any source, even if it has a word from the "too senior"
+# list below (so "Chief of Staff" isn't blocked by "chief"). Add or remove
+# titles freely, one per line.
+my_target_titles:
+  - technical program manager
+  - r&d program manager
+  - program manager
+  - project manager
+  - product operations manager
+  - strategy & operations manager
+  - strategy and operations manager
+  - business operations manager
+  - business analyst
+  - technical business analyst
+  - product owner
+  - technical product owner
+  - product owner ii
+  - technology product management
+  - technical product management
+  - product operations
+  - product operations associate
+  - product operations analyst
+  - product operator
+  - product analyst
+  - business systems analyst
+  - senior business systems analyst
+  - senior technical business analyst
+  - ai program manager
+  - ai transformation program manager
+  - implementation manager
+  - implementation consultant
+  - solutions consultant
+  - professional services consultant
+  - technical account manager
+  - consultant
+  - senior consultant
+  - special projects lead
+  - special projects manager
+  - ai implementation lead
+  - implementation lead
+  - process lead
+  - chief of staff
+
+# EVERYTHING ELSE MUST BE MID-LEVEL. A job title containing any of these
+# words is skipped as too senior (unless it's one of your titles above,
+# e.g. "Program Manager" is kept but "Principal Program Manager" is not).
+# Add "senior" or "sr" here if you also want to skip Senior-level roles.
+too_senior_title_words:
+  - director
+  - vp
+  - svp
+  - evp
+  - vice president
+  - head of
+  - chief
+  - principal
+  - staff
+  - president
+  - partner
+  - general manager
+
+# true = never email a job the AI itself labels Remote (non-US), Hybrid or
+# Onsite, whatever score it gave.
+drop_if_ai_says_not_remote_us: true
+
+# PAY. Skip a job only when its posted pay range tops out below this (a
+# $100k-$120k job is skipped; $110k-$150k is kept). Jobs that don't list pay
+# are kept, and the AI prefers ones that meet it. Set to 0 to turn off.
+min_salary: 130000
+
+# EXPERIENCE. Skip a job only when it clearly asks for more than this many
+# years (e.g. "8+ years of experience"). Jobs that don't say are kept, and the
+# AI prefers ones asking 2-5 years (see profile.md). Set to 0 to turn off.
+max_years_experience: 6
 
 # Job boards (Remotive, Remote OK, Himalayas, Hacker News) list thousands of
 # jobs. So nothing is wasted on the AI, a job from those sources is only
@@ -39,6 +116,17 @@ job_board_title_keywords:
   - portfolio
   - transformation
 
+# THE STARTUP BOARD LIST. A separate daily action ("Build startup board list")
+# finds the job boards of every Y Combinator company that's hiring in the US
+# and has at least min_team_size people, and saves them in startup_boards.json.
+# The daily alert reads all of them, with the same strict title / seniority /
+# remote filters as the big job boards. You don't have to list any companies.
+startup_boards:
+  min_team_size: 5               # skip tiny teams (they rarely hire non-engineers)
+  new_companies_per_run: 400     # how many companies it looks up per daily build
+  recheck_missing_after_days: 90 # try again for companies with no board found
+  recheck_found_after_days: 60   # make sure found boards still exist
+
 # The We Work Remotely feeds read each day. Other categories are listed at
 # weworkremotely.com (look for the RSS link on a category page).
 weworkremotely_feeds:
@@ -55,6 +143,13 @@ himalayas_searches:
   - strategy and operations
   - business analyst
   - product owner
+  - technical product owner
+  - product operations analyst
+  - product analyst
+  - business systems analyst
+  - implementation consultant
+  - solutions consultant
+  - technical account manager
   - chief of staff
   - special projects
   - implementation lead
@@ -67,11 +162,13 @@ gemini_model: gemini-flash-latest
 fallback_model: gemini-flash-lite-latest
 
 # AI budget per daily run. Each "AI call" scores up to jobs_per_ai_call jobs.
-# 20 x 15 = up to 300 new jobs per day; anything beyond waits until tomorrow
-# (nothing is lost). Reading the Hacker News thread uses up to
-# hacker_news_max_ai_calls of the same budget.
-jobs_per_ai_call: 20
-max_ai_calls_per_run: 15
+# 25 x 40 = up to 1,000 new jobs per day; anything beyond waits until tomorrow
+# (nothing is lost). Google's free tier allows only a small number of calls a
+# day on the main model; when those run out it switches to the lighter
+# fallback model, which has a much bigger free allowance. Reading the Hacker
+# News thread uses up to hacker_news_max_ai_calls of the same budget.
+jobs_per_ai_call: 25
+max_ai_calls_per_run: 40
 hacker_news_max_ai_calls: 3
 hacker_news_posts_per_ai_call: 12
 seconds_between_ai_calls: 7

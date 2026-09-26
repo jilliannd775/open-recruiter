@@ -1,0 +1,63 @@
+name: Build startup board list
+
+# Finds the job boards of hiring US startups (from the Y Combinator directory)
+# a few hundred at a time and saves them in startup_boards.json, which the
+# daily job alert then searches. Runs early each morning, before the alert.
+# The first few runs fill the list; after that it mostly re-checks.
+
+on:
+  schedule:
+    - cron: "17 11 * * *"   # 4:17am Pacific in summer, 3:17am in winter
+  workflow_dispatch:
+    inputs:
+      how_many:
+        description: "How many new companies to look up this run"
+        required: false
+        default: "400"
+
+permissions:
+  contents: write  # lets the run save startup_boards.json
+
+concurrency:
+  group: job-alerts-repo-writes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: job-alerts
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: job-alerts/requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Find startups' job boards
+        env:
+          HOW_MANY: ${{ inputs.how_many }}
+        run: python startups.py --build --limit "${HOW_MANY:-400}"
+
+      - name: Save the updated list
+        if: always()
+        run: |
+          if git diff --quiet -- startup_boards.json; then
+            echo "Nothing new to save."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add startup_boards.json
+          git commit -m "Update startup board list ($(TZ=America/Los_Angeles date +%F))"
+          for i in 1 2 3; do
+            git pull --rebase --quiet && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
