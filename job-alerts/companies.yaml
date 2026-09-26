@@ -2,7 +2,8 @@
 #
 # To add a company, copy one block below and change the three lines:
 #   name:     how the company appears in your email (anything you like)
-#   platform: greenhouse, lever, ashby, workable, smartrecruiters or gem
+#   platform: greenhouse, lever, ashby, workable, smartrecruiters, gem, workday,
+#             amazon or microsoft; or skip platform/slug and give a careers page url
 #             (see the README for how to tell)
 #   slug:     the company's short name in its job-board web address, e.g.
 #               job-boards.greenhouse.io/andurilindustries  ->  andurilindustries
@@ -31,6 +32,16 @@ companies:
   - name: Littlebird
     platform: gem
     slug: littlebird
+
+  # Big companies with their own job sites (searched with big_company_searches
+  # in settings.yaml; only fully remote US roles get through the filters).
+  - name: Amazon
+    platform: amazon
+    slug: amazon
+
+  - name: Microsoft
+    platform: microsoft
+    slug: microsoft
 
   # Google is not listed: it runs its own careers site (google.com/about/careers),
   # not any of the supported job-board systems (checked every common spelling),

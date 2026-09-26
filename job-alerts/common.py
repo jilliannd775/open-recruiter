@@ -44,13 +44,18 @@ BOARD_URLS = {
     "gem": "https://api.gem.com/job_board/v0/{slug}/job_posts/",
     # slug = "<tenant>.wd<N>.myworkdayjobs.com/<site>", e.g. nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite
     "workday": "https://{host}/wday/cxs/{tenant}/{site}/jobs",
+    "amazon": "https://www.amazon.jobs/en/search.json",
+    "microsoft": "https://apply.careers.microsoft.com/api/pcsx/search",
 }
 # Platforms whose company ids can't be guessed from a name (skipped by find_board).
-UNGUESSABLE = {"workday"}
+UNGUESSABLE = {"workday", "amazon", "microsoft"}
+BIG_COMPANY_SEARCHES_DEFAULT = ["program manager", "product operations", "business analyst", "product owner",
+                                "implementation", "solutions consultant", "chief of staff"]
 WORKDAY_MAX_JOBS = 1000
 PLATFORM_LABELS = {"greenhouse": "Greenhouse", "lever": "Lever", "ashby": "Ashby",
                    "workable": "Workable", "smartrecruiters": "SmartRecruiters", "gem": "Gem",
-                   "workday": "Workday", "page": "careers page"}
+                   "workday": "Workday", "page": "careers page", "amazon": "amazon.jobs",
+                   "microsoft": "Microsoft Careers"}
 CAREERS_URLS = {
     "greenhouse": "https://job-boards.greenhouse.io/{slug}",
     "lever": "https://jobs.lever.co/{slug}",
@@ -60,6 +65,8 @@ CAREERS_URLS = {
     "gem": "https://jobs.gem.com/{slug}",
     "workday": "https://{slug}",
     "page": "{slug}",
+    "amazon": "https://www.amazon.jobs",
+    "microsoft": "https://careers.microsoft.com",
 }
 SMARTRECRUITERS_MAX_PAGES = 10  # 1,000 jobs; enough for any company we'd watch
 
@@ -96,6 +103,7 @@ DEFAULT_SETTINGS = {
         "https://weworkremotely.com/categories/remote-product-jobs.rss",
         "https://weworkremotely.com/categories/all-other-remote-jobs.rss",
     ],
+    "big_company_searches": [],
     "himalayas_searches": [
         "technical program manager", "program manager", "product operations",
         "strategy and operations", "business analyst", "product owner",
@@ -310,6 +318,10 @@ def fetch_board(company: dict) -> list[Job]:
         jobs = _fetch_smartrecruiters(name, slug, what)
     elif platform == "workday":
         jobs = _fetch_workday(name, slug, what)
+    elif platform == "amazon":
+        jobs = _fetch_amazon(name, what)
+    elif platform == "microsoft":
+        jobs = _fetch_microsoft(name, what)
     else:
         url = BOARD_URLS[platform].format(slug=urllib.parse.quote(slug))
         data = get_with_retries(lambda: http_json(url, timeout=90), what)
@@ -482,6 +494,54 @@ def _fetch_workday(name, slug, what) -> list[Job]:
         offset += 20
         time.sleep(0.2)
     return jobs
+
+
+def _big_company_searches() -> list[str]:
+    return load_settings().get("big_company_searches") or BIG_COMPANY_SEARCHES_DEFAULT
+
+
+def _fetch_amazon(name, what) -> list[Job]:
+    """amazon.jobs' own search feed, US jobs, one search per term in big_company_searches."""
+    jobs: dict[str, Job] = {}
+    for q in _big_company_searches():
+        for offset in (0, 100):
+            url = BOARD_URLS["amazon"] + "?" + urllib.parse.urlencode(
+                {"base_query": q, "result_limit": 100, "offset": offset, "normalized_country_code[]": "USA"})
+            data = get_with_retries(lambda: http_json(url, timeout=60), what)
+            got = (data or {}).get("jobs") or []
+            for j in got:
+                loc = j.get("normalized_location") or j.get("location") or ""
+                desc = " ".join(x for x in (j.get("description"), j.get("basic_qualifications"),
+                                            j.get("preferred_qualifications")) if x)
+                jobs[str(j.get("id_icims") or j.get("id"))] = Job(
+                    uid=f"amazon:{j.get('id_icims') or j.get('id')}", company=name,
+                    title=(j.get("title") or "").strip(), url="https://www.amazon.jobs" + (j.get("job_path") or ""),
+                    location=loc, workplace="remote" if re.search(r"\b(virtual|remote)\b", loc, re.I) else "",
+                    description=strip_html(desc))
+            if len(got) < 100:
+                break
+            time.sleep(0.5)
+    return list(jobs.values())
+
+
+def _fetch_microsoft(name, what) -> list[Job]:
+    """Microsoft's careers search feed (US), one search per term in big_company_searches."""
+    jobs: dict[str, Job] = {}
+    for q in _big_company_searches():
+        url = BOARD_URLS["microsoft"] + "?" + urllib.parse.urlencode(
+            {"domain": "microsoft.com", "query": q, "location": "United States", "start": 0, "num": 100})
+        data = get_with_retries(lambda: http_json(url, timeout=60), what)
+        for p in ((data or {}).get("data") or {}).get("positions") or []:
+            wl = str(p.get("workLocationOption") or "").lower()
+            workplace = "remote" if "remote" in wl or "home" in wl else "hybrid" if "hybrid" in wl else \
+                "onsite" if "onsite" in wl or "office" in wl else ""
+            jobs[str(p.get("id"))] = Job(
+                uid=f"microsoft:{p.get('id')}", company=name, title=(p.get("name") or "").strip(),
+                url="https://apply.careers.microsoft.com" + (p.get("positionUrl") or ""),
+                location="; ".join(p.get("locations") or []), workplace=workplace,
+                description=f"Department: {p.get('department') or ''}. Work location: {wl or 'not listed'}.")
+        time.sleep(0.5)
+    return list(jobs.values())
 
 
 def _fetch_smartrecruiters(name, slug, what) -> list[Job]:
@@ -663,7 +723,9 @@ def fetch_careers_page(name: str, url: str, detail_limit: int = 15) -> list[Job]
             continue
         links.append((title, urllib.parse.urljoin(final, href)))
     links = list(dict.fromkeys(links))
-    if not links and browser_available():
+    static_links = links
+    if len(links) < 5 and browser_available():
+        links = []  # maybe just a few menu links that look like jobs; see what the real page loads
         # Script-built page: load it in a real (hidden) Chrome and look again, including
         # at the data the page fetched (often a Greenhouse/Lever feed).
         rendered = render_page(url)
@@ -682,6 +744,7 @@ def fetch_careers_page(name: str, url: str, detail_limit: int = 15) -> list[Job]
                 if 4 <= len(title) <= 120 and JOB_WORDS.search(title) and href.startswith("http"):
                     links.append((title, href))
             links = list(dict.fromkeys(links))
+    links = links or static_links
     if not links:
         if len(strip_html(page)) < 2000:
             raise ValueError("this page loads its jobs with JavaScript, so there's nothing to read "
@@ -803,6 +866,11 @@ US_HINT = re.compile(
     r"NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)\b|"
     r"\b(?i:california|texas|new york|washington|colorado|virginia|massachusetts|florida|illinois|"
     r"georgia|arizona|oregon|utah|maryland|north carolina)\b")
+# Phrases in a description that really mean the job is remote (not boilerplate).
+STRONG_REMOTE = re.compile(
+    r"\b(fully|100%|100 percent|completely)[ -]remote\b|\bremote[- ]first\b|\bremote \(?(us|u\.s\.|usa|united states)\)?|"
+    r"\b(this|the) (role|position|job) (is|can be) (fully )?remote\b|\bwork from anywhere in the (us|u\.s\.|united states)\b|"
+    r"\blocation:? *remote\b", re.I)
 # Phrases where "remote" is about the technology, not where you work.
 REMOTE_TECH = re.compile(
     r"\bremote(ly)?[- ](sensing|sensed|piloted|operated|weapons?|control(led)?|access|"
@@ -849,10 +917,12 @@ def prefilter(job: Job, settings: dict) -> str | None:
     if job.workplace != "remote":
         if HYBRID_OR_ONSITE.search(loc) and not REMOTE_WORD.search(loc):
             return "location says onsite/hybrid"
-        if settings.get("require_remote_mention", True):
-            haystack = REMOTE_TECH.sub(" ", f"{title} {loc} {job.description}")
-            if not REMOTE_WORD.search(haystack):
-                return "no mention of remote anywhere"
+        if settings.get("require_remote_mention", True) and not REMOTE_WORD.search(f"{title} {loc}"):
+            # Not marked remote and nothing in the title/location: only keep it if the
+            # description clearly says the job is remote ("remote" alone is often boilerplate).
+            desc = REMOTE_TECH.sub(" ", job.description or "")
+            if not STRONG_REMOTE.search(desc):
+                return "not clearly remote" if REMOTE_WORD.search(desc) else "no mention of remote anywhere"
 
     if job.extra.get("non_us"):
         return "remote, but not open to the US"
