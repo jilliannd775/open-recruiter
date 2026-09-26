@@ -13,3 +13,4 @@ import xml.etree.ElementTree as ET
 t = c.http_text("https://app.jazz.co/feeds/export/jobs/cyclopsio")
 print("JAZZ TAGS", [ch.tag for ch in ET.fromstring(t.strip().encode()).find("job")])
 print("GUESS", c.find_board("Hostaway", "hostaway.com", quick=True)[:2] if c.find_board("Hostaway", "hostaway.com", quick=True) else None)
+# rerun
