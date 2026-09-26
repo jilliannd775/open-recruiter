@@ -115,6 +115,7 @@ DEFAULT_SETTINGS = {
         "staff", "president", "partner", "general manager",
     ],
     "drop_if_ai_says_not_remote_us": True,
+    "tracker_url": "",
     "min_salary": 130000,
     "max_years_experience": 6,
     "job_board_title_keywords": [
@@ -1187,6 +1188,22 @@ def email_shell(heading: str, subheading: str, body_html: str, footer_html: str 
 {body_html}
 <div style="color:#999;font-size:12px;margin-top:24px;">{footer_html}</div>
 </div></body></html>"""
+
+
+def tracker_link(settings: dict, mode: str, payload: dict) -> str:
+    """A link that opens the job tracker with this job ready to add.
+
+    mode: 'a' = mark applied, 's' = save for later, 'r' = track outreach.
+    The job travels in the link's #fragment (base64url JSON: only letters,
+    digits, '-' and '_', which is all the tracker page is allowed to read)."""
+    base = str(settings.get("tracker_url") or "").strip()
+    if not base:
+        return ""
+    import base64
+    data = {k: v for k, v in payload.items() if v not in (None, "", [])}
+    raw = json.dumps(data, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    token = base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+    return f"{base.split('#')[0]}#{mode}.{token}"
 
 
 def missing_secrets(names: tuple[str, ...]) -> list[str]:

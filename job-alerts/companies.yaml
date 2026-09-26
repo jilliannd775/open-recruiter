@@ -33,6 +33,13 @@ companies:
     platform: gem
     slug: littlebird
 
+  # Companies' own careers pages (read in a hidden browser when needed).
+  - name: SpaceX
+    url: https://www.spacex.com/careers/jobs
+
+  - name: Planet
+    url: https://www.planet.com/company/careers/
+
   # Big companies with their own job sites (searched with big_company_searches
   # in settings.yaml; only fully remote US roles get through the filters).
   - name: Amazon

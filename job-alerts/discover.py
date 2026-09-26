@@ -36,7 +36,7 @@ from email.utils import parsedate_to_datetime
 import yaml
 
 from common import (CAREERS_URLS, COMPANIES_FILE, DISCOVERY_STATE_FILE, Gemini, QuotaExhausted,
-                    _request, as_list, email_shell, find_board, get_with_retries, http_json, load_json_state, load_profile,
+                    _request, as_list, email_shell, find_board, get_with_retries, http_json, tracker_link, load_json_state, load_profile,
                     load_settings, log, missing_secrets, norm_name, prune_dated, save_json_state,
                     send_email, strip_html, today_pacific)
 
@@ -439,14 +439,25 @@ def append_companies(added: list[dict]) -> None:
 # Email
 # --------------------------------------------------------------------------- #
 
+TRACKER_SETTINGS: dict = {}
+
+
 def _outreach_html(c: dict) -> str:
     if not c.get("note"):
         return ""
     esc = html.escape
     who = esc(c.get("contact") or "")
     tip = f" <span style='color:#888;'>({esc(c['find_them'])})</span>" if c.get("find_them") else ""
+    name = c.get("company") or c.get("name") or ""
+    track = tracker_link(TRACKER_SETTINGS, "r", {
+        "id": "outreach-" + norm_name(name), "c": name, "t": "Outreach", "who": c.get("contact"),
+        "how": c.get("find_them"), "n": (c.get("note") or "")[:400], "u": c.get("careers") or c.get("website"),
+        "why": (c.get("reason") or "")[:180]})
+    button = (f"<div style='margin-top:6px;'><a href='{esc(track)}' style='color:#0e6e6a;font-weight:600;'>"
+              f"Track this outreach in your job tracker &rarr;</a></div>") if track else ""
     return (f"<div style='margin-top:6px;padding:8px 10px;background:#f4f7fb;border-radius:6px;font-size:13px;'>"
-            f"<b>Reach out to:</b> {who}{tip}<div style='margin-top:4px;white-space:pre-wrap;'>{esc(c['note'])}</div></div>")
+            f"<b>Reach out to:</b> {who}{tip}<div style='margin-top:4px;white-space:pre-wrap;'>{esc(c['note'])}</div>"
+            f"{button}</div>")
 
 
 def build_summary(added: list[dict], no_board: list[dict], notes: list[str], stats: dict,
@@ -508,6 +519,7 @@ def build_summary(added: list[dict], no_board: list[dict], notes: list[str], sta
 
 def run(dry_run: bool) -> int:
     settings = load_settings()
+    TRACKER_SETTINGS.update(settings)
     cfg = settings["discovery"]
     if not cfg.get("enabled", True):
         log("Weekly discovery is turned off (settings.yaml -> discovery -> enabled).")

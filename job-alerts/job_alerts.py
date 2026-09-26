@@ -37,7 +37,7 @@ from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_li
                     fetch_board, fill_details, fill_page_details, find_board, format_salary, load_companies,
                     load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
                     prefilter, priority, prune_dated, save_json_state, send_email, source_on,
-                    today_pacific, years_required)
+                    today_pacific, tracker_link, years_required)
 
 SEND_HOUR_PACIFIC = 7
 
@@ -112,6 +112,24 @@ def score_color(score: int) -> str:
     return "#1a7f37" if score >= 85 else "#2f6fb0" if score >= 75 else "#8a6d00"
 
 
+TRACKER_SETTINGS: dict = {}
+
+
+def _tracker_buttons(job: Job, r: dict) -> str:
+    """'I applied' / 'Save' links into the job tracker page (if tracker_url is set)."""
+    pay = format_salary(parse_salary(job))
+    payload = {"id": job.uid, "t": job.title, "c": job.company, "u": job.url, "l": r.get("remote") or job.location,
+               "p": pay, "s": r.get("score"), "src": job.source, "why": (r.get("reason") or "")[:180]}
+    applied = tracker_link(TRACKER_SETTINGS, "a", payload)
+    if not applied:
+        return ""
+    saved = tracker_link(TRACKER_SETTINGS, "s", payload)
+    style = ("display:inline-block;margin-top:8px;margin-right:8px;padding:4px 10px;border:1px solid #0e6e6a;"
+             "border-radius:6px;color:#0e6e6a;text-decoration:none;font-size:13px;font-weight:600;")
+    return (f'<div><a href="{html.escape(applied)}" style="{style}">&#10003; I applied</a>'
+            f'<a href="{html.escape(saved)}" style="{style}border-color:#8a94a6;color:#4a5568;">&#9734; Save</a></div>')
+
+
 def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, threshold: int) -> str:
     esc = html.escape
     rows = []
@@ -125,7 +143,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
   <div style="margin-top:6px;"><span style="display:inline-block;background:{score_color(r['score'])};color:#fff;border-radius:10px;padding:1px 8px;font-size:13px;font-weight:600;">{r['score']}</span>
   <span style="color:#222;">{esc(r['reason'])}</span></div>
   <div style="margin-top:6px;font-size:13px;"><a href="{esc(job.url)}" style="color:#0b57d0;">Apply &rarr;</a>
-  <span style="color:#888;"> &nbsp;via {source}</span></div>
+  <span style="color:#888;"> &nbsp;via {source}</span></div>{_tracker_buttons(job, r)}
 </td></tr>""")
     notes_html = ""
     if notes:
@@ -144,7 +162,9 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
         f"Scored {threshold}+ out of 100 &middot; {stats['scored']} new jobs scored today "
         f"from {stats['sources_ok']} source{'s' if stats['sources_ok'] != 1 else ''}",
         f'<table style="width:100%;border-collapse:collapse;margin-top:12px;">{"".join(rows)}</table>{notes_html}',
-        credits + "Sent by your job-alerts GitHub Action.")
+        credits + (f'<a href="{esc(settings_tracker)}" style="color:#999;">Open your job tracker</a> &middot; '
+                   if (settings_tracker := TRACKER_SETTINGS.get("tracker_url")) else "")
+        + "Sent by your job-alerts GitHub Action.")
 
 
 # --------------------------------------------------------------------------- #
@@ -271,6 +291,7 @@ def should_skip_scheduled(seen: dict) -> str | None:
 
 def run(dry_run: bool, scheduled: bool) -> int:
     settings = load_settings()
+    TRACKER_SETTINGS.update(settings)
     seen = load_json_state(SEEN_FILE, EMPTY_SEEN)
     if scheduled:
         skip = should_skip_scheduled(seen)
