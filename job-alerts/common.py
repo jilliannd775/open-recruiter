@@ -881,7 +881,12 @@ NON_US = re.compile(
     r"netherlands|amsterdam|poland|warsaw|israel|tel aviv|australia|sydney|melbourne|japan|tokyo|"
     r"singapore|korea|seoul|taiwan|brazil|mexico|argentina|switzerland|zurich|sweden|stockholm|"
     r"denmark|norway|finland|italy|romania|ukraine|portugal|lisbon|emea|apac|latam|europe|"
-    r"philippines|vietnam|turkey|estonia|south africa|nigeria|kenya|pakistan|colombia)\b", re.I)
+    r"philippines|vietnam|turkey|estonia|south africa|nigeria|kenya|pakistan|colombia|"
+    r"austria|vienna|slovenia|croatia|serbia|hungary|budapest|czech|prague|slovakia|greece|athens|"
+    r"belgium|brussels|luxembourg|lithuania|latvia|bulgaria|cyprus|malta|iceland|"
+    r"united arab emirates|uae|dubai|abu dhabi|saudi arabia|riyadh|qatar|doha|egypt|cairo|morocco|"
+    r"new zealand|auckland|china|beijing|shanghai|hong kong|malaysia|kuala lumpur|indonesia|jakarta|"
+    r"thailand|bangkok|chile|santiago|peru|lima|costa rica|uruguay|ecuador|guatemala)\b", re.I)
 
 
 def prefilter(job: Job, settings: dict) -> str | None:
