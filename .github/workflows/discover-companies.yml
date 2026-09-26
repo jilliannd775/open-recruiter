@@ -23,6 +23,10 @@ jobs:
         working-directory: job-alerts
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The latest version of the branch when the run starts, not when it
+          # was queued, so it sees lists saved by runs that finished meanwhile.
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v6
         with:
