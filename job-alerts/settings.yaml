@@ -17,6 +17,11 @@ sources:
   himalayas: true        # himalayas.app
   weworkremotely: true   # weworkremotely.com
   startup_boards: true   # every hiring US startup on the startup board list (see below)
+  # These three need a free key added as a GitHub secret (see the README).
+  # Until the key is there they're skipped quietly.
+  jsearch: true          # Google Jobs (through JSearch)
+  adzuna: true           # adzuna.com (lots of Indeed-style listings)
+  usajobs: true          # usajobs.gov (federal government jobs)
 
 # YOUR SPECIFIC TITLES. A job whose title contains one of these is always
 # considered, from any source, even if it has a word from the "too senior"
@@ -149,6 +154,42 @@ big_company_searches:
   - implementation
   - solutions consultant
   - chief of staff
+
+# GOOGLE JOBS (through JSearch). The free plan allows only about 200
+# searches a month, so it runs the first google_jobs_searches_per_day of these
+# each day (10 newest remote US results each) and stops for the month at
+# google_jobs_searches_per_month. Put your most important searches first.
+google_jobs_searches:
+  - technical program manager
+  - product operations
+  - business systems analyst
+  - implementation consultant
+  - product owner
+  - chief of staff
+google_jobs_searches_per_day: 6
+google_jobs_searches_per_month: 180
+
+# ADZUNA. Jobs whose title matches each search and that mention remote,
+# posted in the last 3 days (up to 50 each).
+adzuna_searches:
+  - technical program manager
+  - program manager
+  - product operations
+  - business analyst
+  - business systems analyst
+  - product owner
+  - implementation consultant
+  - solutions consultant
+  - technical account manager
+  - chief of staff
+
+# USAJOBS (federal jobs). Remote federal jobs posted in the last 3 days.
+usajobs_searches:
+  - program manager
+  - program analyst
+  - management analyst
+  - business analyst
+  - project manager
 
 # The searches run on Himalayas each day (US-eligible remote jobs, newest
 # first, 20 results each).

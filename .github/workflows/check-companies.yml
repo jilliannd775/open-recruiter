@@ -37,6 +37,11 @@ jobs:
       - name: Test every company, source and feed
         env:
           SEARCH_FOR: ${{ inputs.search_for }}
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
+          USAJOBS_EMAIL: ${{ secrets.USAJOBS_EMAIL }}
         run: |
           names=()
           IFS=',' read -ra parts <<< "${SEARCH_FOR:-}"
