@@ -30,6 +30,14 @@ English. Be specific about what you want and what you don't.
 - Product Owner / Technical Product Owner / Product Owner II
 - Senior Analyst, Technology (or Technical) Product Management
 - Product Operations Associate / Product Operations Analyst / Product Operator
+- Product Analyst
+- Business Systems Analyst / Senior Business Systems Analyst
+- Technical Business Analyst / Senior Technical Business Analyst
+- AI Program Manager / AI Transformation Program Manager
+- Implementation Manager / Implementation Consultant
+- Solutions Consultant / Professional Services Consultant
+- Technical Account Manager
+- Consultant / Senior Consultant
 - Special Projects Lead
 - Chief of Staff — **only** at a seed or Series A deep tech company
 
