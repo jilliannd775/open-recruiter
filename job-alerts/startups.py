@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 
@@ -31,6 +32,7 @@ EMPTY_INDEX = {"companies": {}, "last_build": None}
 YC_HIRING_URL = "https://yc-oss.github.io/api/companies/hiring.json"
 YC_US_REGIONS = {"United States of America", "America / Canada"}
 WORKERS = 8
+TIME_BUDGET_S = 30 * 60  # the workflow's hard limit is 45 minutes
 
 
 def load_index() -> dict:
@@ -100,18 +102,29 @@ def build(limit: int | None = None) -> int:
 
     found = 0
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        for c, result in pool.map(lookup, todo):
-            key = c.get("slug") or norm_name(c["name"])
-            entry = {"name": c["name"], "website": c.get("website") or "", "checked": today,
-                     "team_size": c.get("team_size"), "source": "yc"}
-            if result:
-                platform, slug, jobs = result
-                entry.update(status="found", platform=platform, slug=slug)
-                found += 1
-                log(f"  found  {c['name']:<32} {platform}/{slug} ({len(jobs)} jobs)")
-            else:
-                entry["status"] = "none"
-            index["companies"][key] = entry
+        # Work in chunks and save after each, so a slow run keeps what it found.
+        # Stop starting new chunks after TIME_BUDGET_S; the next run carries on.
+        started = time.time()
+        done = 0
+        for start in range(0, len(todo), 100):
+            if time.time() - started > TIME_BUDGET_S:
+                log(f"  time's up for this run after {done} companies; the next run continues")
+                break
+            for c, result in pool.map(lookup, todo[start:start + 100]):
+                key = c.get("slug") or norm_name(c["name"])
+                entry = {"name": c["name"], "website": c.get("website") or "", "checked": today,
+                         "team_size": c.get("team_size"), "source": "yc"}
+                if result:
+                    platform, slug, jobs = result
+                    entry.update(status="found", platform=platform, slug=slug)
+                    found += 1
+                    log(f"  found  {c['name']:<32} {platform}/{slug} ({len(jobs)} jobs)")
+                else:
+                    entry["status"] = "none"
+                index["companies"][key] = entry
+                done += 1
+            save_json_state(INDEX_FILE, index)
+            log(f"  ...{done} of {len(todo)} looked up, {found} boards found so far")
 
         def still_there(item):
             key, v = item
@@ -128,7 +141,7 @@ def build(limit: int | None = None) -> int:
     index["last_build"] = today
     save_json_state(INDEX_FILE, index)
     stats(index)
-    log(f"This run: {found} new boards found out of {len(todo)} companies looked up.")
+    log(f"This run: {found} new boards found out of {done} companies looked up.")
     return 0
 
 
