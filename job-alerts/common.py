@@ -596,7 +596,8 @@ def fetch_careers_page(name: str, url: str, detail_limit: int = 15) -> list[Job]
         if len(strip_html(page)) < 2000:
             raise ValueError("this page loads its jobs with JavaScript, so there's nothing to read "
                              "(try the link its 'Apply' buttons go to instead)")
-        return []
+        raise ValueError("found no job links on this page (it may load them with JavaScript, or list "
+                         "them on another page; try the link its 'Apply' buttons go to instead)")
     host = urllib.parse.urlparse(final).hostname or ""
     jobs = []
     for title, link in links:
