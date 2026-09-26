@@ -151,12 +151,12 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
         notes_html = ("<p style='margin-top:24px;color:#8a1c1c;font-size:13px;'><b>Problems this run</b></p>"
                       "<ul style='color:#8a1c1c;font-size:13px;'>"
                       + "".join(f"<li>{esc(n)}</li>" for n in notes) + "</ul>")
-    used = sorted({j.source for j, _ in matches if j.kind == "aggregator"})
+    used = {j.source: j.source_url or sources.SOURCE_HOMES.get(j.source.split(":")[0], "")
+            for j, _ in matches if j.kind == "aggregator"}
     credits = ""
     if used:
         credits = "Listings from " + ", ".join(
-            f'<a href="{esc(sources.SOURCE_HOMES.get(s.split(":")[0], ""))}" style="color:#999;">{esc(s)}</a>'
-            for s in used) + ". "
+            f'<a href="{esc(used[s])}" style="color:#999;">{esc(s)}</a>' for s in sorted(used)) + ". "
     n = len(matches)
     return email_shell(
         f"{n} new job match{'es' if n != 1 else ''}",
@@ -172,7 +172,22 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
 # Collecting jobs
 # --------------------------------------------------------------------------- #
 
-def collect_fixed_sources(settings: dict, notes: list[str]) -> tuple[list[Job], int, int]:
+def keyed_sources(settings: dict, seen: dict | None, check: bool = False) -> list[tuple]:
+    """Sources that need a free key (JSearch/Google Jobs, Adzuna, USAJobs), as
+    (settings key, label, fetch). check=True runs one small search each."""
+    usage = (seen if seen is not None else {}).setdefault("jsearch_usage", {})
+    def pick(name):
+        return (settings.get(name) or [])[:1] if check else settings.get(name) or []
+    return [
+        ("jsearch", "Google Jobs (JSearch)", lambda: sources.fetch_jsearch(
+            pick("google_jobs_searches"), usage, 1 if check else int(settings.get("google_jobs_searches_per_day") or 6),
+            int(settings.get("google_jobs_searches_per_month") or 180))),
+        ("adzuna", "Adzuna", lambda: sources.fetch_adzuna(pick("adzuna_searches"))),
+        ("usajobs", "USAJobs", lambda: sources.fetch_usajobs(pick("usajobs_searches"))),
+    ]
+
+
+def collect_fixed_sources(settings: dict, notes: list[str], seen: dict | None = None) -> tuple[list[Job], int, int]:
     """Company boards + Remotive + Remote OK + Himalayas. Returns (jobs, sources worked, sources tried)."""
     jobs: list[Job] = []
     ok = tried = 0
@@ -213,8 +228,11 @@ def collect_fixed_sources(settings: dict, notes: list[str]) -> tuple[list[Job], 
         ("weworkremotely", "We Work Remotely",
          lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
     ]
-    for key, label, fetch in aggregators:
+    for key, label, fetch in aggregators + keyed_sources(settings, seen):
         if not source_on(settings, key):
+            continue
+        if key in ("jsearch", "adzuna", "usajobs") and not sources.has_keys(key):
+            log(f"{label}: skipped (its key isn't in your GitHub secrets yet; see the README)")
             continue
         tried += 1
         try:
@@ -333,7 +351,7 @@ def run(dry_run: bool, scheduled: bool) -> int:
     gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings)
 
     # 1. Collect
-    all_jobs, sources_ok, sources_tried = collect_fixed_sources(settings, notes)
+    all_jobs, sources_ok, sources_tried = collect_fixed_sources(settings, notes, seen)
     hn_jobs: list[Job] = []
     if source_on(settings, "hacker_news"):
         sources_tried += 1
@@ -489,8 +507,11 @@ def check_all(probe_names: list[str]) -> int:
         ("weworkremotely", "We Work Remotely",
          lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
     ]
-    for key, label, fetch in checks:
+    for key, label, fetch in checks + keyed_sources(settings, None, check=True):
         state = "on " if source_on(settings, key) else "off"
+        if key in ("jsearch", "adzuna", "usajobs") and not sources.has_keys(key):
+            log(f"  --    {label:<16} ({state}) no key yet (add it in GitHub secrets; see the README)")
+            continue
         try:
             jobs = fetch()
             passing = [j for j in jobs if not prefilter(j, settings)]

@@ -14,9 +14,17 @@ jobs are only emailed to you, never republished.
     of `himalayas_searches` in settings.yaml, 2 seconds apart.
   * We Work Remotely: public RSS feeds, one request per feed a day. Every
     job links to its We Work Remotely page and is credited to them.
+
+These three need a free key (a GitHub secret); each is skipped until its key is added:
+  * JSearch (RapidAPI): Google for Jobs results. The free plan has a small
+    monthly allowance, so searches are capped per day and per month.
+  * Adzuna: a big job search site (lots of Indeed-style listings). Free
+    developer key, 250 requests a day; we use one per search.
+  * USAJobs: US federal jobs. Free key; asks for your email as the User-Agent.
 """
 from __future__ import annotations
 
+import os
 import re
 import time
 import urllib.parse
@@ -34,7 +42,21 @@ SOURCE_HOMES = {
     "Remote OK": "https://remoteok.com",
     "Himalayas": "https://himalayas.app",
     "We Work Remotely": "https://weworkremotely.com",
+    "Google Jobs": "https://www.google.com/search?q=jobs&ibp=htl;jobs",
+    "Adzuna": "https://www.adzuna.com",
+    "USAJobs": "https://www.usajobs.gov",
 }
+
+
+def env(name: str) -> str:
+    return (os.environ.get(name) or "").strip()
+
+
+def has_keys(key: str) -> bool:
+    """Whether the GitHub secrets a keyed source needs are set."""
+    need = {"jsearch": ("RAPIDAPI_KEY",), "adzuna": ("ADZUNA_APP_ID", "ADZUNA_APP_KEY"),
+            "usajobs": ("USAJOBS_API_KEY",)}.get(key, ())
+    return all(env(n) for n in need)
 
 
 def _salary_extra(lo, hi) -> dict:
@@ -134,6 +156,153 @@ def fetch_himalayas(searches: list[str]) -> list[Job]:
                 source="Himalayas", source_url=SOURCE_HOMES["Himalayas"], kind="aggregator",
                 extra=_salary_extra(j.get("minSalary"), j.get("maxSalary"))
                 if (j.get("currency") or "USD") == "USD" and (j.get("salaryPeriod") or "annual") == "annual" else {},
+            )
+    if errors and not jobs:
+        raise RuntimeError("; ".join(errors[:3]))
+    return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# Google Jobs, through JSearch on RapidAPI
+# --------------------------------------------------------------------------- #
+
+def fetch_jsearch(searches: list[str], usage: dict, per_day: int, per_month: int) -> list[Job]:
+    """One request (10 results, remote US, posted in the last 3 days) per search.
+    `usage` ({"month": "YYYY-MM", "used": n}) is kept in seen_jobs.json so the
+    free monthly allowance is never exceeded."""
+    month = datetime.now(timezone.utc).strftime("%Y-%m")
+    if usage.get("month") != month:
+        usage.clear()
+        usage.update({"month": month, "used": 0})
+    budget = max(0, min(per_day, per_month - int(usage.get("used") or 0)))
+    if not budget:
+        log(f"  JSearch: this month's {per_month} searches are used up")
+        return []
+    jobs: dict[str, Job] = {}
+    errors = []
+    headers = {"X-RapidAPI-Key": env("RAPIDAPI_KEY"), "X-RapidAPI-Host": "jsearch.p.rapidapi.com"}
+    for q in searches[:budget]:
+        url = "https://jsearch.p.rapidapi.com/search?" + urllib.parse.urlencode({
+            "query": f"{q} remote", "page": 1, "num_pages": 1, "country": "us",
+            "date_posted": "3days", "work_from_home": "true", "remote_jobs_only": "true"})
+        usage["used"] = int(usage.get("used") or 0) + 1
+        try:
+            data = get_with_retries(lambda: http_json(url, headers=headers, timeout=60), f"JSearch '{q}'")
+        except Exception as e:  # noqa: BLE001
+            errors.append(str(e))
+            continue
+        finally:
+            time.sleep(1.5)
+        for j in (data or {}).get("data") or []:
+            if not isinstance(j, dict) or not j.get("job_id"):
+                continue
+            loc = ", ".join(x for x in (j.get("job_city"), j.get("job_state"), j.get("job_country")) if x)
+            period = str(j.get("job_salary_period") or "").upper()
+            publisher = (j.get("job_publisher") or "").strip()
+            uid = f"jsearch:{j['job_id']}"
+            jobs[uid] = Job(
+                uid=uid,
+                company=(j.get("employer_name") or "").strip(),
+                title=(j.get("job_title") or "").strip(),
+                url=j.get("job_apply_link") or j.get("job_google_link") or "",
+                location=("Remote" + (f" ({loc})" if loc else "")) if j.get("job_is_remote") else loc,
+                workplace="remote" if j.get("job_is_remote") else "",
+                description=strip_html(j.get("job_description") or ""),
+                source="Google Jobs" + (f" (from {publisher})" if publisher else ""),
+                source_url=SOURCE_HOMES["Google Jobs"], kind="aggregator",
+                extra={"country": (j.get("job_country") or "").upper(),
+                       **(_salary_extra(j.get("job_min_salary"), j.get("job_max_salary")) if period in ("", "YEAR") else {})},
+            )
+    if errors and not jobs:
+        raise RuntimeError("; ".join(errors[:3]))
+    return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# Adzuna
+# --------------------------------------------------------------------------- #
+
+def fetch_adzuna(searches: list[str]) -> list[Job]:
+    """Jobs whose TITLE matches each search and that mention remote, from the last 3 days."""
+    jobs: dict[str, Job] = {}
+    errors = []
+    for q in searches:
+        url = "https://api.adzuna.com/v1/api/jobs/us/search/1?" + urllib.parse.urlencode({
+            "app_id": env("ADZUNA_APP_ID"), "app_key": env("ADZUNA_APP_KEY"), "results_per_page": 50,
+            "title_only": q, "what": "remote", "max_days_old": 3, "sort_by": "date",
+            "content-type": "application/json"})
+        try:
+            data = get_with_retries(lambda: http_json(url, timeout=60), f"Adzuna search '{q}'")
+        except Exception as e:  # noqa: BLE001
+            key = env("ADZUNA_APP_KEY")
+            errors.append(str(e).replace(key, "***") if key else str(e))
+            continue
+        finally:
+            time.sleep(2.5)
+        for j in (data or {}).get("results") or []:
+            if not isinstance(j, dict) or not j.get("id"):
+                continue
+            title = strip_html(j.get("title") or "").strip()
+            desc = strip_html(j.get("description") or "")
+            loc = ((j.get("location") or {}).get("display_name") or "").strip()
+            uid = f"adzuna:{j['id']}"
+            jobs[uid] = Job(
+                uid=uid,
+                company=strip_html((j.get("company") or {}).get("display_name") or "").strip(),
+                title=title,
+                url=j.get("redirect_url") or "",           # Adzuna's own page, as their terms ask
+                location=loc,
+                workplace="remote" if REMOTE_WORD.search(f"{title} {loc} {desc}") else "",
+                description=desc,
+                source="Adzuna", source_url=SOURCE_HOMES["Adzuna"], kind="aggregator",
+                extra={"country": "US",
+                       **({} if str(j.get("salary_is_predicted")) == "1" else _salary_extra(j.get("salary_min"), j.get("salary_max")))},
+            )
+    if errors and not jobs:
+        raise RuntimeError("; ".join(errors[:3]))
+    return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# USAJobs (federal jobs)
+# --------------------------------------------------------------------------- #
+
+def fetch_usajobs(searches: list[str]) -> list[Job]:
+    """Remote federal jobs posted in the last 3 days, one request per search."""
+    headers = {"Host": "data.usajobs.gov", "Authorization-Key": env("USAJOBS_API_KEY"),
+               "User-Agent": env("USAJOBS_EMAIL") or env("GMAIL_ADDRESS")}
+    jobs: dict[str, Job] = {}
+    errors = []
+    for q in searches:
+        url = "https://data.usajobs.gov/api/search?" + urllib.parse.urlencode({
+            "Keyword": q, "RemoteIndicator": "True", "DatePosted": 3, "ResultsPerPage": 100})
+        try:
+            data = get_with_retries(lambda: http_json(url, headers=headers, timeout=60), f"USAJobs search '{q}'")
+        except Exception as e:  # noqa: BLE001
+            errors.append(str(e))
+            continue
+        finally:
+            time.sleep(1)
+        for item in ((data or {}).get("SearchResult") or {}).get("SearchResultItems") or []:
+            d = (item or {}).get("MatchedObjectDescriptor") or {}
+            if not d.get("PositionID") and not d.get("PositionURI"):
+                continue
+            details = ((d.get("UserArea") or {}).get("Details") or {})
+            pay = next((p for p in d.get("PositionRemuneration") or [] if p.get("RateIntervalCode") == "PA"), {})
+            uid = f"usajobs:{d.get('PositionID') or d.get('PositionURI')}"
+            org = d.get("OrganizationName") or ""
+            dept = d.get("DepartmentName") or ""
+            jobs[uid] = Job(
+                uid=uid,
+                company=org if not dept or dept == org else f"{org} ({dept})",
+                title=(d.get("PositionTitle") or "").strip(),
+                url=d.get("PositionURI") or (d.get("ApplyURI") or [""])[0],
+                location=d.get("PositionLocationDisplay") or "Remote (US)",
+                workplace="remote",
+                description=strip_html(" ".join(x for x in (details.get("JobSummary"), d.get("QualificationSummary"))
+                                                 if isinstance(x, str))),
+                source="USAJobs", source_url=SOURCE_HOMES["USAJobs"], kind="aggregator",
+                extra={"country": "US", **_salary_extra(pay.get("MinimumRange"), pay.get("MaximumRange"))},
             )
     if errors and not jobs:
         raise RuntimeError("; ".join(errors[:3]))
