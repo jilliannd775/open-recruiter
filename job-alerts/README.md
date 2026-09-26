@@ -361,6 +361,26 @@ discovery added. A company discovery added and you deleted will not come back.
 
 ---
 
+## Your job tracker
+
+Your private tracker page: <https://claude.ai/artifact/2Zf1bitQ7sps5Z6wdyhkUq>
+(only you can open it, signed in to claude.ai). Bookmark it.
+
+- **From the daily email:** every job has **✓ I applied** and **☆ Save**
+  buttons. Tap one and the tracker opens with that job ready; tap the green
+  button to add it. Applying sets a follow-up reminder for a week later.
+- **From the Monday email:** each outreach note has **Track this outreach**,
+  which adds the company with the person you're contacting and your note.
+- **In the tracker:** each job has a stage (Saved, Applied, Talking,
+  Interviewing, Offer, Closed), the date you applied, a follow-up date, the
+  next step, notes, and a list of **people you've talked to** (name, role,
+  how to reach them, date, what you discussed). Follow-ups due in the next
+  3 days are listed at the top. Use **+ Add a job** for anything you found
+  yourself.
+
+To move the tracker somewhere else later, change `tracker_url` in
+`settings.yaml` (leave it empty to hide the buttons).
+
 ## Pay and experience
 
 In `settings.yaml`:

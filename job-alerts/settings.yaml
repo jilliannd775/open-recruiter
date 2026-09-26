@@ -84,6 +84,11 @@ too_senior_title_words:
 # Onsite, whatever score it gave.
 drop_if_ai_says_not_remote_us: true
 
+# YOUR JOB TRACKER. Each job in the daily email gets "I applied" and "Save"
+# buttons, and each Monday outreach note a "Track this outreach" link, that
+# open this page with the job ready to add. Leave it empty to hide them.
+tracker_url: https://claude.ai/artifact/2Zf1bitQ7sps5Z6wdyhkUq
+
 # PAY. Skip a job only when its posted pay range tops out below this (a
 # $100k-$120k job is skipped; $110k-$150k is kept). Jobs that don't list pay
 # are kept, and the AI prefers ones that meet it. Set to 0 to turn off.
