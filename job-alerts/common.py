@@ -175,7 +175,15 @@ def load_companies() -> list[dict]:
 
 
 def load_profile() -> str:
-    return PROFILE_FILE.read_text(encoding="utf-8")
+    """profile.md, plus the resume from the RESUME secret if one is set.
+
+    The resume lives in a GitHub secret, not a file, because this repository is
+    public. It is only ever sent to the AI, never saved or printed."""
+    profile = PROFILE_FILE.read_text(encoding="utf-8")
+    resume = os.environ.get("RESUME", "").strip()
+    if resume:
+        profile += "\n\n## Resume (from the RESUME secret)\n" + resume[:20000]
+    return profile
 
 
 def _request(url: str, *, method: str = "GET", body: dict | None = None,

@@ -42,6 +42,7 @@ jobs:
       - name: Find, score and email new jobs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          RESUME: ${{ secrets.RESUME }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}

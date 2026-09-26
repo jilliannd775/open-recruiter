@@ -359,6 +359,22 @@ lower.
 A new threshold only applies to jobs that haven't been scored yet. Jobs that
 were already scored are not re-scored.
 
+## Giving the AI your resume (optional, recommended)
+
+The AI scores jobs much better when it can see your actual experience. This
+repository is **public**, so don't put your resume in a file here. Add it as a
+secret instead; secrets are encrypted and never shown to anyone:
+
+1. Open your resume, select all the text, and copy it. Plain text is fine;
+   formatting doesn't matter.
+2. Go to **Settings**, then **Secrets and variables**, then **Actions**, then
+   **New repository secret**.
+3. Name: `RESUME`. Secret: paste the text. Click **Add secret**.
+
+From the next run on, the AI reads it along with `profile.md` when scoring
+jobs and picking companies. To update it later, click the pencil next to
+`RESUME` and paste the new version.
+
 ## Changing what the AI looks for
 
 Edit `profile.md`. Write it the way you'd brief a recruiter. Adding "Score
