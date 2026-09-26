@@ -70,6 +70,13 @@ DEFAULT_SETTINGS = {
         "remoteok": True,
         "himalayas": True,
         "weworkremotely": True,
+        "startup_boards": True,
+    },
+    "startup_boards": {
+        "min_team_size": 5,
+        "new_companies_per_run": 400,
+        "recheck_missing_after_days": 90,
+        "recheck_found_after_days": 60,
     },
     "hacker_news_max_ai_calls": 3,
     "hacker_news_posts_per_ai_call": 12,
@@ -86,7 +93,7 @@ DEFAULT_SETTINGS = {
     "my_target_titles": [],
     "too_senior_title_words": [
         "director", "vp", "svp", "evp", "vice president", "head of", "chief", "principal",
-        "staff", "executive", "president", "partner", "general manager",
+        "staff", "president", "partner", "general manager",
     ],
     "drop_if_ai_says_not_remote_us": True,
     "job_board_title_keywords": [
@@ -423,8 +430,9 @@ def fill_details(jobs: list[Job], limit: int = 80) -> None:
 SLUG_SUFFIXES = ("inc", "hq", "ai", "labs", "technologies", "tech", "industries")
 
 
-def slug_candidates(name: str, website: str = "") -> list[str]:
-    """Likely board slugs for a company, most likely first."""
+def slug_candidates(name: str, website: str = "", quick: bool = False) -> list[str]:
+    """Likely board slugs for a company, most likely first. quick=True skips the
+    long tail of suffix guesses ("acmeinc", "acmelabs"...), for bulk lookups."""
     raw = (name or "").lower()
     base = re.sub(r"[^a-z0-9]", "", raw)
     hyph = re.sub(r"[^a-z0-9]+", "-", raw).strip("-")
@@ -437,7 +445,8 @@ def slug_candidates(name: str, website: str = "") -> list[str]:
         out.append(re.sub(r"[^a-z0-9]", "", parts[0]))
         if len(parts) > 2 or parts[-1] not in ("com", "org", "net", "co", "us"):
             out.append(re.sub(r"[^a-z0-9]", "", "".join(parts[:-1])) + parts[-1])  # hubble.network -> hubblenetwork
-    out += [core + s for s in SLUG_SUFFIXES]
+    if not quick:
+        out += [core + s for s in SLUG_SUFFIXES]
     # SmartRecruiters ids are often CamelCase, e.g. "BoschGroup".
     words = re.findall(r"[A-Za-z0-9]+", name or "")
     if len(words) > 1:
@@ -467,9 +476,11 @@ def board_matches_company(platform: str, slug: str, jobs: list[Job], name: str) 
     return any(needle.search(j.description[:5000]) or needle.search(j.title) for j in jobs[:25])
 
 
-def find_board(name: str, website: str = "", verify: bool = True, pause: float = 0.3):
+def find_board(name: str, website: str = "", verify: bool = True, pause: float = 0.3,
+               extra_slugs: tuple = (), quick: bool = False):
     """Try likely slugs on every platform. Returns (platform, slug, jobs) or None."""
-    for slug in slug_candidates(name, website):
+    slugs = list(dict.fromkeys([s for s in extra_slugs if s] + slug_candidates(name, website, quick)))
+    for slug in slugs:
         for platform in BOARD_URLS:
             try:
                 jobs = fetch_board({"name": name, "platform": platform, "slug": slug})

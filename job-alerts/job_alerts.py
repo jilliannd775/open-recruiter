@@ -32,6 +32,7 @@ import sys
 from datetime import datetime
 
 import sources
+import startups
 from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, fetch_board,
                     fill_details, find_board, load_companies, load_json_state, load_profile, load_settings, log,
                     missing_secrets, prefilter, priority, prune_dated, save_json_state, send_email,
@@ -161,6 +162,23 @@ def collect_fixed_sources(settings: dict, notes: list[str]) -> tuple[list[Job], 
             except Exception as e:  # noqa: BLE001
                 log(f"  {c['name']}: FAILED - {e}")
                 notes.append(f"Couldn't read {c['name']}'s job board ({c['platform']}/{c['slug']}): {e}")
+    if source_on(settings, "startup_boards"):
+        tried += 1
+        try:
+            skip = {(c["platform"], c["slug"].lower()) for c in load_companies()}
+            got, n, failed = startups.sweep(skip)
+            if n == 0:
+                log("Startup boards: the list is still empty (the 'Build startup board list' action fills it)")
+            else:
+                ok += 1
+                log(f"Startup boards: {len(got)} jobs from {n} startups' boards"
+                    + (f" ({failed} boards didn't answer)" if failed else ""))
+                if failed > max(10, n // 5):
+                    notes.append(f"{failed} of {n} startup job boards didn't answer today.")
+            jobs.extend(got)
+        except Exception as e:  # noqa: BLE001
+            log(f"Startup boards: FAILED - {e}")
+            notes.append(f"Couldn't read the startup board list: {e}")
     aggregators = [
         ("remotive", "Remotive", sources.fetch_remotive),
         ("remoteok", "Remote OK", sources.fetch_remoteok),
@@ -413,6 +431,7 @@ def check_all(probe_names: list[str]) -> int:
             probe_names.append(c["name"])
 
     log("\nChecking the job-board sources (on/off is in settings.yaml -> sources)\n")
+    startups.stats()
     checks = [
         ("remotive", "Remotive", sources.fetch_remotive),
         ("remoteok", "Remote OK", sources.fetch_remoteok),

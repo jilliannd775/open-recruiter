@@ -23,6 +23,7 @@ so you can check those yourself.
 
 | Source | What it is | How often |
 |---|---|---|
+| **Startup board list** | Built for you automatically: the job boards of about 1,500 hiring US startups from the Y Combinator directory. See "The startup board list" below | Daily |
 | **Your companies** | Every company in `companies.yaml`. Their own careers pages, read through the free Greenhouse, Lever, Ashby, Workable and SmartRecruiters feeds | Daily |
 | **Hacker News "Who is hiring?"** | The monthly thread where companies post openings. The AI reads each new post and pulls out the roles | Daily (new posts only) |
 | **Remotive** | Remote job board (remotive.com). Its free feed is small, about 20 jobs, shown 24 hours after posting | Daily |
@@ -105,8 +106,9 @@ When you're done you should see all four names listed under **Repository secrets
 1. Click the **Actions** tab at the top of the repository.
 2. If you see a button like **I understand my workflows, go ahead and enable
    them**, click it.
-3. You should see three workflows in the left sidebar: **Daily job alerts**,
-   **Weekly company discovery** and **Check companies and sources**.
+3. You should see four workflows in the left sidebar: **Daily job alerts**,
+   **Build startup board list**, **Weekly company discovery** and **Check
+   companies and sources**.
 
 > Scheduled runs only happen from the repository's main (default) branch. If
 > these files are on a different branch, merge them into main first.
@@ -153,6 +155,34 @@ finds. You'll get the summary email whether or not it added anything. Any
 companies it adds show up at the bottom of `companies.yaml`.
 
 ---
+
+## The startup board list (no company list needed)
+
+You don't need to know your target companies. A separate action, **Build
+startup board list**, runs early every morning:
+
+1. It takes every company in the Y Combinator directory that's hiring in the
+   US and has at least 5 people.
+2. It finds each one's job board on Greenhouse, Lever, Ashby, Workable or
+   SmartRecruiters, and saves the list in `startup_boards.json`.
+
+It looks up 400 companies a run, so the list fills in over the first few
+days. To fill it faster, run **Build startup board list** by hand a few times
+from the Actions tab. After that it mostly re-checks: found boards every 2
+months, and companies with no board every 3 months.
+
+The daily alert then reads every board on the list. Because there are
+thousands of jobs, they go through the same strict filters as the big job
+boards before any AI:
+- your target titles or keywords
+- not too senior
+- remote, and open to the US
+
+Big companies are still covered by Himalayas, We Work Remotely and the other
+job boards, which search by title across all companies.
+
+To turn it off, set `startup_boards: false` under `sources:` in
+`settings.yaml`.
 
 ## Weekly company discovery
 

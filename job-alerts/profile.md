@@ -31,6 +31,11 @@ English. Be specific about what you want and what you don't.
 - Special Projects Lead
 - Chief of Staff — **only** at a seed or Series A deep tech company
 
+## Company size
+- **Prefer small startups and mid-size companies.**
+- Big companies are fine too, as long as the role itself is fully remote.
+- I don't have a fixed list of target companies. Judge each job on fit.
+
 ## Favorite sectors (score higher)
 - Deep tech: quantum, physics, space, fusion
 - AI application startups

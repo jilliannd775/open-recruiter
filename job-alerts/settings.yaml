@@ -16,6 +16,7 @@ sources:
   remoteok: true         # remoteok.com
   himalayas: true        # himalayas.app
   weworkremotely: true   # weworkremotely.com
+  startup_boards: true   # every hiring US startup on the startup board list (see below)
 
 # YOUR SPECIFIC TITLES. A job whose title contains one of these is always
 # considered, from any source, even if it has a word from the "too senior"
@@ -54,7 +55,6 @@ too_senior_title_words:
   - chief
   - principal
   - staff
-  - executive
   - president
   - partner
   - general manager
@@ -84,6 +84,17 @@ job_board_title_keywords:
   - r&d
   - portfolio
   - transformation
+
+# THE STARTUP BOARD LIST. A separate daily action ("Build startup board list")
+# finds the job boards of every Y Combinator company that's hiring in the US
+# and has at least min_team_size people, and saves them in startup_boards.json.
+# The daily alert reads all of them, with the same strict title / seniority /
+# remote filters as the big job boards. You don't have to list any companies.
+startup_boards:
+  min_team_size: 5               # skip tiny teams (they rarely hire non-engineers)
+  new_companies_per_run: 400     # how many companies it looks up per daily build
+  recheck_missing_after_days: 90 # try again for companies with no board found
+  recheck_found_after_days: 60   # make sure found boards still exist
 
 # The We Work Remotely feeds read each day. Other categories are listed at
 # weworkremotely.com (look for the RSS link on a category page).
