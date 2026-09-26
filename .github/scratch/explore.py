@@ -1,29 +1,15 @@
-import json, re, urllib.request, urllib.error
-UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
-def get(u, accept="application/json"):
+import sys; sys.path.insert(0, "job-alerts")
+import common as c
+for plat, slug, name in [("recruitee","hostaway","Hostaway"),("breezy","tushy","Tushy"),("jazzhr","cyclopsio","Cyclops"),
+                         ("jazzhr","firstadvantage","First Advantage"),("recruitee","zzqxnonexist","X"),("breezy","zzqxnonexist","X"),("jazzhr","zzqxnonexist","X")]:
     try:
-        with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": UA, "Accept": accept}), timeout=60) as r:
-            return r.status, r.headers.get("content-type"), r.read(), r.geturl()
-    except urllib.error.HTTPError as e: return e.code, e.headers.get("content-type"), e.read()[:200], u
-    except Exception as e: return None, None, str(e).encode(), u
-for slug in ["hostaway", "constructivedialogue", "zzqxnonexist"]:
-    st, ct, b, f = get(f"https://{slug}.recruitee.com/api/offers/")
-    print(f"\nRECRUITEE {slug} {st} {ct} final={f} bytes={len(b)}")
-    try:
-        d = json.loads(b); o = d.get("offers") or []; print(" count", len(o))
-        if o: print(" keys", list(o[0])); print(" sample", {k: str(o[0].get(k))[:80] for k in ("id","title","location","city","country","country_code","remote","hybrid","on_site","careers_url","min_salary","max_salary","salary","employment_type_code","experience_code","status")})
-    except Exception as e: print(" not json", b[:150])
-for slug in ["tushy", "playtestcloud", "zzqxnonexist"]:
-    st, ct, b, f = get(f"https://{slug}.breezy.hr/json?verbose=true")
-    print(f"\nBREEZY {slug} {st} {ct} final={f} bytes={len(b)}")
-    try:
-        d = json.loads(b); print(" count", len(d))
-        if d: print(" keys", list(d[0])); print(" sample", {k: str(d[0].get(k))[:120] for k in ("id","name","url","location","type","salary","department","published_date","description")})
-    except Exception as e: print(" not json", b[:150])
-for slug in ["cyclopsio", "firstadvantage", "zzqxnonexist"]:
-    st, ct, b, f = get(f"https://app.jazz.co/feeds/export/jobs/{slug}", "application/xml")
-    print(f"\nJAZZ XML {slug} {st} {ct} final={f} bytes={len(b)} {b[:300]!r}")
-    st, ct, b, f = get(f"https://{slug}.applytojob.com/apply", "text/html")
-    html = b.decode("utf-8", "replace")
-    links = re.findall(r'href="(https?://[^"]*applytojob\.com/apply/[A-Za-z0-9]+/[^"]*)"[^>]*>(.*?)</a>', html, re.S)
-    print(f"JAZZ HTML {slug} {st} final={f} bytes={len(b)} job links={len(links)}", [ (re.sub('<[^>]+>','',t).strip()[:50], h[:90]) for h,t in links[:3]])
+        jobs = c.fetch_board({"platform": plat, "slug": slug, "name": name})
+        print(plat, slug, len(jobs))
+        for j in jobs[:3]:
+            print("   ", j.title, "|", j.location, "|", j.workplace, "|", j.url, "|", j.extra, "|", len(j.description), c.format_salary(c.parse_salary(j)))
+    except Exception as e:
+        print(plat, slug, "ERROR", type(e).__name__, str(e)[:150])
+import xml.etree.ElementTree as ET
+t = c.http_text("https://app.jazz.co/feeds/export/jobs/cyclopsio")
+print("JAZZ TAGS", [ch.tag for ch in ET.fromstring(t.strip().encode()).find("job")])
+print("GUESS", c.find_board("Hostaway", "hostaway.com", quick=True)[:2] if c.find_board("Hostaway", "hostaway.com", quick=True) else None)

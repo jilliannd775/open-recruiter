@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: python3 .github/scratch/explore.py
+      - run: pip install -q pyyaml && python3 .github/scratch/explore.py
