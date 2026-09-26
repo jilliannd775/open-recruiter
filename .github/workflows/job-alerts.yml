@@ -55,13 +55,13 @@ jobs:
       - name: Save the list of jobs already seen
         if: always()
         run: |
-          if git diff --quiet -- seen_jobs.json; then
+          if git diff --quiet -- seen_jobs.json matches_log.json; then
             echo "Nothing new to save."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add seen_jobs.json
+          git add seen_jobs.json matches_log.json
           git commit -m "Update seen jobs ($(TZ=America/Los_Angeles date +%F))"
           for i in 1 2 3; do
             git pull --rebase --quiet && git push && exit 0

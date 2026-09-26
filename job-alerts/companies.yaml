@@ -2,8 +2,8 @@
 #
 # To add a company, copy one block below and change the three lines:
 #   name:     how the company appears in your email (anything you like)
-#   platform: greenhouse, lever, ashby, workable, smartrecruiters, gem, workday,
-#             amazon or microsoft; or skip platform/slug and give a careers page url
+#   platform: greenhouse, lever, ashby, workable, smartrecruiters, gem, recruitee,
+#             breezy, jazzhr, workday, amazon or microsoft; or skip platform/slug and give a careers page url
 #             (see the README for how to tell)
 #   slug:     the company's short name in its job-board web address, e.g.
 #               job-boards.greenhouse.io/andurilindustries  ->  andurilindustries
@@ -12,6 +12,7 @@
 #               apply.workable.com/huggingface              ->  huggingface
 #               jobs.smartrecruiters.com/ServiceNow/...     ->  ServiceNow
 #               jobs.gem.com/littlebird                     ->  littlebird
+#               acme.recruitee.com / acme.breezy.hr / acme.applytojob.com  ->  acme
 #
 # Keep the two spaces of indentation and the dash. Lines starting with # are notes.
 # After you save, the "Check company boards" action tests every entry for you.
