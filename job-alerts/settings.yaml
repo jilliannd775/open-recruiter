@@ -195,6 +195,20 @@ discovery:
   articles_per_ai_call: 25
   max_companies_to_check: 60      # most companies to look up job boards for
 
+  # REACHING OUT BEFORE A JOB IS POSTED. For the best-fitting companies in the
+  # Monday email, the AI suggests who to contact and drafts a short note from
+  # you (using your profile and resume) that you can edit and send.
+  outreach_notes: true
+  outreach_max: 12
+
+  # FUNDING ALERTS. When the news mentions one of these companies (or any
+  # company in companies.yaml), the Monday email says so at the top: new
+  # funding usually means hiring soon. Add names one per line.
+  watch_for_funding:
+    - Littlebird
+    - Anduril
+    - SandboxAQ
+
   # Y Combinator's company directory (a free, community-kept copy of
   # ycombinator.com/companies). Each week it looks at YC companies that say
   # they're hiring, are in the US, have at least yc_min_team_size people, and

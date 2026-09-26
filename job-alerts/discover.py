@@ -322,8 +322,77 @@ def score_yc(gemini: Gemini, profile: str, companies: list[dict]) -> list[dict]:
                     "round": f"YC {c.get('batch')}" if c.get("batch") else "", "amount": "",
                     "fit_score": fit, "hires_non_engineering": r.get("hires_non_engineering", True),
                     "reason": r.get("reason") or "", "found_via": "Y Combinator directory",
+                    "about": f"{c.get('one_liner') or ''}. {(c.get('long_description') or '')[:800]}",
                     "yc_slug": c.get("slug") or ""})
     return out
+
+
+# --------------------------------------------------------------------------- #
+# Reaching out before a job is posted
+# --------------------------------------------------------------------------- #
+
+OUTREACH_SYSTEM = """You help a job seeker reach out to companies that just \
+raised money, BEFORE a matching job is posted. The job seeker's profile (and \
+resume, if included) is below.
+
+For EACH company, return:
+{"id": "<id>", "contact": "<a specific person named in the text, with their role, \
+e.g. 'Jane Doe, CEO'; if nobody suitable is named, the best role to contact, e.g. \
+'Founder/CEO' or 'Head of Operations'>", "find_them": "<one short tip for finding \
+that person, e.g. 'LinkedIn: Acme head of operations'>", "note": "<a warm, specific \
+outreach note of at most 90 words from the job seeker to that person: congratulate \
+them on the news, connect 1-2 concrete things from the job seeker's background to \
+what the company is doing, and ask for a short chat about program/operations roles \
+as they grow. No placeholders except signing off with [Your name].>"}
+
+Reply with JSON only: a list with one object per company.
+
+JOB SEEKER PROFILE:
+"""
+
+
+def draft_outreach(gemini: Gemini, profile: str, companies: list[dict], article_text: dict[str, str]) -> None:
+    """Adds 'contact', 'find_them' and 'note' to each company dict, in place (one AI call)."""
+    if not companies:
+        return
+    blocks = []
+    for i, c in enumerate(companies, 1):
+        context = article_text.get(c.get("article") or "", "") or c.get("about") or ""
+        blocks.append(f"### Company id: {i}\nName: {c.get('company') or c.get('name')}\n"
+                      f"What they do: {c.get('sector') or ''}; {c.get('reason') or ''}\n"
+                      f"News: {c.get('round') or ''} {c.get('amount') or ''}\n"
+                      f"Source text: {context[:1500]}\n")
+    data = gemini.ask_json(OUTREACH_SYSTEM + profile.strip(), "Draft outreach for these companies.\n\n" + "\n".join(blocks))
+    for r in as_list(data, "companies"):
+        try:
+            c = companies[int(str(r.get("id")).strip().lstrip("#")) - 1]
+        except (TypeError, ValueError, IndexError, AttributeError):
+            continue
+        c["contact"] = str(r.get("contact") or "").strip()
+        c["find_them"] = str(r.get("find_them") or "").strip()
+        c["note"] = str(r.get("note") or "").strip()
+
+
+def watched_in_news(settings: dict, articles: list[dict]) -> list[dict]:
+    """Articles that mention a company you're watching (settings + companies.yaml)."""
+    names = [str(n).strip() for n in settings["discovery"].get("watch_for_funding") or [] if str(n).strip()]
+    try:
+        data = yaml.safe_load(COMPANIES_FILE.read_text(encoding="utf-8")) or {}
+        names += [str(c.get("name")) for c in (data.get("companies") or []) if isinstance(c, dict) and c.get("name")]
+    except yaml.YAMLError:
+        pass
+    hits, seen = [], set()
+    for name in dict.fromkeys(names):
+        if len(norm_name(name)) < 3:
+            continue
+        pat = re.compile(r"(?<![\w])" + re.escape(name) + r"(?![\w])", re.I)
+        for a in articles:
+            if (name, a["link"]) in seen:
+                continue
+            if pat.search(a["title"]) or pat.search(a["text"][:3000]):
+                seen.add((name, a["link"]))
+                hits.append({"name": name, "title": a["title"], "link": a["link"], "feed": a["feed"]})
+    return hits
 
 
 # --------------------------------------------------------------------------- #
@@ -370,9 +439,27 @@ def append_companies(added: list[dict]) -> None:
 # Email
 # --------------------------------------------------------------------------- #
 
-def build_summary(added: list[dict], no_board: list[dict], notes: list[str], stats: dict) -> str:
+def _outreach_html(c: dict) -> str:
+    if not c.get("note"):
+        return ""
+    esc = html.escape
+    who = esc(c.get("contact") or "")
+    tip = f" <span style='color:#888;'>({esc(c['find_them'])})</span>" if c.get("find_them") else ""
+    return (f"<div style='margin-top:6px;padding:8px 10px;background:#f4f7fb;border-radius:6px;font-size:13px;'>"
+            f"<b>Reach out to:</b> {who}{tip}<div style='margin-top:4px;white-space:pre-wrap;'>{esc(c['note'])}</div></div>")
+
+
+def build_summary(added: list[dict], no_board: list[dict], notes: list[str], stats: dict,
+                  watched: list[dict] | None = None) -> str:
     esc = html.escape
     parts = []
+    if watched:
+        parts.append("<h3 style='font-size:16px;margin:20px 0 6px;'>Companies you're watching are in the news</h3>"
+                     "<div style='color:#666;font-size:13px;'>New funding usually means hiring soon. A good moment to reach out.</div>")
+        for w in watched:
+            parts.append(f"<div style='padding:6px 0;'><b>{esc(w['name'])}</b>: "
+                         f"<a href='{esc(w['link'])}' style='color:#0b57d0;'>{esc(w['title'])}</a>"
+                         f" <span style='color:#888;font-size:12px;'>({esc(w['feed'])})</span></div>")
     if added:
         parts.append("<h3 style='font-size:16px;margin:20px 0 6px;'>Added to your company list</h3>")
         for a in added:
@@ -382,7 +469,7 @@ def build_summary(added: list[dict], no_board: list[dict], notes: list[str], sta
                 f" <span style='color:#666;'>&middot; {esc(a['sector'])}{' &middot; ' + esc(a['round']) if a['round'] else ''}"
                 f"{' ' + esc(a['amount']) if a['amount'] else ''} &middot; {a['jobs']} open jobs"
                 f"{' &middot; via ' + esc(a['found_via']) if a.get('found_via') else ''}</span>"
-                f"<div>{esc(a['reason'])}</div></div>")
+                f"<div>{esc(a['reason'])}</div>{_outreach_html(a)}</div>")
     else:
         parts.append("<p>No new companies were added this week.</p>")
     no_board = sorted(no_board, key=lambda c: -c.get("fit_score", 0))
@@ -399,7 +486,7 @@ def build_summary(added: list[dict], no_board: list[dict], notes: list[str], sta
             parts.append(
                 f"<div style='padding:8px 0;border-bottom:1px solid #eee;'><b>{esc(c['company'])}</b>"
                 f" <span style='color:#666;'>&middot; {esc(c.get('sector') or '')} &middot; fit {c['fit_score']}</span>"
-                f" &middot; {link}<div>{esc(c.get('reason') or '')}</div></div>")
+                f" &middot; {link}<div>{esc(c.get('reason') or '')}</div>{_outreach_html(c)}</div>")
     if extra_count:
         parts.append(f"<div style='color:#666;font-size:13px;margin-top:6px;'>...and {extra_count} more lower-scoring ones.</div>")
     if notes:
@@ -441,7 +528,8 @@ def run(dry_run: bool) -> int:
 
     use_yc = bool(cfg.get("yc_directory", True))
     gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings,
-                    max_calls=int(cfg["max_ai_calls"]) + (1 if use_yc else 0))
+                    max_calls=int(cfg["max_ai_calls"]) + (1 if use_yc else 0)
+                    + (1 if cfg.get("outreach_notes", True) else 0))
     profile = load_profile()
     found, read_links = pick_companies(gemini, profile, articles, int(cfg["articles_per_ai_call"]), notes)
     taken = existing_keys()
@@ -491,6 +579,8 @@ def run(dry_run: bool) -> int:
             if norm_name(slug) in taken:
                 continue
             entry = {"name": c["company"], "platform": platform, "slug": slug, "date": today,
+                     "company": c["company"], "article": c.get("article") or "", "about": c.get("about") or "",
+                     "fit_score": c.get("fit_score", 0),
                      "reason": c.get("reason") or "", "sector": c.get("sector") or "",
                      "found_via": c.get("found_via") or "",
                      "round": c.get("round") or "", "amount": c.get("amount") or "",
@@ -506,11 +596,23 @@ def run(dry_run: bool) -> int:
                                        "website": c.get("website") or ""}
             log(f"  none   {c['company']:<30} (fit {c['fit_score']}) no job board found")
 
+    watched = watched_in_news(settings, articles)
+    if watched:
+        log(f"\n{len(watched)} news stories mention companies you're watching.")
+    if cfg.get("outreach_notes", True) and (added or no_board):
+        targets = sorted(added + no_board, key=lambda c: -c.get("fit_score", 0))[: int(cfg["outreach_max"])]
+        try:
+            draft_outreach(gemini, profile, targets, {a["link"]: a["text"] for a in articles})
+            log(f"Drafted outreach notes for {sum(1 for t in targets if t.get('note'))} companies.")
+        except Exception as e:  # noqa: BLE001
+            log(f"  outreach drafting failed: {e}")
+            notes.append(f"Couldn't draft the outreach notes this week ({e}).")
+
     stats = {"articles": len(read_links), "candidates": len(candidates), "yc": len(yc_scored)}
     if dry_run:
         log(f"\nDry run: would add {len(added)} companies; nothing saved or emailed.")
         (DISCOVERY_STATE_FILE.parent / "preview_discovery.html").write_text(
-            build_summary(added, no_board, notes, stats), encoding="utf-8")
+            build_summary(added, no_board, notes, stats, watched), encoding="utf-8")
         return 0
 
     if added:
@@ -526,7 +628,9 @@ def run(dry_run: bool) -> int:
 
     subject = (f"Weekly discovery: {len(added)} compan{'ies' if len(added) != 1 else 'y'} added"
                + (f", {len(no_board)} to check by hand" if no_board else "") + f" - {today}")
-    send_email(subject, build_summary(added, no_board, notes, stats))
+    if watched:
+        subject = subject.replace(" - ", f", {len(watched)} watched-company news - ", 1)
+    send_email(subject, build_summary(added, no_board, notes, stats, watched))
     log(f"\nEmail sent: {subject}")
     if notes:
         log("\nProblems this run:\n  - " + "\n  - ".join(notes))
