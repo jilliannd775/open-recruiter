@@ -1950,6 +1950,14 @@
    "team_size": 16,
    "website": "https://www.deepnight.com"
   },
+  "deepreach-inc": {
+   "checked": "2026-09-26",
+   "name": "DeepReach Inc.",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "http://www.deepreach.ai"
+  },
   "dench-com": {
    "checked": "2026-09-25",
    "name": "Dench.com",
@@ -3265,6 +3273,14 @@
    "status": "none",
    "team_size": 12,
    "website": "https://www.inbuild.ai/"
+  },
+  "indemni": {
+   "checked": "2026-09-26",
+   "name": "Indemni",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "http://www.indemni.com"
   },
   "inevent": {
    "checked": "2026-09-25",
@@ -7879,5 +7895,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-09-25"
+ "last_build": "2026-09-26"
 }
