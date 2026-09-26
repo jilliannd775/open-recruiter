@@ -11,5 +11,5 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: pip install pyyaml playwright && which google-chrome && google-chrome --version
+      - run: pip install pyyaml playwright
       - run: python3 .github/scratch/explore.py

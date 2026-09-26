@@ -537,10 +537,81 @@ def fill_details(jobs: list[Job], limit: int = 80) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Hidden Chrome for careers pages built by scripts (optional: needs playwright)
+# --------------------------------------------------------------------------- #
+
+_PW = None
+_BROWSER = None
+_BROWSER_FAILED = False
+
+
+def browser_available() -> bool:
+    if _BROWSER_FAILED or os.environ.get("JOB_ALERTS_NO_BROWSER"):
+        return False
+    try:
+        import playwright  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
+def _browser():
+    global _PW, _BROWSER, _BROWSER_FAILED
+    if _BROWSER is None:
+        import atexit
+        from playwright.sync_api import sync_playwright
+        try:
+            _PW = sync_playwright().start()
+            try:
+                _BROWSER = _PW.chromium.launch(channel="chrome", headless=True)  # GitHub's runners have Chrome
+            except Exception:  # noqa: BLE001
+                _BROWSER = _PW.chromium.launch(headless=True)
+        except Exception as e:  # noqa: BLE001
+            _BROWSER_FAILED = True
+            log(f"  (couldn't start the hidden browser: {e})")
+            return None
+
+        def _close():
+            try:
+                _BROWSER.close()
+                _PW.stop()
+            except Exception:  # noqa: BLE001
+                pass
+        atexit.register(_close)
+    return _BROWSER
+
+
+def render_page(url: str, timeout_ms: int = 45000):
+    """Load a page in hidden Chrome. Returns (html, final_url, request_urls, [(link_text, href)]) or None."""
+    browser = _browser()
+    if browser is None:
+        return None
+    page = browser.new_page(user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                                       "Chrome/140.0 Safari/537.36")
+    requests_seen: list[str] = []
+    page.on("request", lambda r: requests_seen.append(r.url))
+    try:
+        try:
+            page.goto(url, wait_until="networkidle", timeout=timeout_ms)
+        except Exception:  # noqa: BLE001  (slow pages: use whatever has loaded)
+            pass
+        html_text = page.content()
+        anchors = page.eval_on_selector_all("a[href]", "els => els.map(e => [e.innerText, e.href])")
+        return html_text, page.url, requests_seen, [(a[0], a[1]) for a in anchors]
+    except Exception:  # noqa: BLE001
+        return None
+    finally:
+        page.close()
+
+
+# --------------------------------------------------------------------------- #
 # Careers-page watcher: any company's own careers page
 # --------------------------------------------------------------------------- #
 
 ATS_PATTERNS = [
+    ("greenhouse", re.compile(r"(?:boards-api|api)\.greenhouse\.io/v1/boards/([\w-]+)")),
+    ("lever", re.compile(r"api\.lever\.co/v0/postings/([\w-]+)")),
+    ("ashby", re.compile(r"api\.ashbyhq\.com/posting-api/job-board/([\w.%-]+)")),
     ("greenhouse", re.compile(r"greenhouse\.io/embed/job_board(?:/js)?\?for=([\w-]+)")),
     ("greenhouse", re.compile(r"(?:boards|job-boards)(?:\.eu)?\.greenhouse\.io/(?!embed)([\w-]+)")),
     ("lever", re.compile(r"jobs\.lever\.co/([\w-]+)")),
@@ -592,6 +663,25 @@ def fetch_careers_page(name: str, url: str, detail_limit: int = 15) -> list[Job]
             continue
         links.append((title, urllib.parse.urljoin(final, href)))
     links = list(dict.fromkeys(links))
+    if not links and browser_available():
+        # Script-built page: load it in a real (hidden) Chrome and look again, including
+        # at the data the page fetched (often a Greenhouse/Lever feed).
+        rendered = render_page(url)
+        if rendered:
+            html_r, final_r, requests_r, anchors_r = rendered
+            ats = detect_ats(html_r + " " + " ".join(requests_r), final_r)
+            if ats:
+                platform, slug = ats
+                jobs = fetch_board({"name": name, "platform": platform, "slug": slug})
+                for j in jobs:
+                    j.source = f"{name} careers page ({PLATFORM_LABELS[platform]})"
+                return jobs
+            final = final_r
+            for text, href in anchors_r:
+                title = re.sub(r"\s+", " ", text or "").strip()
+                if 4 <= len(title) <= 120 and JOB_WORDS.search(title) and href.startswith("http"):
+                    links.append((title, href))
+            links = list(dict.fromkeys(links))
     if not links:
         if len(strip_html(page)) < 2000:
             raise ValueError("this page loads its jobs with JavaScript, so there's nothing to read "
@@ -617,6 +707,10 @@ def fill_page_details(jobs: list[Job], settings: dict, limit: int = 40) -> None:
             req = urllib.request.Request(j.extra["page_detail"], headers={"User-Agent": "Mozilla/5.0 (compatible; " + USER_AGENT + ")"})
             with urllib.request.urlopen(req, timeout=45) as resp:
                 text = strip_html(resp.read().decode("utf-8", "replace"))
+            if len(text) < 600 and browser_available():
+                rendered = render_page(j.extra["page_detail"])
+                if rendered:
+                    text = strip_html(rendered[0])
             j.description = text[:8000]
             m = re.search(r"(remote[^\n.]{0,60}|hybrid[^\n.]{0,60}|on-?site[^\n.]{0,60})", text, re.I)
             j.location = m.group(1).strip() if m else ""
