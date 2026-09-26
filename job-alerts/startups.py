@@ -156,6 +156,7 @@ def sweep(skip: set[tuple[str, str]] | None = None):
             for j in got:
                 # Same strict filters as the big job boards (target titles/keywords).
                 j.kind = "aggregator"
+                j.extra["sweep"] = True
                 j.source = f"{b['name']} careers ({PLATFORM_LABELS[b['platform']]})"
                 j.source_url = CAREERS_URLS[b["platform"]].format(slug=b["slug"])
             jobs.extend(got)

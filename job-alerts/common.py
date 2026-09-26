@@ -548,6 +548,10 @@ def prefilter(job: Job, settings: dict) -> str | None:
     loc = job.location or ""
     if job.workplace in ("onsite", "hybrid"):
         return f"listed as {job.workplace}"
+    # Startup-list boards: "remote" buried in a description is usually boilerplate,
+    # so the job itself must be marked remote, or say so in its title/location.
+    if job.extra.get("sweep") and job.workplace != "remote" and not REMOTE_WORD.search(f"{title} {loc}"):
+        return "startup job not listed as remote"
     if job.workplace != "remote":
         if HYBRID_OR_ONSITE.search(loc) and not REMOTE_WORD.search(loc):
             return "location says onsite/hybrid"
