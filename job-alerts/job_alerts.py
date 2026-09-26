@@ -33,10 +33,11 @@ from datetime import datetime
 
 import sources
 import startups
-from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, fetch_board,
-                    fill_details, find_board, load_companies, load_json_state, load_profile, load_settings, log,
-                    missing_secrets, prefilter, priority, prune_dated, save_json_state, send_email,
-                    source_on, email_shell, today_pacific)
+from common import (HERE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
+                    fetch_board, fill_details, find_board, format_salary, load_companies,
+                    load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
+                    prefilter, priority, prune_dated, save_json_state, send_email, source_on,
+                    today_pacific, years_required)
 
 SEND_HOUR_PACIFIC = 7
 
@@ -53,6 +54,9 @@ or outside the US.
 Seniority matters: match the candidate's target level in the profile. Roles \
 clearly above it (Director, VP, Head of, Principal, Staff, C-level other than \
 Chief of Staff) score below 50 even if the function fits.
+Experience and pay: follow the profile's experience range and salary target. \
+A role that clearly asks for far more experience, or pays clearly below the \
+target, scores lower; if pay or years aren't listed, don't penalize.
 A job that is not fully remote or not open to US-based candidates must score below 40.
 
 Reply with JSON only: a list with one object per job, in the same order, shaped:
@@ -74,9 +78,11 @@ def score_batch(gemini: Gemini, profile: str, jobs: list[Job], max_chars: int) -
     """Returns {job.uid: {"score", "reason", "remote"}} for one batch."""
     blocks = []
     for i, j in enumerate(jobs, 1):
+        pay, yrs = format_salary(parse_salary(j)), years_required(j)
         blocks.append(f"### Job id: {i}\nTitle: {j.title}\nCompany: {j.company}\n"
                       f"Location: {j.location or 'not listed'}\n"
                       f"Workplace type: {j.workplace or 'not listed'}\n"
+                      f"Pay: {pay or 'not listed'}; experience asked: {f'{yrs}+ years' if yrs else 'not stated'}\n"
                       f"Description (truncated): {j.description[:max_chars]}\n")
     data = gemini.ask_json(SCORE_SYSTEM + profile.strip(),
                            "Score each of these jobs for the candidate.\n\n" + "\n".join(blocks))
@@ -115,7 +121,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
         rows.append(f"""
 <tr><td style="padding:14px 0;border-bottom:1px solid #e5e5e5;">
   <div style="font-size:16px;font-weight:600;"><a href="{esc(job.url)}" style="color:#0b57d0;text-decoration:none;">{esc(job.title)}</a></div>
-  <div style="color:#444;margin-top:2px;">{esc(job.company)} &middot; {esc(r['remote'])}{' &middot; ' + esc(job.location) if job.location else ''}</div>
+  <div style="color:#444;margin-top:2px;">{esc(job.company)} &middot; {esc(r['remote'])}{' &middot; ' + esc(job.location) if job.location else ''}{' &middot; ' + esc(format_salary(parse_salary(job))) if parse_salary(job) else ''}</div>
   <div style="margin-top:6px;"><span style="display:inline-block;background:{score_color(r['score'])};color:#fff;border-radius:10px;padding:1px 8px;font-size:13px;font-weight:600;">{r['score']}</span>
   <span style="color:#222;">{esc(r['reason'])}</span></div>
   <div style="margin-top:6px;font-size:13px;"><a href="{esc(job.url)}" style="color:#0b57d0;">Apply &rarr;</a>

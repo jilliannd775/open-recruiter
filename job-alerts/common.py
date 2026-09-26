@@ -57,8 +57,8 @@ DEFAULT_SETTINGS = {
     "score_threshold": 65,
     "gemini_model": "gemini-flash-latest",
     "fallback_model": "gemini-flash-lite-latest",
-    "jobs_per_ai_call": 20,
-    "max_ai_calls_per_run": 15,
+    "jobs_per_ai_call": 25,
+    "max_ai_calls_per_run": 40,
     "seconds_between_ai_calls": 7,
     "max_description_chars": 1500,
     "require_remote_mention": True,
@@ -96,6 +96,8 @@ DEFAULT_SETTINGS = {
         "staff", "president", "partner", "general manager",
     ],
     "drop_if_ai_says_not_remote_us": True,
+    "min_salary": 130000,
+    "max_years_experience": 6,
     "job_board_title_keywords": [
         "program", "project", "operations", "ops", "strategy", "analyst",
         "product owner", "chief of staff", "special projects", "implementation",
@@ -562,6 +564,15 @@ def prefilter(job: Job, settings: dict) -> str | None:
 
     if job.extra.get("non_us"):
         return "remote, but not open to the US"
+
+    min_pay = int(settings.get("min_salary") or 0)
+    pay = parse_salary(job)
+    if min_pay and pay and pay[1] < min_pay:
+        return f"pay tops out below ${min_pay // 1000}k"
+    max_years = int(settings.get("max_years_experience") or 0)
+    years = years_required(job)
+    if max_years and years and years > max_years:
+        return f"asks for more than {max_years} years' experience"
     country = (job.extra.get("country") or "").upper()
     if country and country not in ("US", "USA", "UNITED STATES"):
         if not US_HINT.search(loc):
@@ -569,6 +580,52 @@ def prefilter(job: Job, settings: dict) -> str | None:
     if NON_US.search(loc) and not US_HINT.search(loc):
         return "location outside the US"
     return None
+
+
+_MONEY = r"\$\s?(\d{2,3}(?:,\d{3})+(?:\.\d+)?|\d{2,3}(?:\.\d+)?\s?[kK])"
+SALARY_RANGE = re.compile(_MONEY + r"\s*(?:USD)?\s*(?:-|–|—|to)\s*" + _MONEY)
+HOURLY_RANGE = re.compile(r"\$\s?(\d{2,3}(?:\.\d{1,2})?)\s*(?:-|–|—|to)\s*\$?\s?(\d{2,3}(?:\.\d{1,2})?)\s*"
+                          r"(?:/|per|an)\s*(?:hr|hour)", re.I)
+YEARS_REQUIRED = re.compile(
+    r"(?:at least|minimum of|min\.?)?\s*(\d{1,2})\s*(?:\+|or more)?\s*(?:-|–|to)?\s*(?:\d{1,2})?\s*\+?\s*"
+    r"(?:years|yrs)\b[^.\n]{0,60}?\bexperience", re.I)
+
+
+def _money(v: str) -> float:
+    v = v.replace(",", "").replace(" ", "")
+    return float(v[:-1]) * 1000 if v[-1:] in "kK" else float(v)
+
+
+def parse_salary(job: "Job") -> tuple[int, int] | None:
+    """Yearly USD pay range from the board's own fields or the description, or None."""
+    if job.extra.get("salary"):
+        lo, hi = job.extra["salary"]
+        return int(lo), int(hi)
+    text = job.description or ""
+    for m in SALARY_RANGE.finditer(text):
+        lo, hi = _money(m.group(1)), _money(m.group(2))
+        if 20000 <= lo <= hi <= 1_000_000:
+            return int(lo), int(hi)
+    m = HOURLY_RANGE.search(text)
+    if m:
+        lo, hi = float(m.group(1)) * 2080, float(m.group(2)) * 2080
+        if 20000 <= lo <= hi <= 1_000_000:
+            return int(lo), int(hi)
+    return None
+
+
+def years_required(job: "Job") -> int | None:
+    """The smallest 'N+ years of experience' the posting asks for, or None."""
+    found = [int(m.group(1)) for m in YEARS_REQUIRED.finditer(job.description or "")]
+    found = [n for n in found if 0 < n <= 30]
+    return min(found) if found else None
+
+
+def format_salary(rng: tuple[int, int] | None) -> str:
+    if not rng:
+        return ""
+    lo, hi = rng
+    return f"${lo // 1000}k" if lo == hi else f"${lo // 1000}k–${hi // 1000}k"
 
 
 TARGET_WORDS = re.compile(

@@ -20,6 +20,10 @@ English. Be specific about what you want and what you don't.
 - **Not** Director, VP, Head of, Principal, Staff or other executive roles
   (except Chief of Staff, below).
 
+## Experience and pay
+- Looking for roles asking **about 2-5 years** of experience.
+- Target base salary **$130k+ a year**, if possible.
+
 ## Target titles
 - Technical Program Manager
 - R&D Program Manager

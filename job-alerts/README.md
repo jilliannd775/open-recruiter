@@ -320,6 +320,17 @@ discovery added. A company discovery added and you deleted will not come back.
 
 ---
 
+## Pay and experience
+
+In `settings.yaml`:
+- **`min_salary: 130000`**: a job is skipped only when its posted pay range
+  tops out below this. Jobs that don't list pay are kept, since many don't.
+- **`max_years_experience: 6`**: a job is skipped only when it clearly asks
+  for more (e.g. "8+ years of experience"). Jobs that don't say are kept.
+
+Your target (2-5 years, $130k+) is also in `profile.md`, so the AI scores
+jobs that fit it higher. When a job lists pay, the email shows it.
+
 ## Choosing which job titles you see
 
 Two lists in `settings.yaml` control this:
@@ -368,9 +379,9 @@ companies in the weekly discovery. Changes apply from the next run.
      scientist titles (unless the title also says "program" or "project").
      It also drops jobs listed as onsite, hybrid or outside the US, jobs that
      never mention remote, and job-board titles outside your target words.
-  2. Jobs go to the AI **20 at a time** in one request, with at most **15
-     requests a day** in total. Reading Hacker News uses up to 3 of those.
-     Anything left over waits until tomorrow; nothing is lost.
+  2. Jobs go to the AI **25 at a time** in one request, with at most **40
+     requests a day** in total (up to 1,000 jobs). Reading Hacker News uses up
+     to 3 of those. Anything left over waits until tomorrow; nothing is lost.
   3. Weekly discovery uses at most **5 requests**, on Mondays: 4 for the news
      and 1 for the Y Combinator directory.
   4. If the free daily limit on the main model runs out, it switches to

@@ -37,6 +37,16 @@ SOURCE_HOMES = {
 }
 
 
+def _salary_extra(lo, hi) -> dict:
+    """{'salary': (lo, hi)} when a board gives a sensible yearly USD range."""
+    try:
+        lo, hi = float(lo or 0), float(hi or 0)
+    except (TypeError, ValueError):
+        return {}
+    lo, hi = lo or hi, hi or lo
+    return {"salary": (lo, hi)} if 20000 <= lo <= hi <= 1_000_000 else {}
+
+
 def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (text or "").lower()).strip("-")[:60]
 
@@ -58,7 +68,8 @@ def fetch_remotive() -> list[Job]:
             url=j.get("url") or "",                      # Remotive's own page, as their terms ask
             location=j.get("candidate_required_location") or "",
             workplace="remote",
-            description=strip_html(j.get("description") or ""),
+            description=((f"Salary: {j['salary']}. " if j.get("salary") else "")
+                         + strip_html(j.get("description") or "")),
             source="Remotive", source_url=SOURCE_HOMES["Remotive"], kind="aggregator",
         ))
     return jobs
@@ -86,6 +97,7 @@ def fetch_remoteok() -> list[Job]:
             workplace="remote",
             description=strip_html(j.get("description") or ""),
             source="Remote OK", source_url=SOURCE_HOMES["Remote OK"], kind="aggregator",
+            extra=_salary_extra(j.get("salary_min"), j.get("salary_max")),
         ))
     return jobs
 
@@ -120,6 +132,8 @@ def fetch_himalayas(searches: list[str]) -> list[Job]:
                 workplace="remote",
                 description=strip_html(j.get("description") or j.get("excerpt") or ""),
                 source="Himalayas", source_url=SOURCE_HOMES["Himalayas"], kind="aggregator",
+                extra=_salary_extra(j.get("minSalary"), j.get("maxSalary"))
+                if (j.get("currency") or "USD") == "USD" and (j.get("salaryPeriod") or "annual") == "annual" else {},
             )
     if errors and not jobs:
         raise RuntimeError("; ".join(errors[:3]))
