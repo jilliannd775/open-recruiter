@@ -97,6 +97,8 @@ DEFAULT_SETTINGS = {
         "himalayas": True,
         "weworkremotely": True,
         "startup_boards": True,
+        "jobicy": True,
+        "workingnomads": True,
         "jsearch": True,
         "adzuna": True,
         "usajobs": True,

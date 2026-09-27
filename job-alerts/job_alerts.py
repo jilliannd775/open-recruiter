@@ -29,6 +29,7 @@ import argparse
 import html
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta
 
@@ -128,7 +129,7 @@ def _tracker_buttons(job: Job, r: dict) -> str:
     style = ("display:inline-block;margin-top:8px;margin-right:8px;padding:4px 10px;border:1px solid #0e6e6a;"
              "border-radius:6px;color:#0e6e6a;text-decoration:none;font-size:13px;font-weight:600;")
     return (f'<div><a href="{html.escape(applied)}" style="{style}">&#10003; I applied</a>'
-            f'<a href="{html.escape(saved)}" style="{style}border-color:#8a94a6;color:#4a5568;">&#9734; Save</a></div>')
+            f'<a href="{html.escape(saved)}" style="{style}border-color:#8a94a6;color:#4a5568;">&#9734; Want to apply</a></div>')
 
 
 def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, threshold: int) -> str:
@@ -227,6 +228,8 @@ def collect_fixed_sources(settings: dict, notes: list[str], seen: dict | None = 
         ("himalayas", "Himalayas", lambda: sources.fetch_himalayas(settings.get("himalayas_searches") or [])),
         ("weworkremotely", "We Work Remotely",
          lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
+        ("jobicy", "Jobicy", sources.fetch_jobicy),
+        ("workingnomads", "Working Nomads", sources.fetch_workingnomads),
     ]
     for key, label, fetch in aggregators + keyed_sources(settings, seen):
         if not source_on(settings, key):
@@ -312,6 +315,7 @@ def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
             "id": job.uid, "date": today, "t": job.title, "c": job.company, "u": job.url,
             "l": r.get("remote") or job.location, "p": format_salary(parse_salary(job)), "s": r.get("score"),
             "src": job.source, "why": (r.get("reason") or "")[:240],
+            "d": re.sub(r"\s+", " ", job.description or "")[:3000],
         })
     cutoff = (datetime.now(PACIFIC) - timedelta(days=60)).date().isoformat()
     kept = sorted((e for e in entries.values() if (e.get("date") or "") >= cutoff), key=lambda e: (e["date"], e["id"]))
@@ -506,6 +510,8 @@ def check_all(probe_names: list[str]) -> int:
         ("himalayas", "Himalayas", lambda: sources.fetch_himalayas((settings.get("himalayas_searches") or [])[:2])),
         ("weworkremotely", "We Work Remotely",
          lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
+        ("jobicy", "Jobicy", sources.fetch_jobicy),
+        ("workingnomads", "Working Nomads", sources.fetch_workingnomads),
     ]
     for key, label, fetch in checks + keyed_sources(settings, None, check=True):
         state = "on " if source_on(settings, key) else "off"
