@@ -15,6 +15,10 @@ jobs are only emailed to you, never republished.
   * We Work Remotely: public RSS feeds, one request per feed a day. Every
     job links to its We Work Remotely page and is credited to them.
 
+  * Jobicy: free remote-jobs API, US-eligible jobs; asks for a link back and
+    at most one request an hour. We use 1 a day.
+  * Working Nomads: free public job feed; one request a day, links to their page.
+
 These three need a free key (a GitHub secret); each is skipped until its key is added:
   * JSearch (RapidAPI): Google for Jobs results. The free plan has a small
     monthly allowance, so searches are capped per day and per month.
@@ -42,6 +46,8 @@ SOURCE_HOMES = {
     "Remote OK": "https://remoteok.com",
     "Himalayas": "https://himalayas.app",
     "We Work Remotely": "https://weworkremotely.com",
+    "Jobicy": "https://jobicy.com",
+    "Working Nomads": "https://www.workingnomads.com",
     "Google Jobs": "https://www.google.com/search?q=jobs&ibp=htl;jobs",
     "Adzuna": "https://www.adzuna.com",
     "USAJobs": "https://www.usajobs.gov",
@@ -160,6 +166,56 @@ def fetch_himalayas(searches: list[str]) -> list[Job]:
     if errors and not jobs:
         raise RuntimeError("; ".join(errors[:3]))
     return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# Jobicy and Working Nomads
+# --------------------------------------------------------------------------- #
+
+def fetch_jobicy() -> list[Job]:
+    url = "https://jobicy.com/api/v2/remote-jobs?count=100&geo=usa"
+    data = get_with_retries(lambda: http_json(url, timeout=90), "Jobicy")
+    if not isinstance(data, dict) or not isinstance(data.get("jobs"), list):
+        raise ValueError("unexpected Jobicy response shape")
+    jobs = []
+    for j in data["jobs"]:
+        if not isinstance(j, dict) or not j.get("id"):
+            continue
+        usd = (j.get("salaryCurrency") or "USD").upper() == "USD"
+        jobs.append(Job(
+            uid=f"jobicy:{j['id']}",
+            company=strip_html(j.get("companyName") or "").strip(),
+            title=strip_html(j.get("jobTitle") or "").strip(),
+            url=j.get("url") or "",                      # Jobicy's own page, as their terms ask
+            location=j.get("jobGeo") or "USA",
+            workplace="remote",
+            description=strip_html(j.get("jobDescription") or j.get("jobExcerpt") or ""),
+            source="Jobicy", source_url=SOURCE_HOMES["Jobicy"], kind="aggregator",
+            extra=_salary_extra(j.get("annualSalaryMin"), j.get("annualSalaryMax")) if usd else {},
+        ))
+    return jobs
+
+
+def fetch_workingnomads() -> list[Job]:
+    data = get_with_retries(lambda: http_json("https://www.workingnomads.com/api/exposed_jobs/", timeout=90),
+                            "Working Nomads")
+    if not isinstance(data, list):
+        raise ValueError("unexpected Working Nomads response shape")
+    jobs = []
+    for j in data:
+        if not isinstance(j, dict) or not j.get("url"):
+            continue
+        jobs.append(Job(
+            uid=f"workingnomads:{j['url'].rstrip('/').rsplit('/', 1)[-1]}",
+            company=strip_html(j.get("company_name") or "").strip(),
+            title=strip_html(j.get("title") or "").strip(),
+            url=j["url"],                                # Working Nomads' own page
+            location=j.get("location") or "",
+            workplace="remote",
+            description=strip_html(j.get("description") or ""),
+            source="Working Nomads", source_url=SOURCE_HOMES["Working Nomads"], kind="aggregator",
+        ))
+    return jobs
 
 
 # --------------------------------------------------------------------------- #

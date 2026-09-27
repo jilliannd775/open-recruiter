@@ -16,6 +16,8 @@ sources:
   remoteok: true         # remoteok.com
   himalayas: true        # himalayas.app
   weworkremotely: true   # weworkremotely.com
+  jobicy: true           # jobicy.com (US-eligible remote jobs)
+  workingnomads: true    # workingnomads.com
   startup_boards: true   # every hiring US startup on the startup board list (see below)
   # These three need a free key added as a GitHub secret (see the README).
   # Until the key is there they're skipped quietly.
