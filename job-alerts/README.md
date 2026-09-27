@@ -30,11 +30,13 @@ so you can check those yourself.
 | **Remote OK** | Remote job board (remoteok.com). The 100 newest jobs | Daily |
 | **Himalayas** | Remote job board (himalayas.app). Searches for your target titles, US-eligible, newest first | Daily |
 | **We Work Remotely** | One of the biggest remote job boards (weworkremotely.com). Its management & finance, product, and "all other" categories | Daily |
+| **Jobicy** | Remote job board (jobicy.com), US-eligible jobs. The 100 newest | Daily |
+| **Working Nomads** | Remote job board (workingnomads.com). Its newest jobs | Daily |
 | **Google Jobs** *(free key)* | The job listings Google shows in search, which pulls from LinkedIn, Indeed, ZipRecruiter, company sites and more. Read through the JSearch service. Your top 6 searches a day | Daily |
 | **Adzuna** *(free key)* | A big job search site with lots of Indeed-style listings. Remote jobs whose title matches your searches | Daily |
 | **USAJobs** *(free key)* | US federal government jobs (NASA, DOE, DoD and so on) that are remote | Daily |
 
-The first seven are free and need no sign-up. The last three need a free key;
+The first nine are free and need no sign-up. The last three need a free key;
 see "Adding Google Jobs, Adzuna and USAJobs" below. Until you add a key, that
 source is quietly skipped. Each one's terms ask that you credit it
 and link back to its listing. The email does that for every job ("via
@@ -269,7 +271,7 @@ All of these are in `settings.yaml`. Change the word, then **Commit changes**.
 
 | To turn off... | Change this |
 |---|---|
-| One job source (e.g. Remote OK) | Under `sources:`, set `remoteok: false`. The others are `company_boards`, `startup_boards`, `hacker_news`, `remotive`, `himalayas`, `weworkremotely`, `jsearch` (Google Jobs), `adzuna` and `usajobs` |
+| One job source (e.g. Remote OK) | Under `sources:`, set `remoteok: false`. The others are `company_boards`, `startup_boards`, `hacker_news`, `remotive`, `himalayas`, `weworkremotely`, `jobicy`, `workingnomads`, `jsearch` (Google Jobs), `adzuna` and `usajobs` |
 | The Y Combinator directory | Under `discovery:`, set `yc_directory: false` |
 | One news feed | Under `discovery:` then `feeds:`, set that feed's `enabled: false` |
 | Weekly discovery entirely | Under `discovery:`, set `enabled: false` |
@@ -375,7 +377,7 @@ discovery added. A company discovery added and you deleted will not come back.
 Your private tracker page: <https://claude.ai/artifact/2Zf1bitQ7sps5Z6wdyhkUq>
 (only you can open it, signed in to claude.ai). Bookmark it.
 
-- **From the daily email:** every job has **✓ I applied** and **☆ Save**
+- **From the daily email:** every job has **✓ I applied** and **☆ Want to apply**
   buttons. Tap one and the tracker opens with that job ready; tap the green
   button to add it. Applying sets a follow-up reminder for a week later.
 - **From the Monday email:** each outreach note has **Track this outreach**,
@@ -391,6 +393,16 @@ Your private tracker page: <https://claude.ai/artifact/2Zf1bitQ7sps5Z6wdyhkUq>
   how to reach them, date, what you discussed). Follow-ups due in the next
   3 days are listed at the top. Use **+ Add a job** for anything you found
   yourself.
+
+- **Resumes tab (your resume partner):** paste your resume once; it's kept
+  privately in the tracker, never in this public repository. Jobs you mark
+  **☆ Want to apply** are tailored each morning automatically, or tap
+  **Tailor** to do it right away. Similar jobs share one version (for
+  example one resume for three product operations roles). Each version has
+  a Word download, what changed, gaps to prepare for, and a short note to
+  the recruiter for each job. It never makes up experience. Tailoring uses
+  your Claude plan, not the Gemini credit. Job descriptions for this come
+  from `matches_log.json` (the first 3,000 characters of each emailed job).
 
 The **What's set up** tab in the tracker lists everything this system does.
 
