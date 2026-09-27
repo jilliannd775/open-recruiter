@@ -385,7 +385,7 @@ Your private tracker page: <https://claude.ai/artifact/2Zf1bitQ7sps5Z6wdyhkUq>
 - **New matches fill in by themselves:** every job in your daily email is
   saved to `matches_log.json`, and a daily Claude routine (about 8:10am
   Pacific) copies the new ones into the tracker under **New match**. Open one
-  and tap **✓ I applied**, **☆ Save** or **Not for me**. They stay out of
+  and tap **✓ I applied**, **☆ Want to apply** or **Not for me**. They stay out of
   your main list until you do.
 - **In the tracker:** each job has a stage (New match, Saved, Applied, Talking,
   Interviewing, Offer, Closed), the date you applied, a follow-up date, the
