@@ -7784,6 +7784,14 @@
    "team_size": 8,
    "website": "https://www.wozcode.com/"
   },
+  "x1": {
+   "checked": "2026-09-27",
+   "name": "x1",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://x1.new/"
+  },
   "yarn-2": {
    "checked": "2026-09-25",
    "name": "Yarn",
@@ -7895,5 +7903,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-09-26"
+ "last_build": "2026-09-27"
 }
