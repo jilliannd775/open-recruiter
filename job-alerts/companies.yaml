@@ -55,3 +55,181 @@ companies:
   # not any of the supported job-board systems (checked every common spelling),
   # so there is no free public feed to read.
 
+  # --- Added automatically by weekly discovery ---
+  # Delete any block you don't want (it won't be re-added), or add
+  # `enabled: false` under it to pause it.
+
+  - name: "Hubble Network"
+    platform: greenhouse
+    slug: "hubblenetwork"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Ideal match for the candidate's physics degree and space/satellite interest, with Series C scale offering abundant TPM and operational roles."
+
+  - name: "TRM Labs"
+    platform: ashby
+    slug: "trm-labs"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Explicitly remote and matches defense-adjacent security interests, directly aligning with your security operations consulting background."
+
+  - name: "Paces"
+    platform: gem
+    slug: "paces"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Exceptional intersection of your favorite sectors (AI applications and clean energy) with strong need for technical workflow and implementation leads."
+
+  - name: "Reality Defender"
+    platform: ashby
+    slug: "realitydefender"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Superb alignment with AI applications and defense-adjacent security, matching your verification layer design and security operations experience."
+
+  - name: "Scale AI"
+    platform: greenhouse
+    slug: "scaleai"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Outstanding match with defense and AI domains, offering plentiful TPM and operations roles that fit your AI workflow design experience."
+
+  - name: "Mazama"
+    platform: smartrecruiters
+    slug: "mazama"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Strong alignment with candidate's physics degree and clean energy interest, with a mature Series B stage supporting technical program and operations roles."
+
+  - name: "Quindar"
+    platform: ashby
+    slug: "quindar"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Strong overlap with satellite operations and your physics degree, with a pure software focus that supports fully remote program roles."
+
+  - name: "Mach9"
+    platform: ashby
+    slug: "mach9"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Software-based AI application dealing with geospatial infrastructure data, well-suited for technical program and implementation managers in remote setups."
+
+  - name: "Baselayer"
+    platform: greenhouse
+    slug: "baselayer"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "San Francisco AI verification startup at Series A scaling its team, well suited for implementation and product operations roles."
+
+  - name: "Gridware"
+    platform: lever
+    slug: "gridware"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Strong match with climate and energy infrastructure priorities, and its mid-sized team actively hires operations and program management roles."
+
+  - name: "Reach"
+    platform: ashby
+    slug: "reach"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Strong alignment with your physics degree and energy research background, though wireless power hardware development typically requires lab presence."
+
+  - name: "River AI"
+    platform: greenhouse
+    slug: "riverai"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Mega Series A AI platform in the US with substantial resources to build out technical program management and operations."
+
+  - name: "Gecko Robotics"
+    platform: ashby
+    slug: "gecko-robotics"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Matches energy, infrastructure, and defense interests with a mature team size that regularly hires operations and technical program managers."
+
+  - name: "Albedo"
+    platform: greenhouse
+    slug: "albedo"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Excellent match for your satellite and physics background, though satellite hardware development can limit fully remote opportunities."
+
+  - name: "Astranis"
+    platform: greenhouse
+    slug: "astranis"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Directly matches your satellite and physics background at scale, though space hardware manufacturing introduces friction with fully remote preferences."
+
+  - name: "Usul"
+    platform: ashby
+    slug: "usul"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Hits both AI applications and defense-adjacent categories with pure software, though a 15-person team offers few mid-level openings."
+
+  - name: "Icarus"
+    platform: greenhouse
+    slug: "icarus"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Strong alignment with defense-adjacent aerospace technology, though physical aircraft assembly typically restricts remote work options."
+
+  - name: "Broccoli AI"
+    platform: ashby
+    slug: "broccoli"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Strong fit for an AI application startup needing implementation and workflow operations, though home contractor services lacks deep-tech appeal."
+
+  - name: "Island"
+    platform: greenhouse
+    slug: "island"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Large US enterprise security unicorn with substantial scale to hire TPM and program delivery roles, aligning with security ops experience."
+
+  - name: "Agency"
+    platform: smartrecruiters
+    slug: "agency"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Matches your enterprise security operations consulting and AI workflow design experience, with software-driven remote viability."
+
+  - name: "Charge Robotics"
+    platform: ashby
+    slug: "charge-robotics"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Directly aligns with your climate and renewable energy interests, but field robotics deployment often demands physical site presence."
+
+  - name: "Heron Power"
+    platform: ashby
+    slug: "heron-power"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "US-based hardware/energy player with scale, likely needing operations and project delivery talent."
+
+  - name: "Mainstay"
+    platform: ashby
+    slug: "mainstay"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "US-based AI automation startup at growth stage hiring business and ops roles, although real estate is outside preferred core sectors."
+
+  - name: "Stoke Space"
+    platform: greenhouse
+    slug: "stokespacetechnologies"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "High thematic alignment with space launch, but hands-on rocket propulsion development heavily favors an onsite engineering team."
+
+  - name: "Human Archive"
+    platform: ashby
+    slug: "humanarchive"
+    tag: discovered
+    added: "2026-09-28"
+    reason: "Matches your AI and process mapping background well, though global hardware deployment may constrain remote arrangements."

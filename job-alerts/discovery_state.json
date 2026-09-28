@@ -1,1 +1,309 @@
-{"articles": {}, "companies": {}, "last_run": null}
+{
+ "articles": {
+  "https://news.crunchbase.com/ai/verifying-ai-agents-baselayer-35m-raise/": "2026-09-28",
+  "https://news.crunchbase.com/venture/2026-global-gaming-startup-funding-up-ai-meshy-decart/": "2026-09-28",
+  "https://news.crunchbase.com/venture/biggest-funding-rounds-cybersecurity-ai-health-island-cyera/": "2026-09-28",
+  "https://news.crunchbase.com/venture/dextr-ai-hospitality-agents-raises-seed-funding/": "2026-09-28",
+  "https://news.crunchbase.com/venture/early-groq-ai-investor-qa-venkatachalam-axiom/": "2026-09-28",
+  "https://news.crunchbase.com/venture/megaround-seriesa-ai-chips-robotics-2026/": "2026-09-28",
+  "https://payloadspace.com/fuse-grows-its-space-portfolio/": "2026-09-28",
+  "https://payloadspace.com/hubble-network-raises-200m-series-c-at-1-6b-valuation/": "2026-09-28",
+  "https://payloadspace.com/rocket-lab-cfo-adam-spice-predicts-more-ma-deals-on-the-horizon/": "2026-09-28",
+  "https://techcrunch.com/2026/09/23/3-days-left-to-save-up-to-200-and-make-impactful-connections-at-techcrunch-disrupt-2026/": "2026-09-28",
+  "https://techcrunch.com/2026/09/23/strictlyvc-at-techcrunch-disrupt-2026-inside-the-changing-rules-of-venture-capital/": "2026-09-28",
+  "https://techcrunch.com/2026/09/23/vc-firm-bessemer-now-has-another-5-75b-to-invest-in-what-else-ai/": "2026-09-28",
+  "https://techcrunch.com/2026/09/24/2-days-left-to-save-up-to-200-on-techcrunch-disrupt-2026-reason-5-7-to-attend/": "2026-09-28",
+  "https://techcrunch.com/2026/09/24/lightspeed-targets-250m-for-new-india-fund-focusing-on-early-stage-ai/": "2026-09-28",
+  "https://techcrunch.com/2026/09/24/meet-the-next-wave-of-vcs-judging-startup-battlefield-200-at-techcrunch-disrupt-2026/": "2026-09-28",
+  "https://techcrunch.com/2026/09/25/ahead-of-u-s-ipo-british-ai-neocloud-nscale-secures-3-36b-in-convertible-finacing/": "2026-09-28",
+  "https://techcrunch.com/2026/09/25/disrupt-2026-layoff-expo-plus-passes-available-for-75-dollars/": "2026-09-28",
+  "https://techcrunch.com/2026/09/25/last-24-hours-to-save-up-to-200-on-techcrunch-disrupt-2026-reason-5-of-5-to-attend-momentum/": "2026-09-28",
+  "https://techcrunch.com/2026/09/28/disrupt-2026-exhibitor-program-extended-until-oct-2/": "2026-09-28",
+  "https://techcrunch.com/2026/09/28/mavi-bets-on-the-ai-boom-creating-demand-for-a-new-kind-of-accountant/": "2026-09-28",
+  "https://thequantuminsider.com/2026/09/28/austin-mayor-ut-austin-support-occam-foundry/": "2026-09-28",
+  "https://thequantuminsider.com/2026/09/28/cea-leti-and-quobly-strengthen-their-collaboration-to-accelerate-the-development-of-next-generation-silicon-quantum-technologies/": "2026-09-28",
+  "https://thequantuminsider.com/2026/09/28/fsu-2-1-million-quantum-communication-testbed/": "2026-09-28",
+  "https://thequantuminsider.com/2026/09/28/indias-finance-minister-places-quantum-among-next-major-infrastructure-investment-priorities/": "2026-09-28",
+  "https://www.ctvc.co/overheard-at-nycw-26-315/": "2026-09-28",
+  "https://www.ctvc.co/see-you-at-new-york-climate-week-314/": "2026-09-28",
+  "https://www.geekwire.com/2026/amazons-fight-with-meta-who-owns-the-customer-relationship-when-an-agent-does-the-buying/": "2026-09-28",
+  "https://www.geekwire.com/2026/an-ethicists-take-what-philosophy-teaches-us-about-the-limits-we-should-be-setting-on-ai-agents/": "2026-09-28",
+  "https://www.geekwire.com/2026/artists-game-designers-and-producers-hit-hard-as-microsoft-cuts-277-jobs-in-washington-state/": "2026-09-28",
+  "https://www.geekwire.com/2026/ex-zillow-vps-startup-truelist-acquired-by-mainstay-in-18m-expansion-of-real-estate-ai/": "2026-09-28",
+  "https://www.geekwire.com/2026/facing-seismic-shifts-in-tech-sector-seattle-mayor-freezes-jumpstart-tax-rates-in-new-budget/": "2026-09-28",
+  "https://www.geekwire.com/2026/former-amazon-and-opendoor-leaders-raise-3m-to-give-every-key-business-metric-its-own-ai-agent/": "2026-09-28",
+  "https://www.geekwire.com/2026/hubble-network-raises-200m-to-reach-1-6b-valuation-as-startup-expands-satellite-bluetooth-network/": "2026-09-28",
+  "https://www.geekwire.com/2026/its-not-a-lost-cause-seattle-aquarium-ceo-meg-mccann-on-saving-the-ocean-one-visitor-at-a-time/": "2026-09-28",
+  "https://www.geekwire.com/2026/nimbus-aerospace-tests-quarter-scale-prototype-in-oregon-as-hybrid-electric-race-ramps-up/": "2026-09-28",
+  "https://www.geekwire.com/2026/seattle-based-sales-tech-company-outreach-to-move-hq-to-adobes-campus-in-fremont-neighborhood/": "2026-09-28",
+  "https://www.geekwire.com/2026/seattle-outranks-major-global-cities-to-land-at-no-4-in-report-that-cites-economy-quality-of-life-and-more/": "2026-09-28"
+ },
+ "companies": {
+  "agency": {
+   "date": "2026-09-28",
+   "name": "Agency",
+   "platform": "smartrecruiters",
+   "slug": "agency",
+   "status": "added"
+  },
+  "albedo": {
+   "date": "2026-09-28",
+   "name": "Albedo",
+   "platform": "greenhouse",
+   "slug": "albedo",
+   "status": "added"
+  },
+  "astranis": {
+   "date": "2026-09-28",
+   "name": "Astranis",
+   "platform": "greenhouse",
+   "slug": "astranis",
+   "status": "added"
+  },
+  "baselayer": {
+   "date": "2026-09-28",
+   "name": "Baselayer",
+   "platform": "greenhouse",
+   "slug": "baselayer",
+   "status": "added"
+  },
+  "branchenergy": {
+   "date": "2026-09-28",
+   "name": "Branch Energy",
+   "status": "no_board",
+   "website": ""
+  },
+  "broccoliai": {
+   "date": "2026-09-28",
+   "name": "Broccoli AI",
+   "platform": "ashby",
+   "slug": "broccoli",
+   "status": "added"
+  },
+  "chargerobotics": {
+   "date": "2026-09-28",
+   "name": "Charge Robotics",
+   "platform": "ashby",
+   "slug": "charge-robotics",
+   "status": "added"
+  },
+  "cyera": {
+   "date": "2026-09-28",
+   "name": "Cyera",
+   "status": "no_board",
+   "website": "cyera.io"
+  },
+  "geckorobotics": {
+   "date": "2026-09-28",
+   "name": "Gecko Robotics",
+   "platform": "ashby",
+   "slug": "gecko-robotics",
+   "status": "added"
+  },
+  "gridware": {
+   "date": "2026-09-28",
+   "name": "Gridware",
+   "platform": "lever",
+   "slug": "gridware",
+   "status": "added"
+  },
+  "heronpower": {
+   "date": "2026-09-28",
+   "name": "Heron Power",
+   "platform": "ashby",
+   "slug": "heron-power",
+   "status": "added"
+  },
+  "hubblenetwork": {
+   "date": "2026-09-28",
+   "name": "Hubble Network",
+   "platform": "greenhouse",
+   "slug": "hubblenetwork",
+   "status": "added"
+  },
+  "humanarchive": {
+   "date": "2026-09-28",
+   "name": "Human Archive",
+   "platform": "ashby",
+   "slug": "humanarchive",
+   "status": "added"
+  },
+  "icarus": {
+   "date": "2026-09-28",
+   "name": "Icarus",
+   "platform": "greenhouse",
+   "slug": "icarus",
+   "status": "added"
+  },
+  "island": {
+   "date": "2026-09-28",
+   "name": "Island",
+   "platform": "greenhouse",
+   "slug": "island",
+   "status": "added"
+  },
+  "linevision": {
+   "date": "2026-09-28",
+   "name": "LineVision",
+   "status": "no_board",
+   "website": ""
+  },
+  "mach9": {
+   "date": "2026-09-28",
+   "name": "Mach9",
+   "platform": "ashby",
+   "slug": "mach9",
+   "status": "added"
+  },
+  "mainstay": {
+   "date": "2026-09-28",
+   "name": "Mainstay",
+   "platform": "ashby",
+   "slug": "mainstay",
+   "status": "added"
+  },
+  "mazama": {
+   "date": "2026-09-28",
+   "name": "Mazama",
+   "platform": "smartrecruiters",
+   "slug": "mazama",
+   "status": "added"
+  },
+  "meshyai": {
+   "date": "2026-09-28",
+   "name": "Meshy AI",
+   "status": "no_board",
+   "website": "meshy.ai"
+  },
+  "paces": {
+   "date": "2026-09-28",
+   "name": "Paces",
+   "platform": "gem",
+   "slug": "paces",
+   "status": "added"
+  },
+  "plantedsolar": {
+   "date": "2026-09-28",
+   "name": "Planted Solar",
+   "status": "no_board",
+   "website": ""
+  },
+  "polymathrobotics": {
+   "date": "2026-09-28",
+   "name": "Polymath Robotics",
+   "status": "no_board",
+   "website": "http://www.polymathrobotics.com"
+  },
+  "quindar": {
+   "date": "2026-09-28",
+   "name": "Quindar",
+   "platform": "ashby",
+   "slug": "quindar",
+   "status": "added"
+  },
+  "reach": {
+   "date": "2026-09-28",
+   "name": "Reach",
+   "platform": "ashby",
+   "slug": "reach",
+   "status": "added"
+  },
+  "realitydefender": {
+   "date": "2026-09-28",
+   "name": "Reality Defender",
+   "platform": "ashby",
+   "slug": "realitydefender",
+   "status": "added"
+  },
+  "relativityspace": {
+   "date": "2026-09-28",
+   "name": "Relativity Space",
+   "status": "no_board",
+   "website": "http://relativityspace.com"
+  },
+  "riverai": {
+   "date": "2026-09-28",
+   "name": "River AI",
+   "platform": "greenhouse",
+   "slug": "riverai",
+   "status": "added"
+  },
+  "scaleai": {
+   "date": "2026-09-28",
+   "name": "Scale AI",
+   "platform": "greenhouse",
+   "slug": "scaleai",
+   "status": "added"
+  },
+  "siphoxhealth": {
+   "date": "2026-09-28",
+   "name": "SiPhox Health",
+   "status": "no_board",
+   "website": "https://www.siphoxhealth.com"
+  },
+  "stokespace": {
+   "date": "2026-09-28",
+   "name": "Stoke Space",
+   "platform": "greenhouse",
+   "slug": "stokespacetechnologies",
+   "status": "added"
+  },
+  "trm": {
+   "date": "2026-09-28",
+   "name": "TRM Labs",
+   "platform": "ashby",
+   "slug": "trm-labs",
+   "status": "added"
+  },
+  "usul": {
+   "date": "2026-09-28",
+   "name": "Usul",
+   "platform": "ashby",
+   "slug": "usul",
+   "status": "added"
+  }
+ },
+ "last_run": "2026-09-28",
+ "yc_seen": {
+  "9-mothers-corporation": "2026-09-28",
+  "agency": "2026-09-28",
+  "albedo": "2026-09-28",
+  "apollo-io": "2026-09-28",
+  "astranis": "2026-09-28",
+  "atomic-industries": "2026-09-28",
+  "be-go": "2026-09-28",
+  "broccoli-ai": "2026-09-28",
+  "charge-robotics": "2026-09-28",
+  "culdesac": "2026-09-28",
+  "eight-sleep": "2026-09-28",
+  "forge-automation": "2026-09-28",
+  "gecko-robotics": "2026-09-28",
+  "gridware": "2026-09-28",
+  "guardian-rf": "2026-09-28",
+  "human-archive": "2026-09-28",
+  "icarus": "2026-09-28",
+  "influxdata": "2026-09-28",
+  "inspectify": "2026-09-28",
+  "korrai": "2026-09-28",
+  "mach9": "2026-09-28",
+  "may-mobility": "2026-09-28",
+  "modern-health": "2026-09-28",
+  "nomic-bio": "2026-09-28",
+  "paces": "2026-09-28",
+  "polymath-robotics": "2026-09-28",
+  "quindar": "2026-09-28",
+  "reach": "2026-09-28",
+  "reality-defender": "2026-09-28",
+  "relativity-space": "2026-09-28",
+  "remi": "2026-09-28",
+  "scale-ai": "2026-09-28",
+  "shepherd": "2026-09-28",
+  "siphox-health": "2026-09-28",
+  "skyways": "2026-09-28",
+  "stoke-space": "2026-09-28",
+  "trm-labs": "2026-09-28",
+  "turion-space": "2026-09-28",
+  "usul": "2026-09-28",
+  "volta-labs-inc": "2026-09-28"
+ }
+}
