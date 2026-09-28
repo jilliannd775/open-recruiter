@@ -7464,6 +7464,16 @@
    "team_size": 5,
    "website": "https://www.venu3d.com"
   },
+  "vera-health": {
+   "checked": "2026-09-28",
+   "name": "Vera Health",
+   "platform": "ashby",
+   "slug": "verahealth",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://www.vera-health.ai"
+  },
   "verge-genomics": {
    "checked": "2026-09-25",
    "name": "Verge Genomics",
@@ -7903,5 +7913,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-09-27"
+ "last_build": "2026-09-28"
 }
