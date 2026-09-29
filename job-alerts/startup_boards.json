@@ -1794,6 +1794,14 @@
    "team_size": 5,
    "website": "https://www.hellocozmo.ai/"
   },
+  "craftwork": {
+   "checked": "2026-09-29",
+   "name": "Craftwork",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://craftwork.com/"
+  },
   "craniometrix": {
    "checked": "2026-09-25",
    "name": "Craniometrix",
@@ -4892,6 +4900,14 @@
    "team_size": 500,
    "website": "https://pairteam.com/"
   },
+  "pango": {
+   "checked": "2026-09-29",
+   "name": "Pango",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://pango.ai/"
+  },
   "paradedb": {
    "checked": "2026-09-25",
    "name": "ParadeDB",
@@ -7913,5 +7929,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-09-28"
+ "last_build": "2026-09-29"
 }
