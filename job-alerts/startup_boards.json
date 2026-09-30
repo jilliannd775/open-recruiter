@@ -4268,6 +4268,14 @@
    "team_size": 31,
    "website": "https://mixrank.com"
   },
+  "moda-2": {
+   "checked": "2026-09-30",
+   "name": "Moda",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": ""
+  },
   "modern-health": {
    "checked": "2026-09-25",
    "name": "Modern Health",
@@ -4817,6 +4825,14 @@
    "status": "found",
    "team_size": 10,
    "website": "https://www.orbitalops.tech/"
+  },
+  "origin-bio": {
+   "checked": "2026-09-30",
+   "name": "Origin",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://origin.bio/"
   },
   "osmosis": {
    "checked": "2026-09-25",
@@ -6143,6 +6159,14 @@
    "status": "found",
    "team_size": 20,
    "website": "https://www.serifhealth.com"
+  },
+  "serve-ai": {
+   "checked": "2026-09-30",
+   "name": "Serve AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://serveaiglobal.com/"
   },
   "shape-shapescale": {
    "checked": "2026-09-25",
@@ -7929,5 +7953,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-09-29"
+ "last_build": "2026-09-30"
 }
