@@ -2686,6 +2686,14 @@
    "team_size": 5,
    "website": "https://withgauge.com"
   },
+  "gauss": {
+   "checked": "2026-10-01",
+   "name": "Gauss",
+   "source": "yc",
+   "status": "none",
+   "team_size": 16,
+   "website": "https://gauss.money"
+  },
   "gecko-robotics": {
    "checked": "2026-09-25",
    "name": "Gecko Robotics",
@@ -7953,5 +7961,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-09-30"
+ "last_build": "2026-10-01"
 }
