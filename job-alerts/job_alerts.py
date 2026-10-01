@@ -228,6 +228,7 @@ def collect_fixed_sources(settings: dict, notes: list[str], seen: dict | None = 
         ("himalayas", "Himalayas", lambda: sources.fetch_himalayas(settings.get("himalayas_searches") or [])),
         ("weworkremotely", "We Work Remotely",
          lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
+        ("vc_boards", "VC job boards", lambda: sources.fetch_vc_boards(settings.get("vc_boards") or [], settings.get("vc_board_searches") or [])),
         ("jobicy", "Jobicy", sources.fetch_jobicy),
         ("workingnomads", "Working Nomads", sources.fetch_workingnomads),
     ]
@@ -510,6 +511,7 @@ def check_all(probe_names: list[str]) -> int:
         ("himalayas", "Himalayas", lambda: sources.fetch_himalayas((settings.get("himalayas_searches") or [])[:2])),
         ("weworkremotely", "We Work Remotely",
          lambda: sources.fetch_weworkremotely(settings.get("weworkremotely_feeds") or [])),
+        ("vc_boards", "VC job boards", lambda: sources.fetch_vc_boards(settings.get("vc_boards") or [], settings.get("vc_board_searches") or [])),
         ("jobicy", "Jobicy", sources.fetch_jobicy),
         ("workingnomads", "Working Nomads", sources.fetch_workingnomads),
     ]

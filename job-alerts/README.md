@@ -30,13 +30,14 @@ so you can check those yourself.
 | **Remote OK** | Remote job board (remoteok.com). The 100 newest jobs | Daily |
 | **Himalayas** | Remote job board (himalayas.app). Searches for your target titles, US-eligible, newest first | Daily |
 | **We Work Remotely** | One of the biggest remote job boards (weworkremotely.com). Its management & finance, product, and "all other" categories | Daily |
+| **Venture capital job boards** | Job boards that investors run for all the companies they've funded: Lux Capital, DCVC, Khosla Ventures, 8VC, General Catalyst, Energy Impact Partners and Accel (`vc_boards` in `settings.yaml`; add more there). Fully remote US jobs only | Daily |
 | **Jobicy** | Remote job board (jobicy.com), US-eligible jobs. The 100 newest | Daily |
 | **Working Nomads** | Remote job board (workingnomads.com). Its newest jobs | Daily |
 | **Google Jobs** *(free key)* | The job listings Google shows in search, which pulls from LinkedIn, Indeed, ZipRecruiter, company sites and more. Read through the JSearch service. Your top 6 searches a day | Daily |
 | **Adzuna** *(free key)* | A big job search site with lots of Indeed-style listings. Remote jobs whose title matches your searches | Daily |
 | **USAJobs** *(free key)* | US federal government jobs (NASA, DOE, DoD and so on) that are remote | Daily |
 
-The first nine are free and need no sign-up. The last three need a free key;
+The first ten are free and need no sign-up. The last three need a free key;
 see "Adding Google Jobs, Adzuna and USAJobs" below. Until you add a key, that
 source is quietly skipped. Each one's terms ask that you credit it
 and link back to its listing. The email does that for every job ("via
@@ -271,7 +272,7 @@ All of these are in `settings.yaml`. Change the word, then **Commit changes**.
 
 | To turn off... | Change this |
 |---|---|
-| One job source (e.g. Remote OK) | Under `sources:`, set `remoteok: false`. The others are `company_boards`, `startup_boards`, `hacker_news`, `remotive`, `himalayas`, `weworkremotely`, `jobicy`, `workingnomads`, `jsearch` (Google Jobs), `adzuna` and `usajobs` |
+| One job source (e.g. Remote OK) | Under `sources:`, set `remoteok: false`. The others are `company_boards`, `startup_boards`, `hacker_news`, `remotive`, `himalayas`, `weworkremotely`, `vc_boards`, `jobicy`, `workingnomads`, `jsearch` (Google Jobs), `adzuna` and `usajobs` |
 | The Y Combinator directory | Under `discovery:`, set `yc_directory: false` |
 | One news feed | Under `discovery:` then `feeds:`, set that feed's `enabled: false` |
 | Weekly discovery entirely | Under `discovery:`, set `enabled: false` |

@@ -16,6 +16,7 @@ sources:
   remoteok: true         # remoteok.com
   himalayas: true        # himalayas.app
   weworkremotely: true   # weworkremotely.com
+  vc_boards: true        # venture capital portfolio job boards (list below)
   jobicy: true           # jobicy.com (US-eligible remote jobs)
   workingnomads: true    # workingnomads.com
   startup_boards: true   # every hiring US startup on the startup board list (see below)
@@ -199,6 +200,39 @@ adzuna_searches:
   - implementation consultant
   - solutions consultant
   - technical account manager
+  - chief of staff
+
+# VENTURE CAPITAL JOB BOARDS. Many investors run a job board listing every
+# opening at the companies they've funded. These are deep tech, space,
+# defense, climate and AI investors. Only fully remote US jobs are kept. Add a
+# board by its address (most "jobs.<firm>.com" boards work), or set
+# enabled: false to skip one.
+vc_boards:
+  - name: Lux Capital
+    url: https://jobs.luxcapital.com
+  - name: DCVC
+    url: https://jobs.dcvc.com
+  - name: Khosla Ventures
+    url: https://jobs.khoslaventures.com
+  - name: 8VC
+    url: https://jobs.8vc.com
+  - name: General Catalyst
+    url: https://jobs.generalcatalyst.com
+  - name: Energy Impact Partners
+    url: https://jobs.energyimpactpartners.com
+  - name: Accel
+    url: https://jobs.accel.com
+# What to search for on each board (one search each, up to 100 results).
+vc_board_searches:
+  - program manager
+  - product operations
+  - product analyst
+  - associate product manager
+  - business analyst
+  - product owner
+  - implementation
+  - solutions consultant
+  - strategy operations
   - chief of staff
 
 # USAJOBS (federal jobs). Remote federal jobs posted in the last 3 days.

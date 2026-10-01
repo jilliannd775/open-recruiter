@@ -15,6 +15,10 @@ jobs are only emailed to you, never republished.
   * We Work Remotely: public RSS feeds, one request per feed a day. Every
     job links to its We Work Remotely page and is credited to them.
 
+  * VC portfolio job boards (Getro): job boards that venture firms run for all
+    their portfolio companies (Lux, DCVC, Khosla...). One search per title
+    keyword per board; only remote US jobs are kept. Each job links to the
+    company's own posting.
   * Jobicy: free remote-jobs API, US-eligible jobs; asks for a link back and
     at most one request an hour. We use 1 a day.
   * Working Nomads: free public job feed; one request a day, links to their page.
@@ -28,6 +32,7 @@ These three need a free key (a GitHub secret); each is skipped until its key is 
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import time
@@ -47,6 +52,7 @@ SOURCE_HOMES = {
     "Himalayas": "https://himalayas.app",
     "We Work Remotely": "https://weworkremotely.com",
     "Jobicy": "https://jobicy.com",
+    "VC job boards": "https://www.getro.com",
     "Working Nomads": "https://www.workingnomads.com",
     "Google Jobs": "https://www.google.com/search?q=jobs&ibp=htl;jobs",
     "Adzuna": "https://www.adzuna.com",
@@ -163,6 +169,86 @@ def fetch_himalayas(searches: list[str]) -> list[Job]:
                 extra=_salary_extra(j.get("minSalary"), j.get("maxSalary"))
                 if (j.get("currency") or "USD") == "USD" and (j.get("salaryPeriod") or "annual") == "annual" else {},
             )
+    if errors and not jobs:
+        raise RuntimeError("; ".join(errors[:3]))
+    return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# Venture capital portfolio job boards (Getro)
+# --------------------------------------------------------------------------- #
+
+def _getro_collection(board_url: str) -> str:
+    """The board's Getro collection id, read from its own jobs page."""
+    html_text = get_with_retries(lambda: http_text(board_url.rstrip("/") + "/jobs", timeout=60), board_url)
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html_text, re.S)
+    if m:
+        try:
+            net = (json.loads(m.group(1)).get("props", {}).get("pageProps", {}).get("network") or {})
+            if net.get("id"):
+                return str(net["id"])
+        except (ValueError, AttributeError):
+            pass
+    m = re.search(r'"network"\s*:\s*\{\s*"id"\s*:\s*"?(\d+)', html_text) or re.search(r'collections/(\d+)', html_text)
+    if not m:
+        raise ValueError(f"couldn't find the job board id on {board_url}")
+    return m.group(1)
+
+
+def fetch_vc_boards(boards: list[dict], searches: list[str]) -> list[Job]:
+    """Remote US jobs from VC portfolio job boards. boards: [{name, url}]."""
+    jobs: dict[str, Job] = {}
+    errors = []
+    for b in boards:
+        name, url = b.get("name") or b.get("url"), str(b.get("url") or "").rstrip("/")
+        if not url or b.get("enabled") is False:
+            continue
+        try:
+            coll = _getro_collection(url)
+        except Exception as e:  # noqa: BLE001
+            errors.append(f"{name}: {e}")
+            continue
+        for q in searches:
+            api = f"https://api.getro.com/api/v2/collections/{coll}/search/jobs"
+            try:
+                data = get_with_retries(lambda: http_json(api, method="POST", timeout=60,
+                                                          body={"hitsPerPage": 100, "page": 0, "filters": {}, "query": q}),
+                                        f"{name} job board search '{q}'")
+            except Exception as e:  # noqa: BLE001
+                errors.append(f"{name}: {e}")
+                break
+            finally:
+                time.sleep(1)
+            for j in ((data or {}).get("results") or {}).get("jobs") or []:
+                if not isinstance(j, dict) or not j.get("url"):
+                    continue
+                mode = str(j.get("work_mode") or "").lower()
+                locs = j.get("searchable_locations") or j.get("locations") or []
+                us = any("united states" in str(l).lower() for l in locs) or not locs
+                if mode != "remote" or not us:
+                    continue
+                org = j.get("organization") or {}
+                uid = f"getro:{j.get('id') or j['url']}"
+                extra = {"country": "US"}
+                if j.get("compensation_public") and (j.get("compensation_currency") or "USD") == "USD" \
+                        and (j.get("compensation_period") or "year") in ("year", "yearly", "annual"):
+                    extra.update(_salary_extra((j.get("compensation_amount_min_cents") or 0) / 100,
+                                               (j.get("compensation_amount_max_cents") or 0) / 100))
+                tags = ", ".join(org.get("industry_tags") or org.get("industryTags") or [])
+                jobs[uid] = Job(
+                    uid=uid,
+                    company=(org.get("name") or "").strip(),
+                    title=(j.get("title") or "").strip(),
+                    url=j["url"],
+                    location="Remote (US)",
+                    workplace="remote",
+                    description=(f"Backed by {name}. Company: {org.get('name') or ''}"
+                                 + (f" ({tags})" if tags else "") + (f", stage {org.get('stage')}" if org.get("stage") else "")
+                                 + (". Skills: " + ", ".join(j.get("skills") or []) if j.get("skills") else "")
+                                 + (f". Seniority: {j.get('seniority')}" if j.get("seniority") else "") + "."),
+                    source=f"{name} job board", source_url=url, kind="aggregator",
+                    extra=extra,
+                )
     if errors and not jobs:
         raise RuntimeError("; ".join(errors[:3]))
     return list(jobs.values())
