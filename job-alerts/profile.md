@@ -35,6 +35,7 @@ English. Be specific about what you want and what you don't.
 - Senior Analyst, Technology (or Technical) Product Management
 - Product Operations Associate / Product Operations Analyst / Product Operator
 - Product Analyst
+- Associate Product Manager / Product Associate / Product Manager I
 - Business Systems Analyst / Senior Business Systems Analyst
 - Technical Business Analyst / Senior Technical Business Analyst
 - AI Program Manager / AI Transformation Program Manager
