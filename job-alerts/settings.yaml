@@ -175,6 +175,9 @@ big_company_searches:
 # each day (10 newest remote US results each) and stops for the month at
 # google_jobs_searches_per_month. Put your most important searches first.
 google_jobs_searches:
+  - AI product analyst
+  - AI associate product manager
+  - AI product operations
   - associate product manager
   - product analyst
   - product operations
@@ -191,6 +194,7 @@ adzuna_searches:
   - associate product manager
   - product analyst
   - product operations
+  - AI product
   - technical program manager
   - program manager
   - product operations

@@ -49,6 +49,9 @@ jobs should NOT score highly.
 
 Scoring guide:
 - 85-100: target title AND fully remote in the US AND strong sector/skills fit.
+  The candidate's TOP PRIORITY is product roles (product analyst, associate
+  product manager, product operations, product owner) at science or AI
+  companies: when one of those is remote US and at her level, score it 85+.
 - 65-84: good fit worth applying to, with at most one soft gap.
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
 - 0-39: wrong kind of role (engineering/coding, sales, etc.), onsite/hybrid only, \
@@ -64,7 +67,8 @@ A job that is not fully remote or not open to US-based candidates must score bel
 Reply with JSON only: a list with one object per job, in the same order, shaped:
 {"id": "<the job's id>", "score": <integer 0-100>, "reason": "<one sentence on why \
 it fits or doesn't>", "remote": "<one of: Remote (US), Remote (US + other countries), \
-Remote (non-US), Hybrid, Onsite, Unclear>"}
+Remote (non-US), Hybrid, Onsite, Unclear>", "priority": <true only if it is a \
+product role at a science or AI company, else false>}
 
 CANDIDATE PROFILE:
 """
@@ -102,6 +106,7 @@ def score_batch(gemini: Gemini, profile: str, jobs: list[Job], max_chars: int) -
                 "score": score,
                 "reason": str(item.get("reason") or "").strip(),
                 "remote": str(item.get("remote") or "Unclear").strip(),
+                "priority": item.get("priority") is True or str(item.get("priority")).lower() == "true",
             }
     return out
 
@@ -135,7 +140,14 @@ def _tracker_buttons(job: Job, r: dict) -> str:
 def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, threshold: int) -> str:
     esc = html.escape
     rows = []
-    for job, r in matches:
+    n_top = sum(1 for _, r in matches if r.get("priority"))
+    for i, (job, r) in enumerate(matches):
+        if n_top and i == 0:
+            rows.append('<tr><td style="padding:16px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;color:#6b3fb5;">'
+                        'TOP PRIORITY: PRODUCT ROLES AT SCIENCE &amp; AI COMPANIES</td></tr>')
+        if n_top and i == n_top:
+            rows.append('<tr><td style="padding:20px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;color:#555;">'
+                        'MORE GOOD MATCHES</td></tr>')
         source = (f'<a href="{esc(job.source_url)}" style="color:#666;">{esc(job.source)}</a>'
                   if job.source_url else esc(job.source))
         rows.append(f"""
@@ -315,7 +327,7 @@ def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
         entries.setdefault(job.uid, {
             "id": job.uid, "date": today, "t": job.title, "c": job.company, "u": job.url,
             "l": r.get("remote") or job.location, "p": format_salary(parse_salary(job)), "s": r.get("score"),
-            "src": job.source, "why": (r.get("reason") or "")[:240],
+            "src": job.source, "why": (r.get("reason") or "")[:240], "pri": bool(r.get("priority")),
             "d": re.sub(r"\s+", " ", job.description or "")[:10000],
         })
     cutoff = (datetime.now(PACIFIC) - timedelta(days=14)).date().isoformat()
@@ -438,10 +450,10 @@ def run(dry_run: bool, scheduled: bool) -> int:
     matches = sorted(
         ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold
          and not (strict and r["remote"].strip().lower() in not_remote_us)),
-        key=lambda x: (-x[1]["score"], x[0].company, x[0].title))
+        key=lambda x: (not x[1].get("priority"), -x[1]["score"], x[0].company, x[0].title))
     log(f"\nScored {len(scored)} jobs with {gemini.calls_made} AI calls; {len(matches)} scored {threshold}+.")
     for job, r in matches:
-        log(f"  {r['score']:>3}  {job.company} - {job.title}  [{r['remote']}]  via {job.source}")
+        log(f"  {r['score']:>3}{' *' if r.get('priority') else '  '} {job.company} - {job.title}  [{r['remote']}]  via {job.source}")
     near = sorted(((unique[u], r) for u, r in scored.items() if r["score"] < threshold),
                   key=lambda x: -x[1]["score"])[:10]
     if near:

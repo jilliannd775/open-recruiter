@@ -6,7 +6,22 @@ English. Be specific about what you want and what you don't.
 ## Background
 - Senior Consultant at a tech consultancy: process mapping, technical
   program/project delivery.
-- Physics degree; former Caltech research fellow (LIGO).
+- B.A. in Physics (Oberlin); former Caltech research fellow (gravitational-wave
+  research).
+
+## TOP PRIORITY: product roles at science or AI companies
+These are the jobs I want most. Score them highest when they're fully remote in
+the US and at my level:
+- **Product roles**: Product Analyst, Associate Product Manager / Product
+  Associate / Product Manager I, Product Operations, Product Owner / Technical
+  Product Owner, technical product management.
+- **At science or AI companies**: companies whose product is AI/ML (AI-native
+  startups, AI platforms and tools, applied AI), or science and deep tech
+  (physics, quantum, space and satellites, climate and energy science,
+  biotech / life-science tools, research and lab software, scientific data).
+- Next best: product roles at other tech companies, and program /
+  operations roles at science or AI companies.
+- Everything else on my title list is still welcome, but ranks below these.
 
 ## Hard requirements
 - Must be **fully remote**, at a **US-based company**, open to candidates
