@@ -50,6 +50,12 @@ my_target_titles:
   - product operations analyst
   - product operator
   - product analyst
+  - associate product manager
+  - product associate
+  - junior product manager
+  - product manager i
+  - product manager 1
+  - apm
   - business systems analyst
   - senior business systems analyst
   - senior technical business analyst
@@ -111,6 +117,10 @@ max_years_experience: 6
 # scored if its TITLE contains one of these words. (Jobs from your own
 # companies.yaml list are not limited this way.) Add or remove words freely.
 job_board_title_keywords:
+  - associate product manager
+  - product associate
+  - product analyst
+  - apm
   - program
   - project
   - operations
@@ -149,6 +159,8 @@ weworkremotely_feeds:
 # The searches run each day on big companies' own job sites (Amazon and
 # Microsoft entries in companies.yaml), up to 100-200 results each.
 big_company_searches:
+  - associate product manager
+  - product analyst
   - program manager
   - product operations
   - business analyst
@@ -162,18 +174,22 @@ big_company_searches:
 # each day (10 newest remote US results each) and stops for the month at
 # google_jobs_searches_per_month. Put your most important searches first.
 google_jobs_searches:
-  - technical program manager
+  - associate product manager
+  - product analyst
   - product operations
+  - technical program manager
   - business systems analyst
   - implementation consultant
   - product owner
-  - chief of staff
 google_jobs_searches_per_day: 6
 google_jobs_searches_per_month: 180
 
 # ADZUNA. Jobs whose title matches each search and that mention remote,
 # posted in the last 3 days (up to 50 each).
 adzuna_searches:
+  - associate product manager
+  - product analyst
+  - product operations
   - technical program manager
   - program manager
   - product operations
@@ -196,6 +212,8 @@ usajobs_searches:
 # The searches run on Himalayas each day (US-eligible remote jobs, newest
 # first, 20 results each).
 himalayas_searches:
+  - associate product manager
+  - product associate
   - technical program manager
   - program manager
   - product operations

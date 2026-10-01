@@ -303,7 +303,7 @@ def collect_hacker_news(settings: dict, seen: dict, gemini: Gemini, notes: list[
 # --------------------------------------------------------------------------- #
 
 def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
-    """Append emailed matches to matches_log.json (last 60 days), which the
+    """Append emailed matches to matches_log.json (last 14 days), which the
     daily tracker sync copies into the job tracker as 'New match'."""
     try:
         data = json.loads(MATCHES_LOG_FILE.read_text(encoding="utf-8")) if MATCHES_LOG_FILE.exists() else {}
@@ -315,9 +315,9 @@ def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
             "id": job.uid, "date": today, "t": job.title, "c": job.company, "u": job.url,
             "l": r.get("remote") or job.location, "p": format_salary(parse_salary(job)), "s": r.get("score"),
             "src": job.source, "why": (r.get("reason") or "")[:240],
-            "d": re.sub(r"\s+", " ", job.description or "")[:3000],
+            "d": re.sub(r"\s+", " ", job.description or "")[:10000],
         })
-    cutoff = (datetime.now(PACIFIC) - timedelta(days=60)).date().isoformat()
+    cutoff = (datetime.now(PACIFIC) - timedelta(days=14)).date().isoformat()
     kept = sorted((e for e in entries.values() if (e.get("date") or "") >= cutoff), key=lambda e: (e["date"], e["id"]))
     MATCHES_LOG_FILE.write_text(json.dumps({"matches": kept}, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
 
