@@ -34,9 +34,11 @@ companies:
     platform: gem
     slug: littlebird
 
-  # Companies' own careers pages (read in a hidden browser when needed).
   - name: SpaceX
-    url: https://www.spacex.com/careers/jobs
+    platform: greenhouse
+    slug: spacex
+
+  # Companies' own careers pages (read in a hidden browser when needed).
 
   - name: Planet
     url: https://www.planet.com/company/careers/
