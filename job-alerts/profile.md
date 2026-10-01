@@ -17,11 +17,22 @@ the US and at my level:
   Product Owner, technical product management.
 - **At science or AI companies**: companies whose product is AI/ML (AI-native
   startups, AI platforms and tools, applied AI), or science and deep tech
-  (physics, quantum, space and satellites, climate and energy science,
-  biotech / life-science tools, research and lab software, scientific data).
+  (aerospace, space and satellites, physics, quantum, climate and energy
+  science, research and lab software, scientific data).
+- **Or at companies that help people**: mission-driven work such as health
+  care access, education, public services, social impact and nonprofits.
 - Next best: product roles at other tech companies, and program /
-  operations roles at science or AI companies.
+  operations roles at science, AI or mission-driven companies.
 - Everything else on my title list is still welcome, but ranks below these.
+
+## Industries
+- **Especially interested:** aerospace and space, AI, physics and deep tech,
+  climate and energy, mission-driven companies that help people.
+- **Open to:** biotech and life sciences, but I don't have a biology
+  background, so roles that need deep bio knowledge are a weaker fit.
+- **Bottom of my list:** financial services, banking and insurance
+  (especially auto insurance). Score these lower unless the role itself is an
+  unusually strong fit.
 
 ## Hard requirements
 - Must be **fully remote**, at a **US-based company**, open to candidates
