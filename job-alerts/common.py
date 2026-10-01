@@ -97,6 +97,7 @@ DEFAULT_SETTINGS = {
         "himalayas": True,
         "weworkremotely": True,
         "startup_boards": True,
+        "vc_boards": True,
         "jobicy": True,
         "workingnomads": True,
         "jsearch": True,
@@ -107,6 +108,8 @@ DEFAULT_SETTINGS = {
     "google_jobs_searches_per_day": 6,
     "google_jobs_searches_per_month": 180,
     "adzuna_searches": [],
+    "vc_boards": [],
+    "vc_board_searches": [],
     "usajobs_searches": [],
     "startup_boards": {
         "min_team_size": 5,
