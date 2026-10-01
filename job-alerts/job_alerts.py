@@ -50,8 +50,10 @@ jobs should NOT score highly.
 Scoring guide:
 - 85-100: target title AND fully remote in the US AND strong sector/skills fit.
   The candidate's TOP PRIORITY is product roles (product analyst, associate
-  product manager, product operations, product owner) at science or AI
-  companies: when one of those is remote US and at her level, score it 85+.
+  product manager, product operations, product owner) at science, AI or
+  mission-driven (helping people) companies: when one of those is remote US
+  and at her level, score it 85+. Financial services and insurance companies
+  rank at the bottom of her list: score them lower.
 - 65-84: good fit worth applying to, with at most one soft gap.
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
 - 0-39: wrong kind of role (engineering/coding, sales, etc.), onsite/hybrid only, \
@@ -68,7 +70,7 @@ Reply with JSON only: a list with one object per job, in the same order, shaped:
 {"id": "<the job's id>", "score": <integer 0-100>, "reason": "<one sentence on why \
 it fits or doesn't>", "remote": "<one of: Remote (US), Remote (US + other countries), \
 Remote (non-US), Hybrid, Onsite, Unclear>", "priority": <true only if it is a \
-product role at a science or AI company, else false>}
+product role at a science, AI or mission-driven company, else false>}
 
 CANDIDATE PROFILE:
 """
@@ -144,7 +146,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
     for i, (job, r) in enumerate(matches):
         if n_top and i == 0:
             rows.append('<tr><td style="padding:16px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;color:#6b3fb5;">'
-                        'TOP PRIORITY: PRODUCT ROLES AT SCIENCE &amp; AI COMPANIES</td></tr>')
+                        'TOP PRIORITY: PRODUCT ROLES AT SCIENCE, AI &amp; MISSION-DRIVEN COMPANIES</td></tr>')
         if n_top and i == n_top:
             rows.append('<tr><td style="padding:20px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;color:#555;">'
                         'MORE GOOD MATCHES</td></tr>')
