@@ -222,6 +222,11 @@ def fetch_workingnomads() -> list[Job]:
 # Google Jobs, through JSearch on RapidAPI
 # --------------------------------------------------------------------------- #
 
+# Sites that re-post other companies' jobs under their own name (duplicates, often spammy).
+JSEARCH_REPOSTERS = re.compile(r"mysmartpros|remotepromsp|remote jobs usa|jobgether|virtualvocations|"
+                               r"talent\.com|jooble|lensa|jobright|hiring cafe|dailyremote", re.I)
+
+
 def fetch_jsearch(searches: list[str], usage: dict, per_day: int, per_month: int) -> list[Job]:
     """One request (10 results, remote US, posted in the last 3 days) per search.
     `usage` ({"month": "YYYY-MM", "used": n}) is kept in seen_jobs.json so the
@@ -238,7 +243,7 @@ def fetch_jsearch(searches: list[str], usage: dict, per_day: int, per_month: int
     errors = []
     headers = {"X-RapidAPI-Key": env("RAPIDAPI_KEY"), "X-RapidAPI-Host": "jsearch.p.rapidapi.com"}
     for q in searches[:budget]:
-        url = "https://jsearch.p.rapidapi.com/search?" + urllib.parse.urlencode({
+        url = "https://jsearch.p.rapidapi.com/search-v2?" + urllib.parse.urlencode({
             "query": f"{q} remote", "page": 1, "num_pages": 1, "country": "us",
             "date_posted": "3days", "work_from_home": "true", "remote_jobs_only": "true"})
         usage["used"] = int(usage.get("used") or 0) + 1
@@ -249,9 +254,14 @@ def fetch_jsearch(searches: list[str], usage: dict, per_day: int, per_month: int
             continue
         finally:
             time.sleep(1.5)
-        for j in (data or {}).get("data") or []:
+        found = (data or {}).get("data") or []
+        if isinstance(found, dict):          # search-v2 returns {"jobs": [...], "cursor": ...}
+            found = found.get("jobs") or []
+        for j in found:
             if not isinstance(j, dict) or not j.get("job_id"):
                 continue
+            if JSEARCH_REPOSTERS.search(f"{j.get('employer_name') or ''} {j.get('job_publisher') or ''}"):
+                continue                     # sites that copy other companies' listings
             loc = ", ".join(x for x in (j.get("job_city"), j.get("job_state"), j.get("job_country")) if x)
             period = str(j.get("job_salary_period") or "").upper()
             publisher = (j.get("job_publisher") or "").strip()
@@ -261,7 +271,7 @@ def fetch_jsearch(searches: list[str], usage: dict, per_day: int, per_month: int
                 company=(j.get("employer_name") or "").strip(),
                 title=(j.get("job_title") or "").strip(),
                 url=j.get("job_apply_link") or j.get("job_google_link") or "",
-                location=("Remote" + (f" ({loc})" if loc else "")) if j.get("job_is_remote") else loc,
+                location=("Remote" + (f" ({loc})" if loc else "")) if j.get("job_is_remote") else (loc or j.get("job_location") or ""),
                 workplace="remote" if j.get("job_is_remote") else "",
                 description=strip_html(j.get("job_description") or ""),
                 source="Google Jobs" + (f" (from {publisher})" if publisher else ""),
