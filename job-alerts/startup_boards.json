@@ -2260,6 +2260,14 @@
    "team_size": 12,
    "website": "https://www.epsilon3.io/"
   },
+  "ergo": {
+   "checked": "2026-10-02",
+   "name": "Ergo",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://joinergo.com"
+  },
   "etleap": {
    "checked": "2026-09-25",
    "name": "Etleap",
@@ -7961,5 +7969,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-01"
+ "last_build": "2026-10-02"
 }
