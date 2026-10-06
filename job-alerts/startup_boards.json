@@ -634,6 +634,14 @@
    "team_size": 65,
    "website": "https://www.assemblyai.com"
   },
+  "asteroid": {
+   "checked": "2026-10-06",
+   "name": "Asteroid",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://asteroid.ai"
+  },
   "astraea": {
    "checked": "2026-09-25",
    "name": "Astraea",
@@ -1375,6 +1383,14 @@
    "status": "none",
    "team_size": 5,
    "website": "https://www.celltype.com"
+  },
+  "centaur": {
+   "checked": "2026-10-06",
+   "name": "Centaur",
+   "source": "yc",
+   "status": "none",
+   "team_size": 45,
+   "website": "https://centaur.ai/"
   },
   "centralize": {
    "checked": "2026-09-25",
@@ -3090,6 +3106,14 @@
    "team_size": 15,
    "website": "https://www.healiahealth.com/"
   },
+  "healthkey": {
+   "checked": "2026-10-06",
+   "name": "HealthKey",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://gethealthkey.com/"
+  },
   "helium": {
    "checked": "2026-09-25",
    "name": "Helium",
@@ -4025,6 +4049,16 @@
    "status": "none",
    "team_size": 15,
    "website": "https://maintouch.com/?utm_source=bookface&utm_medium=social&utm_campaign=profile"
+  },
+  "malama-health": {
+   "checked": "2026-10-06",
+   "name": "Malama Health",
+   "platform": "workable",
+   "slug": "malama-health",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.heymalama.co"
   },
   "manicule": {
    "checked": "2026-09-25",
@@ -5296,6 +5330,16 @@
    "team_size": 10,
    "website": "https://www.poshenergy.com"
   },
+  "postera": {
+   "checked": "2026-10-06",
+   "name": "PostEra",
+   "platform": "lever",
+   "slug": "postera",
+   "source": "yc",
+   "status": "found",
+   "team_size": 40,
+   "website": "https://postera.ai/"
+  },
   "posthog": {
    "checked": "2026-09-25",
    "name": "PostHog",
@@ -6183,6 +6227,16 @@
    "status": "none",
    "team_size": 6,
    "website": "https://serveaiglobal.com/"
+  },
+  "sf-tensor": {
+   "checked": "2026-10-06",
+   "name": "SF Tensor",
+   "platform": "ashby",
+   "slug": "sf-tensor",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://sf-tensor.com"
   },
   "shape-shapescale": {
    "checked": "2026-09-25",
@@ -7488,6 +7542,14 @@
    "team_size": 30,
    "website": "https://www.vectorshift.ai"
   },
+  "vela": {
+   "checked": "2026-10-06",
+   "name": "Vela",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://tryvela.ai"
+  },
   "velt": {
    "checked": "2026-09-25",
    "name": "Velt",
@@ -7969,5 +8031,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-04"
+ "last_build": "2026-10-06"
 }
