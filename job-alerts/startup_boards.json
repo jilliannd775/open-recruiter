@@ -3752,6 +3752,16 @@
    "team_size": 11,
    "website": "https://www.lanesurf.com/"
   },
+  "lapel": {
+   "checked": "2026-10-07",
+   "name": "Lapel",
+   "platform": "ashby",
+   "slug": "lapel",
+   "source": "yc",
+   "status": "found",
+   "team_size": 14,
+   "website": "https://lapel.com/"
+  },
   "latent": {
    "checked": "2026-09-25",
    "name": "Latent",
@@ -4929,6 +4939,14 @@
    "status": "found",
    "team_size": 40,
    "website": "https://overview.ai"
+  },
+  "owny": {
+   "checked": "2026-10-07",
+   "name": "OWNY",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://www.owny.com"
   },
   "oxygen": {
    "checked": "2026-09-25",
@@ -8031,5 +8049,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-06"
+ "last_build": "2026-10-07"
 }
