@@ -4886,6 +4886,14 @@
    "team_size": 10,
    "website": "https://www.orbitalops.tech/"
   },
+  "orca-aerospace": {
+   "checked": "2026-10-08",
+   "name": "Orca Aerospace",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://orcaaerospace.com/"
+  },
   "origin-bio": {
    "checked": "2026-09-30",
    "name": "Origin",
@@ -6730,6 +6738,14 @@
    "team_size": 6,
    "website": "https://www.stardex.com"
   },
+  "stayflexi": {
+   "checked": "2026-10-08",
+   "name": "Stayflexi",
+   "source": "yc",
+   "status": "none",
+   "team_size": 58,
+   "website": "https://business.stayflexi.com/"
+  },
   "steinmetz": {
    "checked": "2026-09-25",
    "name": "Steinmetz",
@@ -7788,6 +7804,16 @@
    "team_size": 190,
    "website": "http://vouch.us"
   },
+  "voyager": {
+   "checked": "2026-10-08",
+   "name": "Voyager",
+   "platform": "gem",
+   "slug": "voyager",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://voyager.so"
+  },
   "vulcan-technologies": {
    "checked": "2026-09-25",
    "name": "Vulcan Technologies",
@@ -8049,5 +8075,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-07"
+ "last_build": "2026-10-08"
 }
