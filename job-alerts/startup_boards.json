@@ -4948,6 +4948,14 @@
    "team_size": 40,
    "website": "https://overview.ai"
   },
+  "oway": {
+   "checked": "2026-10-09",
+   "name": "Oway",
+   "source": "yc",
+   "status": "none",
+   "team_size": 16,
+   "website": "https://www.shipoway.com"
+  },
   "owny": {
    "checked": "2026-10-07",
    "name": "OWNY",
@@ -8075,5 +8083,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-08"
+ "last_build": "2026-10-09"
 }
