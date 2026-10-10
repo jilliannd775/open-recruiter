@@ -2320,6 +2320,14 @@
    "team_size": 12,
    "website": "https://every.io/"
   },
+  "evidence": {
+   "checked": "2026-10-10",
+   "name": "Evidence",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.evidence.dev"
+  },
   "eze": {
    "checked": "2026-09-25",
    "name": "Eze",
@@ -6738,6 +6746,14 @@
    "team_size": 5,
    "website": "https://standout.work"
   },
+  "starcloud": {
+   "checked": "2026-10-10",
+   "name": "Starcloud",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://www.starcloud.com/"
+  },
   "stardex": {
    "checked": "2026-09-25",
    "name": "Stardex",
@@ -8083,5 +8099,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-09"
+ "last_build": "2026-10-10"
 }
