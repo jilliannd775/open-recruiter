@@ -235,3 +235,101 @@ companies:
     tag: discovered
     added: "2026-09-28"
     reason: "Matches your AI and process mapping background well, though global hardware deployment may constrain remote arrangements."
+
+  - name: "Oratomic"
+    platform: ashby
+    slug: "oratomic"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Quantum computing is a top-priority deep tech sector that directly leverages the candidate's physics degree and technical delivery background."
+
+  - name: "Aurelian"
+    platform: ashby
+    slug: "aurelian"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Strong alignment with mission-driven AI applications that help people, with team scale suited for product operations and implementation roles."
+
+  - name: "TypeSafe AI"
+    platform: ashby
+    slug: "typesafe-ai"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "As an AI model developer raising a large round, it aligns well with target product and technical program management roles."
+
+  - name: "Kapta Space"
+    platform: lever
+    slug: "kapta-space"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Strong fit with candidate's astrophysics/physics background and interest in space/defense-adjacent tech, with Series A funding likely supporting product and operations hires."
+
+  - name: "Sieve"
+    platform: ashby
+    slug: "sieve"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Directly matches your top priority for AI tooling and data platforms with sufficient scale to support technical PM and operations."
+
+  - name: "JITX"
+    platform: lever
+    slug: "jitxinc"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Exceptional fit with your physics education and technical background applying automation to complex engineering workflows."
+
+  - name: "Ghost"
+    platform: greenhouse
+    slug: "ghost"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Fits the candidate's interest in AI platforms and deep tech hardware, with potential for product operations or early Chief of Staff roles."
+
+  - name: "Cinder"
+    platform: ashby
+    slug: "cinder"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Excellent applied AI governance startup whose mission-driven safety focus fits your experience designing AI verification layers."
+
+  - name: "Overview"
+    platform: ashby
+    slug: "overview"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Great match as an applied AI startup solving operational quality problems where your process analysis skills translate well."
+
+  - name: "Astro Mechanica"
+    platform: ashby
+    slug: "astro-mechanica"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Excellent match for your physics and aerospace interests, though high-speed aerospace hardware typically leans towards onsite roles."
+
+  - name: "Vooma"
+    platform: ashby
+    slug: "vooma"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Good match for an applied AI workflow platform where your cross-functional delivery and process mapping background add value."
+
+  - name: "Nox Metals"
+    platform: ashby
+    slug: "nox-metals"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Solid fit for your process mapping and technical delivery background, though industrial factory automation often favors local presence."
+
+  - name: "Multiply Labs"
+    platform: lever
+    slug: "multiplylabs"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Compelling robotics and health mission, though drug manufacturing domain depth creates a partial gap with your physics profile."
+
+  - name: "Living Carbon"
+    platform: lever
+    slug: "livingcarbon"
+    tag: discovered
+    added: "2026-10-12"
+    reason: "Strong climate mission, but heavy focus on synthetic biology and genetics makes it a weaker fit for your physics background."
