@@ -4928,6 +4928,14 @@
    "team_size": 8,
    "website": "https://www.outputbio.com/"
   },
+  "output-labs": {
+   "checked": "2026-10-12",
+   "name": "Output Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.outputlabs.ai/"
+  },
   "outset": {
    "checked": "2026-09-25",
    "name": "Outset",
@@ -8099,5 +8107,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-11"
+ "last_build": "2026-10-12"
 }
