@@ -3498,6 +3498,14 @@
    "team_size": 6,
    "website": "https://item.app"
   },
+  "janeen": {
+   "checked": "2026-10-13",
+   "name": "Janeen",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://janeen.care"
+  },
   "jarmin": {
    "checked": "2026-09-25",
    "name": "Jarmin",
@@ -5686,6 +5694,14 @@
    "team_size": 35,
    "website": "https://www.rallyuxr.com/"
   },
+  "ramain": {
+   "checked": "2026-10-13",
+   "name": "RamAIn",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://ramain.ai"
+  },
   "raycaster": {
    "checked": "2026-09-25",
    "name": "Raycaster",
@@ -6998,6 +7014,16 @@
    "team_size": 40,
    "website": "https://taiv.tv"
   },
+  "talentpluto": {
+   "checked": "2026-10-13",
+   "name": "Pluto",
+   "platform": "workable",
+   "slug": "talentpluto",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://talentpluto.com"
+  },
   "tamarind-bio": {
    "checked": "2026-09-25",
    "name": "Tamarind Bio",
@@ -8107,5 +8133,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-12"
+ "last_build": "2026-10-13"
 }
