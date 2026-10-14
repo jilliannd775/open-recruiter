@@ -1794,6 +1794,14 @@
    "team_size": 8,
    "website": "https://cotera.co"
   },
+  "cotool": {
+   "checked": "2026-10-14",
+   "name": "Cotool",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://cotool.ai"
+  },
   "coval": {
    "checked": "2026-09-25",
    "name": "Coval",
@@ -1825,6 +1833,14 @@
    "status": "none",
    "team_size": 64,
    "website": "https://craniometrix.com"
+  },
+  "creativemode": {
+   "checked": "2026-10-14",
+   "name": "CreativeMode",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://creativemode.net"
   },
   "credal-ai": {
    "checked": "2026-09-25",
@@ -2213,6 +2229,14 @@
    "status": "found",
    "team_size": 18,
    "website": "https://www.electricair.io/"
+  },
+  "elevate-2": {
+   "checked": "2026-10-14",
+   "name": "Elevate",
+   "source": "yc",
+   "status": "none",
+   "team_size": 10,
+   "website": "https://www.useelevate.dev/"
   },
   "ello": {
    "checked": "2026-09-25",
@@ -6068,6 +6092,14 @@
    "team_size": 160,
    "website": "https://routable.com"
   },
+  "rove": {
+   "checked": "2026-10-14",
+   "name": "Rove",
+   "source": "yc",
+   "status": "none",
+   "team_size": 32,
+   "website": "https://rove.com"
+  },
   "rubbrband": {
    "checked": "2026-09-25",
    "name": "Rubbrband",
@@ -6099,6 +6131,14 @@
    "status": "none",
    "team_size": 7,
    "website": "https://www.runtm.com/"
+  },
+  "runtimesi": {
+   "checked": "2026-10-14",
+   "name": "Runtime.si",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://runtime.si/"
   },
   "runway": {
    "checked": "2026-09-25",
@@ -6897,6 +6937,14 @@
    "status": "none",
    "team_size": 44,
    "website": "https://www.sully.ai"
+  },
+  "sunflower": {
+   "checked": "2026-10-14",
+   "name": "Sunflower",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://sunflowerclinic.com/"
   },
   "supertokens": {
    "checked": "2026-09-25",
@@ -8133,5 +8181,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-13"
+ "last_build": "2026-10-14"
 }
