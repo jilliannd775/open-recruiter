@@ -7380,6 +7380,14 @@
    "team_size": 7,
    "website": "https://mymindbase.ai"
   },
+  "trainloop": {
+   "checked": "2026-10-15",
+   "name": "TrainLoop",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "http://trainloop.ai"
+  },
   "transastra-corporation": {
    "checked": "2026-09-25",
    "name": "TransAstra Corporation",
@@ -8181,5 +8189,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-14"
+ "last_build": "2026-10-15"
 }
