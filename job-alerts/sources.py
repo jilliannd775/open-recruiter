@@ -675,7 +675,11 @@ def fetch_email_alerts(days: int = 3) -> list[Job]:
                 for card in cards:
                     job = _alert_job(site, card, received)
                     jobs.setdefault(job.uid, job)
-        log(f"  {emails} LinkedIn/Indeed alert emails from the last {days} days")
+        per_site = {site: sum(1 for j in jobs.values() if j.source.startswith(site)) for site in ALERT_SITES}
+        no_company = sum(1 for j in jobs.values() if not j.company)
+        log(f"  {emails} LinkedIn/Indeed alert emails from the last {days} days: "
+            + ", ".join(f"{n} {site} jobs" for site, n in per_site.items())
+            + (f" ({no_company} with no company found)" if no_company else ""))
     finally:
         try:
             imap.logout()
