@@ -6912,6 +6912,14 @@
    "team_size": 7000,
    "website": "http://stripe.com"
   },
+  "strong-compute": {
+   "checked": "2026-10-19",
+   "name": "Strong Compute",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://strongcompute.com"
+  },
   "structured-ai": {
    "checked": "2026-09-25",
    "name": "Structured AI",
@@ -8197,5 +8205,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-18"
+ "last_build": "2026-10-19"
 }
