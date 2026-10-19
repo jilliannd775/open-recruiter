@@ -187,6 +187,9 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
 # Collecting jobs
 # --------------------------------------------------------------------------- #
 
+KEYED_SOURCES = ("jsearch", "adzuna", "usajobs", "email_alerts")
+
+
 def keyed_sources(settings: dict, seen: dict | None, check: bool = False) -> list[tuple]:
     """Sources that need a free key (JSearch/Google Jobs, Adzuna, USAJobs), as
     (settings key, label, fetch). check=True runs one small search each."""
@@ -199,6 +202,8 @@ def keyed_sources(settings: dict, seen: dict | None, check: bool = False) -> lis
             int(settings.get("google_jobs_searches_per_month") or 180))),
         ("adzuna", "Adzuna", lambda: sources.fetch_adzuna(pick("adzuna_searches"))),
         ("usajobs", "USAJobs", lambda: sources.fetch_usajobs(pick("usajobs_searches"))),
+        ("email_alerts", "LinkedIn/Indeed alert emails", lambda: sources.fetch_email_alerts(
+            int(settings.get("email_alerts_days") or 3))),
     ]
 
 
@@ -249,7 +254,7 @@ def collect_fixed_sources(settings: dict, notes: list[str], seen: dict | None = 
     for key, label, fetch in aggregators + keyed_sources(settings, seen):
         if not source_on(settings, key):
             continue
-        if key in ("jsearch", "adzuna", "usajobs") and not sources.has_keys(key):
+        if key in KEYED_SOURCES and not sources.has_keys(key):
             log(f"{label}: skipped (its key isn't in your GitHub secrets yet; see the README)")
             continue
         tried += 1
@@ -531,7 +536,7 @@ def check_all(probe_names: list[str]) -> int:
     ]
     for key, label, fetch in checks + keyed_sources(settings, None, check=True):
         state = "on " if source_on(settings, key) else "off"
-        if key in ("jsearch", "adzuna", "usajobs") and not sources.has_keys(key):
+        if key in KEYED_SOURCES and not sources.has_keys(key):
             log(f"  --    {label:<16} ({state}) no key yet (add it in GitHub secrets; see the README)")
             continue
         try:

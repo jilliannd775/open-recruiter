@@ -23,6 +23,11 @@ jobs are only emailed to you, never republished.
     at most one request an hour. We use 1 a day.
   * Working Nomads: free public job feed; one request a day, links to their page.
 
+  * LinkedIn and Indeed job alert emails: neither site has a public job feed,
+    so instead the job alerts they email you are read from your Gmail inbox
+    (with the same Gmail app password that sends the digest). Nothing is
+    fetched from LinkedIn or Indeed themselves; each job links to its page there.
+
 These three need a free key (a GitHub secret); each is skipped until its key is added:
   * JSearch (RapidAPI): Google for Jobs results. The free plan has a small
     monthly allowance, so searches are capped per day and per month.
@@ -32,13 +37,20 @@ These three need a free key (a GitHub secret); each is skipped until its key is 
 """
 from __future__ import annotations
 
+import base64
+import email
+import email.utils
+import gzip
+import hashlib
+import html
+import imaplib
 import json
 import os
 import re
 import time
 import urllib.parse
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from common import (REMOTE_WORD, Gemini, Job, as_list, get_with_retries, http_json, http_text,
                     log, strip_html)
@@ -57,6 +69,8 @@ SOURCE_HOMES = {
     "Google Jobs": "https://www.google.com/search?q=jobs&ibp=htl;jobs",
     "Adzuna": "https://www.adzuna.com",
     "USAJobs": "https://www.usajobs.gov",
+    "LinkedIn": "https://www.linkedin.com/jobs/",
+    "Indeed": "https://www.indeed.com",
 }
 
 
@@ -67,7 +81,8 @@ def env(name: str) -> str:
 def has_keys(key: str) -> bool:
     """Whether the GitHub secrets a keyed source needs are set."""
     need = {"jsearch": ("RAPIDAPI_KEY",), "adzuna": ("ADZUNA_APP_ID", "ADZUNA_APP_KEY"),
-            "usajobs": ("USAJOBS_API_KEY",)}.get(key, ())
+            "usajobs": ("USAJOBS_API_KEY",),
+            "email_alerts": ("GMAIL_ADDRESS", "GMAIL_APP_PASSWORD")}.get(key, ())
     return all(env(n) for n in need)
 
 
@@ -499,6 +514,177 @@ def fetch_weworkremotely(feeds: list[str]) -> list[Job]:
             )
     if errors and not jobs:
         raise RuntimeError("; ".join(errors[:3]))
+    return list(jobs.values())
+
+
+# --------------------------------------------------------------------------- #
+# LinkedIn and Indeed job alert emails (read from your Gmail)
+# --------------------------------------------------------------------------- #
+
+ALERT_SITES = {"LinkedIn": "linkedin.com", "Indeed": "indeed.com"}
+ALERT_LINK = re.compile(r"<a\b[^>]*?href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>", re.S | re.I)
+# Card lines that aren't the job itself (badges, buttons, footers).
+ALERT_NOISE = re.compile(
+    r"^(view (job|all|more)\b.*|see (all|more)\b.*|search (for )?(more )?jobs.*|apply( now)?|easy ?apply|easily apply|actively recruiting|"
+    r"promoted|new|just posted|be an early applicant|\d+ (connections?|alumni|applicants?)\b.*|"
+    r"responsive employer|urgently hiring|hiring multiple candidates|job alert.*|unsubscribe.*|"
+    r"manage (job )?alerts.*|.*school alumni.*|.*works here.*|\d+\+? days? ago|today|"
+    r"posted \d+.*|active \d+.*|\W*)$", re.I)
+ALERT_FOOTER = re.compile(r"unsubscribe|manage (your )?(job )?alerts|you are receiving|privacy policy|"
+                          r"this email was (intended|sent)|help center|\u00a9|copyright", re.I)
+MONEY = re.compile(r"\$\s?(\d[\d,.]*)\s?(k)?\b(?:\s*(?:-|–|to)\s*\$?\s?(\d[\d,.]*)\s?(k)?)?", re.I)
+
+
+def _indeed_jk(href: str) -> str:
+    m = re.search(r"[?&](?:jk|vjk)=([0-9a-f]{16})\b", href)
+    if m:
+        return m.group(1)
+    m = re.search(r"/v3/([A-Za-z0-9_\-]{20,})", href)         # cts.indeed.com tracking links
+    if m:
+        try:
+            raw = base64.urlsafe_b64decode(m.group(1) + "=" * (-len(m.group(1)) % 4))
+            raw = gzip.decompress(raw) if raw[:2] == b"\x1f\x8b" else raw
+            m = re.search(rb"jk=([0-9a-f]{16})", raw)
+            return m.group(1).decode() if m else ""
+        except Exception:  # noqa: BLE001
+            return ""
+    return ""
+
+
+def _alert_key(site: str, href: str) -> str:
+    """The job's id on LinkedIn/Indeed, or "" when a link isn't a job."""
+    href = html.unescape(href)
+    if site == "LinkedIn":
+        m = re.search(r"/jobs/view/(?:[^/?\s]*-)?(\d{6,})", href)
+        return m.group(1) if m else ""
+    if re.search(r"indeed\.com", href, re.I):
+        return _indeed_jk(href)
+    return ""
+
+
+def _yearly(n: str, k: str) -> float:
+    v = float(n.replace(",", "") or 0)
+    return v * 1000 if k else v
+
+
+def parse_alert_email(site: str, body: str) -> list[dict]:
+    """Job cards from one alert email: [{id, title, lines}] in the email's order."""
+    marks = {}
+
+    def mark(m):
+        key = _alert_key(site, m.group(1))
+        text = strip_html(m.group(2)).replace("\n", " ").strip()
+        if not key and site == "Indeed" and text and not ALERT_NOISE.match(text) and re.search(
+                r"indeed\.com/(v3/|rc/clk|pagead/clk|viewjob|m/viewjob)", html.unescape(m.group(1)), re.I):
+            key = "h" + hashlib.sha1(text.lower().encode()).hexdigest()[:15]   # tracking link with no visible id
+        if not key:
+            return f" {text} "
+        marks.setdefault(key, m.group(1))
+        return f"\n\x00{key}\x00{text}\n"
+    body = re.sub(r"<(tr|td|th|table|tbody)\b[^>]*>", "\n", body or "", flags=re.I)  # email layouts are tables
+    lines = strip_html(ALERT_LINK.sub(mark, body)).split("\n")
+    cards: dict[str, dict] = {}
+    current = None
+    for line in lines:
+        line = line.strip()
+        m = re.match(r"\x00(\w+)\x00(.*)", line)
+        if m:
+            key, text = m.group(1), m.group(2).strip()
+            current = cards.setdefault(key, {"id": key, "title": "", "lines": [], "href": marks[key]})
+            if text and not ALERT_NOISE.match(text):
+                if not current["title"]:
+                    current["title"] = text
+                elif text != current["title"] and text not in current["lines"]:
+                    current["lines"].append(text)
+            continue
+        if current is None or not line:
+            continue
+        if ALERT_FOOTER.search(line):
+            current = None
+            continue
+        if not ALERT_NOISE.match(line) and line != current["title"] and len(current["lines"]) < 8:
+            current["lines"].append(line)
+    return [c for c in cards.values() if c["title"]]
+
+
+def _alert_job(site: str, card: dict, received: str) -> Job:
+    details = []
+    for ln in card["lines"]:
+        details.extend(p.strip() for p in re.split(r"\s+[·•|–-]\s+", ln) if p.strip())
+    company = details[0] if details else ""
+    rest = details[1:]
+    location = next((d for d in rest if REMOTE_WORD.search(d) or re.search(
+        r",\s*[A-Z]{2}\b|united states|\bUS\b|\bUSA\b|hybrid|on-?site", d, re.I)), "")
+    extra = {"country": "US", "alert_received": received}
+    money = next((MONEY.search(d) for d in rest if MONEY.search(d)), None)
+    if money:
+        lo = _yearly(money.group(1), money.group(2))
+        hi = _yearly(money.group(3), money.group(4)) if money.group(3) else lo
+        extra.update(_salary_extra(lo, hi))
+    if site == "LinkedIn":
+        uid, url = f"linkedin:{card['id']}", f"https://www.linkedin.com/jobs/view/{card['id']}/"
+    else:
+        url = (html.unescape(card["href"]) if card["id"].startswith("h")
+               else f"https://www.indeed.com/viewjob?jk={card['id']}")
+        uid = f"indeed:{card['id']}"
+    text = "\n".join(x for x in (card["title"], *card["lines"]) if x)
+    return Job(
+        uid=uid, company=company, title=card["title"], url=url, location=location,
+        workplace="remote" if REMOTE_WORD.search(location) else "",
+        description=(f"{text}\n(From {'an' if site == 'Indeed' else 'a'} {site} job alert email. Only the title, company, location and any "
+                     f"pay are known; the full description is on {site}.)"),
+        source=f"{site} job alert", source_url=SOURCE_HOMES[site], kind="aggregator", extra=extra,
+    )
+
+
+def _html_body(msg) -> str:
+    for part in msg.walk():
+        if part.get_content_type() == "text/html":
+            raw = part.get_payload(decode=True) or b""
+            return raw.decode(part.get_content_charset() or "utf-8", "replace")
+    return ""
+
+
+def fetch_email_alerts(days: int = 3) -> list[Job]:
+    """Jobs from LinkedIn and Indeed job alert emails in your Gmail from the last `days` days.
+    Opens the mailbox read-only, so nothing is marked read, moved or deleted."""
+    imap = imaplib.IMAP4_SSL("imap.gmail.com", timeout=60)
+    jobs: dict[str, Job] = {}
+    try:
+        imap.login(env("GMAIL_ADDRESS"), env("GMAIL_APP_PASSWORD").replace(" ", ""))
+        # All Mail, so alerts a Gmail filter skipped the inbox for still count.
+        for box in ('"[Gmail]/All Mail"', '"[Google Mail]/All Mail"', "INBOX"):
+            if imap.select(box, readonly=True)[0] == "OK":
+                break
+        since = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%d-%b-%Y")
+        emails = 0
+        for site, domain in ALERT_SITES.items():
+            status, data = imap.search(None, "FROM", f'"{domain}"', "SINCE", since)
+            ids = (data[0] or b"").split() if status == "OK" else []
+            for num in ids[-60:]:
+                status, parts = imap.fetch(num, "(BODY.PEEK[])")
+                if status != "OK" or not parts or not isinstance(parts[0], tuple):
+                    continue
+                msg = email.message_from_bytes(parts[0][1])
+                cards = parse_alert_email(site, _html_body(msg))
+                if not cards:
+                    continue                  # not a job alert (messages, news, receipts)
+                emails += 1
+                received = email.utils.parsedate_to_datetime(msg.get("Date")).date().isoformat() \
+                    if msg.get("Date") else ""
+                for card in cards:
+                    job = _alert_job(site, card, received)
+                    jobs.setdefault(job.uid, job)
+        per_site = {site: sum(1 for j in jobs.values() if j.source.startswith(site)) for site in ALERT_SITES}
+        no_company = sum(1 for j in jobs.values() if not j.company)
+        log(f"  {emails} LinkedIn/Indeed alert emails from the last {days} days: "
+            + ", ".join(f"{n} {site} jobs" for site, n in per_site.items())
+            + (f" ({no_company} with no company found)" if no_company else ""))
+    finally:
+        try:
+            imap.logout()
+        except Exception:  # noqa: BLE001
+            pass
     return list(jobs.values())
 
 

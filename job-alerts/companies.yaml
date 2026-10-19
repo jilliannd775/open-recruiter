@@ -396,3 +396,105 @@ companies:
     tag: discovered
     added: "2026-10-19"
     reason: "Established enterprise cybersecurity firm with AI integration, offering operational and PM roles but lower on preferred industry list."
+
+  # Added from your list of companies hiring remotely (fintech, AI, health, security, crypto, SaaS, defense).
+
+  - name: "Mercury"
+    platform: greenhouse
+    slug: "mercury"
+
+  - name: "SentiLink"
+    platform: ashby
+    slug: "sentilink"
+
+  - name: "Sardine"
+    platform: ashby
+    slug: "sardine"
+
+  - name: "Yuno"
+    platform: lever
+    slug: "yuno"
+
+  - name: "Addi"
+    platform: ashby
+    slug: "addi"
+
+  - name: "ElevenLabs"
+    platform: ashby
+    slug: "elevenlabs"
+
+  - name: "Cresta"
+    platform: greenhouse
+    slug: "cresta"
+
+  - name: "Cursor"
+    platform: ashby
+    slug: "cursor"
+
+  - name: "Kong"
+    platform: ashby
+    slug: "kong"
+
+  - name: "OpenRouter"
+    platform: ashby
+    slug: "openrouter"
+
+  - name: "Runware"
+    platform: workable
+    slug: "runware"
+
+  - name: "Talkiatry"
+    platform: ashby
+    slug: "talkiatry"
+
+  - name: "Headway"
+    platform: ashby
+    slug: "headway"
+
+  - name: "Thatch"
+    platform: greenhouse
+    slug: "thatch"
+
+  - name: "Turquoise Health"
+    platform: ashby
+    slug: "turquoise-health"
+
+  - name: "Tanium"
+    platform: greenhouse
+    slug: "tanium"
+
+  - name: "Anchorage Digital"
+    platform: lever
+    slug: "anchorage"
+
+  - name: "Phantom"
+    platform: ashby
+    slug: "phantom"
+
+  - name: "ClickUp"
+    platform: ashby
+    slug: "clickup"
+
+  - name: "Harvey"
+    platform: ashby
+    slug: "harvey"
+
+  - name: "Skydio"
+    platform: ashby
+    slug: "skydio"
+
+  - name: "KoBold Metals"
+    platform: greenhouse
+    slug: "koboldmetals"
+
+  - name: "Shield AI"
+    platform: lever
+    slug: "shieldai"
+
+  - name: "Jeeves"
+    platform: lever
+    slug: "tryjeeves"
+
+  - name: "Pindrop"
+    platform: greenhouse
+    slug: "pindropsecurity"

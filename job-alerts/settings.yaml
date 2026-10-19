@@ -25,6 +25,10 @@ sources:
   jsearch: true          # Google Jobs (through JSearch)
   adzuna: true           # adzuna.com (lots of Indeed-style listings)
   usajobs: true          # usajobs.gov (federal government jobs)
+  # LinkedIn and Indeed have no public job feed, so this reads the job alert
+  # emails they send you, from the Gmail account that sends your digest
+  # (GMAIL_ADDRESS). Set up the alerts on LinkedIn/Indeed (see the README).
+  email_alerts: true     # LinkedIn + Indeed job alert emails
 
 # YOUR SPECIFIC TITLES. A job whose title contains one of these is always
 # considered, from any source, even if it has a word from the "too senior"
@@ -238,6 +242,10 @@ vc_board_searches:
   - solutions consultant
   - strategy operations
   - chief of staff
+
+# LINKEDIN AND INDEED ALERT EMAILS. How many days back to read alert emails
+# (jobs already scored are skipped, so overlap is harmless).
+email_alerts_days: 3
 
 # USAJOBS (federal jobs). Remote federal jobs posted in the last 3 days.
 usajobs_searches:
