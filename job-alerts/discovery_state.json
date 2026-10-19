@@ -1,27 +1,42 @@
 {
  "articles": {
+  "https://news.crunchbase.com/ai/legal-tech-chariot-raise-stop-hidden-fees-subscriptions-hang/": "2026-10-19",
   "https://news.crunchbase.com/ai/verifying-ai-agents-baselayer-35m-raise/": "2026-09-28",
   "https://news.crunchbase.com/cybersecurity/from-ballet-to-breach-prevention-ai-startup-hilt-cielen/": "2026-10-12",
+  "https://news.crunchbase.com/cybersecurity/q3-2026-large-venture-investments-ai-defense-startups/": "2026-10-19",
   "https://news.crunchbase.com/ma/ai-startup-acquisitions-legal-healthcare-openai/": "2026-10-12",
   "https://news.crunchbase.com/venture/2026-global-gaming-startup-funding-up-ai-meshy-decart/": "2026-09-28",
   "https://news.crunchbase.com/venture/ai-startup-investors-raising-bar-ipo-farid-leo/": "2026-10-12",
   "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-energy-cloud-axiom-typesafe/": "2026-10-12",
   "https://news.crunchbase.com/venture/biggest-funding-rounds-cybersecurity-ai-health-island-cyera/": "2026-09-28",
+  "https://news.crunchbase.com/venture/biggest-funding-rounds-investors-scaled-back-ai-biotech-modal/": "2026-10-19",
   "https://news.crunchbase.com/venture/dextr-ai-hospitality-agents-raises-seed-funding/": "2026-09-28",
   "https://news.crunchbase.com/venture/early-groq-ai-investor-qa-venkatachalam-axiom/": "2026-09-28",
+  "https://news.crunchbase.com/venture/fde-bubble-enterprise-agentic-ai-gurtu-airrived/": "2026-10-19",
+  "https://news.crunchbase.com/venture/founder-raises-5m-next-act-ai-marketing-startup-marklo-herrin/": "2026-10-19",
   "https://news.crunchbase.com/venture/gudea-lands-funding-predict-viral-online-narratives/": "2026-10-12",
   "https://news.crunchbase.com/venture/megaround-seriesa-ai-chips-robotics-2026/": "2026-09-28",
   "https://news.crunchbase.com/venture/q3-2026-active-investors-kept-deal-pace-a16z-insight-sequoia/": "2026-10-12",
+  "https://news.crunchbase.com/venture/q3-2026-asia-startup-funding-near-record-ai/": "2026-10-19",
   "https://news.crunchbase.com/venture/q3-2026-europe-strong-quarter-ai-uk-germany-france/": "2026-10-12",
   "https://news.crunchbase.com/venture/q3-2026-global-startup-funding-ai-billion-dollar-rounds-exits-data/": "2026-10-12",
+  "https://news.crunchbase.com/venture/q3-2026-latam-startup-funding-jumps-ai-fintech-mexico/": "2026-10-19",
   "https://news.crunchbase.com/venture/q3-2026-north-america-startup-funding-falls-ai-exits-data/": "2026-10-12",
+  "https://payloadspace.com/anna-shaposhnik-orbes/": "2026-10-19",
+  "https://payloadspace.com/exclusive-eradrive-lands-13m-dod-award-for-autonomy-module/": "2026-10-19",
+  "https://payloadspace.com/exclusive-in-orbit-aerospace-pivots-from-re-entry-vehicles-to-spacecraft-autonomy/": "2026-10-19",
   "https://payloadspace.com/exclusive-kapta-space-raises-24m-series-a-to-build-moving-target-radar-payload/": "2026-10-12",
   "https://payloadspace.com/fortastra-raises-30m-series-a-to-fund-its-next-security-spacecraft/": "2026-10-12",
   "https://payloadspace.com/fuse-grows-its-space-portfolio/": "2026-09-28",
   "https://payloadspace.com/hawkeye-360-turns-its-rf-sensors-to-orbital-targets/": "2026-10-12",
+  "https://payloadspace.com/how-space-companies-can-prepare-for-a-potential-launch-gap/": "2026-10-19",
   "https://payloadspace.com/hubble-network-raises-200m-series-c-at-1-6b-valuation/": "2026-09-28",
   "https://payloadspace.com/nebex-partners-with-thrusters-unlimited-to-unlock-700m-for-mexicos-space-ecosystem/": "2026-10-12",
   "https://payloadspace.com/rocket-lab-cfo-adam-spice-predicts-more-ma-deals-on-the-horizon/": "2026-09-28",
+  "https://payloadspace.com/seraphim-space-investment-trust-doubled-its-value-in-2026/": "2026-10-19",
+  "https://payloadspace.com/uksa-taps-clearspace-for-countrys-first-debris-removal-mission/": "2026-10-19",
+  "https://payloadspace.com/velos-election-day-tracker-for-space/": "2026-10-19",
+  "https://payloadspace.com/warpware-closes-pre-seed-to-bring-agentic-tools-to-flight-software/": "2026-10-19",
   "https://techcrunch.com/2026/09/23/3-days-left-to-save-up-to-200-and-make-impactful-connections-at-techcrunch-disrupt-2026/": "2026-09-28",
   "https://techcrunch.com/2026/09/23/strictlyvc-at-techcrunch-disrupt-2026-inside-the-changing-rules-of-venture-capital/": "2026-09-28",
   "https://techcrunch.com/2026/09/23/vc-firm-bessemer-now-has-another-5-75b-to-invest-in-what-else-ai/": "2026-09-28",
@@ -48,6 +63,10 @@
   "https://techcrunch.com/2026/10/10/3-days-to-disrupt-2026-meet-the-startups-before-they-hit-mainstream/": "2026-10-12",
   "https://techcrunch.com/2026/10/11/48-hours-to-techcrunch-disrupt-2026-hear-directly-from-the-people-building-whats-next/": "2026-10-12",
   "https://techcrunch.com/2026/10/12/techcrunch-disrupt-2026-starts-tomorrow-your-final-chance-to-secure-up-to-100-ticket-savings/": "2026-10-12",
+  "https://techcrunch.com/2026/10/13/the-final-disrupt-stage-lineup-three-days-of-conversations-you-wont-hear-anywhere-outside-of-techcrunch-disrupt-2026/": "2026-10-19",
+  "https://techcrunch.com/2026/10/15/last-chance-to-save-up-to-200-on-techcrunch-founder-summit-early-booking-ends-oct-16/": "2026-10-19",
+  "https://techcrunch.com/2026/10/19/ai-assistant-startup-town-nabs-unicorn-valuation-four-months-after-launch/": "2026-10-19",
+  "https://techcrunch.com/2026/10/19/tenstorrent-hits-6-2b-valuation-to-scale-open-weight-ai-chips/": "2026-10-19",
   "https://thequantuminsider.com/2026/09/28/austin-mayor-ut-austin-support-occam-foundry/": "2026-09-28",
   "https://thequantuminsider.com/2026/09/28/cea-leti-and-quobly-strengthen-their-collaboration-to-accelerate-the-development-of-next-generation-silicon-quantum-technologies/": "2026-09-28",
   "https://thequantuminsider.com/2026/09/28/fsu-2-1-million-quantum-communication-testbed/": "2026-09-28",
@@ -55,15 +74,24 @@
   "https://thequantuminsider.com/2026/10/09/guest-post-quantum-computings-transistor-moment/": "2026-10-12",
   "https://thequantuminsider.com/2026/10/12/ionq-agrees-to-buy-elisity-in-cybersecurity-deal-worth-up-to-1-3-billion/": "2026-10-12",
   "https://thequantuminsider.com/2026/10/12/sealsq-vaultic409-secure-element-post-quantum-cryptography/": "2026-10-12",
+  "https://thequantuminsider.com/2026/10/19/chinas-tuoyuan-targets-neutral-atom-quantum-computing/": "2026-10-19",
+  "https://thequantuminsider.com/2026/10/19/quantinuum-reports-a-10x-reduction-in-logical-error-rate-on-helios/": "2026-10-19",
+  "https://thequantuminsider.com/2026/10/19/ukri-backs-uk-quantum-businesses-with-share-of-50-million/": "2026-10-19",
   "https://www.ctvc.co/fervo-flips-the-switch-316/": "2026-10-12",
   "https://www.ctvc.co/inside-the-frenzied-heart-of-the-11-trillion-ai-buildout/": "2026-10-12",
   "https://www.ctvc.co/overheard-at-nycw-26-315/": "2026-09-28",
+  "https://www.ctvc.co/q3-roundup-ft-mega-deals-nuclear-listings-and-more-317/": "2026-10-19",
   "https://www.ctvc.co/see-you-at-new-york-climate-week-314/": "2026-09-28",
+  "https://www.ctvc.co/who-builds-europes-biggest-climate-companies-318/": "2026-10-19",
+  "https://www.geekwire.com/2026/a-two-person-seattle-startup-lands-1m-to-reinvent-energy-hungry-chips-suitable-for-space/": "2026-10-19",
   "https://www.geekwire.com/2026/ai-founders-for-hire-startup-hub-foundations-launches-service-to-connect-businesses-with-builders/": "2026-10-12",
   "https://www.geekwire.com/2026/amazon-unveils-alexa-tablets-running-android-with-google-play-including-a-pro-model-aimed-at-work/": "2026-10-12",
   "https://www.geekwire.com/2026/amazons-fight-with-meta-who-owns-the-customer-relationship-when-an-agent-does-the-buying/": "2026-09-28",
+  "https://www.geekwire.com/2026/amazons-new-bee-ai-devices-have-a-bystander-problem-says-former-aws-security-engineer/": "2026-10-19",
   "https://www.geekwire.com/2026/an-ethicists-take-what-philosophy-teaches-us-about-the-limits-we-should-be-setting-on-ai-agents/": "2026-09-28",
+  "https://www.geekwire.com/2026/apple-challenges-amazons-echo-and-ring-with-its-new-smart-home-lineup/": "2026-10-19",
   "https://www.geekwire.com/2026/artists-game-designers-and-producers-hit-hard-as-microsoft-cuts-277-jobs-in-washington-state/": "2026-09-28",
+  "https://www.geekwire.com/2026/booking-holdings-unveils-ai-travel-startup-vayo-based-in-seattle-with-a-planned-100m-investment/": "2026-10-19",
   "https://www.geekwire.com/2026/ex-zillow-vps-startup-truelist-acquired-by-mainstay-in-18m-expansion-of-real-estate-ai/": "2026-09-28",
   "https://www.geekwire.com/2026/facing-seismic-shifts-in-tech-sector-seattle-mayor-freezes-jumpstart-tax-rates-in-new-budget/": "2026-09-28",
   "https://www.geekwire.com/2026/fast-growing-temporal-hires-team-from-nyc-startup-oso-to-build-ai-agent-security-controls/": "2026-10-12",
@@ -71,9 +99,13 @@
   "https://www.geekwire.com/2026/hubble-network-raises-200m-to-reach-1-6b-valuation-as-startup-expands-satellite-bluetooth-network/": "2026-09-28",
   "https://www.geekwire.com/2026/i-am-not-an-ai-friendly-actor-nicolas-cage-likely-done-with-amazon-after-spider-noir-stance/": "2026-10-12",
   "https://www.geekwire.com/2026/its-not-a-lost-cause-seattle-aquarium-ceo-meg-mccann-on-saving-the-ocean-one-visitor-at-a-time/": "2026-09-28",
+  "https://www.geekwire.com/2026/leaked-list-shows-what-microsoft-amazon-and-other-tech-giants-are-giving-for-the-white-house-ballroom/": "2026-10-19",
+  "https://www.geekwire.com/2026/lime-tops-10-5m-seattle-rides-in-2026-rolling-past-last-years-e-bike-and-scooter-total-two-months-early/": "2026-10-19",
+  "https://www.geekwire.com/2026/microsofts-wild-ride-stock-hits-new-record-after-a-year-of-ups-and-downs/": "2026-10-19",
   "https://www.geekwire.com/2026/nimbus-aerospace-tests-quarter-scale-prototype-in-oregon-as-hybrid-electric-race-ramps-up/": "2026-09-28",
   "https://www.geekwire.com/2026/opinion-washingtons-new-state-income-tax-must-be-repealed/": "2026-10-12",
   "https://www.geekwire.com/2026/overland-ai-unveils-ibex-a-new-autonomous-ground-vehicle-selected-by-the-marine-corps/": "2026-10-12",
+  "https://www.geekwire.com/2026/prime-intellect-acquires-moondream-a-vision-ai-startup-founded-in-seattle-by-aws-vets/": "2026-10-19",
   "https://www.geekwire.com/2026/rings-first-smart-lock-ditches-the-key-and-adds-a-dial-to-revive-a-dead-battery/": "2026-10-12",
   "https://www.geekwire.com/2026/rocket-fuel-seattle-area-startups-raise-a-record-3-5b-as-national-vc-funding-cools/": "2026-10-12",
   "https://www.geekwire.com/2026/satellite-radar-tech-startup-kapta-space-raises-24m-including-cash-from-bill-gates-backed-fund/": "2026-10-12",
@@ -82,7 +114,10 @@
   "https://www.geekwire.com/2026/seattle-startup-chiplytics-lands-4-5m-to-catch-fake-and-flawed-chips-before-they-hit-the-market/": "2026-10-12",
   "https://www.geekwire.com/2026/seattles-tax-burden-shifted-to-business-as-jobs-slipped-away-new-report-finds/": "2026-10-12",
   "https://www.geekwire.com/2026/shield-ai-lands-150m-navy-contract-to-advance-ai-piloted-fighter-jet-that-will-be-built-south-of-seattle/": "2026-10-12",
+  "https://www.geekwire.com/2026/tech-moves-brinc-drones-fred-hutch-acumatica-convera-add-to-c-suites-linkedin-director-departs/": "2026-10-19",
   "https://www.geekwire.com/2026/uw-institute-run-by-nobel-winner-lands-transformational-cloud-grant-from-huang-foundation/": "2026-10-12",
+  "https://www.geekwire.com/2026/uw-receives-12m-gift-from-taiwan-based-chip-company-led-by-alumnus-arthur-chiao/": "2026-10-19",
+  "https://www.geekwire.com/2026/what-is-fusion-helion-energy-harnesses-the-power-of-television-with-a-jeopardy-mention/": "2026-10-19",
   "https://www.geekwire.com/2026/why-amazon-might-pay-billions-for-decart-a-3-year-old-ai-startup-that-hasnt-disclosed-its-revenue/": "2026-10-12"
  },
  "companies": {
@@ -154,6 +189,13 @@
    "slug": "charge-robotics",
    "status": "added"
   },
+  "chariotclaims": {
+   "date": "2026-10-19",
+   "name": "Chariot Claims",
+   "platform": "ashby",
+   "slug": "chariotclaims",
+   "status": "added"
+  },
   "cinder": {
    "date": "2026-10-12",
    "name": "Cinder",
@@ -172,6 +214,13 @@
    "name": "Cyera",
    "status": "no_board",
    "website": "cyera.io"
+  },
+  "eradrive": {
+   "date": "2026-10-19",
+   "name": "EraDrive",
+   "platform": "ashby",
+   "slug": "eradrive",
+   "status": "added"
   },
   "fortastra": {
    "date": "2026-10-12",
@@ -234,6 +283,13 @@
    "slug": "icarus",
    "status": "added"
   },
+  "icon": {
+   "date": "2026-10-19",
+   "name": "Icon",
+   "platform": "ashby",
+   "slug": "icon",
+   "status": "added"
+  },
   "island": {
    "date": "2026-09-28",
    "name": "Island",
@@ -248,11 +304,25 @@
    "slug": "jitxinc",
    "status": "added"
   },
+  "kairospower": {
+   "date": "2026-10-19",
+   "name": "Kairos Power",
+   "platform": "greenhouse",
+   "slug": "kairospower",
+   "status": "added"
+  },
   "kaptaspace": {
    "date": "2026-10-12",
    "name": "Kapta Space",
    "platform": "lever",
    "slug": "kapta-space",
+   "status": "added"
+  },
+  "keyfactor": {
+   "date": "2026-10-19",
+   "name": "Keyfactor",
+   "platform": "greenhouse",
+   "slug": "keyfactorinc",
    "status": "added"
   },
   "linevision": {
@@ -307,6 +377,12 @@
    "status": "no_board",
    "website": "meshy.ai"
   },
+  "modal": {
+   "date": "2026-10-19",
+   "name": "Modal Labs",
+   "status": "no_board",
+   "website": "modal.com"
+  },
   "multiply": {
    "date": "2026-10-12",
    "name": "Multiply Labs",
@@ -347,6 +423,12 @@
    "platform": "gem",
    "slug": "paces",
    "status": "added"
+  },
+  "parallelsystems": {
+   "date": "2026-10-19",
+   "name": "Parallel Systems",
+   "status": "no_board",
+   "website": "moveparallel.com"
   },
   "plantedsolar": {
    "date": "2026-09-28",
@@ -421,11 +503,25 @@
    "slug": "stokespacetechnologies",
    "status": "added"
   },
+  "tenstorrent": {
+   "date": "2026-10-19",
+   "name": "Tenstorrent",
+   "platform": "greenhouse",
+   "slug": "tenstorrent",
+   "status": "added"
+  },
   "terraapi": {
    "date": "2026-10-12",
    "name": "Terra API",
    "status": "no_board",
    "website": "http://tryterra.co"
+  },
+  "town": {
+   "date": "2026-10-19",
+   "name": "Town",
+   "platform": "ashby",
+   "slug": "town",
+   "status": "added"
   },
   "trm": {
    "date": "2026-09-28",
@@ -433,6 +529,12 @@
    "platform": "ashby",
    "slug": "trm-labs",
    "status": "added"
+  },
+  "typeoneenergy": {
+   "date": "2026-10-19",
+   "name": "Type One Energy",
+   "status": "no_board",
+   "website": "typeoneenergy.com"
   },
   "typesafeai": {
    "date": "2026-10-12",
@@ -446,6 +548,26 @@
    "name": "Usul",
    "platform": "ashby",
    "slug": "usul",
+   "status": "added"
+  },
+  "vayo": {
+   "date": "2026-10-19",
+   "name": "Vayo",
+   "status": "no_board",
+   "website": ""
+  },
+  "veir": {
+   "date": "2026-10-19",
+   "name": "VEIR",
+   "platform": "greenhouse",
+   "slug": "veir",
+   "status": "added"
+  },
+  "voltus": {
+   "date": "2026-10-19",
+   "name": "Voltus",
+   "platform": "lever",
+   "slug": "voltus",
    "status": "added"
   },
   "vooma": {
@@ -462,7 +584,7 @@
    "website": "https://www.weaverobotics.com"
   }
  },
- "last_run": "2026-10-12",
+ "last_run": "2026-10-19",
  "yc_seen": {
   "9-mothers-corporation": "2026-09-28",
   "agency": "2026-09-28",

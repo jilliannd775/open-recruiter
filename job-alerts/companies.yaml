@@ -333,3 +333,66 @@ companies:
     tag: discovered
     added: "2026-10-12"
     reason: "Strong climate mission, but heavy focus on synthetic biology and genetics makes it a weaker fit for your physics background."
+
+  - name: "Kairos Power"
+    platform: greenhouse
+    slug: "kairospower"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Excellent match combining deep tech nuclear physics and clean energy, with ample need for technical program and operations leads."
+
+  - name: "VEIR"
+    platform: greenhouse
+    slug: "veir"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Superconducting grid technology fits candidate's physics expertise and clean energy interests, with mature Series C hiring needs."
+
+  - name: "EraDrive"
+    platform: ashby
+    slug: "eradrive"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Autonomous satellite systems startup directly matches candidate's space/physics interests and technical program management background."
+
+  - name: "Voltus"
+    platform: lever
+    slug: "voltus"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Established climate tech platform with well-developed product operations and technical program management opportunities."
+
+  - name: "Town"
+    platform: ashby
+    slug: "town"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Fast-growing Series B applied AI startup likely scaling product management and product operations teams."
+
+  - name: "Tenstorrent"
+    platform: greenhouse
+    slug: "tenstorrent"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Massive funding for open-weight AI silicon provides strong TPM and product opportunities matching candidate's AI and physics background."
+
+  - name: "Icon"
+    platform: ashby
+    slug: "icon"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Advanced robotics hardware startup with strong deep tech crossover, though leaning into construction automation rather than pure physics."
+
+  - name: "Chariot Claims"
+    platform: ashby
+    slug: "chariotclaims"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Mission-driven company protecting consumers from corporate hidden fees, offering good alignment with candidate's operations and BA experience."
+
+  - name: "Keyfactor"
+    platform: greenhouse
+    slug: "keyfactorinc"
+    tag: discovered
+    added: "2026-10-19"
+    reason: "Established enterprise cybersecurity firm with AI integration, offering operational and PM roles but lower on preferred industry list."
