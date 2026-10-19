@@ -490,3 +490,11 @@ companies:
   - name: "Shield AI"
     platform: lever
     slug: "shieldai"
+
+  - name: "Jeeves"
+    platform: lever
+    slug: "tryjeeves"
+
+  - name: "Pindrop"
+    platform: greenhouse
+    slug: "pindropsecurity"
