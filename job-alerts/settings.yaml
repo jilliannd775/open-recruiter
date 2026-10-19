@@ -35,6 +35,8 @@ sources:
 # list below (so "Chief of Staff" isn't blocked by "chief"). Add or remove
 # titles freely, one per line.
 my_target_titles:
+  - consulting
+  - product ops
   - technical program manager
   - r&d program manager
   - program manager
@@ -122,6 +124,9 @@ max_years_experience: 6
 # scored if its TITLE contains one of these words. (Jobs from your own
 # companies.yaml list are not limited this way.) Add or remove words freely.
 job_board_title_keywords:
+  - consultant
+  - consulting
+  - product ops
   - associate product manager
   - product associate
   - product analyst
@@ -179,9 +184,11 @@ big_company_searches:
 # each day (10 newest remote US results each) and stops for the month at
 # google_jobs_searches_per_month. Put your most important searches first.
 google_jobs_searches:
+  - product operations manager
+  - technology consultant
+  - AI product operations
   - AI product analyst
   - AI associate product manager
-  - AI product operations
   - associate product manager
   - product analyst
   - product operations
@@ -195,6 +202,8 @@ google_jobs_searches_per_month: 180
 # ADZUNA. Jobs whose title matches each search and that mention remote,
 # posted in the last 3 days (up to 50 each).
 adzuna_searches:
+  - consultant
+  - product operations manager
   - associate product manager
   - product analyst
   - product operations
@@ -232,6 +241,7 @@ vc_boards:
     url: https://jobs.accel.com
 # What to search for on each board (one search each, up to 100 results).
 vc_board_searches:
+  - consultant
   - program manager
   - product operations
   - product analyst
@@ -258,6 +268,10 @@ usajobs_searches:
 # The searches run on Himalayas each day (US-eligible remote jobs, newest
 # first, 20 results each).
 himalayas_searches:
+  - consultant
+  - technology consultant
+  - management consultant
+  - product operations manager
   - associate product manager
   - product associate
   - technical program manager

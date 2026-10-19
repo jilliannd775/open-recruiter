@@ -9,9 +9,18 @@ English. Be specific about what you want and what you don't.
 - B.A. in Physics (Oberlin); former Caltech research fellow (gravitational-wave
   research).
 
-## TOP PRIORITY: product roles at science or AI companies
-These are the jobs I want most. Score them highest when they're fully remote in
-the US and at my level:
+## TOP PRIORITY: consulting and product operations roles
+These come first, at any company, whenever they're fully remote in the US, at my
+level and a good fit:
+- **Consulting roles**: Consultant / Senior Consultant, technology,
+  management, process, implementation, solutions and AI / digital
+  transformation consulting. I'm a Senior Consultant now, so these build
+  directly on what I do.
+- **Product operations roles**: Product Operations Manager / Analyst /
+  Associate / Specialist, Product Operator.
+
+## ALSO TOP PRIORITY: product roles at science or AI companies
+Score these highest too when they're fully remote in the US and at my level:
 - **Product roles**: Product Analyst, Associate Product Manager / Product
   Associate / Product Manager I, Product Operations, Product Owner / Technical
   Product Owner, technical product management.
