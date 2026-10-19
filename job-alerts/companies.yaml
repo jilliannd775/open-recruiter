@@ -498,3 +498,197 @@ companies:
   - name: "Pindrop"
     platform: greenhouse
     slug: "pindropsecurity"
+
+  # Added from your second list (grid, nuclear, minerals, climate capital, and remote-hiring startups).
+
+  - name: "Base Power"
+    platform: ashby
+    slug: "base-power"
+
+  - name: "Radiant"
+    platform: ashby
+    slug: "radiant-industries"
+
+  - name: "Mariana Minerals"
+    platform: ashby
+    slug: "marianaminerals"
+
+  - name: "Crux"
+    platform: ashby
+    slug: "cruxclimate"
+
+  - name: "Rune Technologies"
+    platform: ashby
+    slug: "runetech"
+
+  - name: "Patch"
+    platform: greenhouse
+    slug: "patch"
+
+  - name: "Lyft"
+    platform: greenhouse
+    slug: "lyft"
+
+  - name: "Hercules"
+    platform: ashby
+    slug: "hercules"
+
+  - name: "SpotOn"
+    platform: ashby
+    slug: "spoton"
+
+  - name: "OpenGov"
+    platform: ashby
+    slug: "opengov"
+
+  - name: "Lio"
+    platform: ashby
+    slug: "lio"
+
+  - name: "Wonderschool"
+    platform: greenhouse
+    slug: "wonderschool"
+
+  - name: "Saronic"
+    platform: ashby
+    slug: "saronic"
+
+  - name: "Sprinter Health"
+    platform: ashby
+    slug: "sprinter-health"
+
+  - name: "Nash"
+    platform: ashby
+    slug: "nash"
+
+  - name: "Omada Health"
+    platform: greenhouse
+    slug: "omadahealth"
+
+  - name: "Illumio"
+    platform: ashby
+    slug: "illumio"
+
+  - name: "Wrapbook"
+    platform: ashby
+    slug: "wrapbook"
+
+  - name: "Freenome"
+    platform: greenhouse
+    slug: "freenome"
+
+  - name: "Clutch"
+    platform: greenhouse
+    slug: "clutch"
+
+  - name: "Honor"
+    platform: greenhouse
+    slug: "honor"
+
+  - name: "Very Good Security"
+    platform: lever
+    slug: "verygoodsecurity"
+
+  - name: "Roblox"
+    platform: greenhouse
+    slug: "roblox"
+
+  - name: "Greenlight"
+    platform: lever
+    slug: "greenlight"
+
+  - name: "EngFlow"
+    platform: ashby
+    slug: "engflow"
+
+  - name: "Benchling"
+    platform: ashby
+    slug: "benchling"
+
+  - name: "Resend"
+    platform: ashby
+    slug: "resend"
+
+  - name: "Propel"
+    platform: ashby
+    slug: "propel"
+
+  - name: "Abridge"
+    platform: ashby
+    slug: "abridge"
+
+  - name: "Descript"
+    platform: greenhouse
+    slug: "descript"
+
+  - name: "Kodex"
+    platform: ashby
+    slug: "kodex"
+
+  - name: "Mysten Labs"
+    platform: ashby
+    slug: "mystenlabs"
+
+  - name: "Waymark"
+    platform: greenhouse
+    slug: "waymark"
+
+  - name: "Sleeper"
+    platform: ashby
+    slug: "sleeper"
+
+  - name: "Valon"
+    platform: ashby
+    slug: "valon"
+
+  - name: "SnapLogic"
+    platform: lever
+    slug: "snaplogic"
+
+  - name: "Morpho Labs"
+    platform: ashby
+    slug: "morpho"
+
+  - name: "Material Security"
+    platform: ashby
+    slug: "materialsecurity"
+
+  - name: "Plaid"
+    platform: ashby
+    slug: "plaid"
+
+  - name: "Ambience Healthcare"
+    platform: ashby
+    slug: "ambiencehealthcare"
+
+  - name: "AirGarage"
+    platform: ashby
+    slug: "airgarage"
+
+  - name: "Quora"
+    platform: ashby
+    slug: "quora"
+
+  - name: "Bastion"
+    platform: ashby
+    slug: "bastion"
+
+  - name: "Apollo GraphQL"
+    platform: ashby
+    slug: "apollo-graphql"
+
+  - name: "Treeline"
+    platform: breezy
+    slug: "treeline"
+
+  - name: "Matter Labs"
+    platform: ashby
+    slug: "matter-labs"
+
+  - name: "Replit"
+    platform: ashby
+    slug: "replit"
+
+  - name: "Rasa"
+    platform: ashby
+    slug: "rasa"
