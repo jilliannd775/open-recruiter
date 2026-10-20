@@ -9,6 +9,16 @@ English. Be specific about what you want and what you don't.
 - B.A. in Physics (Oberlin); former Caltech research fellow (gravitational-wave
   research).
 
+## Technical skills (be realistic)
+- I'm **not fluent in SQL, Python or BI tools** like Tableau or Power BI.
+  I'm learning SQL, but I don't want roles where hands-on SQL, Python or
+  dashboard building is a core daily requirement (data analyst, BI analyst,
+  most product analyst roles). Listed as "a plus" is fine.
+- I'd rather learn product (customers, requirements, roadmaps, launches,
+  operations) than go deep on analytics software.
+- Comfortable with: Jira, Confluence, ServiceNow SPM, Smartsheet, AI tools
+  (Gemini, Claude, Claude Code), process mapping, requirements and PRDs.
+
 ## My goal: move into product
 I want to end up in a product role. Right now I'm best placed for roles that
 build a path there, since I haven't yet owned a product or led a software
@@ -20,9 +30,10 @@ These come first whenever they're fully remote in the US and at my level:
   Associate / Specialist), Consulting (technology, implementation,
   solutions, process, AI or digital transformation; I'm a Senior Consultant
   now), Program Manager / Technical Program Manager, Implementation Manager
-  / Consultant / Lead, Product Owner / Technical Product Owner, Product
-  Analyst, Associate Product Manager / Product Associate, Solutions Engineer /
-  Sales Engineer, Forward Deployed / Deployment Strategist.
+  / Consultant / Lead, Product Owner / Technical Product Owner, Associate
+  Product Manager / Product Associate, Solutions Consultant, Solutions
+  Engineer / Sales Engineer, Technical Account Manager, Forward Deployed /
+  Deployment Strategist.
 - **At science and tech companies**: companies whose product is AI/ML,
   software or data, or science and deep tech (aerospace, space and
   satellites, physics, quantum, climate and energy, robotics, research and
@@ -73,7 +84,7 @@ These come first whenever they're fully remote in the US and at my level:
 - Product Owner / Technical Product Owner / Product Owner II
 - Senior Analyst, Technology (or Technical) Product Management
 - Product Operations Associate / Product Operations Analyst / Product Operator
-- Product Analyst
+- Product Analyst (only when SQL / Python aren't core daily requirements)
 - Associate Product Manager / Product Associate / Product Manager I
 - Business Systems Analyst / Senior Business Systems Analyst
 - Technical Business Analyst / Senior Technical Business Analyst

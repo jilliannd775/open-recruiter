@@ -53,16 +53,21 @@ Scoring guide:
   build a path to product, at science and tech companies: product operations,
   consulting (technology, implementation, solutions, process, AI or digital
   transformation), program / technical program management, implementation,
-  and entry-level product roles (product analyst, associate product manager,
-  product owner), and customer-facing technical roles such as solutions
-  engineer, sales engineer, forward-deployed or deployment strategist (score
-  these lower if they require writing production code). When one of these is
+  entry-level product roles (associate product manager, product owner), and
+  customer-facing technical roles such as solutions consultant, solutions
+  engineer, sales engineer, technical account manager, forward-deployed or
+  deployment strategist (score these lower if they require writing production
+  code). When one of these is
   remote US, at her level and at a
   science or tech company, score it 85+. The same roles at other companies
   are good but rank a little lower. She has NOT yet owned a product or led a
   software implementation: product manager roles that require years of
   product management experience or of owning a product or implementation
-  must score below 65. Financial services and insurance companies rank at
+  must score below 65. She is NOT fluent in SQL, Python or BI tools (Tableau,
+  Power BI) and is still learning SQL: roles where hands-on SQL, Python or BI
+  work is a core daily requirement (data analyst, BI analyst, most product
+  analyst and analytics roles) must score below 65. Roles that only mention
+  these as a plus are fine. Financial services and insurance companies rank at
   the bottom of her list: score them lower.
 - 65-84: good fit worth applying to, with at most one soft gap.
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
@@ -85,8 +90,8 @@ aerospace or space, physics or quantum, climate or energy technology, robotics, 
 tech; false for consulting or staffing firms, government contractors, banks, insurers, retailers \
 and other non-tech businesses, or when the employer is unnamed>, "path": <true if the role builds \
 a path to product (product operations, consulting, program or technical program management, \
-implementation, product analyst, associate product manager, product owner, solutions or sales \
-engineer, forward-deployed or deployment strategist), else false>, "sector": "<for a science or \
+implementation, associate product manager, product owner, solutions consultant, solutions or \
+sales engineer, technical account manager, forward-deployed or deployment strategist), else false>, "sector": "<for a science or \
 tech company, its field in 1-3 words, as specific as the posting allows, e.g. AI research, \
 Applied AI, AI dev tools, Aerospace, Space & satellites, Defense tech, Climate & energy, Nuclear, \
 Quantum, Robotics, Health tech, Biotech, Fintech, Security, Developer tools, Data & analytics, \
@@ -98,7 +103,7 @@ CANDIDATE PROFILE:
 # Roles that build a path to product: listed first in each section of the email.
 PATH_TITLE = re.compile(
     r"\bconsult(ant|ants|ing|ancy)?\b|\bproduct[- ]?op(eration)?s\b|\bproduct operator\b|"
-    r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\bproduct analyst\b|"
+    r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\btechnical account manager\b|"
     r"\bassociate product manager\b|\bapm\b|\bproduct associate\b|"
     r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment) (engineer|strategist|consultant)\b", re.I)
 
