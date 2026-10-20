@@ -187,6 +187,7 @@ weworkremotely_feeds:
 big_company_searches:
   - solutions engineer
   - associate product manager
+  - product analyst
   - program manager
   - product operations
   - business analyst
@@ -206,8 +207,10 @@ google_jobs_searches:
   - implementation consultant
   - deployment strategist
   - AI product operations
+  - AI product analyst
   - AI associate product manager
   - associate product manager
+  - product analyst
   - product operations
   - technical program manager
   - business systems analyst
@@ -227,6 +230,7 @@ adzuna_searches:
   - consultant
   - product operations manager
   - associate product manager
+  - product analyst
   - product operations
   - AI product
   - technical program manager
@@ -269,6 +273,7 @@ vc_board_searches:
   - consultant
   - program manager
   - product operations
+  - product analyst
   - associate product manager
   - business analyst
   - product owner
@@ -311,6 +316,7 @@ himalayas_searches:
   - product owner
   - technical product owner
   - product operations analyst
+  - product analyst
   - business systems analyst
   - implementation consultant
   - solutions consultant
