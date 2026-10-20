@@ -54,7 +54,7 @@ import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 
-from common import (REMOTE_WORD, Gemini, Job, as_list, get_with_retries, http_json, http_text,
+from common import (REMOTE_WORD, REPOSTERS, Gemini, Job, as_list, get_with_retries, http_json, http_text,
                     log, strip_html)
 
 UA_NOTE = "personal job alert emailed to one person"
@@ -370,7 +370,8 @@ def fetch_jsearch(searches: list[str], usage: dict, per_day: int, per_month: int
         for j in found:
             if not isinstance(j, dict) or not j.get("job_id"):
                 continue
-            if JSEARCH_REPOSTERS.search(f"{j.get('employer_name') or ''} {j.get('job_publisher') or ''}"):
+            if JSEARCH_REPOSTERS.search(f"{j.get('employer_name') or ''} {j.get('job_publisher') or ''}") \
+                    or REPOSTERS.match(j.get("job_publisher") or ""):
                 continue                     # sites that copy other companies' listings
             loc = ", ".join(x for x in (j.get("job_city"), j.get("job_state"), j.get("job_country")) if x)
             period = str(j.get("job_salary_period") or "").upper()

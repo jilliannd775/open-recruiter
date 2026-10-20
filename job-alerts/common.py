@@ -989,6 +989,14 @@ def find_board(name: str, website: str = "", verify: bool = True, pause: float =
 ENGINEERING_TITLE = re.compile(
     r"\b(engineer|engineers|engineering|developer|developers|swe|sde|scientist|scientists)\b", re.I)
 PROGRAM_OR_PROJECT = re.compile(r"\b(program|programme|project)s?\b", re.I)
+# Sites that re-post other companies' jobs under their own name, hiding the real
+# employer (often stale or lead-gen). Matched against the whole company name.
+REPOSTERS = re.compile(
+    r"^\s*(talenthop|remote ?hunter|jobgether|ladders|remote quest jobs|hire ?vault|job ?leads|learn4good|"
+    r"hire ?quest|jzone|job ?mesh(\.io)?|job ?stream|wfh ?sprint|remote ?drift|job ?edge|jersey ?hired|zenvora|"
+    r"swooped|dataroles|tech jobs for good|mysmartpros|remotepromsp|remote jobs usa|virtualvocations|talent\.com|"
+    r"jooble|lensa|jobright(\.ai)?|hiring ?cafe|dailyremote|remote job board)\s*(,? ?(inc|llc)\.?)?\s*$", re.I)
+
 # Customer-facing "engineer" roles that are mostly demos, discovery and solution design, not coding.
 CUSTOMER_ENGINEER = re.compile(
     r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment|implementation|customer success)\s+engineer", re.I)
@@ -1028,6 +1036,8 @@ def prefilter(job: Job, settings: dict) -> str | None:
     title = job.title
     if not title:
         return "no title"
+    if REPOSTERS.match(job.company or ""):
+        return "reposted by a job-copying site"
     if ENGINEERING_TITLE.search(title) and not PROGRAM_OR_PROJECT.search(title) \
             and not CUSTOMER_ENGINEER.search(title):
         return "engineering/science title"
