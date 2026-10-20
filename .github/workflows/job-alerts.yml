@@ -14,7 +14,7 @@ on:
         type: boolean
         default: false
       resend_today:
-        description: "Resend today's email (re-scored, without reposted jobs) instead of searching"
+        description: "Resend today's email (re-scored with your current settings) instead of searching"
         type: boolean
         default: false
 
