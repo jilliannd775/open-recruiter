@@ -242,7 +242,7 @@ def keyed_sources(settings: dict, seen: dict | None, check: bool = False) -> lis
             int(settings.get("google_jobs_searches_per_month") or 180))),
         ("adzuna", "Adzuna", lambda: sources.fetch_adzuna(pick("adzuna_searches"))),
         ("usajobs", "USAJobs", lambda: sources.fetch_usajobs(pick("usajobs_searches"))),
-        ("email_alerts", "LinkedIn/Indeed alert emails", lambda: sources.fetch_email_alerts(
+        ("email_alerts", "Job alert emails", lambda: sources.fetch_email_alerts(
             int(settings.get("email_alerts_days") or 3))),
     ]
 
