@@ -49,15 +49,18 @@ jobs should NOT score highly.
 
 Scoring guide:
 - 85-100: target title AND fully remote in the US AND strong sector/skills fit.
-  The candidate's TOP PRIORITIES, at any company: (1) CONSULTING roles that fit
-  her consulting background (technology, management, process, implementation,
-  solutions, AI or digital transformation consulting) and (2) PRODUCT
-  OPERATIONS roles (product operations manager / analyst / associate /
-  specialist, product operator). Also top priority: product roles (product
-  analyst, associate product manager, product owner) at science, AI or
-  mission-driven (helping people) companies. When one of these is remote US
-  and at her level, score it 85+. Financial services and insurance companies
-  rank at the bottom of her list: score them lower.
+  The candidate wants to move into product. Her TOP PRIORITY is roles that
+  build a path to product, at science and tech companies: product operations,
+  consulting (technology, implementation, solutions, process, AI or digital
+  transformation), program / technical program management, implementation,
+  and entry-level product roles (product analyst, associate product manager,
+  product owner). When one of these is remote US, at her level and at a
+  science or tech company, score it 85+. The same roles at other companies
+  are good but rank a little lower. She has NOT yet owned a product or led a
+  software implementation: product manager roles that require years of
+  product management experience or of owning a product or implementation
+  must score below 65. Financial services and insurance companies rank at
+  the bottom of her list: score them lower.
 - 65-84: good fit worth applying to, with at most one soft gap.
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
 - 0-39: wrong kind of role (engineering/coding, sales, etc.), onsite/hybrid only, \
@@ -73,15 +76,26 @@ A job that is not fully remote or not open to US-based candidates must score bel
 Reply with JSON only: a list with one object per job, in the same order, shaped:
 {"id": "<the job's id>", "score": <integer 0-100>, "reason": "<one sentence on why \
 it fits or doesn't>", "remote": "<one of: Remote (US), Remote (US + other countries), \
-Remote (non-US), Hybrid, Onsite, Unclear>", "priority": <true if it is a consulting \
-role, a product operations role, or a product role at a science, AI or mission-driven company; \
-else false>}
+Remote (non-US), Hybrid, Onsite, Unclear>", "science_tech": <true if the hiring \
+company is a science or technology company: its own product is software, AI, data, deep tech, \
+aerospace or space, physics or quantum, climate or energy technology, robotics, biotech or health \
+tech; false for consulting or staffing firms, government contractors, banks, insurers, retailers \
+and other non-tech businesses, or when the employer is unnamed>, "path": <true if the role builds \
+a path to product (product operations, consulting, program or technical program management, \
+implementation, product analyst, associate product manager, product owner), else false>}
 
 CANDIDATE PROFILE:
 """
 
-# Consulting and product operations titles: always top of the email, at any company.
-FOCUS_TITLE = re.compile(r"\bconsult(ant|ants|ing|ancy)?\b|\bproduct[- ]?op(eration)?s\b|\bproduct operator\b", re.I)
+# Roles that build a path to product: listed first in each section of the email.
+PATH_TITLE = re.compile(
+    r"\bconsult(ant|ants|ing|ancy)?\b|\bproduct[- ]?op(eration)?s\b|\bproduct operator\b|"
+    r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\bproduct analyst\b|"
+    r"\bassociate product manager\b|\bapm\b|\bproduct associate\b", re.I)
+
+
+def _true(v) -> bool:
+    return v is True or str(v).lower() == "true"
 
 EMPTY_SEEN = {"last_run_date": None, "jobs": {}, "hn": {"thread": None, "done": {}, "pending": []}}
 
@@ -112,13 +126,15 @@ def score_batch(gemini: Gemini, profile: str, jobs: list[Job], max_chars: int) -
         except (TypeError, ValueError):
             continue
         if 1 <= idx <= len(jobs):
-            focus = bool(FOCUS_TITLE.search(jobs[idx - 1].title))
+            path = bool(PATH_TITLE.search(jobs[idx - 1].title)) or _true(item.get("path"))
+            sci = _true(item.get("science_tech"))
             out[jobs[idx - 1].uid] = {
                 "score": score,
                 "reason": str(item.get("reason") or "").strip(),
                 "remote": str(item.get("remote") or "Unclear").strip(),
-                "priority": focus or item.get("priority") is True or str(item.get("priority")).lower() == "true",
-                "focus": focus,
+                "science_tech": sci,
+                "path": path,
+                "priority": sci and path,       # the tracker's "top priority" flag
             }
     return out
 
@@ -149,8 +165,10 @@ def _tracker_buttons(job: Job, r: dict) -> str:
             f'<a href="{html.escape(saved)}" style="{style}border-color:#8a94a6;color:#4a5568;">&#9734; Want to apply</a></div>')
 
 
-def match_group(r: dict) -> str:
-    return "focus" if r.get("focus") else "priority" if r.get("priority") else "rest"
+def match_sort_key(x: tuple) -> tuple:
+    """Science/tech companies first; within each, path-to-product roles first, then by score."""
+    job, r = x
+    return (not r.get("science_tech"), not r.get("path"), -r["score"], job.company, job.title)
 
 
 def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, threshold: int) -> str:
@@ -158,17 +176,13 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
     rows = []
     heading = ('<tr><td style="padding:{pad}px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;'
                'color:{color};">{text}</td></tr>')
-    sections = [
-        ("focus", "#6b3fb5", "TOP PRIORITY: CONSULTING &amp; PRODUCT OPERATIONS ROLES"),
-        ("priority", "#6b3fb5", "TOP PRIORITY: PRODUCT ROLES AT SCIENCE, AI &amp; MISSION-DRIVEN COMPANIES"),
-        ("rest", "#555", "MORE GOOD MATCHES"),
-    ]
+    split = any(r.get("science_tech") for _, r in matches) and not all(r.get("science_tech") for _, r in matches)
     shown = None
     for job, r in matches:
-        group = match_group(r)
-        if group != shown and any(match_group(x) != "rest" for _, x in matches):
-            _, color, text = next(sec for sec in sections if sec[0] == group)
-            rows.append(heading.format(pad=16 if shown is None else 20, color=color, text=text))
+        group = bool(r.get("science_tech"))
+        if split and group != shown:
+            rows.append(heading.format(pad=16 if shown is None else 24, color="#6b3fb5" if group else "#555",
+                                       text="SCIENCE &amp; TECH COMPANIES" if group else "OTHER COMPANIES"))
         shown = group
         source = (f'<a href="{esc(job.source_url)}" style="color:#666;">{esc(job.source)}</a>'
                   if job.source_url else esc(job.source))
@@ -177,6 +191,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
   <div style="font-size:16px;font-weight:600;"><a href="{esc(job.url)}" style="color:#0b57d0;text-decoration:none;">{esc(job.title)}</a></div>
   <div style="color:#444;margin-top:2px;">{esc(job.company)} &middot; {esc(r['remote'])}{' &middot; ' + esc(job.location) if job.location else ''}{' &middot; ' + esc(format_salary(parse_salary(job))) if parse_salary(job) else ''}</div>
   <div style="margin-top:6px;"><span style="display:inline-block;background:{score_color(r['score'])};color:#fff;border-radius:10px;padding:1px 8px;font-size:13px;font-weight:600;">{r['score']}</span>
+  {'<span style="display:inline-block;border:1px solid #6b3fb5;color:#6b3fb5;border-radius:10px;padding:0 7px;font-size:12px;font-weight:600;">Path to product</span>' if r.get("path") else ''}
   <span style="color:#222;">{esc(r['reason'])}</span></div>
   <div style="margin-top:6px;font-size:13px;"><a href="{esc(job.url)}" style="color:#0b57d0;">Apply &rarr;</a>
   <span style="color:#888;"> &nbsp;via {source}</span></div>{_tracker_buttons(job, r)}
@@ -477,7 +492,7 @@ def run(dry_run: bool, scheduled: bool) -> int:
     matches = sorted(
         ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold
          and not (strict and r["remote"].strip().lower() in not_remote_us)),
-        key=lambda x: (not x[1].get("focus"), not x[1].get("priority"), -x[1]["score"], x[0].company, x[0].title))
+        key=match_sort_key)
     log(f"\nScored {len(scored)} jobs with {gemini.calls_made} AI calls; {len(matches)} scored {threshold}+.")
     for job, r in matches:
         log(f"  {r['score']:>3}{' *' if r.get('priority') else '  '} {job.company} - {job.title}  [{r['remote']}]  via {job.source}")
