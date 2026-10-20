@@ -1078,6 +1078,14 @@
    "team_size": 25,
    "website": "https://bolsterbuilt.com"
   },
+  "bolto": {
+   "checked": "2026-10-20",
+   "name": "Bolto",
+   "source": "yc",
+   "status": "none",
+   "team_size": 20,
+   "website": "https://www.bolto.com"
+  },
   "botbuilt": {
    "checked": "2026-09-25",
    "name": "BotBuilt",
@@ -3130,6 +3138,16 @@
    "team_size": 6,
    "website": "https://usehaystack.io/"
   },
+  "hazel-2": {
+   "checked": "2026-10-20",
+   "name": "Hazel",
+   "platform": "greenhouse",
+   "slug": "hazel",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://hazelai.com"
+  },
   "healia": {
    "checked": "2026-09-25",
    "name": "Healia",
@@ -4368,6 +4386,14 @@
    "team_size": 31,
    "website": "https://mixrank.com"
   },
+  "mochi": {
+   "checked": "2026-10-20",
+   "name": "Mochi",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://www.mochi.tv/"
+  },
   "moda-2": {
    "checked": "2026-09-30",
    "name": "Moda",
@@ -4649,6 +4675,14 @@
    "status": "none",
    "team_size": 500,
    "website": "http://noorahealth.org"
+  },
+  "noril1": {
+   "checked": "2026-10-20",
+   "name": "Nori",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "http://norirobotics.com"
   },
   "noso-labs": {
    "checked": "2026-09-25",
@@ -8205,5 +8239,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-19"
+ "last_build": "2026-10-20"
 }
