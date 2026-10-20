@@ -35,6 +35,12 @@ sources:
 # list below (so "Chief of Staff" isn't blocked by "chief"). Add or remove
 # titles freely, one per line.
 my_target_titles:
+  - solutions engineer
+  - sales engineer
+  - presales engineer
+  - forward deployed
+  - deployment strategist
+  - implementation specialist
   - consulting
   - product ops
   - technical program manager
@@ -124,6 +130,11 @@ max_years_experience: 6
 # scored if its TITLE contains one of these words. (Jobs from your own
 # companies.yaml list are not limited this way.) Add or remove words freely.
 job_board_title_keywords:
+  - solutions engineer
+  - sales engineer
+  - forward deployed
+  - deployment strategist
+  - technical product owner
   - consultant
   - consulting
   - product ops
@@ -169,6 +180,7 @@ weworkremotely_feeds:
 # The searches run each day on big companies' own job sites (Amazon and
 # Microsoft entries in companies.yaml), up to 100-200 results each.
 big_company_searches:
+  - solutions engineer
   - associate product manager
   - product analyst
   - program manager
@@ -186,6 +198,9 @@ big_company_searches:
 google_jobs_searches:
   - product operations manager
   - technology consultant
+  - solutions engineer
+  - implementation consultant
+  - deployment strategist
   - AI product operations
   - AI product analyst
   - AI associate product manager
@@ -202,6 +217,11 @@ google_jobs_searches_per_month: 180
 # ADZUNA. Jobs whose title matches each search and that mention remote,
 # posted in the last 3 days (up to 50 each).
 adzuna_searches:
+  - solutions engineer
+  - sales engineer
+  - implementation manager
+  - technical product owner
+  - deployment strategist
   - consultant
   - product operations manager
   - associate product manager
@@ -241,6 +261,10 @@ vc_boards:
     url: https://jobs.accel.com
 # What to search for on each board (one search each, up to 100 results).
 vc_board_searches:
+  - solutions engineer
+  - sales engineer
+  - deployment strategist
+  - implementation manager
   - consultant
   - program manager
   - product operations
@@ -268,6 +292,11 @@ usajobs_searches:
 # The searches run on Himalayas each day (US-eligible remote jobs, newest
 # first, 20 results each).
 himalayas_searches:
+  - solutions engineer
+  - sales engineer
+  - forward deployed
+  - deployment strategist
+  - implementation manager
   - consultant
   - technology consultant
   - management consultant

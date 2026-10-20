@@ -20,8 +20,9 @@ These come first whenever they're fully remote in the US and at my level:
   Associate / Specialist), Consulting (technology, implementation,
   solutions, process, AI or digital transformation; I'm a Senior Consultant
   now), Program Manager / Technical Program Manager, Implementation Manager
-  / Consultant / Lead, Product Owner, Product Analyst, Associate Product
-  Manager / Product Associate.
+  / Consultant / Lead, Product Owner / Technical Product Owner, Product
+  Analyst, Associate Product Manager / Product Associate, Solutions Engineer /
+  Sales Engineer, Forward Deployed / Deployment Strategist.
 - **At science and tech companies**: companies whose product is AI/ML,
   software or data, or science and deep tech (aerospace, space and
   satellites, physics, quantum, climate and energy, robotics, research and
@@ -47,7 +48,10 @@ These come first whenever they're fully remote in the US and at my level:
 - Must be **fully remote**, at a **US-based company**, open to candidates
   living in the US. Hybrid or onsite roles are not a fit.
 - **Not** engineering or coding roles (software engineer, developer, data
-  scientist, research scientist, etc.).
+  scientist, research scientist, etc.). The exception is customer-facing
+  technical roles (Solutions Engineer, Sales Engineer, Forward Deployed /
+  Deployment Strategist) that are about demos, discovery and solution design
+  rather than writing production code.
 
 ## Target level
 - **Mid-level** roles: individual contributor through manager (e.g. Program
