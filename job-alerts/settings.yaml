@@ -8,6 +8,11 @@
 # Minimum AI score (0-100) for a job to be emailed to you.
 score_threshold: 65
 
+# Jobs re-posted by job-copying sites (TalentHop, Jobgether, Remote Quest Jobs...)
+# hide the real employer and are sometimes stale. They're only emailed when
+# they score at least this, in their own section at the end of the email.
+repost_min_score: 75
+
 # Where jobs come from. Change true to false to turn a source off.
 sources:
   company_boards: true   # the companies in companies.yaml

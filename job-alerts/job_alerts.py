@@ -37,7 +37,7 @@ import sources
 import startups
 from common import (HERE, MATCHES_LOG_FILE, PACIFIC, REPOSTERS, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
                     fetch_board, fill_details, fill_page_details, find_board, format_salary, load_companies,
-                    _money, load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
+                    _money, is_repost, load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
                     prefilter, priority, prune_dated, save_json_state, send_email, source_on,
                     today_pacific, tracker_link, years_required)
 
@@ -86,7 +86,11 @@ tech; false for consulting or staffing firms, government contractors, banks, ins
 and other non-tech businesses, or when the employer is unnamed>, "path": <true if the role builds \
 a path to product (product operations, consulting, program or technical program management, \
 implementation, product analyst, associate product manager, product owner, solutions or sales \
-engineer, forward-deployed or deployment strategist), else false>}
+engineer, forward-deployed or deployment strategist), else false>, "sector": "<for a science or \
+tech company, its field in 1-3 words, as specific as the posting allows, e.g. AI research, \
+Applied AI, AI dev tools, Aerospace, Space & satellites, Defense tech, Climate & energy, Nuclear, \
+Quantum, Robotics, Health tech, Biotech, Fintech, Security, Developer tools, Data & analytics, \
+SaaS; otherwise the industry in 1-3 words>"}
 
 CANDIDATE PROFILE:
 """
@@ -133,13 +137,16 @@ def score_batch(gemini: Gemini, profile: str, jobs: list[Job], max_chars: int) -
         if 1 <= idx <= len(jobs):
             path = bool(PATH_TITLE.search(jobs[idx - 1].title)) or _true(item.get("path"))
             sci = _true(item.get("science_tech"))
+            repost = is_repost(jobs[idx - 1])
             out[jobs[idx - 1].uid] = {
                 "score": score,
                 "reason": str(item.get("reason") or "").strip(),
                 "remote": str(item.get("remote") or "Unclear").strip(),
                 "science_tech": sci,
                 "path": path,
-                "priority": sci and path,       # the tracker's "top priority" flag
+                "sector": str(item.get("sector") or "").strip()[:40],
+                "repost": repost,
+                "priority": sci and path and not repost,   # the tracker's "top priority" flag
             }
     return out
 
@@ -170,10 +177,29 @@ def _tracker_buttons(job: Job, r: dict) -> str:
             f'<a href="{html.escape(saved)}" style="{style}border-color:#8a94a6;color:#4a5568;">&#9734; Want to apply</a></div>')
 
 
+def match_group(r: dict) -> str:
+    return "repost" if r.get("repost") else "sci" if r.get("science_tech") else "other"
+
+
 def match_sort_key(x: tuple) -> tuple:
-    """Science/tech companies first; within each, path-to-product roles first, then by score."""
+    """Science, tech & AI companies first, then other companies, then reposts; within each,
+    path-to-product roles first, then by score."""
     job, r = x
-    return (not r.get("science_tech"), not r.get("path"), -r["score"], job.company, job.title)
+    return (["sci", "other", "repost"].index(match_group(r)), not r.get("path"), -r["score"],
+            job.company, job.title)
+
+
+def select_matches(scored: dict[str, dict], jobs: dict[str, Job], settings: dict) -> list[tuple[Job, dict]]:
+    """Jobs to email: at the threshold, remote US, and reposts only when they score well."""
+    threshold = int(settings["score_threshold"])
+    repost_min = int(settings.get("repost_min_score") or 75)
+    strict = bool(settings.get("drop_if_ai_says_not_remote_us", True))
+    not_remote_us = {"remote (non-us)", "hybrid", "onsite"}
+    return sorted(
+        ((jobs[uid], r) for uid, r in scored.items() if uid in jobs
+         and r["score"] >= (max(threshold, repost_min) if r.get("repost") else threshold)
+         and not (strict and r["remote"].strip().lower() in not_remote_us)),
+        key=match_sort_key)
 
 
 def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, threshold: int) -> str:
@@ -181,13 +207,23 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
     rows = []
     heading = ('<tr><td style="padding:{pad}px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;'
                'color:{color};">{text}</td></tr>')
-    split = any(r.get("science_tech") for _, r in matches) and not all(r.get("science_tech") for _, r in matches)
+    sections = {
+        "sci": ("#6b3fb5", "SCIENCE, TECH &amp; AI COMPANIES", ""),
+        "other": ("#555", "OTHER COMPANIES", ""),
+        "repost": ("#8a6d00", "REPOSTED LISTINGS: FIND THE REAL COMPANY FIRST",
+                   "These were copied by job-reposting sites, which hide the real employer and are "
+                   "sometimes stale or fake. Search a distinctive phrase from the posting on Google or "
+                   "LinkedIn; if you find the original, apply there. If you can't, skip it."),
+    }
+    split = len({match_group(r) for _, r in matches}) > 1
     shown = None
     for job, r in matches:
-        group = bool(r.get("science_tech"))
-        if split and group != shown:
-            rows.append(heading.format(pad=16 if shown is None else 24, color="#6b3fb5" if group else "#555",
-                                       text="SCIENCE &amp; TECH COMPANIES" if group else "OTHER COMPANIES"))
+        group = match_group(r)
+        if (split or group == "repost") and group != shown:
+            color, text, note = sections[group]
+            rows.append(heading.format(pad=16 if shown is None else 24, color=color, text=text))
+            if note:
+                rows.append(f'<tr><td style="padding:0 0 6px;font-size:13px;color:#666;">{note}</td></tr>')
         shown = group
         source = (f'<a href="{esc(job.source_url)}" style="color:#666;">{esc(job.source)}</a>'
                   if job.source_url else esc(job.source))
@@ -196,6 +232,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
   <div style="font-size:16px;font-weight:600;"><a href="{esc(job.url)}" style="color:#0b57d0;text-decoration:none;">{esc(job.title)}</a></div>
   <div style="color:#444;margin-top:2px;">{esc(job.company)} &middot; {esc(r['remote'])}{' &middot; ' + esc(job.location) if job.location else ''}{' &middot; ' + esc(format_salary(parse_salary(job))) if parse_salary(job) else ''}</div>
   <div style="margin-top:6px;"><span style="display:inline-block;background:{score_color(r['score'])};color:#fff;border-radius:10px;padding:1px 8px;font-size:13px;font-weight:600;">{r['score']}</span>
+  {'<span style="display:inline-block;background:#efe9fb;color:#4b2a8a;border-radius:10px;padding:0 7px;font-size:12px;font-weight:600;">' + esc(r["sector"]) + '</span>' if r.get("sector") else ''}
   {'<span style="display:inline-block;border:1px solid #6b3fb5;color:#6b3fb5;border-radius:10px;padding:0 7px;font-size:12px;font-weight:600;">Path to product</span>' if r.get("path") else ''}
   <span style="color:#222;">{esc(r['reason'])}</span></div>
   <div style="margin-top:6px;font-size:13px;"><a href="{esc(job.url)}" style="color:#0b57d0;">Apply &rarr;</a>
@@ -376,6 +413,7 @@ def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
             "l": r.get("remote") or job.location, "p": format_salary(parse_salary(job)), "s": r.get("score"),
             "src": job.source, "why": (r.get("reason") or "")[:240], "pri": bool(r.get("priority")),
             "sci": bool(r.get("science_tech")), "path": bool(r.get("path")),
+            "sec": r.get("sector") or "", "repost": bool(r.get("repost")),
             "d": re.sub(r"\s+", " ", job.description or "")[:10000],
         })
     cutoff = (datetime.now(PACIFIC) - timedelta(days=14)).date().isoformat()
@@ -493,12 +531,7 @@ def run(dry_run: bool, scheduled: bool) -> int:
                              if j.uid in unique and j.uid not in scored and j.uid not in dropped
                              and j.uid not in seen["jobs"] and j.dedupe_key() not in seen["jobs"]]
 
-    not_remote_us = {"remote (non-us)", "hybrid", "onsite"}
-    strict = bool(settings.get("drop_if_ai_says_not_remote_us", True))
-    matches = sorted(
-        ((unique[uid], r) for uid, r in scored.items() if r["score"] >= threshold
-         and not (strict and r["remote"].strip().lower() in not_remote_us)),
-        key=match_sort_key)
+    matches = select_matches(scored, unique, settings)
     log(f"\nScored {len(scored)} jobs with {gemini.calls_made} AI calls; {len(matches)} scored {threshold}+.")
     for job, r in matches:
         log(f"  {r['score']:>3}{' *' if r.get('priority') else '  '} {job.company} - {job.title}  [{r['remote']}]  via {job.source}")
@@ -642,8 +675,8 @@ def test_email() -> int:
 
 
 def resend(day: str = "") -> int:
-    """Rebuild and resend one day's email from matches_log.json, without reposted jobs and
-    re-scored with the current profile (so the email uses today's sections and filters)."""
+    """Rebuild and resend one day's email from matches_log.json, re-scored with the current
+    profile (so the email uses the current sections and filters)."""
     settings = load_settings()
     TRACKER_SETTINGS.update(settings)
     missing = missing_secrets(("GEMINI_API_KEY", "GMAIL_ADDRESS", "GMAIL_APP_PASSWORD"))
@@ -662,9 +695,11 @@ def resend(day: str = "") -> int:
         jobs.append(Job(uid=e["id"], company=e.get("c") or "", title=e.get("t") or "", url=e.get("u") or "",
                         location=e.get("l") or "", workplace="", description=e.get("d") or "",
                         source=e.get("src") or "", kind="aggregator",
-                        extra={"salary": (min(pay), max(pay))} if pay else {}))
-    kept = [j for j in jobs if not REPOSTERS.match(j.company)]
-    log(f"{len(entries)} matches logged for {day}; {len(entries) - len(kept)} were reposts and are dropped.")
+                        extra={**({"salary": (min(pay), max(pay))} if pay else {}),
+                               **({"repost": True} if REPOSTERS.match(
+                                   (re.search(r"\(from (.+)\)$", e.get("src") or "") or [None, ""])[1]) else {})}))
+    kept = jobs
+    log(f"{len(entries)} matches logged for {day}; {sum(map(is_repost, jobs))} are reposts.")
     gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings)
     profile, threshold = load_profile(), int(settings["score_threshold"])
     size = max(1, int(settings["jobs_per_ai_call"]))
@@ -673,13 +708,11 @@ def resend(day: str = "") -> int:
         scored.update(score_batch(gemini, profile, kept[start:start + size], int(settings["max_description_chars"])))
     old = {e["id"]: e for e in entries}
     by_id = {j.uid: j for j in kept}
-    matches = []
-    for uid, j in by_id.items():
-        r = scored.get(uid) or {"score": int(old[uid].get("s") or 0), "reason": old[uid].get("why") or "",
-                                "remote": old[uid].get("l") or "Unclear", "priority": bool(old[uid].get("pri"))}
-        if r["score"] >= threshold and r["remote"].strip().lower() not in {"remote (non-us)", "hybrid", "onsite"}:
-            matches.append((j, r))
-    matches.sort(key=match_sort_key)
+    for uid, j in by_id.items():                 # a batch the AI skipped keeps its old score
+        scored.setdefault(uid, {"score": int(old[uid].get("s") or 0), "reason": old[uid].get("why") or "",
+                                "remote": old[uid].get("l") or "Unclear", "priority": bool(old[uid].get("pri")),
+                                "repost": is_repost(j)})
+    matches = select_matches(scored, by_id, settings)
     if not matches:
         log("Nothing left to send after re-scoring.")
         return 0
@@ -695,7 +728,8 @@ def resend(day: str = "") -> int:
     for j, r in matches:
         e = dict(old[j.uid])
         e.update({"s": r["score"], "why": (r.get("reason") or "")[:240], "pri": bool(r.get("priority")),
-                  "sci": bool(r.get("science_tech")), "path": bool(r.get("path"))})
+                  "sci": bool(r.get("science_tech")), "path": bool(r.get("path")),
+                  "sec": r.get("sector") or "", "repost": bool(r.get("repost"))})
         fresh.append(e)
     data["matches"] = sorted(others + fresh, key=lambda e: (e.get("date") or "", e.get("id") or ""))
     MATCHES_LOG_FILE.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -711,7 +745,7 @@ def main() -> int:
     p.add_argument("--scheduled", action="store_true", help="skip unless it's 7am+ Pacific and not yet run today")
     p.add_argument("--test-email", action="store_true", help="only send a test email, to check the Gmail secrets")
     p.add_argument("--resend", nargs="?", const="", default=None, metavar="YYYY-MM-DD",
-                   help="re-score and resend one day's email (default today) without reposted jobs")
+                   help="re-score and resend one day's email (default today)")
     args = p.parse_args()
     if args.check:
         return check_all(list(args.probe))
