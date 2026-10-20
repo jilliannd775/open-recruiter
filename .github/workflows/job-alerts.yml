@@ -13,6 +13,10 @@ on:
         description: "Only send a test email (checks the Gmail secrets; no job search)"
         type: boolean
         default: false
+      resend_today:
+        description: "Resend today's email (re-scored, without reposted jobs) instead of searching"
+        type: boolean
+        default: false
 
 permissions:
   contents: write  # lets the run save seen_jobs.json back to the repo
@@ -55,7 +59,7 @@ jobs:
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
           USAJOBS_EMAIL: ${{ secrets.USAJOBS_EMAIL }}
-        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }} ${{ inputs.test_email_only && '--test-email' || '' }}
+        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }} ${{ inputs.test_email_only && '--test-email' || '' }} ${{ inputs.resend_today && '--resend' || '' }}
 
       - name: Save the list of jobs already seen
         if: always()

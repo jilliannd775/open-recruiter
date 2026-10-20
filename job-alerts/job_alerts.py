@@ -35,9 +35,9 @@ from datetime import datetime, timedelta
 
 import sources
 import startups
-from common import (HERE, MATCHES_LOG_FILE, PACIFIC, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
+from common import (HERE, MATCHES_LOG_FILE, PACIFIC, REPOSTERS, SEEN_FILE, Gemini, Job, QuotaExhausted, as_list, email_shell,
                     fetch_board, fill_details, fill_page_details, find_board, format_salary, load_companies,
-                    load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
+                    _money, load_json_state, load_profile, load_settings, log, missing_secrets, parse_salary,
                     prefilter, priority, prune_dated, save_json_state, send_email, source_on,
                     today_pacific, tracker_link, years_required)
 
@@ -375,6 +375,7 @@ def log_matches(matches: list[tuple[Job, dict]], today: str) -> None:
             "id": job.uid, "date": today, "t": job.title, "c": job.company, "u": job.url,
             "l": r.get("remote") or job.location, "p": format_salary(parse_salary(job)), "s": r.get("score"),
             "src": job.source, "why": (r.get("reason") or "")[:240], "pri": bool(r.get("priority")),
+            "sci": bool(r.get("science_tech")), "path": bool(r.get("path")),
             "d": re.sub(r"\s+", " ", job.description or "")[:10000],
         })
     cutoff = (datetime.now(PACIFIC) - timedelta(days=14)).date().isoformat()
@@ -512,7 +513,7 @@ def run(dry_run: bool, scheduled: bool) -> int:
     stats = {"scored": len(scored), "sources_ok": sources_ok}
     if matches:
         n = len(matches)
-        subject = f"{n} new job match{'es' if n != 1 else ''} (top: {matches[0][1]['score']}) - {today}"
+        subject = f"{n} new job match{'es' if n != 1 else ''} (top: {max(r['score'] for _, r in matches)}) - {today}"
         body = build_email(matches, notes, stats, threshold)
         if dry_run:
             (HERE / "preview_email.html").write_text(body, encoding="utf-8")
@@ -640,6 +641,67 @@ def test_email() -> int:
     return 0
 
 
+def resend(day: str = "") -> int:
+    """Rebuild and resend one day's email from matches_log.json, without reposted jobs and
+    re-scored with the current profile (so the email uses today's sections and filters)."""
+    settings = load_settings()
+    TRACKER_SETTINGS.update(settings)
+    missing = missing_secrets(("GEMINI_API_KEY", "GMAIL_ADDRESS", "GMAIL_APP_PASSWORD"))
+    if missing:
+        log(f"ERROR: these GitHub secrets are missing or empty: {', '.join(missing)}.")
+        return 2
+    day = day or today_pacific()
+    data = json.loads(MATCHES_LOG_FILE.read_text(encoding="utf-8")) if MATCHES_LOG_FILE.exists() else {}
+    entries = [e for e in data.get("matches", []) if isinstance(e, dict) and e.get("date") == day]
+    if not entries:
+        log(f"No matches were logged for {day}; nothing to resend.")
+        return 0
+    jobs = []
+    for e in entries:
+        pay = [_money(x) for x in re.findall(r"\$(\d[\d,.]*k?)", e.get("p") or "", re.I)]
+        jobs.append(Job(uid=e["id"], company=e.get("c") or "", title=e.get("t") or "", url=e.get("u") or "",
+                        location=e.get("l") or "", workplace="", description=e.get("d") or "",
+                        source=e.get("src") or "", kind="aggregator",
+                        extra={"salary": (min(pay), max(pay))} if pay else {}))
+    kept = [j for j in jobs if not REPOSTERS.match(j.company)]
+    log(f"{len(entries)} matches logged for {day}; {len(entries) - len(kept)} were reposts and are dropped.")
+    gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings)
+    profile, threshold = load_profile(), int(settings["score_threshold"])
+    size = max(1, int(settings["jobs_per_ai_call"]))
+    scored: dict[str, dict] = {}
+    for start in range(0, len(kept), size):
+        scored.update(score_batch(gemini, profile, kept[start:start + size], int(settings["max_description_chars"])))
+    old = {e["id"]: e for e in entries}
+    by_id = {j.uid: j for j in kept}
+    matches = []
+    for uid, j in by_id.items():
+        r = scored.get(uid) or {"score": int(old[uid].get("s") or 0), "reason": old[uid].get("why") or "",
+                                "remote": old[uid].get("l") or "Unclear", "priority": bool(old[uid].get("pri"))}
+        if r["score"] >= threshold and r["remote"].strip().lower() not in {"remote (non-us)", "hybrid", "onsite"}:
+            matches.append((j, r))
+    matches.sort(key=match_sort_key)
+    if not matches:
+        log("Nothing left to send after re-scoring.")
+        return 0
+    n = len(matches)
+    subject = (f"Updated: {n} job match{'es' if n != 1 else ''} "
+               f"(top: {max(r['score'] for _, r in matches)}) - {day}")
+    send_email(subject, build_email(matches, [], {"scored": len(kept), "sources_ok": len({j.source for j in kept})},
+                                    threshold))
+    log(f"Email sent: {subject}")
+    # Keep the tracker in step: drop reposts and the jobs that no longer pass, refresh the rest.
+    others = [e for e in data.get("matches", []) if not (isinstance(e, dict) and e.get("date") == day)]
+    fresh = []
+    for j, r in matches:
+        e = dict(old[j.uid])
+        e.update({"s": r["score"], "why": (r.get("reason") or "")[:240], "pri": bool(r.get("priority")),
+                  "sci": bool(r.get("science_tech")), "path": bool(r.get("path"))})
+        fresh.append(e)
+    data["matches"] = sorted(others + fresh, key=lambda e: (e.get("date") or "", e.get("id") or ""))
+    MATCHES_LOG_FILE.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--check", action="store_true", help="only test companies.yaml and every source")
@@ -648,11 +710,15 @@ def main() -> int:
     p.add_argument("--dry-run", action="store_true", help="don't send email or save seen jobs")
     p.add_argument("--scheduled", action="store_true", help="skip unless it's 7am+ Pacific and not yet run today")
     p.add_argument("--test-email", action="store_true", help="only send a test email, to check the Gmail secrets")
+    p.add_argument("--resend", nargs="?", const="", default=None, metavar="YYYY-MM-DD",
+                   help="re-score and resend one day's email (default today) without reposted jobs")
     args = p.parse_args()
     if args.check:
         return check_all(list(args.probe))
     if args.test_email:
         return test_email()
+    if args.resend is not None:
+        return resend(args.resend)
     return run(dry_run=args.dry_run, scheduled=args.scheduled)
 
 
