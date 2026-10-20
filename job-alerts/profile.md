@@ -9,30 +9,30 @@ English. Be specific about what you want and what you don't.
 - B.A. in Physics (Oberlin); former Caltech research fellow (gravitational-wave
   research).
 
-## TOP PRIORITY: consulting and product operations roles
-These come first, at any company, whenever they're fully remote in the US, at my
-level and a good fit:
-- **Consulting roles**: Consultant / Senior Consultant, technology,
-  management, process, implementation, solutions and AI / digital
-  transformation consulting. I'm a Senior Consultant now, so these build
-  directly on what I do.
-- **Product operations roles**: Product Operations Manager / Analyst /
-  Associate / Specialist, Product Operator.
+## My goal: move into product
+I want to end up in a product role. Right now I'm best placed for roles that
+build a path there, since I haven't yet owned a product or led a software
+implementation.
 
-## ALSO TOP PRIORITY: product roles at science or AI companies
-Score these highest too when they're fully remote in the US and at my level:
-- **Product roles**: Product Analyst, Associate Product Manager / Product
-  Associate / Product Manager I, Product Operations, Product Owner / Technical
-  Product Owner, technical product management.
-- **At science or AI companies**: companies whose product is AI/ML (AI-native
-  startups, AI platforms and tools, applied AI), or science and deep tech
-  (aerospace, space and satellites, physics, quantum, climate and energy
-  science, research and lab software, scientific data).
-- **Or at companies that help people**: mission-driven work such as health
-  care access, education, public services, social impact and nonprofits.
-- Next best: product roles at other tech companies, and program /
-  operations roles at science, AI or mission-driven companies.
-- Everything else on my title list is still welcome, but ranks below these.
+## TOP PRIORITY: path-to-product roles at science and tech companies
+These come first whenever they're fully remote in the US and at my level:
+- **Path-to-product roles**: Product Operations (Manager / Analyst /
+  Associate / Specialist), Consulting (technology, implementation,
+  solutions, process, AI or digital transformation; I'm a Senior Consultant
+  now), Program Manager / Technical Program Manager, Implementation Manager
+  / Consultant / Lead, Product Owner, Product Analyst, Associate Product
+  Manager / Product Associate.
+- **At science and tech companies**: companies whose product is AI/ML,
+  software or data, or science and deep tech (aerospace, space and
+  satellites, physics, quantum, climate and energy, robotics, research and
+  lab software). Health tech and companies that help people are welcome too.
+- The same roles at other companies are still good, just a step lower.
+
+## Product roles I'm not ready for yet
+- Product Manager roles that ask for years of product management
+  experience, or for having owned a product or led a software
+  implementation: score these lower (below 65). I'd rather see entry-level
+  product roles and the path-to-product roles above.
 
 ## Industries
 - **Especially interested:** aerospace and space, AI, physics and deep tech,
