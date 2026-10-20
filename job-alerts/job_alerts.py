@@ -553,6 +553,10 @@ def check_all(probe_names: list[str]) -> int:
             log(f"  OK    {c['name']:<28} {c['platform']:<10} {c['slug']:<24} {len(jobs)} open jobs, "
                 f"{len(passing)} pass the keyword filter")
         except Exception as e:  # noqa: BLE001
+            if re.search(r"\b429\b|too many requests", str(e), re.I):
+                # Rate limited for now (the board exists); not a broken entry.
+                log(f"  BUSY  {c['name']:<28} {c['platform']:<10} {c['slug']:<24} rate limited, try again later")
+                continue
             failed += 1
             log(f"  FAIL  {c['name']:<28} {c['platform']:<10} {c['slug']:<24} {e}")
             probe_names.append(c["name"])
