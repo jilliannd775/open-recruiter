@@ -10,12 +10,12 @@ English. Be specific about what you want and what you don't.
   research).
 
 ## Technical skills (be realistic)
-- I'm **not fluent in SQL, Python or BI tools** like Tableau or Power BI.
-  I'm learning SQL, but I don't want roles where hands-on SQL, Python or
-  dashboard building is a core daily requirement (data analyst, BI analyst,
-  most product analyst roles). Listed as "a plus" is fine.
-- I'd rather learn product (customers, requirements, roadmaps, launches,
-  operations) than go deep on analytics software.
+- I'm **learning SQL** but not yet fluent in SQL, Python or BI tools like
+  Tableau or Power BI. Product analyst roles that lean on SQL are still worth
+  showing me (they're a common way into product), just a little lower and
+  flagged, since I'd need to grow into them.
+- Long term I want to learn product (customers, requirements, roadmaps,
+  launches, operations) more than go deep on analytics software.
 - Comfortable with: Jira, Confluence, ServiceNow SPM, Smartsheet, AI tools
   (Gemini, Claude, Claude Code), process mapping, requirements and PRDs.
 
@@ -31,7 +31,7 @@ These come first whenever they're fully remote in the US and at my level:
   solutions, process, AI or digital transformation; I'm a Senior Consultant
   now), Program Manager / Technical Program Manager, Implementation Manager
   / Consultant / Lead, Product Owner / Technical Product Owner, Associate
-  Product Manager / Product Associate, Solutions Consultant, Solutions
+  Product Manager / Product Associate, Product Analyst, Solutions Consultant, Solutions
   Engineer / Sales Engineer, Technical Account Manager, Forward Deployed /
   Deployment Strategist.
 - **At science and tech companies**: companies whose product is AI/ML,
@@ -84,7 +84,7 @@ These come first whenever they're fully remote in the US and at my level:
 - Product Owner / Technical Product Owner / Product Owner II
 - Senior Analyst, Technology (or Technical) Product Management
 - Product Operations Associate / Product Operations Analyst / Product Operator
-- Product Analyst (only when SQL / Python aren't core daily requirements)
+- Product Analyst
 - Associate Product Manager / Product Associate / Product Manager I
 - Business Systems Analyst / Senior Business Systems Analyst
 - Technical Business Analyst / Senior Technical Business Analyst

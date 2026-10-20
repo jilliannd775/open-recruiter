@@ -53,7 +53,8 @@ Scoring guide:
   build a path to product, at science and tech companies: product operations,
   consulting (technology, implementation, solutions, process, AI or digital
   transformation), program / technical program management, implementation,
-  entry-level product roles (associate product manager, product owner), and
+  entry-level product roles (associate product manager, product owner,
+  product analyst), and
   customer-facing technical roles such as solutions consultant, solutions
   engineer, sales engineer, technical account manager, forward-deployed or
   deployment strategist (score these lower if they require writing production
@@ -63,11 +64,11 @@ Scoring guide:
   are good but rank a little lower. She has NOT yet owned a product or led a
   software implementation: product manager roles that require years of
   product management experience or of owning a product or implementation
-  must score below 65. She is NOT fluent in SQL, Python or BI tools (Tableau,
-  Power BI) and is still learning SQL: roles where hands-on SQL, Python or BI
-  work is a core daily requirement (data analyst, BI analyst, most product
-  analyst and analytics roles) must score below 65. Roles that only mention
-  these as a plus are fine. Financial services and insurance companies rank at
+  must score below 65. She is learning SQL but is not yet fluent in SQL,
+  Python or BI tools (Tableau, Power BI): roles where those are a core daily
+  requirement (product analyst, data or BI analyst) are still worth showing,
+  since product analyst is a common way into product, but score them a little
+  lower (65-80) and set "sql_heavy" to true. Financial services and insurance companies rank at
   the bottom of her list: score them lower.
 - 65-84: good fit worth applying to, with at most one soft gap.
 - 40-64: partial fit (adjacent title, weak sector match, or remote status unclear).
@@ -90,12 +91,14 @@ aerospace or space, physics or quantum, climate or energy technology, robotics, 
 tech; false for consulting or staffing firms, government contractors, banks, insurers, retailers \
 and other non-tech businesses, or when the employer is unnamed>, "path": <true if the role builds \
 a path to product (product operations, consulting, program or technical program management, \
-implementation, associate product manager, product owner, solutions consultant, solutions or \
+implementation, associate product manager, product owner, product analyst, solutions consultant, solutions or \
 sales engineer, technical account manager, forward-deployed or deployment strategist), else false>, "sector": "<for a science or \
 tech company, its field in 1-3 words, as specific as the posting allows, e.g. AI research, \
 Applied AI, AI dev tools, Aerospace, Space & satellites, Defense tech, Climate & energy, Nuclear, \
 Quantum, Robotics, Health tech, Biotech, Fintech, Security, Developer tools, Data & analytics, \
-SaaS; otherwise the industry in 1-3 words>"}
+SaaS; otherwise the industry in 1-3 words>", "sql_heavy": <true if hands-on SQL, Python or \
+BI tools (Tableau, Power BI, Looker) are a core daily requirement of the role, not just a plus; \
+else false>}
 
 CANDIDATE PROFILE:
 """
@@ -103,7 +106,8 @@ CANDIDATE PROFILE:
 # Roles that build a path to product: listed first in each section of the email.
 PATH_TITLE = re.compile(
     r"\bconsult(ant|ants|ing|ancy)?\b|\bproduct[- ]?op(eration)?s\b|\bproduct operator\b|"
-    r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\btechnical account manager\b|"
+    r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\bproduct analyst\b|"
+    r"\btechnical account manager\b|"
     r"\bassociate product manager\b|\bapm\b|\bproduct associate\b|"
     r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment) (engineer|strategist|consultant)\b", re.I)
 
@@ -150,6 +154,7 @@ def score_batch(gemini: Gemini, profile: str, jobs: list[Job], max_chars: int) -
                 "science_tech": sci,
                 "path": path,
                 "sector": str(item.get("sector") or "").strip()[:40],
+                "sql_heavy": _true(item.get("sql_heavy")),
                 "repost": repost,
                 "priority": sci and path and not repost,   # the tracker's "top priority" flag
             }
@@ -239,6 +244,7 @@ def build_email(matches: list[tuple[Job, dict]], notes: list[str], stats: dict, 
   <div style="margin-top:6px;"><span style="display:inline-block;background:{score_color(r['score'])};color:#fff;border-radius:10px;padding:1px 8px;font-size:13px;font-weight:600;">{r['score']}</span>
   {'<span style="display:inline-block;background:#efe9fb;color:#4b2a8a;border-radius:10px;padding:0 7px;font-size:12px;font-weight:600;">' + esc(r["sector"]) + '</span>' if r.get("sector") else ''}
   {'<span style="display:inline-block;border:1px solid #6b3fb5;color:#6b3fb5;border-radius:10px;padding:0 7px;font-size:12px;font-weight:600;">Path to product</span>' if r.get("path") else ''}
+  {'<span style="display:inline-block;border:1px solid #b06a00;color:#b06a00;border-radius:10px;padding:0 7px;font-size:12px;font-weight:600;">SQL-heavy</span>' if r.get("sql_heavy") else ''}
   <span style="color:#222;">{esc(r['reason'])}</span></div>
   <div style="margin-top:6px;font-size:13px;"><a href="{esc(job.url)}" style="color:#0b57d0;">Apply &rarr;</a>
   <span style="color:#888;"> &nbsp;via {source}</span></div>{_tracker_buttons(job, r)}
