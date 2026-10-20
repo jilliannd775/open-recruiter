@@ -989,6 +989,9 @@ def find_board(name: str, website: str = "", verify: bool = True, pause: float =
 ENGINEERING_TITLE = re.compile(
     r"\b(engineer|engineers|engineering|developer|developers|swe|sde|scientist|scientists)\b", re.I)
 PROGRAM_OR_PROJECT = re.compile(r"\b(program|programme|project)s?\b", re.I)
+# Customer-facing "engineer" roles that are mostly demos, discovery and solution design, not coding.
+CUSTOMER_ENGINEER = re.compile(
+    r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment|implementation|customer success)\s+engineer", re.I)
 REMOTE_WORD = re.compile(r"\bremote(ly)?\b|\bwork from home\b|\bwfh\b|\bdistributed\b", re.I)
 HYBRID_OR_ONSITE = re.compile(r"\bhybrid\b|\bon-?site\b|\bin[- ]office\b|\bin[- ]person\b", re.I)
 US_HINT = re.compile(
@@ -1025,7 +1028,8 @@ def prefilter(job: Job, settings: dict) -> str | None:
     title = job.title
     if not title:
         return "no title"
-    if ENGINEERING_TITLE.search(title) and not PROGRAM_OR_PROJECT.search(title):
+    if ENGINEERING_TITLE.search(title) and not PROGRAM_OR_PROJECT.search(title) \
+            and not CUSTOMER_ENGINEER.search(title):
         return "engineering/science title"
 
     # Your own target titles always count, even if a word in them looks senior

@@ -54,7 +54,10 @@ Scoring guide:
   consulting (technology, implementation, solutions, process, AI or digital
   transformation), program / technical program management, implementation,
   and entry-level product roles (product analyst, associate product manager,
-  product owner). When one of these is remote US, at her level and at a
+  product owner), and customer-facing technical roles such as solutions
+  engineer, sales engineer, forward-deployed or deployment strategist (score
+  these lower if they require writing production code). When one of these is
+  remote US, at her level and at a
   science or tech company, score it 85+. The same roles at other companies
   are good but rank a little lower. She has NOT yet owned a product or led a
   software implementation: product manager roles that require years of
@@ -82,7 +85,8 @@ aerospace or space, physics or quantum, climate or energy technology, robotics, 
 tech; false for consulting or staffing firms, government contractors, banks, insurers, retailers \
 and other non-tech businesses, or when the employer is unnamed>, "path": <true if the role builds \
 a path to product (product operations, consulting, program or technical program management, \
-implementation, product analyst, associate product manager, product owner), else false>}
+implementation, product analyst, associate product manager, product owner, solutions or sales \
+engineer, forward-deployed or deployment strategist), else false>}
 
 CANDIDATE PROFILE:
 """
@@ -91,7 +95,8 @@ CANDIDATE PROFILE:
 PATH_TITLE = re.compile(
     r"\bconsult(ant|ants|ing|ancy)?\b|\bproduct[- ]?op(eration)?s\b|\bproduct operator\b|"
     r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\bproduct analyst\b|"
-    r"\bassociate product manager\b|\bapm\b|\bproduct associate\b", re.I)
+    r"\bassociate product manager\b|\bapm\b|\bproduct associate\b|"
+    r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment) (engineer|strategist|consultant)\b", re.I)
 
 
 def _true(v) -> bool:
@@ -237,7 +242,7 @@ def keyed_sources(settings: dict, seen: dict | None, check: bool = False) -> lis
             int(settings.get("google_jobs_searches_per_month") or 180))),
         ("adzuna", "Adzuna", lambda: sources.fetch_adzuna(pick("adzuna_searches"))),
         ("usajobs", "USAJobs", lambda: sources.fetch_usajobs(pick("usajobs_searches"))),
-        ("email_alerts", "LinkedIn/Indeed alert emails", lambda: sources.fetch_email_alerts(
+        ("email_alerts", "Job alert emails", lambda: sources.fetch_email_alerts(
             int(settings.get("email_alerts_days") or 3))),
     ]
 
@@ -553,6 +558,10 @@ def check_all(probe_names: list[str]) -> int:
             log(f"  OK    {c['name']:<28} {c['platform']:<10} {c['slug']:<24} {len(jobs)} open jobs, "
                 f"{len(passing)} pass the keyword filter")
         except Exception as e:  # noqa: BLE001
+            if re.search(r"\b429\b|too many requests", str(e), re.I):
+                # Rate limited for now (the board exists); not a broken entry.
+                log(f"  BUSY  {c['name']:<28} {c['platform']:<10} {c['slug']:<24} rate limited, try again later")
+                continue
             failed += 1
             log(f"  FAIL  {c['name']:<28} {c['platform']:<10} {c['slug']:<24} {e}")
             probe_names.append(c["name"])

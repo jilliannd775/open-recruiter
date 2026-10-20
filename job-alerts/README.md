@@ -36,7 +36,7 @@ so you can check those yourself.
 | **Google Jobs** *(free key)* | The job listings Google shows in search, which pulls from LinkedIn, Indeed, ZipRecruiter, company sites and more. Read through the JSearch service. Your top 6 searches a day | Daily |
 | **Adzuna** *(free key)* | A big job search site with lots of Indeed-style listings. Remote jobs whose title matches your searches | Daily |
 | **USAJobs** *(free key)* | US federal government jobs (NASA, DOE, DoD and so on) that are remote | Daily |
-| **LinkedIn and Indeed** *(your alert emails)* | The job alerts LinkedIn and Indeed email you, read from your Gmail. See "Adding LinkedIn and Indeed" below | Daily |
+| **LinkedIn, Indeed, Wellfound and more** *(your alert emails)* | The job alerts LinkedIn, Indeed, Wellfound, Glassdoor, Built In, Welcome to the Jungle (Otta), ZipRecruiter, Climatebase and Idealist email you, read from your Gmail. See "Adding LinkedIn, Indeed and other job sites" below | Daily |
 
 The first ten are free and need no sign-up. The last three need a free key;
 see "Adding Google Jobs, Adzuna and USAJobs" below. Until you add a key, that
@@ -505,7 +505,7 @@ source shows OK, FAIL, or "no key yet".
 
 ---
 
-## Adding LinkedIn and Indeed
+## Adding LinkedIn, Indeed and other job sites
 
 LinkedIn and Indeed don't offer a public job feed, and their rules forbid
 scraping. They do email you job alerts, though, and the daily action reads
@@ -518,13 +518,17 @@ your digest). It only reads: nothing is marked read, moved or deleted.
    Do this for each title you care about (LinkedIn allows several alerts).
 2. **Indeed:** search a title with location **Remote**, then choose
    **Get new jobs for this search by email** (or the bell icon).
-3. Make sure the alerts go to the Gmail account in your `GMAIL_ADDRESS`
+3. **The same works for** Wellfound (startup jobs), Glassdoor, Built In,
+   Welcome to the Jungle (formerly Otta), ZipRecruiter, Climatebase
+   (climate jobs) and Idealist (mission-driven and nonprofit jobs): save a
+   search with Remote / United States and turn on email alerts.
+4. Make sure the alerts go to the Gmail account in your `GMAIL_ADDRESS`
    secret. If they go to another address, forward them there (a Gmail
    filter on "from:linkedin.com" or "from:indeed.com" can do this).
 
 Alert emails only include each job's title, company, location and
 sometimes pay, so the AI scores them from that and the "Apply" link opens
-the full posting on LinkedIn or Indeed. To turn this off, set
+the full posting on that site. To turn this off, set
 `email_alerts: false` under `sources` in `settings.yaml`.
 
 ---
