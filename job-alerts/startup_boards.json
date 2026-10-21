@@ -1086,6 +1086,14 @@
    "team_size": 20,
    "website": "https://www.bolto.com"
   },
+  "booko": {
+   "checked": "2026-10-21",
+   "name": "Booko",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://booko.com"
+  },
   "botbuilt": {
    "checked": "2026-09-25",
    "name": "BotBuilt",
@@ -2038,6 +2046,16 @@
    "team_size": 15,
    "website": "https://www.dili.com"
   },
+  "diligencesquared-inc": {
+   "checked": "2026-10-21",
+   "name": "DiligenceSquared",
+   "platform": "ashby",
+   "slug": "diligencesquared",
+   "source": "yc",
+   "status": "found",
+   "team_size": 5,
+   "website": "https://diligencesquared.com/"
+  },
   "diode-computers-inc": {
    "checked": "2026-09-25",
    "name": "Diode Computers, Inc.",
@@ -2971,6 +2989,16 @@
    "status": "found",
    "team_size": 35,
    "website": "https://www.greenboard.com"
+  },
+  "greptile": {
+   "checked": "2026-10-21",
+   "name": "Greptile",
+   "platform": "ashby",
+   "slug": "greptile",
+   "source": "yc",
+   "status": "found",
+   "team_size": 35,
+   "website": "https://www.greptile.com"
   },
   "gridware": {
    "checked": "2026-09-25",
@@ -6274,6 +6302,14 @@
    "team_size": 7,
    "website": "https://saphira.ai"
   },
+  "sava-trust-company": {
+   "checked": "2026-10-21",
+   "name": "Sava Trust Company",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.savatrustcompany.com"
+  },
   "savahq": {
    "checked": "2026-09-25",
    "name": "Sava",
@@ -8070,6 +8106,14 @@
    "team_size": 35,
    "website": "http://wefunder.com"
   },
+  "westgate": {
+   "checked": "2026-10-21",
+   "name": "Westgate",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://westgatesupply.com/"
+  },
   "whatnot": {
    "checked": "2026-09-25",
    "name": "Whatnot",
@@ -8103,6 +8147,16 @@
    "status": "none",
    "team_size": 25,
    "website": "https://www.womenwhocode.com/"
+  },
+  "wonderly": {
+   "checked": "2026-10-21",
+   "name": "Wonderly",
+   "platform": "ashby",
+   "slug": "wonderly",
+   "source": "yc",
+   "status": "found",
+   "team_size": 75,
+   "website": "https://www.wonderly.com/"
   },
   "wordware": {
    "checked": "2026-09-25",
@@ -8239,5 +8293,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-20"
+ "last_build": "2026-10-21"
 }
