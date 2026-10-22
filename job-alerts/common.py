@@ -1002,9 +1002,10 @@ def is_repost(job: "Job") -> bool:
     return bool(job.extra.get("repost")) or bool(REPOSTERS.match(job.company or ""))
 
 
-# Customer-facing "engineer" roles that are mostly demos, discovery and solution design, not coding.
+# Customer-facing, post-sale "engineer" roles that are mostly discovery and rollout, not coding.
+# (Sales / solutions engineer roles are presales and usually require sales experience.)
 CUSTOMER_ENGINEER = re.compile(
-    r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment|implementation|customer success)\s+engineer", re.I)
+    r"\b(forward[- ]deployed|deployment|implementation|customer success)\s+engineer", re.I)
 REMOTE_WORD = re.compile(r"\bremote(ly)?\b|\bwork from home\b|\bwfh\b|\bdistributed\b", re.I)
 HYBRID_OR_ONSITE = re.compile(r"\bhybrid\b|\bon-?site\b|\bin[- ]office\b|\bin[- ]person\b", re.I)
 US_HINT = re.compile(

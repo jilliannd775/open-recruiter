@@ -55,10 +55,12 @@ Scoring guide:
   transformation), program / technical program management, implementation,
   entry-level product roles (associate product manager, product owner,
   product analyst), and
-  customer-facing technical roles such as solutions consultant, solutions
-  engineer, sales engineer, technical account manager, forward-deployed or
+  post-sale customer-facing roles such as implementation, delivery-side
+  solutions consultant, technical account manager, forward-deployed or
   deployment strategist (score these lower if they require writing production
-  code). When one of these is
+  code). She has no sales background: roles that require prior sales, quota,
+  presales or sales engineering experience (sales engineer, presales solutions
+  engineer, account executive) must score below 60. When one of these is
   remote US, at her level and at a
   science or tech company, score it 85+. The same roles at other companies
   are good but rank a little lower. She has NOT yet owned a product or led a
@@ -92,8 +94,9 @@ aerospace or space, physics or quantum, climate or energy technology, robotics, 
 tech; false for consulting or staffing firms, government contractors, banks, insurers, retailers \
 and other non-tech businesses, or when the employer is unnamed>, "path": <true if the role builds \
 a path to product (product operations, consulting, program or technical program management, \
-implementation, associate product manager, product owner, product analyst, solutions consultant, solutions or \
-sales engineer, technical account manager, forward-deployed or deployment strategist), else false>, "sector": "<for a science or \
+implementation, associate product manager, product owner, product analyst, post-sale solutions \
+consultant, technical account manager, forward-deployed or deployment strategist; not sales or \
+presales roles), else false>, "sector": "<for a science or \
 tech company, its field in 1-3 words, as specific as the posting allows, e.g. AI research, \
 Applied AI, AI dev tools, Aerospace, Space & satellites, Defense tech, Climate & energy, Nuclear, \
 Quantum, Robotics, Health tech, Biotech, Fintech, Security, Developer tools, Data & analytics, \
@@ -110,7 +113,7 @@ PATH_TITLE = re.compile(
     r"\bprogram manag|\btpm\b|\bimplementation\b|\bproduct owner\b|\bproduct analyst\b|"
     r"\btechnical account manager\b|"
     r"\bassociate product manager\b|\bapm\b|\bproduct associate\b|"
-    r"\b(solutions?|sales|pre-?sales|forward[- ]deployed|deployment) (engineer|strategist|consultant)\b", re.I)
+    r"\b(forward[- ]deployed|deployment) (engineer|strategist|consultant)\b", re.I)
 
 
 def _true(v) -> bool:
