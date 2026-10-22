@@ -713,8 +713,11 @@ def resend(day: str = "") -> int:
                         extra={**({"salary": (min(pay), max(pay))} if pay else {}),
                                **({"repost": True} if REPOSTERS.match(
                                    (re.search(r"\(from (.+)\)$", e.get("src") or "") or [None, ""])[1]) else {})}))
-    kept = jobs
-    log(f"{len(entries)} matches logged for {day}; {sum(map(is_repost, jobs))} are reposts.")
+    # Re-apply the hard filters, which may have changed since that day (years, titles).
+    recheck = ("more than", "engineering/science title", "too senior")
+    kept = [j for j in jobs if not any(r in (prefilter(j, settings) or "") for r in recheck)]
+    log(f"{len(entries)} matches logged for {day}; {len(jobs) - len(kept)} no longer pass the filters; "
+        f"{sum(map(is_repost, kept))} are reposts.")
     gemini = Gemini(os.environ["GEMINI_API_KEY"].strip(), settings)
     profile, threshold = load_profile(), int(settings["score_threshold"])
     size = max(1, int(settings["jobs_per_ai_call"]))
