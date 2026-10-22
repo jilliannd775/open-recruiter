@@ -31,8 +31,8 @@ These come first whenever they're fully remote in the US and at my level:
   solutions, process, AI or digital transformation; I'm a Senior Consultant
   now), Program Manager / Technical Program Manager, Implementation Manager
   / Consultant / Lead, Product Owner / Technical Product Owner, Associate
-  Product Manager / Product Associate, Product Analyst, Solutions Consultant, Solutions
-  Engineer / Sales Engineer, Technical Account Manager, Forward Deployed /
+  Product Manager / Product Associate, Product Analyst, Solutions Consultant (delivery /
+  implementation side), Technical Account Manager, Forward Deployed /
   Deployment Strategist.
 - **At science and tech companies**: companies whose product is AI/ML,
   software or data, or science and deep tech (aerospace, space and
@@ -60,9 +60,13 @@ These come first whenever they're fully remote in the US and at my level:
   living in the US. Hybrid or onsite roles are not a fit.
 - **Not** engineering or coding roles (software engineer, developer, data
   scientist, research scientist, etc.). The exception is customer-facing
-  technical roles (Solutions Engineer, Sales Engineer, Forward Deployed /
-  Deployment Strategist) that are about demos, discovery and solution design
-  rather than writing production code.
+  delivery roles (Forward Deployed / Deployment Strategist) that are about
+  discovery and rollout rather than writing production code.
+- **Not sales roles.** I haven't worked in sales or presales, so roles that
+  require prior sales, quota or presales / sales engineering experience
+  (Sales Engineer, presales Solutions Engineer, account executive) are not a
+  fit. Post-sale roles (implementation, deployment, technical account
+  management, delivery-side solutions consulting) are.
 
 ## Target level
 - **Mid-level** roles: individual contributor through manager (e.g. Program
