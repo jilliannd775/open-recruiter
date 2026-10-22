@@ -17,6 +17,10 @@ on:
         description: "Resend today's email (re-scored with your current settings) instead of searching"
         type: boolean
         default: false
+      resend_date:
+        description: "Or resend another day's email: its date, e.g. 2026-10-21"
+        required: false
+        default: ""
 
 permissions:
   contents: write  # lets the run save seen_jobs.json back to the repo
@@ -59,7 +63,7 @@ jobs:
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
           USAJOBS_EMAIL: ${{ secrets.USAJOBS_EMAIL }}
-        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }} ${{ inputs.test_email_only && '--test-email' || '' }} ${{ inputs.resend_today && '--resend' || '' }}
+        run: python job_alerts.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }} ${{ inputs.test_email_only && '--test-email' || '' }} ${{ inputs.resend_date != '' && format('--resend {0}', inputs.resend_date) || (inputs.resend_today && '--resend' || '') }}
 
       - name: Save the list of jobs already seen
         if: always()
