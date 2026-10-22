@@ -1358,6 +1358,14 @@
    "team_size": 7,
    "website": "https://cascadespace.com"
   },
+  "casey": {
+   "checked": "2026-10-22",
+   "name": "Casey",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://caseyinsure.com/"
+  },
   "castle-2": {
    "checked": "2026-09-25",
    "name": "Castle",
@@ -8293,5 +8301,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-21"
+ "last_build": "2026-10-22"
 }
