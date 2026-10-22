@@ -78,8 +78,9 @@ Seniority matters: match the candidate's target level in the profile. Roles \
 clearly above it (Director, VP, Head of, Principal, Staff, C-level other than \
 Chief of Staff) score below 50 even if the function fits.
 Experience and pay: follow the profile's experience range and salary target. \
-A role that clearly asks for far more experience, or pays clearly below the \
-target, scores lower; if pay or years aren't listed, don't penalize.
+A role asking for 6 years of experience scores at most 75; one asking for 7 or more \
+(including ranges like 8-10 years), even in a single required area, scores below 50. A role \
+that pays clearly below the target scores lower; if pay or years aren't listed, don't penalize.
 A job that is not fully remote or not open to US-based candidates must score below 40.
 
 Reply with JSON only: a list with one object per job, in the same order, shaped:

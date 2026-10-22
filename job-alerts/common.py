@@ -1102,8 +1102,13 @@ SALARY_RANGE = re.compile(_MONEY + r"\s*(?:USD)?\s*(?:-|–|—|to)\s*" + _MONEY
 HOURLY_RANGE = re.compile(r"\$\s?(\d{2,3}(?:\.\d{1,2})?)\s*(?:-|–|—|to)\s*\$?\s?(\d{2,3}(?:\.\d{1,2})?)\s*"
                           r"(?:/|per|an)\s*(?:hr|hour)", re.I)
 YEARS_REQUIRED = re.compile(
-    r"(?:at least|minimum of|min\.?)?\s*(\d{1,2})\s*(?:\+|or more)?\s*(?:-|–|to)?\s*(?:\d{1,2})?\s*\+?\s*"
-    r"(?:years|yrs)\b[^.\n]{0,60}?\bexperience", re.I)
+    r"(?:at least|minimum of|min\.?)?\s*(\d{1,2})\s*(?:\+|or more)?\s*(?:(?:-|–|to)\s*\d{1,2}\s*\+?)?\s*"
+    r"(?:years|yrs)\b(?!\s*(?:old|of age|ago))"
+    r"(?=[^.\n]{0,30}?\b(?:experience|of|in|working|leading|managing|building|running|owning|client|professional|"
+    r"relevant|related|progressive|hands-on|as an?|doing)\b)", re.I)
+# Mentions of years that aren't a requirement ("our team averages 15+ years", "for over 20 years").
+YEARS_NOT_REQUIRED = re.compile(r"(?i)(average|averaging|combined|founded|history|for over|after over|over the (?:last|past)|"
+                                r"in business|our (?:team|company|founders?)|we(?:'|’)ve been|serving)[^.\n]{0,40}$")
 
 
 def _money(v: str) -> float:
@@ -1130,10 +1135,13 @@ def parse_salary(job: "Job") -> tuple[int, int] | None:
 
 
 def years_required(job: "Job") -> int | None:
-    """The smallest 'N+ years of experience' the posting asks for, or None."""
-    found = [int(m.group(1)) for m in YEARS_REQUIRED.finditer(job.description or "")]
-    found = [n for n in found if 0 < n <= 30]
-    return min(found) if found else None
+    """The overall years of experience the posting asks for (the largest 'N+ years' it
+    requires, or a range's lower end, e.g. 8 for '8-10 years'), or None."""
+    text = job.description or ""
+    found = [int(m.group(1)) for m in YEARS_REQUIRED.finditer(text)
+             if not YEARS_NOT_REQUIRED.search(text[max(0, m.start() - 80):m.start()])]
+    found = [n for n in found if 0 < n <= 25]
+    return max(found) if found else None
 
 
 def format_salary(rng: tuple[int, int] | None) -> str:

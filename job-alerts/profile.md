@@ -71,7 +71,9 @@ These come first whenever they're fully remote in the US and at my level:
   (except Chief of Staff, below).
 
 ## Experience and pay
-- Looking for roles asking **about 2-5 years** of experience.
+- Looking for roles asking **about 2-5 years** of experience. 6 years is a
+  stretch (score lower); **7 or more years is not a fit**, including ranges
+  like "8-10 years".
 - Target base salary **$130k+ a year**, if possible.
 
 ## Target titles
