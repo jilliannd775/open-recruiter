@@ -125,9 +125,10 @@ tracker_url: https://claude.ai/artifact/2Zf1bitQ7sps5Z6wdyhkUq
 # are kept, and the AI prefers ones that meet it. Set to 0 to turn off.
 min_salary: 130000
 
-# EXPERIENCE. Skip a job only when it clearly asks for more than this many
-# years (e.g. "8+ years of experience"). Jobs that don't say are kept, and the
-# AI prefers ones asking 2-5 years (see profile.md). Set to 0 to turn off.
+# EXPERIENCE. Skip a job when it asks for more than this many years (e.g.
+# "8+ years of experience", "7+ years in solutions engineering", "8-10 years").
+# Jobs that don't say are kept, and the AI prefers ones asking 2-5 years and
+# scores 6-year roles lower (see profile.md). Set to 0 to turn off.
 max_years_experience: 6
 
 # Job boards (Remotive, Remote OK, Himalayas, Hacker News) list thousands of
