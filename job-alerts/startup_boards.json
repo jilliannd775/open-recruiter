@@ -518,6 +518,16 @@
    "team_size": 6,
    "website": "https://www.arpari.com"
   },
+  "array-labs": {
+   "checked": "2026-10-23",
+   "name": "Array Labs",
+   "platform": "greenhouse",
+   "slug": "array",
+   "source": "yc",
+   "status": "found",
+   "team_size": 30,
+   "website": "https://www.arraylabs.io/"
+  },
   "artie": {
    "checked": "2026-09-25",
    "name": "Artie",
@@ -1517,6 +1527,16 @@
    "status": "found",
    "team_size": 6,
    "website": "https://www.claimhealth.com"
+  },
+  "claimsorted": {
+   "checked": "2026-10-23",
+   "name": "ClaimSorted",
+   "platform": "ashby",
+   "slug": "claimsorted",
+   "source": "yc",
+   "status": "found",
+   "team_size": 50,
+   "website": "https://claimsorted.com"
   },
   "clara-2": {
    "checked": "2026-09-25",
@@ -8301,5 +8321,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-22"
+ "last_build": "2026-10-23"
 }
