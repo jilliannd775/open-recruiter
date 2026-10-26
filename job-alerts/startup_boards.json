@@ -4284,6 +4284,14 @@
    "team_size": 12,
    "website": "https://trymeasured.com/"
   },
+  "mederva": {
+   "checked": "2026-10-26",
+   "name": "Mederva",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://medervahealth.com/"
+  },
   "medme-health": {
    "checked": "2026-09-25",
    "name": "MedMe Health",
@@ -8321,5 +8329,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-25"
+ "last_build": "2026-10-26"
 }
