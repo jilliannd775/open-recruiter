@@ -1704,6 +1704,16 @@
    "team_size": 12,
    "website": "https://collectwise.com/"
   },
+  "commodityai": {
+   "checked": "2026-10-31",
+   "name": "CommodityAI",
+   "platform": "ashby",
+   "slug": "commodityai",
+   "source": "yc",
+   "status": "found",
+   "team_size": 6,
+   "website": "https://commodityai.io/"
+  },
   "community-phone-company": {
    "checked": "2026-09-25",
    "name": "Community Phone Company",
@@ -8369,5 +8379,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-10-30"
+ "last_build": "2026-10-31"
 }
