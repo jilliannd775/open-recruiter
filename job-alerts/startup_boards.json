@@ -6958,6 +6958,14 @@
    "team_size": 34,
    "website": "https://www.stacksync.com/"
   },
+  "staffbar": {
+   "checked": "2026-11-02",
+   "name": "Superwall",
+   "source": "yc",
+   "status": "none",
+   "team_size": 25,
+   "website": "https://superwall.com"
+  },
   "standard-ai": {
    "checked": "2026-09-25",
    "name": "Standard AI",
@@ -8387,5 +8395,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-01"
+ "last_build": "2026-11-02"
 }
