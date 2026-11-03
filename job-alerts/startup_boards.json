@@ -1054,6 +1054,16 @@
    "team_size": 50,
    "website": "https://www.bloomtech.com"
   },
+  "blue": {
+   "checked": "2026-11-03",
+   "name": "Blue",
+   "platform": "lever",
+   "slug": "blue",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://heyblue.com/"
+  },
   "blue-onion": {
    "checked": "2026-09-25",
    "name": "Blue Onion",
@@ -2759,6 +2769,16 @@
    "status": "none",
    "team_size": 5,
    "website": "https://www.foundation-industries.com/"
+  },
+  "fours": {
+   "checked": "2026-11-03",
+   "name": "Fours",
+   "platform": "lever",
+   "slug": "fours",
+   "source": "yc",
+   "status": "found",
+   "team_size": 76,
+   "website": "https://fours.com"
   },
   "fractional": {
    "checked": "2026-09-25",
@@ -7608,6 +7628,14 @@
    "team_size": 34,
    "website": "https://runtrellis.com/"
   },
+  "trexo-robotics": {
+   "checked": "2026-11-03",
+   "name": "Trexo Robotics",
+   "source": "yc",
+   "status": "none",
+   "team_size": 30,
+   "website": "http://trexorobotics.com"
+  },
   "triomics": {
    "checked": "2026-09-25",
    "name": "Triomics",
@@ -8395,5 +8423,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-02"
+ "last_build": "2026-11-03"
 }
