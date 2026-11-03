@@ -5,7 +5,7 @@ on:
     branches: [claude/epic-babbage-tt84kt]
 
 permissions:
-  contents: read
+  contents: write  # saves collected.json to this side branch only
 
 jobs:
   collect:
@@ -31,8 +31,10 @@ jobs:
           USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
           USAJOBS_EMAIL: ${{ secrets.USAJOBS_EMAIL }}
         run: python collect_only.py
-      - uses: actions/upload-artifact@v4
-        with:
-          name: collected
-          path: job-alerts/collected.json
-          retention-days: 3
+      - name: Save collected.json to this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f collected.json
+          git commit -m "Collected jobs (no AI)"
+          git push origin HEAD:claude/epic-babbage-tt84kt
