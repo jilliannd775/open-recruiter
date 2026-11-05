@@ -188,6 +188,14 @@
    "team_size": 5,
    "website": "https://aircaps.com"
   },
+  "aircaps-ai": {
+   "checked": "2026-11-05",
+   "name": "AirCaps AI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://aircaps.ai"
+  },
   "airgoods": {
    "checked": "2026-09-25",
    "name": "Airgoods",
@@ -8423,5 +8431,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-04"
+ "last_build": "2026-11-05"
 }
