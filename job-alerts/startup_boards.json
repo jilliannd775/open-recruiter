@@ -3124,6 +3124,14 @@
    "team_size": 40,
    "website": "https://www.growthbook.io"
   },
+  "gru-space": {
+   "checked": "2026-11-06",
+   "name": "GRU Space",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://gru.space"
+  },
   "guac": {
    "checked": "2026-09-25",
    "name": "Guac",
@@ -5381,6 +5389,16 @@
    "status": "none",
    "team_size": 8,
    "website": "https://www.getpesto.com/"
+  },
+  "pharos": {
+   "checked": "2026-11-06",
+   "name": "Pharos",
+   "platform": "ashby",
+   "slug": "pharos",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://pharos.health/"
   },
   "phoenix": {
    "checked": "2026-09-25",
@@ -8431,5 +8449,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-05"
+ "last_build": "2026-11-06"
 }
