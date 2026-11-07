@@ -4736,6 +4736,14 @@
    "team_size": 40,
    "website": "https://www.usenash.com/"
   },
+  "nautilus": {
+   "checked": "2026-11-07",
+   "name": "Nautilus",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://nautilus.co"
+  },
   "navier-ai": {
    "checked": "2026-09-25",
    "name": "Navier AI",
@@ -8449,5 +8457,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-06"
+ "last_build": "2026-11-07"
 }
