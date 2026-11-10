@@ -822,6 +822,14 @@
    "team_size": 8,
    "website": "https://becomeautonomous.com/"
   },
+  "autosana": {
+   "checked": "2026-11-10",
+   "name": "Autosana",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://autosana.ai"
+  },
   "avallon-ai": {
    "checked": "2026-09-25",
    "name": "Avallon AI",
@@ -8378,6 +8386,16 @@
    "team_size": 10,
    "website": "https://www.you-shift.com/"
   },
+  "yuma-ai": {
+   "checked": "2026-11-10",
+   "name": "Yuma AI",
+   "platform": "greenhouse",
+   "slug": "yuma",
+   "source": "yc",
+   "status": "found",
+   "team_size": 26,
+   "website": "https://yuma.ai"
+  },
   "yummy-future": {
    "checked": "2026-09-25",
    "name": "Yummy Future",
@@ -8457,5 +8475,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-09"
+ "last_build": "2026-11-10"
 }
