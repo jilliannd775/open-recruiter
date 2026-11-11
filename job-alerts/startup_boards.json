@@ -2680,6 +2680,14 @@
    "team_size": 3000,
    "website": "https://www.flexport.com/careers/jobs/"
   },
+  "flick": {
+   "checked": "2026-11-11",
+   "name": "Flick",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://flick.art"
+  },
   "flint": {
    "checked": "2026-09-25",
    "name": "Flint",
@@ -3378,6 +3386,14 @@
    "team_size": 20,
    "website": "https://thehomli.com"
   },
+  "hop-aero": {
+   "checked": "2026-11-11",
+   "name": "Hop Aero",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://hopaero.com"
+  },
   "hotglue": {
    "checked": "2026-09-25",
    "name": "hotglue",
@@ -3403,6 +3419,14 @@
    "status": "none",
    "team_size": 10,
    "website": "https://hub.xyz"
+  },
+  "hub-labs": {
+   "checked": "2026-11-11",
+   "name": "Hub Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 50,
+   "website": "https://hublabs.com"
   },
   "hud": {
    "checked": "2026-09-25",
@@ -8475,5 +8499,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-10"
+ "last_build": "2026-11-11"
 }
