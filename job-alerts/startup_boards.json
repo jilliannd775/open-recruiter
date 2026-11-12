@@ -2874,6 +2874,14 @@
    "team_size": 60,
    "website": "https://www.gather.town/"
   },
+  "gatherhq": {
+   "checked": "2026-11-12",
+   "name": "GatherHQ",
+   "source": "yc",
+   "status": "none",
+   "team_size": 9,
+   "website": "https://www.gatherhq.com"
+  },
   "gauge": {
    "checked": "2026-09-25",
    "name": "Gauge",
@@ -8499,5 +8507,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-11"
+ "last_build": "2026-11-12"
 }
