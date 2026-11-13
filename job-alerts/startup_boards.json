@@ -5878,6 +5878,14 @@
    "team_size": 120,
    "website": "https://usepylon.com/?utm_source=bookface&utm_medium=referral&utm_campaign=pylon-profile"
   },
+  "qfex": {
+   "checked": "2026-11-13",
+   "name": "QFEX",
+   "source": "yc",
+   "status": "none",
+   "team_size": 14,
+   "website": "https://qfex.com"
+  },
   "quadrant-health": {
    "checked": "2026-09-25",
    "name": "Quadrant Health",
@@ -8507,5 +8515,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-12"
+ "last_build": "2026-11-13"
 }
