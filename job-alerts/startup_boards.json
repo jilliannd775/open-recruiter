@@ -4022,6 +4022,14 @@
    "team_size": 540,
    "website": "https://lattice.com"
   },
+  "laurence": {
+   "checked": "2026-11-15",
+   "name": "Laurence",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://laurence.com"
+  },
   "layerup": {
    "checked": "2026-09-25",
    "name": "Layerup",
@@ -8515,5 +8523,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-14"
+ "last_build": "2026-11-15"
 }
