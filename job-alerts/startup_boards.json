@@ -2812,6 +2812,14 @@
    "team_size": 10,
    "website": "https://fractional.app"
   },
+  "freebuff": {
+   "checked": "2026-11-16",
+   "name": "Freebuff",
+   "source": "yc",
+   "status": "none",
+   "team_size": 12,
+   "website": "https://freebuff.com"
+  },
   "freshpaint": {
    "checked": "2026-09-25",
    "name": "Freshpaint",
@@ -3791,6 +3799,14 @@
    "status": "none",
    "team_size": 40,
    "website": "https://www.justappraised.com"
+  },
+  "justai": {
+   "checked": "2026-11-16",
+   "name": "JustAI",
+   "source": "yc",
+   "status": "none",
+   "team_size": 15,
+   "website": "https://getjust.ai"
   },
   "kaipod-learning": {
    "checked": "2026-09-25",
@@ -6986,6 +7002,14 @@
    "team_size": 40,
    "website": "http://speak.com"
   },
+  "specific-labs": {
+   "checked": "2026-11-16",
+   "name": "Specific Labs",
+   "source": "yc",
+   "status": "none",
+   "team_size": 7,
+   "website": "https://withspecific.com"
+  },
   "speedy-labs": {
    "checked": "2026-09-25",
    "name": "Speedy Labs",
@@ -8523,5 +8547,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-15"
+ "last_build": "2026-11-16"
 }
