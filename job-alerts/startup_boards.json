@@ -1154,6 +1154,14 @@
    "team_size": 10,
    "website": "https://www.boundaryml.com"
   },
+  "bravi": {
+   "checked": "2026-11-18",
+   "name": "Bravi",
+   "source": "yc",
+   "status": "none",
+   "team_size": 8,
+   "website": "https://www.bravi.app/"
+  },
   "bretton-ai": {
    "checked": "2026-09-25",
    "name": "Bretton AI",
@@ -3483,6 +3491,16 @@
    "status": "found",
    "team_size": 30,
    "website": "https://hyperbound.ai"
+  },
+  "hypercubic": {
+   "checked": "2026-11-18",
+   "name": "Hypercubic",
+   "platform": "ashby",
+   "slug": "hypercubic",
+   "source": "yc",
+   "status": "found",
+   "team_size": 7,
+   "website": "https://www.hypercubic.ai/"
   },
   "hyperspell": {
    "checked": "2026-09-25",
@@ -7726,6 +7744,16 @@
    "team_size": 34,
    "website": "https://www.buildtrayd.com/"
   },
+  "treasury-prime": {
+   "checked": "2026-11-18",
+   "name": "Treasury Prime",
+   "platform": "greenhouse",
+   "slug": "treasuryprime",
+   "source": "yc",
+   "status": "found",
+   "team_size": 100,
+   "website": "https://treasuryprime.com"
+  },
   "trelium": {
    "checked": "2026-09-25",
    "name": "Trelium",
@@ -8547,5 +8575,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-17"
+ "last_build": "2026-11-18"
 }
