@@ -1956,6 +1956,16 @@
    "team_size": 14,
    "website": "https://credal.ai"
   },
+  "crowdvolt": {
+   "checked": "2026-11-19",
+   "name": "CrowdVolt",
+   "platform": "ashby",
+   "slug": "crowdvolt",
+   "source": "yc",
+   "status": "found",
+   "team_size": 12,
+   "website": "https://crowdvolt.com/"
+  },
   "crustdata": {
    "checked": "2026-10-28",
    "name": "Crustdata",
@@ -8575,5 +8585,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-18"
+ "last_build": "2026-11-19"
 }
