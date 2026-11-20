@@ -1486,6 +1486,16 @@
    "team_size": 5,
    "website": "https://trychannel3.com"
   },
+  "characterquilt": {
+   "checked": "2026-11-20",
+   "name": "CharacterQuilt",
+   "platform": "gem",
+   "slug": "characterquilt",
+   "source": "yc",
+   "status": "found",
+   "team_size": 10,
+   "website": "https://characterquilt.com"
+  },
   "charge-robotics": {
    "checked": "2026-09-25",
    "name": "Charge Robotics",
@@ -2761,6 +2771,14 @@
    "status": "found",
    "team_size": 55,
    "website": "https://flutterflow.io"
+  },
+  "fluxcap": {
+   "checked": "2026-11-20",
+   "name": "FluxCap",
+   "source": "yc",
+   "status": "none",
+   "team_size": 13,
+   "website": "https://www.fluxcap.com/"
   },
   "fondo": {
    "checked": "2026-09-25",
@@ -6958,6 +6976,14 @@
    "team_size": 25,
    "website": "https://www.solosuit.com/"
   },
+  "solum-health": {
+   "checked": "2026-11-20",
+   "name": "Solum Health",
+   "source": "yc",
+   "status": "none",
+   "team_size": 6,
+   "website": "https://www.getsolum.com/"
+  },
   "solva": {
    "checked": "2026-09-25",
    "name": "Solva",
@@ -7395,6 +7421,14 @@
    "status": "none",
    "team_size": 10,
    "website": "https://www.syntra.com"
+  },
+  "taiga": {
+   "checked": "2026-11-20",
+   "name": "Taiga",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://taigabilling.com"
   },
   "taiv": {
    "checked": "2026-09-25",
@@ -8585,5 +8619,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-19"
+ "last_build": "2026-11-20"
 }
