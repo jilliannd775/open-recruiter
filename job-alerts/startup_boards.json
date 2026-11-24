@@ -5828,6 +5828,14 @@
    "team_size": 10,
    "website": "https://proception.ai/"
   },
+  "procindex": {
+   "checked": "2026-11-24",
+   "name": "ProcIndex",
+   "source": "yc",
+   "status": "none",
+   "team_size": 5,
+   "website": "https://procindex.com/"
+  },
   "prodigal": {
    "checked": "2026-09-25",
    "name": "Prodigal",
@@ -8651,5 +8659,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-23"
+ "last_build": "2026-11-24"
 }
