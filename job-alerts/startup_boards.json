@@ -8208,6 +8208,14 @@
    "team_size": 6,
    "website": "https://www.vera-health.ai"
   },
+  "verdun": {
+   "checked": "2026-11-27",
+   "name": "Verdun",
+   "source": "yc",
+   "status": "none",
+   "team_size": 11,
+   "website": "https://verdun.ai"
+  },
   "verge-genomics": {
    "checked": "2026-11-25",
    "name": "Verge Genomics",
@@ -8685,5 +8693,5 @@
    "website": "http://www.zuddl.com"
   }
  },
- "last_build": "2026-11-26"
+ "last_build": "2026-11-27"
 }
